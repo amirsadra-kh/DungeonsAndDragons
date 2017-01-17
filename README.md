@@ -2,11 +2,10 @@
 Dungeons Dragons Game for SOEN 6441
 ========
 
-Installations
+Installations (Only first Time)
 ----------------------------
 
-Only first Time:
-    git clone https://[YOUR-EMAIL]@bitbucket.org/dungeonsanddragons/dungeons_dragons.git
+git clone https://[YOUR-EMAIL]@bitbucket.org/dungeonsanddragons/dungeons_dragons.git
 
 
 Process
