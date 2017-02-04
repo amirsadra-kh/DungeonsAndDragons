@@ -32,11 +32,10 @@
         <dependencies>
             <!-- Dependency libraries to include for compilation -->
             <dependency>
-                <groupId>org.testng</groupId>
-                <artifactId>testng</artifactId>
-                <version>6.9.4</version>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.11</version> <!-- Or whatever JUnit you're using. -->
             </dependency>
-
             <dependency>
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-all</artifactId>
