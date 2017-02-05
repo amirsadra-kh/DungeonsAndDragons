@@ -2,10 +2,10 @@ package main.java.org.model;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Scanner;
 
 /**
- * Inner class to allow user to create and edit Campaigns.
- *
+ * Class to allow user to create and edit Campaigns.
  *
  * @author Freyja Jokulsdottir
  * @version 1.0
@@ -25,13 +25,26 @@ public class Campaign implements Serializable {
         this.levels = levels;
     }
 
+    /**
+     * This is the Campaign object which represents the campaign created by the user
+     */
     public Campaign() {
     }
 
     /**
-     * This is the method for creating campaigns
-     * @param levels these are a list of maps which will be used to create or modify the campaigns
-     * @return
+     * This is the method which is used to create the Campaign
+     *
+     * @param numLevels the number of levels or maps the user wants to have in this campaign
+     */
+    public void createCampaign(int numLevels){
+
+
+    }
+
+    /**
+     * This is the method for returning finished campaigns
+     * @param levels these are a list of maps which were used to create or modify the campaign
+     * @return Campaign A new campaign created by the user or an edited campaign
      */
     Campaign generateCampaign(final List<Map> levels) {
 
@@ -59,7 +72,7 @@ public class Campaign implements Serializable {
 
     /**
      * This method returns a Campaign which will be used for playing
-     * @return
+     * @return Information about the Campaign
      */
     @Override
     public String toString() {
