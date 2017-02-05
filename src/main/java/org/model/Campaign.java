@@ -1,8 +1,8 @@
 package main.java.org.model;
 
 import java.io.Serializable;
+import java.util.EmptyStackException;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Class to allow user to create and edit Campaigns.
@@ -35,8 +35,15 @@ public class Campaign implements Serializable {
      * This is the method which is used to create the Campaign
      *
      * @param numLevels the number of levels or maps the user wants to have in this campaign
+     * @param start the first map in the campaign
+     * @param end the last map in the campaign
      */
-    public void createCampaign(int numLevels){
+    public void createCampaign(int numLevels, Map start, Map end) {
+        // A Campaign should have at least one map!
+        if(numLevels == 0)
+            throw new IllegalArgumentException("There should be at least one map!");
+
+        // Each map represents one level and there has to be a specific start level and a specific end level.
 
 
     }
