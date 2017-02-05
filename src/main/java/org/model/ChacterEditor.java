@@ -1,14 +1,9 @@
 package main.java.org.model;
 
-import main.java.org.model.ItemEnum;
-import main.java.org.model.Map;
-import main.java.org.model.NonPlayerCharacter;
-import main.java.org.model.PlayerCharacter;
-
 import java.util.List;
 
 public class ChacterEditor {
-    Map setplayerCharacter(PlayerCharacter character, final  Map map) throws Exception {
+    Map setplayerCharacter(Character character, final  Map map) throws Exception {
         map.setCharacter(character);
         return map;
     }
@@ -18,7 +13,7 @@ public class ChacterEditor {
         return map;
     }
 
-    void addItem(PlayerCharacter chacater, ItemEnum item){
+    void addItem(Character chacater, ItemEnum item){
         chacater.getBackPackInventory().getItems().add(item);
     }
 
