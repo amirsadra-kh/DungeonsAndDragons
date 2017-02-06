@@ -1,18 +1,19 @@
 package test.java.com;
 
 import main.java.org.model.RollDice;
-
-
-import org.junit.*;
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class RollDiceTest {
 
+    @Test
     public void RollTest()
     {
-        RollDice test = new RollDice();
-        test.setRollDice(6);
-        int output = test.getRollDice();
-        assert ((1 <= output) && (output <= 6));
+        int max = 20;
+        RollDice dice = new RollDice(max);
+        int type = dice.getDiceType();
+        assert (type == max);
+
+        int output = dice.roll();
+        assert ((1 <= type) && (type <= max));
     }
 }
