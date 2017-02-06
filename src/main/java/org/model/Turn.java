@@ -23,7 +23,7 @@ public class Turn {
         this.turns = turns;
     }
 
-    public void setTurnsInit(PlayerCharacter playerCharacter, List<Character> nonPlayerCharacters) {
+    public void setTurnsInit(Character playerCharacter, List<Character> nonPlayerCharacters) {
         List<Character> turns = nonPlayerCharacters;
         turns.add(playerCharacter);
         this.turns = turns;
