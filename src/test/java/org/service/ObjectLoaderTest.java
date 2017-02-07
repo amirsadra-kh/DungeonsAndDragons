@@ -45,7 +45,6 @@ public class ObjectLoaderTest {
         Map map = objectLoader.loadMap("test-Map.xml");
         //THEN
         assertMapsAreEqual(Fixtures.createMap(),map);
-        String s ="";
     }
 
     @Test
