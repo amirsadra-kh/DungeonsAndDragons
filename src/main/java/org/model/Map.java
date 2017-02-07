@@ -28,7 +28,7 @@ public class Map implements Serializable {
         this.character = character;
         this.nonPlayerCharacters = nonPlayerCharacters;
         this.nextLevel = nextLevel;
-        this.turn.setTurnsInit(character,nonPlayerCharacters);
+        this.turn =new Turn(nonPlayerCharacters,character);
     }
 
 

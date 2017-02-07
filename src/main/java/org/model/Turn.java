@@ -1,10 +1,18 @@
 package main.java.org.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Turn {
 
     List<Character> turns;
+
+    public Turn(List<Character> nonPlayerCharacters, Character character) {
+        List<Character> characters= new ArrayList<>();
+        characters.add(character);
+        characters.addAll(nonPlayerCharacters);
+        this.turns = characters;
+    }
 
     Character getActorTurnAndAdjustListOfTurns(){
 
@@ -23,10 +31,5 @@ public class Turn {
         this.turns = turns;
     }
 
-    public void setTurnsInit(Character playerCharacter, List<Character> nonPlayerCharacters) {
-        List<Character> turns = nonPlayerCharacters;
-        turns.add(playerCharacter);
-        this.turns = turns;
-    }
 
 }
