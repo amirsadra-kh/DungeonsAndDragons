@@ -3,12 +3,10 @@ package test;
 import main.java.org.model.Ability;
 import main.java.org.model.BackPackInventory;
 import main.java.org.model.Character;
-import main.java.org.model.ItemEnum;
 import main.java.org.model.Map;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Fixtures {
 
@@ -47,7 +45,7 @@ public class Fixtures {
         ability.setAttackBonus(32);
         ability.setDamageBonus(2);
         ability.setHitPoints(1);
-        character.setAbvility(ability);
+        character.setAbility(ability);
         BackPackInventory inventory = new BackPackInventory();
         inventory.setItems(null);
         character.setBackPackInventory(inventory);
