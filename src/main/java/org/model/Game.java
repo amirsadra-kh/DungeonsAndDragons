@@ -38,7 +38,7 @@ public class Game {
         return new ObjectLoader().loadCampaigns();
     }
 
-    List<java.util.Map> loadMaps(){
+    List<Map> loadMaps(){
         return new ObjectLoader().loadMaps();
     }
 

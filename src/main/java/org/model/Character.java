@@ -15,7 +15,7 @@ public class Character {
         this.currentPosition = currentPosition;
     }
 
-    public Ability getAbvility() {
+    public Ability getAbility() {
         return ability;
     }
 
