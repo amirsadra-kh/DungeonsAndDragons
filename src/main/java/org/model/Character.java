@@ -15,12 +15,12 @@ public class Character {
         this.currentPosition = currentPosition;
     }
 
-    public Ability getAbvility() {
+    public Ability getAbility() {
         return ability;
     }
 
-    public void setAbvility(Ability abvility) {
-        this.ability = abvility;
+    public void setAbility(Ability ability) {
+        this.ability = ability;
     }
     public Character create(final BackPackInventory backPackInventory) {
         Character character = new Character();
