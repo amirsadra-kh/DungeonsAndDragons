@@ -4,6 +4,10 @@ import java.util.Random;
 
 /**
  * This class is sending random numbers according to the type of dice that has been selected.
+ *
+ * @author Parisa Nikzad
+ * @version 1.0
+ * @since 2017-02-06
  */
 public class RollDice {
     private Random r = new Random();
@@ -29,7 +33,6 @@ public class RollDice {
      */
     public int roll()
     {
-        System.out.println(1 + r.nextInt(diceType));
         return 1 + r.nextInt(diceType);
     }
 }
