@@ -10,7 +10,6 @@ import test.Fixtures;
 
 import java.util.List;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -20,40 +19,40 @@ public class ObjectLoaderTest {
     ObjectLoader objectLoader;
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp()  {
         objectLoader= new ObjectLoader();
     }
 
     @Test
-    public void testLoadMaps() throws Exception {
+    public void testLoadMaps(){
 
     }
 
     @Test
-    public void testLoadCampaigns() throws Exception {
+    public void testLoadCampaigns(){
 
     }
 
     @Test
-    public void testLoadCharacters() throws Exception {
+    public void testLoadCharacters(){
 
     }
 
     @Test
-    public void testLoadMap() throws Exception {
+    public void testLoadMap(){
         //WHEN
-        Map map = objectLoader.loadMap("test-Map.xml");
+        Map map = objectLoader.loadMap("test-Map");
         //THEN
         assertMapsAreEqual(Fixtures.createMap(),map);
     }
 
     @Test
-    public void testLoadCampaign() throws Exception {
+    public void testLoadCampaign(){
 
     }
 
     @Test
-    public void testLoadCharacter() throws Exception {
+    public void testLoadCharacter(){
 
     }
     void assertMapsAreEqual(Map expected, Map actual){
