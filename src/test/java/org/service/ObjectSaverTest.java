@@ -18,55 +18,62 @@ import static org.junit.Assert.assertEquals;
 public class ObjectSaverTest {
 
     private ObjectSaver objectSaver;
-    private static String MAP_PATH="./src/test/resources/files/maps/test-Map";
-    private static String EXPECTED_MAP_PATH="./src/test/resources/files/maps/expected-Map";
-
+    private static String MAP_PATH = "./src/test/resources/files/maps/test-Map";
+    private static String EXPECTED_MAP_PATH = "./src/test/resources/files/maps/expected-Map";
 
 
     @Before
-    public void setUp() throws Exception {
+    public void setUp() {
         objectSaver = new ObjectSaver();
     }
 
 
     @Test
-    public void testSaveMaps() throws Exception {
+    public void testSaveMaps() {
 
     }
 
     @Test
-    public void testSaveCampaigns() throws Exception {
+    public void testSaveCampaigns() {
 
     }
 
     @Test
-    public void testLoadCharacters() throws Exception {
+    public void testLoadCharacters() {
 
     }
 
     @Test
-    public void testSaveMap() throws Exception {
+    public void testSaveMap() {
         //WHEN
         objectSaver.saveMap(MAP_PATH,
                 Fixtures.createMap());
         //THEN
         String actual = readFile(MAP_PATH);
         String expected = readFile(EXPECTED_MAP_PATH);
-        assertEquals(expected,actual);
+        assertEquals(expected, actual);
     }
 
     @Test
-    public void testLoadCampaign() throws Exception {
+    public void testLoadCampaign() {
 
     }
 
     @Test
-    public void testLoadCharacter() throws Exception {
+    public void testLoadCharacter() {
 
     }
 
-    private String readFile(final String path) throws IOException {
-        return new String (Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+    private String readFile(final String path) {
+        try {
+            return new String(Files.readAllBytes(Paths.get(path)), StandardCharsets.UTF_8);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.err.println("could not read the file");
+            //to keep the compiler happy,
+            // it will make the test case, so no need to handle the exception further
+            return null;
+        }
     }
 
 

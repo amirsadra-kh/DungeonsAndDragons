@@ -3,6 +3,22 @@
  <object class="main.java.org.model.Map">
   <void property="character">
    <object class="main.java.org.model.Character" id="Character0">
+    <void property="ability">
+     <object class="main.java.org.model.Ability">
+      <void property="armorClass">
+       <int>1</int>
+      </void>
+      <void property="attackBonus">
+       <int>32</int>
+      </void>
+      <void property="damageBonus">
+       <int>2</int>
+      </void>
+      <void property="hitPoints">
+       <int>1</int>
+      </void>
+     </object>
+    </void>
     <void property="backPackInventory">
      <object class="main.java.org.model.BackPackInventory"/>
     </void>
@@ -64,6 +80,22 @@
    <object class="java.util.ArrayList">
     <void method="add">
      <object class="main.java.org.model.Character" id="Character1">
+      <void property="ability">
+       <object class="main.java.org.model.Ability">
+        <void property="armorClass">
+         <int>1</int>
+        </void>
+        <void property="attackBonus">
+         <int>32</int>
+        </void>
+        <void property="damageBonus">
+         <int>2</int>
+        </void>
+        <void property="hitPoints">
+         <int>1</int>
+        </void>
+       </object>
+      </void>
       <void property="backPackInventory">
        <object class="main.java.org.model.BackPackInventory"/>
       </void>

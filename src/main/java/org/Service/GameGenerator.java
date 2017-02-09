@@ -1,12 +1,19 @@
 package main.java.org.Service;
 
 import main.java.org.model.Campaign;
-import main.java.org.model.Character;
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
 
-import java.util.List;
 import java.util.Scanner;
+
+/**
+ * This class is is to Generate/edit game objects .
+ * Game , Map, Campaigns, Items, Characters are created/edited by interacting with user
+ * + *
+ * + * @author Maysam Mokarian
+ * + * @version 1.0
+ * + * @since 2017-02-08
+ */
 
 public class GameGenerator {
     public void showMenuToStartTheGame() throws Exception {
