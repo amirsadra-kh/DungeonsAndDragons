@@ -6,6 +6,7 @@ public class Character {
     BackPackInventory backPackInventory;
     private Point currentPosition = new Point(0,0);
     private Ability ability;
+    private boolean isPlayerCharacter;
 
     public Point getCurrentPosition() {
         return currentPosition;
@@ -15,12 +16,12 @@ public class Character {
         this.currentPosition = currentPosition;
     }
 
-    public Ability getAbvility() {
+    public Ability getAbility() {
         return ability;
     }
 
-    public void setAbvility(Ability abvility) {
-        this.ability = abvility;
+    public void setAbility(Ability ability) {
+        this.ability = ability;
     }
     public Character create(final BackPackInventory backPackInventory) {
         Character character = new Character();
@@ -39,4 +40,13 @@ public class Character {
     public void setBackPackInventory(BackPackInventory backPackInventory) {
         this.backPackInventory = backPackInventory;
     }
+
+    public boolean isPlayerCharacter() {
+        return isPlayerCharacter;
+    }
+
+    public void setPlayerCharacter(boolean playerCharacter) {
+        isPlayerCharacter = playerCharacter;
+    }
+
 }

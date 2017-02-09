@@ -1,18 +1,39 @@
 package main.java.org.model;
 
+import org.apache.commons.collections.CollectionUtils;
+
+import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This class is taking care of the turns in a map
+ * Please Note : the the NEXT Character is always located at last index
+ * + *
+ * + * @author Maysam Mokarian
+ * + * @version 1.0
+ * + * @since 2017-02-08
+ */
 public class Turn {
 
     List<Character> turns;
 
-    Character getActorTurnAndAdjustListOfTurns(){
+    public Turn(List<Character> nonPlayerCharacters, Character character) {
+        List<Character> characters = new ArrayList<>();
+        if (character != null && CollectionUtils.isNotEmpty(nonPlayerCharacters)) {
+            characters.addAll(nonPlayerCharacters);
+            characters.add(character);
 
-        Character character= this.turns.get(turns.size()-1);
-        turns.remove(turns.size()-1);
-        turns.add(0,character);
+        }
+        this.turns = characters;
+    }
 
-        return  character;
+    public Character getActorTurnAndAdjustListOfTurns() {
+
+        Character character = this.turns.get(turns.size() - 1);
+        turns.remove(turns.size() - 1);
+        turns.add(0, character);
+
+        return character;
     }
 
     public List<Character> getTurns() {
@@ -23,10 +44,5 @@ public class Turn {
         this.turns = turns;
     }
 
-    public void setTurnsInit(Character playerCharacter, List<Character> nonPlayerCharacters) {
-        List<Character> turns = nonPlayerCharacters;
-        turns.add(playerCharacter);
-        this.turns = turns;
-    }
 
 }

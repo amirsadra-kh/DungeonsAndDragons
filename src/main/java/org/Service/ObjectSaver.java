@@ -2,33 +2,38 @@ package main.java.org.Service;
 
 
 import main.java.org.model.Campaign;
+import main.java.org.model.Map;
 
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
-public class ObjectSaver extends  FileProcessor{
-    void SaveMaps(List<Map> maps) throws IOException {
-        saveFile("/maps/",maps);
+/**
+ * This class is is to Save the Objects to the File.
+ * + *
+ * + * @author Maysam Mokarian
+ * + * @version 1.0
+ * + * @since 2017-02-08
+ */
+
+public class ObjectSaver extends FileProcessor {
+    public void SaveMaps(List<Map> maps) {
+        saveFile("/maps/", maps);
     }
 
-    void saveCampaigns(List<Campaign> campaigns) throws IOException {
-        saveFile("/campaigns/",campaigns);
+    public void saveCampaigns(List<Campaign> campaigns) {
+        saveFile("/campaigns/", campaigns);
     }
 
-    void loadCharacters(List<Character> characters) throws IOException {
-        saveFile("/characters/",characters);
+    public void loadCharacters(List<Character> characters) {
+        saveFile("/characters/", characters);
     }
 
-    void saveMap(String path, Map map) throws IOException {
-        saveFile(path,map);
+    public void saveMap(String path, Map map) {
+        saveFile(path, map);
     }
 
-    void loadCampaign(String path, Campaign campaign) throws IOException {
-        saveFile(path,campaign);
+    public void loadCampaign(String path, Campaign campaign) {
+        saveFile(path, campaign);
     }
 
-    void loadCharacter(String path, Character character) throws IOException {
-        saveFile(path,character);
-    }
+
 }
