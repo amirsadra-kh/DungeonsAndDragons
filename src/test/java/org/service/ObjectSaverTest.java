@@ -71,7 +71,7 @@ public class ObjectSaverTest {
             e.printStackTrace();
             System.err.println("could not read the file");
             //to keep the compiler happy,
-            // it will make the test case, so no need to handle the exception further
+            // it will make the test case to fail, so no need to handle the exception further
             return null;
         }
     }
