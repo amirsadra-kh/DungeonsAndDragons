@@ -17,35 +17,12 @@ public class Campaign implements Serializable {
     private List<Map> levels;
 
     /**
-     * This is the method ugets the list of maps which will be used in the creation or editing of a campaign
-     * @param levels these are a list of maps which can be used to create or modify the campaigns
+     * This is the campaign object to be created or edited
+     * @param levels these are a list of maps which are in the campaign object
      */
     public Campaign(final List<Map> levels) {
 
         this.levels = levels;
-    }
-
-    /**
-     * This is the Campaign object which represents the campaign created by the user
-     */
-    public Campaign() {
-    }
-
-    /**
-     * This is the method which is used to create the Campaign
-     *
-     * @param numLevels the number of levels or maps the user wants to have in this campaign
-     * @param start the first map in the campaign
-     * @param end the last map in the campaign
-     */
-    public void createCampaign(int numLevels, Map start, Map end) {
-        // A Campaign should have at least one map!
-        if(numLevels == 0)
-            throw new IllegalArgumentException("There should be at least one map!");
-
-        // Each map represents one level and there has to be a specific start level and a specific end level.
-
-
     }
 
     /**
@@ -64,10 +41,23 @@ public class Campaign implements Serializable {
     }
 
     /**
-     * This is the method for adding maps to the campaign
-     * @param map a map which will be added to the list of levels in the campaign
+     * A method to get the number of levels in a campaign
+     *
+     * @return numLevels the number of levels in the campaign
      */
-    public void addMap(final Map map){
+    public int getNumLeveles() {
+        int numLevels = this.levels.size();
+        return numLevels;
+    }
+
+    /**
+     * This is the method for adding maps to the campaign
+     * @param mapName a name of a map which will be added to the list of levels in the campaign
+     */
+    public void addMap(String mapName){
+        // Get Map using Map name - TODO
+        // Contemporary Map item until fetch method is finished
+        Map map = new Map();
 
         this.getLevels().add(map);
     }
