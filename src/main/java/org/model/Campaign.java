@@ -8,7 +8,7 @@ import java.util.List;
  * Class to allow user to create and edit Campaigns.
  *
  * @author Freyja Jokulsdottir
- * @version 1.0
+ * @version 1.5
  * @since 2017-02-05
  */
 
@@ -45,7 +45,7 @@ public class Campaign implements Serializable {
      *
      * @return numLevels the number of levels in the campaign
      */
-    public int getNumLeveles() {
+    public int getNumLevels() {
         int numLevels = this.levels.size();
         return numLevels;
     }
