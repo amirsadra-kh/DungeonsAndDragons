@@ -1,5 +1,7 @@
 package main.java.org.model;
 
+import main.java.org.Service.ObjectLoader;
+
 import java.io.Serializable;
 import java.util.EmptyStackException;
 import java.util.List;
@@ -55,9 +57,8 @@ public class Campaign implements Serializable {
      * @param mapName a name of a map which will be added to the list of levels in the campaign
      */
     public void addMap(String mapName){
-        // Get Map using Map name - TODO
-        // Contemporary Map item until fetch method is finished
-        Map map = new Map();
+        // Get Map using Map name
+        Map map = ObjectLoader.loadMap(mapName);
 
         this.getLevels().add(map);
     }
