@@ -63,9 +63,24 @@ public class Campaign implements Serializable {
         this.getLevels().add(map);
     }
 
+    /**
+     * This is the method that retrieves campaigns for editing.
+     * @param campName the path of the campaign.
+     * @return an existing campaign object.
+     */
+    public Campaign getCampaign(String campName) {
+        Campaign camp = ObjectLoader.loadCampaign(campName);
+
+        return camp;
+    }
+
     public void setLevels(List<Map> levels) {
 
         this.levels = levels;
+    }
+
+    public void removeLevel(List<Map> levels) {
+        levels.remove(levels.size() - 1);
     }
 
     /**
