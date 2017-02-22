@@ -30,6 +30,12 @@
             </plugins>
         </build>
         <dependencies>
+            <!-- https://mvnrepository.com/artifact/org.assertj/assertj-core -->
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>3.6.1</version>
+            </dependency>
             <!-- Dependency libraries to include for compilation -->
             <dependency>
                 <groupId>junit</groupId>
@@ -54,11 +60,6 @@
                 <artifactId>powermock-module-testng</artifactId>
                 <version>1.6.5</version>
                 <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>ch.ledcom.jpreseed</groupId>
-                <artifactId>jpreseed-cli</artifactId>
-                <version>1.0-SNAPSHOT</version>
             </dependency>
         </dependencies>
 
