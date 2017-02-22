@@ -1,6 +1,6 @@
 package test.java.com;
 
-import main.java.org.model.AbilityEnum;
+import main.java.org.model.EnhancementTypes;
 import main.java.org.model.Item;
 import main.java.org.model.ItemEnum;
 import org.junit.Before;
@@ -20,8 +20,8 @@ public class ItemTest {
 
     @Before
     public  void  beforeMethod(){
-        item1 = new Item(ItemEnum.HELMET, AbilityEnum.ARMORCLASS,new Point(0,0));
-        item2 = new Item(ItemEnum.HELMET, AbilityEnum.ARMORCLASS,new Point(0,0));
+        item1 = new Item(ItemEnum.HELMET, EnhancementTypes.ARMORCLASS,new Point(0,0));
+        item2 = new Item(ItemEnum.HELMET, EnhancementTypes.ARMORCLASS,new Point(0,0));
 
     }
 

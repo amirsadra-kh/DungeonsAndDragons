@@ -5,12 +5,12 @@ import java.awt.*;
 public class Item {
 
     ItemEnum item;
-    AbilityEnum ability;
+    EnhancementTypes enhancementType;
     int enhance;
     Point coordinate;
 
-    public Item(ItemEnum item,AbilityEnum ability ,Point coordinate) {
-        createItem(item,ability);
+    public Item(ItemEnum item, EnhancementTypes enhancementType, Point coordinate) {
+        createItem(item, enhancementType);
         this.coordinate = coordinate;
     }
 
@@ -34,62 +34,62 @@ public class Item {
 
 
 
-    public void createItem (ItemEnum itemEnum, AbilityEnum abilityEnum){
+    public void createItem (ItemEnum itemEnum, EnhancementTypes enhancementType){
         //check if the item is "HELMET"
         if (itemEnum == ItemEnum.HELMET){
-            if(abilityEnum == AbilityEnum.ARMORCLASS){
+            if(enhancementType == EnhancementTypes.ARMORCLASS){
                 //Create Helmet
                 this.item = itemEnum;
-                this.ability = abilityEnum;
+                this.enhancementType = enhancementType;
                 enhance = +1;
                 //save into file
             }
             else if(itemEnum == ItemEnum.ARMOMR){
-                if(abilityEnum == AbilityEnum.ARMORCLASS){
+                if(enhancementType == EnhancementTypes.ARMORCLASS){
                     //Create ArmorClass
                     this.item = itemEnum;
-                    this.ability = abilityEnum;
+                    this.enhancementType = enhancementType;
                     enhance = +1;
                     //save into file
                 }
 
             }else if (itemEnum == ItemEnum.SHIELD){
-                if(abilityEnum == AbilityEnum.ARMORCLASS || abilityEnum == AbilityEnum.STRENGTH || abilityEnum == AbilityEnum.CONSTITUTION ){
+                if(enhancementType == EnhancementTypes.ARMORCLASS || enhancementType == EnhancementTypes.STRENGTH || enhancementType == EnhancementTypes.CONSTITUTION ){
                     //Create Shield
                     this.item = itemEnum;
-                    this.ability = abilityEnum;
+                    this.enhancementType = enhancementType;
                     enhance = +1;
                     //save into file
                 }
             }else if(itemEnum == ItemEnum.RING) {
-                if (abilityEnum == AbilityEnum.ARMORCLASS || abilityEnum == AbilityEnum.STRENGTH || abilityEnum == AbilityEnum.CONSTITUTION) {
+                if (enhancementType == EnhancementTypes.ARMORCLASS || enhancementType == EnhancementTypes.STRENGTH || enhancementType == EnhancementTypes.CONSTITUTION) {
                     //Create Ring
                     this.item = itemEnum;
-                    this.ability = abilityEnum;
+                    this.enhancementType = enhancementType;
                     enhance = +1;
                     //save into file
                 }
             }else if(itemEnum == ItemEnum.BELT) {
-                if (abilityEnum == AbilityEnum.STRENGTH || abilityEnum == AbilityEnum.CONSTITUTION) {
+                if (enhancementType == EnhancementTypes.STRENGTH || enhancementType == EnhancementTypes.CONSTITUTION) {
                     //Create Belt
                     this.item = itemEnum;
-                    this.ability = abilityEnum;
+                    this.enhancementType = enhancementType;
                     enhance = +1;
                     //save into file
                 }
             }else if(itemEnum == ItemEnum.BOOTS) {
-                if (abilityEnum == AbilityEnum.ARMORCLASS || abilityEnum == AbilityEnum.DEXTERITY) {
+                if (enhancementType == EnhancementTypes.ARMORCLASS || enhancementType == EnhancementTypes.DEXTERITY) {
                     //Create Boots
                     this.item = itemEnum;
-                    this.ability = abilityEnum;
+                    this.enhancementType = enhancementType;
                     enhance = +1;
                     //save into file
                 }
             }else if (itemEnum == ItemEnum.WEAPON) {
-                if (abilityEnum == AbilityEnum.ATTACKBONUS || abilityEnum == AbilityEnum.DAMAGEBONUS) {
+                if (enhancementType == EnhancementTypes.ATTACKBONUS || enhancementType == EnhancementTypes.DAMAGEBONUS) {
                     //Crete weapon
                     this.item = itemEnum;
-                    this.ability = abilityEnum;
+                    this.enhancementType = enhancementType;
                     enhance = +1;
                     //save into file
                 }
@@ -99,7 +99,7 @@ public class Item {
         }
     }
 
-    public void editItem(boolean remove,AbilityEnum abilityEnum){
+    public void editItem(boolean remove,EnhancementTypes abilityEnum){
         if(remove){
             // load and save functions
         }else {
@@ -117,7 +117,7 @@ public class Item {
         if(object instanceof  Item){
             Item ob = (Item) object;
 
-            return  ob.item == this.item && ob.ability == this.ability && ob.coordinate == this.coordinate && ob.enhance == this.enhance;
+            return  ob.item == this.item && ob.enhancementType == this.enhancementType && ob.coordinate == this.coordinate && ob.enhance == this.enhance;
         }
         return false;
     }
