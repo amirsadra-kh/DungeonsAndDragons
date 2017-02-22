@@ -111,6 +111,11 @@ public class Item {
         // character should call this when enters the map to enhance the item regarding to his level
     }
 
+    /**
+     * Overriding equals function for testing.
+     * @param object
+     * @return
+     */
     @Override
     public boolean equals(Object object){
 
