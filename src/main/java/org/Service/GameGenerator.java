@@ -4,6 +4,8 @@ import main.java.org.model.Campaign;
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
 
+import javax.swing.*;
+import java.awt.*;
 import java.util.Scanner;
 
 /**
@@ -76,6 +78,21 @@ public class GameGenerator {
     }
 
     private void createOrChoseMaps() {
+        MapFrame.makeFrame("Map Builder");
+/*
+        JFrame MapFrame = new JFrame("Map Builder");
+        MapFrame.setContentPane(new MapForm().MapPanel);
+        MapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        MapFrame.setLocationRelativeTo(null);
+        MapFrame.setVisible(true);
+        MapFrame.pack();
+*/
+/*
+//   MapFrame.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
+
+*/
     }
+
+
 
 }
