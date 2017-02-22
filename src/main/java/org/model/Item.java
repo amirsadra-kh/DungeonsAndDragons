@@ -110,4 +110,15 @@ public class Item {
     public void enhancement(int enhance){
         // character should call this when enters the map to enhance the item regarding to his level
     }
+
+    @Override
+    public boolean equals(Object object){
+
+        if(object instanceof  Item){
+            Item ob = (Item) object;
+
+            return  ob.item == this.item && ob.ability == this.ability && ob.coordinate == this.coordinate && ob.enhance == this.enhance;
+        }
+        return false;
+    }
 }
