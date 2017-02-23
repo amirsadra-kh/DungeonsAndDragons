@@ -1,7 +1,42 @@
 package test.java.org.model;
 
-/**
- * Created by Parisa Nikzad on 2/19/2017.
- */
+import main.java.org.model.Ability;
+import org.junit.Before;
+import org.junit.Test;
+
 public class AbilityTest {
+    Ability ability;
+
+    @Before
+    public void setUp() throws Exception {
+        ability = new Ability();
+    }
+
+    @Test
+    public void StrengthTest() {
+        int score = ability.getStrength();
+        System.out.println("strength is " + score);
+    }
+
+    @Test
+    public void ConstitutionTest() {
+        int score = ability.getConstitution();
+        System.out.println("Constitution is " + score);
+        System.out.println("Constitution is xxxxx " + ability.getConstitution());
+    }
+
+    @Test
+    public void DexterityTest() {
+        int score = ability.getDexterity();
+        System.out.println("Dexterity is " + score);
+        System.out.println("Dexterity isxxxx " + ability.getDexterity());
+    }
+
+    @Test
+    public void HitPointTest(){
+        int type = ability.getHitPoints();
+        assert ((1 <= type) && (type <= 22));
+    }
+
+
 }

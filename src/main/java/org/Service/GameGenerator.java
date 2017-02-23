@@ -65,9 +65,16 @@ public class GameGenerator {
 
     private void createOrEditCharacter() {
         Ability ability = new Ability();
-        System.out.println("The new character is made with the following Ability: ");
-        System.out.println(ability.toString());
+        Scanner scan = new Scanner(System.in);
+        String charName = "";
 
+        System.out.println("please enter a name for character: ");
+        charName = scan.nextLine();
+        System.out.println( charName + " has the following ability ");
+        System.out.println(ability.toString());
+        ObjectSaver os = new ObjectSaver();
+
+        os.saveCharacter(charName, );
 
     }
 

@@ -28,7 +28,7 @@ public class ObjectSaver extends  FileProcessor{
         saveFile(path,campaign);
     }
 
-    public void loadCharacter(String path, Character character) throws IOException {
+    public void saveCharacter(String path, Character character) throws IOException {
         saveFile(path,character);
     }
 }
