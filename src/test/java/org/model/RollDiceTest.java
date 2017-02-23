@@ -1,7 +1,9 @@
-package test.java.com;
+package test.java.org.model;
+
 
 import main.java.org.model.RollDice;
 import org.junit.Test;
+
 
 public class RollDiceTest {
 

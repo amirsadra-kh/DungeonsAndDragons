@@ -1,11 +1,10 @@
 package main.java.org.Service;
 
+import main.java.org.model.Ability;
 import main.java.org.model.Campaign;
-import main.java.org.model.Character;
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
 
-import java.util.List;
 import java.util.Scanner;
 
 public class GameGenerator {
@@ -65,6 +64,10 @@ public class GameGenerator {
     }
 
     private void createOrEditCharacter() {
+        Ability ability = new Ability();
+        System.out.println("The new character is made with the following Ability: ");
+        System.out.println(ability.toString());
+
 
     }
 

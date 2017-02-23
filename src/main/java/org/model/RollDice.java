@@ -13,26 +13,32 @@ public class RollDice {
     private Random r = new Random();
     private int diceType;
 
+    /**
+     * Constructor
+     *
+     * @param diceType take the integer as the type of dice.
+     */
     public RollDice(int diceType) {
+
         this.diceType = diceType;
     }
 
     /**
      * This method is setting the type of dice.
      *
-     * @param  diceType integer representing the Type of dice
+     * @return diceType integer representing the Type of dice
      */
     public int getDiceType() {
+
         return diceType;
     }
 
     /**
-     * This method is sending the result of rolling dice.
+     * This method send integer of dice roll.
      *
      * @return integer of the dice roll
      */
-    public int roll()
-    {
+    public int roll() {
         return 1 + r.nextInt(diceType);
     }
 }

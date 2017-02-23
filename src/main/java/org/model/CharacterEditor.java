@@ -2,7 +2,7 @@ package main.java.org.model;
 
 import java.util.List;
 
-public class ChacterEditor {
+public class CharacterEditor {
     Map setplayerCharacter(Character character, final  Map map) throws Exception {
         map.setCharacter(character);
         return map;
