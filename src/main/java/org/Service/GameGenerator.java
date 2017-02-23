@@ -78,21 +78,8 @@ public class GameGenerator {
     }
 
     private void createOrChoseMaps() {
+
         MapFrame.makeFrame("Map Builder");
-/*
-        JFrame MapFrame = new JFrame("Map Builder");
-        MapFrame.setContentPane(new MapForm().MapPanel);
-        MapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        MapFrame.setLocationRelativeTo(null);
-        MapFrame.setVisible(true);
-        MapFrame.pack();
-*/
-/*
-//   MapFrame.getRootPane().setWindowDecorationStyle(JRootPane.FRAME);
-
-*/
     }
-
-
 
 }
