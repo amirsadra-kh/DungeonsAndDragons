@@ -80,6 +80,8 @@ public class GameGenerator {
     private void createOrChoseMaps() {
 
         MapFrame.makeFrame("Map Builder");
+
+      //  MapFrame.Main();
     }
 
 }

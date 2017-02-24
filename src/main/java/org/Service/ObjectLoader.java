@@ -16,27 +16,27 @@ import java.util.List;
 
 public class ObjectLoader extends FileProcessor {
 
-    public List<Map> loadMaps() {
+    public static List<Map> loadMaps() {
         return null;
     }
 
-    public List<Campaign> loadCampaigns() {
+    public static List<Campaign> loadCampaigns() {
         return null;
     }
 
-    public List<Character> loadCharacters() {
+    public static List<Character> loadCharacters() {
         return null;
     }
 
-    public Map loadMap(String fileName) {
+    public static Map loadMap(String fileName) {
 
         return (Map) loadFile("./src/test/resources/files/maps/" + fileName);
     }
-    public Campaign loadCampaign(String path) {
+    public static Campaign loadCampaign(String path) {
         return null;
     }
 
-    public Character loadCharacter(String path) {
+    public static Character loadCharacter(String path) {
         return null;
     }
 
