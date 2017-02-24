@@ -1,6 +1,5 @@
 package main.java.org.Service;
 
-import main.java.org.model.Ability;
 import main.java.org.model.Campaign;
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
@@ -64,18 +63,7 @@ public class GameGenerator {
     }
 
     private void createOrEditCharacter() {
-        Ability ability = new Ability();
-        Scanner scan = new Scanner(System.in);
-        String charName = "";
-
-        System.out.println("please enter a name for character: ");
-        charName = scan.nextLine();
-        System.out.println( charName + " has the following ability ");
-        System.out.println(ability.toString());
-        ObjectSaver os = new ObjectSaver();
-
-        os.saveCharacter(charName, );
-
+        new CharacterScreen();
     }
 
     private void createOrChoseMaps() {

@@ -2,6 +2,7 @@ package main.java.org.Service;
 
 
 import main.java.org.model.Campaign;
+import main.java.org.model.Character;
 import main.java.org.model.Map;
 
 import java.io.IOException;
