@@ -145,5 +145,4 @@ public class CampaignScreen {
     public Campaign getNewCamp() {
         return newCamp;
     }
-    
 }
