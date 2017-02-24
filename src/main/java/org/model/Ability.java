@@ -22,7 +22,7 @@ public class Ability {
 
     public void setStrength(int value) {
         strength.set(value);
-        System.out.println("strength is " + strength.get());
+        //System.out.println("strength is " + strength.get());
 
     }
 
@@ -33,7 +33,7 @@ public class Ability {
 
     public void setConstitution(int value) {
         constitution.set(value);
-        System.out.println("Constitution is " + constitution.get());
+        //System.out.println("Constitution is " + constitution.get());
 
     }
 
@@ -44,16 +44,16 @@ public class Ability {
 
     public void setDexterity(int value) {
         dexterity.set(value);
-        System.out.println("Dexterity is " + dexterity.get());
+        //System.out.println("Dexterity is " + dexterity.get());
 
     }
 
     public int getHitPoints() {
-        System.out.println("the roll dice for hitpoints " + this.hitPoints);
-        System.out.println("the strength in hitpoints " + this.strength.get());
-        System.out.println("strength modifier in hitpoints " + this.strength.modifier());
+        //System.out.println("the roll dice for hitpoints " + this.hitPoints);
+        //System.out.println("the strength in hitpoints " + this.strength.get());
+        //System.out.println("strength modifier in hitpoints " + this.strength.modifier());
         int hitPoints = this.strength.modifier() + this.hitPoints;
-        System.out.println("HitPoint " + hitPoints);
+        //System.out.println("HitPoint " + hitPoints);
         return hitPoints;
     }
 
@@ -80,18 +80,19 @@ public class Ability {
 
     public void setAttackBonus(int attackBonus) {
         this.attackBonus = 1+ attackBonus;
-        System.out.println("Attack Bonus is " + attackBonus);
+        //System.out.println("Attack Bonus is " + attackBonus);
     }
 
     public int getDamageBonus() {
         return damageBonus;
     }
 
+
     public void setDamageBonus(int damageBonus) {
 
         modifier = new Modifier(getStrength());
         damageBonus = this.strength.modifier(); //  +itemBonus  will add itemBonous to this equation
-        System.out.println("Damage Bonus is " + damageBonus);
+        //System.out.println("Damage Bonus is " + damageBonus);
         this.damageBonus = damageBonus;
     }
 

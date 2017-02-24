@@ -24,15 +24,14 @@ public class CharacterScreen {
         // Let user choose an action - Create or Edit a Character
         System.out.println("Choose one of the following by entering the number associated with the choice:");
         System.out.println("1. Create a Character\n2. Edit a Character\n3. Back to Main Menu");
-        choice = scan.nextInt();
+        while(choice == 0)
+            choice = scan.nextInt();
 
         // If the user enters an invalid input, they will be asked again
         while (choice < 1 || choice > 3) {
             System.out.println("Your input is invalid, please try again");
             choice = scan.nextInt();
         }
-
-        scan.close();
 
         switch (choice) {
             case 1:
@@ -45,6 +44,8 @@ public class CharacterScreen {
                 backToMain();
                 break;
             }
+
+        scan.close();
 
     }
     public void createCharacterScreen(){
@@ -60,6 +61,8 @@ public class CharacterScreen {
 
         BackPackInventory backpack = new BackPackInventory();
         char1.setBackPackInventory(backpack);
+
+        System.out.println(ability.toString());
 
         // TODO charName should be the path of the character
         ObjectSaver os = new ObjectSaver();

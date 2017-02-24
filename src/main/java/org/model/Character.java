@@ -20,6 +20,10 @@ public class Character {
     }
 
     public void setAbility(Ability ability) {
+        ability.setArmorClass(0);
+        ability.setDamageBonus(0);
+        ability.setAttackBonus(0);
+        ability.setLevel(1);
         this.ability = ability;
     }
     public Character create(final BackPackInventory backPackInventory) {

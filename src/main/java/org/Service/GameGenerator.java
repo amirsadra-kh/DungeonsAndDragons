@@ -63,7 +63,8 @@ public class GameGenerator {
     }
 
     private void createOrEditCharacter() {
-        new CharacterScreen();
+        CharacterScreen cs = new CharacterScreen();
+        cs.CharacterScreen();
     }
 
     private void createOrChoseMaps() {
