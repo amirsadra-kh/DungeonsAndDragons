@@ -59,14 +59,24 @@ public class Campaign implements Serializable {
     }
 
     /**
+     * A method to set the number of levels in a campaign
+     */
+    public void setNumLevels(int num) {
+        this.numLevels = num;
+    }
+
+    /**
      * This is the method for adding maps to the campaign
      * @param mapName a name of a map which will be added to the list of levels in the campaign
      */
     public void addMap(String mapName){
         // Get Map using Map name
-        Map map = ObjectLoader.loadMap(mapName);
-
-        this.getLevels().add(map);
+        try {
+            Map map = ObjectLoader.loadMap(mapName);
+            this.levels.add(map);
+        } catch(Exception e) {
+            System.out.println("Map not found!");
+        }
     }
 
     /**
@@ -106,13 +116,14 @@ public class Campaign implements Serializable {
      * @return a string to be used to write to the text file.
      */
     public String campaignString() {
+        List<Map> maps = this.levels;
+        String mapName = "";
         // Add all the information about a campaign to one string
-        String campaign = "name: " +this.name
-                +"Number of Levels: " +this.numLevels
-                +"Maps: ";
+        String campaign = this.name
+                +"," +this.numLevels;
         for(int i = 0; i < this.numLevels; i++) {
-            Map map = this.levels.get(i);
-            campaign += map.getName() +" ";
+            mapName = maps.get(i).getName();
+            campaign += "," +mapName;
         }
 
         // Return campaign information string

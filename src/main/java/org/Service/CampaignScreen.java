@@ -3,6 +3,10 @@ package main.java.org.Service;
 import main.java.org.model.Campaign;
 import main.java.org.model.Map;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -69,12 +73,14 @@ public class CampaignScreen {
         System.out.println("Enter the number of levels of the new Campaign: ");
         numLevels = scan.nextInt();
 
+        camp.setNumLevels(numLevels);
+
         // Add a Map
         for(int i = 0; i < numLevels; i++) {
             //Get Map input from user
             String mapName = "";
             System.out.println("Enter the name of the Map you would like to add:");
-            while(mapName.matches("")) {
+            while(mapName.equals("")) {
                 mapName = scan.nextLine();
             }
 
@@ -89,6 +95,7 @@ public class CampaignScreen {
         this.newCamp = camp;
 
         //scan.close();
+
     }
 
     /**

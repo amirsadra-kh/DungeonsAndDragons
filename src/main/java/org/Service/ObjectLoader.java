@@ -24,6 +24,10 @@ public class ObjectLoader extends FileProcessor {
     public static List<Map> loadMaps() {
         return null;
     }
+    public static String campaignsPath = "src/main/java/org/resources/campaigns/campaign.txt";
+    public static String mapsPath = "src/main/java/org/resources/maps/map.txt";
+    public static String charactersPath = "src/main/java/org/resources/characters/character.txt";
+    public static String itemsPath;
 
     public static List<Campaign> loadCampaigns() {
         List<Campaign> campaign = (List<Campaign>) loadFile("resources/campaigns/campaign.txt");
@@ -34,20 +38,24 @@ public class ObjectLoader extends FileProcessor {
         return null;
     }
 
-    public static Map loadMap(String fileName) {
+    public static Map loadMap(String mapName) throws Exception {
         Map map = new Map();
+        boolean match = false;
         // Read the Map file
-        System.out.println("resources/maps/map.txt");
-        ArrayList<String> mapFile = reader("resources/maps/map.txt");
+        ArrayList<String> mapFile = reader(mapsPath);
         for(int i = 0; i < mapFile.size(); i ++) {
-            if(fileName == mapFile.get(i)) {
-                map.setName(fileName);
+            if(mapName.equals(mapFile.get(i))) {
+                map.setName(mapName);
+                match = true;
                 // TODO Set rest of map attributes here to have a complete map object
             }
 
         }
-        //return (Map) loadFile("./src/test/resources/files/maps/" + fileName);
-        return map;
+        if(match)
+            //return (Map) loadFile("./src/test/resources/files/maps/" + fileName);
+            return map;
+        else
+            throw new Exception("Map not found!");
     }
 
     public static Campaign loadCampaign(String campName) {
@@ -56,7 +64,7 @@ public class ObjectLoader extends FileProcessor {
         ArrayList<String> campaigns = new ArrayList<String>();
 
         // Read campaign text file and save in campaigns list
-        campaigns = reader("resources/campaigns/campaign.txt");
+        campaigns = reader(campaignsPath);
 
         // Search for campaign name to find the information about that campaign
         for(int i = 0; i < campaigns.size(); i++){

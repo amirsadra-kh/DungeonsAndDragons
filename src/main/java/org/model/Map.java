@@ -114,7 +114,8 @@ public class Map implements Serializable {
     @Override
     public String toString() {
         return "Map{" +
-                "enterPoint=" + enterPoint +
+                "name=" +name +
+                ", enterPoint=" + enterPoint +
                 ", exitPoint=" + exitPoint +
                 ", screen=" + Arrays.toString(screen) +
                 ", character=" + character +

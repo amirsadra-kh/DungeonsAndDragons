@@ -16,17 +16,22 @@ import java.util.List;
  */
 
 public class ObjectSaver extends FileProcessor {
+    public static String campaignsPath = "src/main/java/org/resources/campaigns/campaign.txt";
+    public static String mapsPath = "src/main/java/org/resources/maps/map.txt";
+    public static String charactersPath = "src/main/java/org/resources/characters/character.txt";
+    public static String itemsPath;
+
     public void SaveMaps(List<Map> maps) {
         saveFile("/maps/", maps);
     }
 
     public void saveCampaign(String camp) {
         //saveFile("/campaigns/", campaigns);
-        writer("resources/campaigns/campaign.txt", camp);
+        writer(campaignsPath, camp);
     }
 
     public void editedCampaign(String newCamp, String oldCamp) {
-        rewriter("resources/campaigns/campaign.txt", newCamp, oldCamp);
+        rewriter(campaignsPath, newCamp, oldCamp);
     }
 
     public void loadCharacters(List<Character> characters) {
@@ -56,9 +61,6 @@ public class ObjectSaver extends FileProcessor {
             PrintWriter out = new PrintWriter(bw))
         {
             out.println(object);
-            fw.close();
-            bw.close();
-            out.close();
         } catch (IOException e) {
             e.printStackTrace();
         }

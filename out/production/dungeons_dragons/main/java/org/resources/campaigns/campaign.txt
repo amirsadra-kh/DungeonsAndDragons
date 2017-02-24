@@ -1,1 +1,9 @@
-Campaign
+bla,0
+bla,0
+bla,0
+bla,0
+bla,0
+bla,0
+bla,0
+bla,1,map
+LaLaLand,1,map
