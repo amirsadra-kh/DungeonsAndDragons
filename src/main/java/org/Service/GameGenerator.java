@@ -1,6 +1,7 @@
 package main.java.org.Service;
 
 import main.java.org.model.Campaign;
+import main.java.org.Service.CampaignScreen;
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
 
@@ -68,7 +69,8 @@ public class GameGenerator {
     }
 
     private Campaign createOrChoseCampaign() {
-        return null;
+        CampaignScreen cs = new CampaignScreen();
+        return cs.getNewCamp();
     }
 
     private void createOrEditCharacter() {

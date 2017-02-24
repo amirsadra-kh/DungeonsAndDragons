@@ -16,6 +16,8 @@ import java.util.concurrent.TimeUnit;
  * @since 2017-02-17
  */
 public class CampaignScreen {
+    private Campaign newCamp;
+
     /**
      *  A basic interaction screen after the user chooses Campaign
      */
@@ -42,9 +44,6 @@ public class CampaignScreen {
                 break;
             case 2:
                 editCampaignScreen();
-                break;
-            case 3:
-                backToMain();
                 break;
         }
     }
@@ -78,12 +77,12 @@ public class CampaignScreen {
         scan.close();
 
         //Back to Main Menu without saving
-        backToMain();
+        this.newCamp = camp;
     }
 
     /**
      * This method prompts the user for information to edit a Campaign
-     * TODO
+     *
      */
     public void editCampaignScreen() {
         Scanner scan = new Scanner(System.in);
@@ -137,8 +136,16 @@ public class CampaignScreen {
 
         scan.close();
 
-        backToMain();
+        this.newCamp = camp;
     }
+
+    /**
+     * Return camp
+     */
+    public Campaign getNewCamp() {
+        return newCamp;
+    }
+
 
     /**
      * This method should look the same for all screens.
