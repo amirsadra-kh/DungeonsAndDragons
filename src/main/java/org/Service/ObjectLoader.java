@@ -68,9 +68,12 @@ public class ObjectLoader extends FileProcessor {
 
         // Search for campaign name to find the information about that campaign
         for(int i = 0; i < campaigns.size(); i++){
-            if(campName == campaigns.get(i)){
+            if(campName.equals(campaigns.get(i))){
                 camp.setName(campName);
-                // TODO set the camp object to this campaign
+                camp.setNumLevels(Integer.parseInt(campaigns.get(i+1)));
+                for(int j = 1; j <= camp.getNumLevels(); j++) {
+                    camp.addMap(campaigns.get(i+1+j));
+                }
             }
         }
         // Return the campaign found

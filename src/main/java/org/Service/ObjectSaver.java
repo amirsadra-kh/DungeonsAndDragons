@@ -17,6 +17,7 @@ import java.util.List;
 
 public class ObjectSaver extends FileProcessor {
     public static String campaignsPath = "src/main/java/org/resources/campaigns/campaign.txt";
+    public static String tempCampaignsPath = "src/main/java/org/resources/campaigns/tempCampaign.txt";
     public static String mapsPath = "src/main/java/org/resources/maps/map.txt";
     public static String charactersPath = "src/main/java/org/resources/characters/character.txt";
     public static String itemsPath;
@@ -31,7 +32,7 @@ public class ObjectSaver extends FileProcessor {
     }
 
     public void editedCampaign(String newCamp, String oldCamp) {
-        reWriter(campaignsPath, newCamp, oldCamp);
+        reWriter(campaignsPath, tempCampaignsPath, newCamp, oldCamp);
     }
 
     public void loadCharacters(List<Character> characters) {
@@ -72,32 +73,46 @@ public class ObjectSaver extends FileProcessor {
      * @author Freyja
      * @since 23.02.2017
      * @param path the path of the text file
+     * @param tempPath the temporary path for the re-writing
      * @param newObject the edited object as a string to be added to the text file
      * @param oldObject the old object (before editing) as a string to be replaces in the text file
      */
-    public static void reWriter(String path, String newObject, String oldObject) {
-        BufferedReader buffer = null;
+    public static void reWriter(String path, String tempPath, String newObject, String oldObject) {
+        // Remove an old object (Character, Map, Item or Campaign) information from text file.
+        BufferedReader br = null;
+        BufferedWriter bw = null;
         String lineIn = "";
 
         // Try to open the file with the path given
         try {
-            buffer = new BufferedReader(new FileReader(path));
-            String text = "";
+            br = new BufferedReader(new FileReader(path));
+            bw = new BufferedWriter(new FileWriter(tempPath));
 
             // Read each line of the file
-            while ((lineIn = buffer.readLine()) != null) {
-                text += lineIn;
+            while ((lineIn = br.readLine()) != null) {
+                if(!lineIn.contains(oldObject))
+                    bw.write(lineIn +"\n");
             }
-            buffer.close();
+            bw.write(newObject);
+            br.close();
+            bw.close();
 
-            // Replace the old object with the new object
-            String replacedText = text.replaceAll(oldObject, newObject);
+            br = new BufferedReader(new FileReader(tempPath));
+            bw = new BufferedWriter(new FileWriter(path));
 
-            // Write the full text file again but with the new object instead of the old
-            FileWriter fw = new FileWriter(path);
-            fw.write(replacedText);
-            fw.close();
-
+            // Read each line of the file
+            while ((lineIn = br.readLine()) != null) {
+                System.out.println(lineIn);
+                System.out.println(oldObject);
+                if(lineIn.equals(oldObject))
+                    continue;
+                bw.write(lineIn +"\n");
+            }
+            br.close();
+            bw.close();
+            // Show exception stack if file is not found
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

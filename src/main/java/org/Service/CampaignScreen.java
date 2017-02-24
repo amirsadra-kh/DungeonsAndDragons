@@ -108,7 +108,6 @@ public class CampaignScreen {
         campName = scan.nextLine();
 
         camp = camp.getCampaign(campName);
-        String oldCamp = camp.campaignString();
 
         System.out.println("Choose one of the following by entering the number associated with the choice:");
         System.out.println("1. Add a Map\n2. Remove a Map\n3. Back to Main Menu");
@@ -165,7 +164,7 @@ public class CampaignScreen {
 
         //Save Campaign
         ObjectSaver os = new ObjectSaver();
-        os.editedCampaign(camp.campaignString(), oldCamp);
+        os.editedCampaign(camp.campaignString(), campName);
 
         this.newCamp = camp;
     }
