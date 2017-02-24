@@ -1,7 +1,8 @@
-package main.java.org.Service;
+package main.java.org.view;
+
+import main.java.org.model.Map;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -23,7 +24,7 @@ public class MapFrame implements ActionListener {
     public JPanel GridPanel;
     private final int SIZE = 9;
 
-    MapFrame() {
+    public MapFrame() {
         String MapActionInput;
     //    MapActionInput=input("Make or Edit");
     //    alert("You Select : "+MapActionInput);
@@ -41,19 +42,24 @@ public class MapFrame implements ActionListener {
         return JOptionPane.showInputDialog(message);
     }
 
-    public static void makeFrame (String frameTitle) {
+    public  Map makeFrame (String frameTitle) {
 
+
+        Map map = new Map();
         JFrame MapFrame = new JFrame(frameTitle);
         MapFrame.setContentPane(new MapFrame().MapPanel);
         MapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //      MapFrame.add(GridPanel);
         MapFrame.setSize(800,500);
         MapFrame.setLocationRelativeTo(null);
         MapFrame.setVisible(true);
-      //  MapFrame.setAlwaysOnTop(true);
+
+       int    rows= parseInt(RowsInput.getText());
+       int    cols=parseInt(ColumnsInput.getText());
+      // String  TestInput=MapGrid.Lable1.getText();
+     //Point enterPoint, Point exitPoint, char[][] screen, Character character, List<Character> nonPlayerCharacters, Map nextLevel
 
 
-        //   MapFrame.pack();
+        return map;
     }
 
 
