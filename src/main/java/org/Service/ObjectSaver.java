@@ -31,7 +31,7 @@ public class ObjectSaver extends FileProcessor {
     }
 
     public void editedCampaign(String newCamp, String oldCamp) {
-        rewriter(campaignsPath, newCamp, oldCamp);
+        reWriter(campaignsPath, newCamp, oldCamp);
     }
 
     public void loadCharacters(List<Character> characters) {
@@ -75,7 +75,7 @@ public class ObjectSaver extends FileProcessor {
      * @param newObject the edited object as a string to be added to the text file
      * @param oldObject the old object (before editing) as a string to be replaces in the text file
      */
-    public static void rewriter(String path, String newObject, String oldObject) {
+    public static void reWriter(String path, String newObject, String oldObject) {
         BufferedReader buffer = null;
         String lineIn = "";
 

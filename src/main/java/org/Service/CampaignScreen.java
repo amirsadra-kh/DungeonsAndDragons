@@ -57,7 +57,6 @@ public class CampaignScreen {
      */
     public void createCampaignScreen() {
         Scanner scan = new Scanner(System.in);
-        int choice = 1;
 
         // Create a new Campaign
         List<Map> levels = new ArrayList<Map>();
@@ -91,11 +90,7 @@ public class CampaignScreen {
         ObjectSaver os = new ObjectSaver();
         os.saveCampaign(camp.campaignString());
 
-        //Back to Main Menu without saving
         this.newCamp = camp;
-
-        //scan.close();
-
     }
 
     /**
@@ -113,6 +108,7 @@ public class CampaignScreen {
         campName = scan.nextLine();
 
         camp = camp.getCampaign(campName);
+        String oldCamp = camp.campaignString();
 
         System.out.println("Choose one of the following by entering the number associated with the choice:");
         System.out.println("1. Add a Map\n2. Remove a Map\n3. Back to Main Menu");
@@ -125,34 +121,51 @@ public class CampaignScreen {
         }
 
         // Add a Map
-        while(choice == 1) {
-            //Get Map input from user
-            String mapName = "";
-            System.out.println("Enter the name of the Map you would like to add:");
-            mapName = scan.nextLine();
+        if(choice == 1) {
+            //Get the number of maps the user would like to add
+            int num = camp.getNumLevels();
+            int addingNum = 0;
+            System.out.println("Please enter the number of levels you would like to add: ");
+            addingNum = scan.nextInt();
 
-            //Send Map input to CampaignModule
-            camp.addMap(mapName);
+            num += addingNum;
+            camp.setNumLevels(num);
 
-            System.out.println("Enter 0 to stop adding maps or 1 to add more maps:");
-            choice = scan.nextInt();
+            for(int i = 0; i < addingNum; i++) {
+                //Get Map input from user
+                String mapName = "";
+                System.out.println("Enter the name of the Map you would like to add:");
+                while (mapName.equals("")) {
+                    mapName = scan.nextLine();
+                }
+
+                //Send Map input to CampaignModule
+                camp.addMap(mapName);
+            }
         }
 
         // Remove a Map - the last one
-        while(choice == 2) {
+        if(choice == 2) {
+            int removeNum = 0;
+            System.out.println("Please enter the number of levels you would like to remove: ");
+            removeNum = scan.nextInt();
+
             levels = camp.getLevels();
 
-            // Remove the last map if there are any maps in the Campaign
-            if (camp.getNumLevels() != 0) {
-                camp.removeLevel(levels);
-            } else
-                System.out.println("There are no maps left in this campaign");
-
-            System.out.println("Enter 0 to stop removing maps or 2 to remove more maps:");
-            choice = scan.nextInt();
+            for (int i = 0; i < removeNum; i++) {
+                // Remove the last map if there are any maps in the Campaign
+                if (camp.getNumLevels() != 0) {
+                    camp.removeLevel(levels);
+                } else
+                    System.out.println("There are no maps left in this campaign");
+            }
         }
 
         scan.close();
+
+        //Save Campaign
+        ObjectSaver os = new ObjectSaver();
+        os.editedCampaign(camp.campaignString(), oldCamp);
 
         this.newCamp = camp;
     }
