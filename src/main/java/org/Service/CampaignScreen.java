@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
  * A view for creating a Campaign
  *
  * @author Freyja Jokulsdottir
- * @version 1.0
+ * @version 2.0
  * @since 2017-02-17
  */
 public class CampaignScreen {
@@ -36,8 +36,6 @@ public class CampaignScreen {
             choice = scan.nextInt();
         }
 
-        scan.close();
-
         switch (choice) {
             case 1:
                 createCampaignScreen();
@@ -46,6 +44,8 @@ public class CampaignScreen {
                 editCampaignScreen();
                 break;
         }
+
+        scan.close();
     }
 
     /**
@@ -145,13 +145,5 @@ public class CampaignScreen {
     public Campaign getNewCamp() {
         return newCamp;
     }
-
-
-    /**
-     * This method should look the same for all screens.
-     * TODO
-     */
-    public void backToMain(){
-
-    }
+    
 }

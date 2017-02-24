@@ -70,6 +70,7 @@ public class GameGenerator {
 
     private Campaign createOrChoseCampaign() {
         CampaignScreen cs = new CampaignScreen();
+        cs.CampaignScreen();
         return cs.getNewCamp();
     }
 
