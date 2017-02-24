@@ -26,12 +26,12 @@ public class MapFrame implements ActionListener {
 
     public MapFrame() {
         String MapActionInput;
-    //    MapActionInput=input("Make or Edit");
-    //    alert("You Select : "+MapActionInput);
-     //   showGrid();
-     //   final MapGrid mapGrid = new MapGrid(10, 10);
+        //    MapActionInput=input("Make or Edit");
+        //    alert("You Select : "+MapActionInput);
+        //   showGrid();
+        //   final MapGrid mapGrid = new MapGrid(10, 10);
         openMapGrid.addActionListener(this);
-     //   MapGrid.ShowGrid(10,20);
+        //   MapGrid.ShowGrid(10,20);
     }
 
     public static void alert(String message) {
@@ -42,23 +42,20 @@ public class MapFrame implements ActionListener {
         return JOptionPane.showInputDialog(message);
     }
 
-    public  Map makeFrame (String frameTitle) {
-
-
+    public Map makeFrame (String frameTitle) {
         Map map = new Map();
         JFrame MapFrame = new JFrame(frameTitle);
         MapFrame.setContentPane(new MapFrame().MapPanel);
         MapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //      MapFrame.add(GridPanel);
         MapFrame.setSize(800,500);
         MapFrame.setLocationRelativeTo(null);
         MapFrame.setVisible(true);
+        //  MapFrame.setAlwaysOnTop(true);
+//        int    rows= parseInt(RowsInput.getText());
+ //       int    cols=parseInt(ColumnsInput.getText());
 
-       int    rows= parseInt(RowsInput.getText());
-       int    cols=parseInt(ColumnsInput.getText());
-      // String  TestInput=MapGrid.Lable1.getText();
-     //Point enterPoint, Point exitPoint, char[][] screen, Character character, List<Character> nonPlayerCharacters, Map nextLevel
-
-
+        //   MapFrame.pack();
         return map;
     }
 
@@ -74,9 +71,9 @@ public class MapFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-    int    rows= parseInt(RowsInput.getText());
-    int    cols=parseInt(ColumnsInput.getText());
-    alert( "Rows:"+rows+" Cols:"+cols);
+        int    rows= parseInt(RowsInput.getText());
+        int    cols=parseInt(ColumnsInput.getText());
+        alert( "Rows:"+rows+" Cols:"+cols);
         MapGrid.ShowGrid(rows,cols);
     }
 }

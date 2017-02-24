@@ -3,10 +3,14 @@ package main.java.org.Service;
 import main.java.org.model.Campaign;
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
+import main.java.org.model.Map;
+import main.java.org.view.MapFrame;
+
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.Scanner;
+import java.util.UUID;
 
 /**
  * This class is is to Generate/edit game objects .
@@ -79,9 +83,12 @@ public class GameGenerator {
 
     private void createOrChoseMaps() {
 
-        MapFrame.makeFrame("Map Builder");
+        Map map = new MapFrame().makeFrame("Map Builder");
 
-      //  MapFrame.Main();
+        //  MapFrame.Main();
+
+        ObjectSaver objectSaver=new ObjectSaver();
+        objectSaver.saveMap("./src/main/java/org/resources/maps/"+ UUID.randomUUID().toString().substring(5),map);
     }
 
 }

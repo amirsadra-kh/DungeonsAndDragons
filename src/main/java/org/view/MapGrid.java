@@ -11,12 +11,13 @@ public class MapGrid extends JFrame {
     private JPanel gt;
 
     public static void ShowGrid(int rows, int cols) {
-    //    int rows = 2;
-    //    int cols = 3;
+        //    int rows = 2;
+        //    int cols = 3;
         MapGrid gt = new MapGrid(rows, cols);
-        gt.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        gt.setDefaultCloseOperation(gt.EXIT_ON_CLOSE);
         gt.setLocationRelativeTo(null);
-        gt.pack();
+        gt.setSize(rows*100,cols*100);
+        //gt.pack();
         gt.setVisible(true);
     }
 
@@ -25,13 +26,14 @@ public class MapGrid extends JFrame {
         pane.setLayout(new GridLayout(rows, cols));
         for (int j=1 ; j<= cols; j++) {
             for (int i = 1; i <= rows; i++) {
-                JButton button = new JButton(i+" "+j); //Integer.toString(i + 1)
-                pane.add(button);
+                JTextField NewTextField = new JTextField(i+" "+j); //Integer.toString(i + 1)
+                pane.add(NewTextField);
             }
         }
     }
 
 }
+
 
 
 
