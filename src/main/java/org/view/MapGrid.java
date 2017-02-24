@@ -1,4 +1,4 @@
-package main.java.org.Service;
+package main.java.org.view;
 
 import javax.swing.*;
 import java.awt.*;
