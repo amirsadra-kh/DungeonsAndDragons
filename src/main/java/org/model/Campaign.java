@@ -17,6 +17,8 @@ import java.util.List;
 public class Campaign implements Serializable {
 
     private List<Map> levels;
+    private String name;
+    private int numLevels;
 
     /**
      * This is the campaign object to be created or edited
@@ -38,8 +40,11 @@ public class Campaign implements Serializable {
     }
 
     public List<Map> getLevels() {
-
         return levels;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -49,6 +54,7 @@ public class Campaign implements Serializable {
      */
     public int getNumLevels() {
         int numLevels = this.levels.size();
+        this.numLevels = numLevels;
         return numLevels;
     }
 
@@ -92,5 +98,24 @@ public class Campaign implements Serializable {
         return "Campaign{" +
                 "levels=" + levels +
                 '}';
+    }
+
+    /**
+     * A method for changing the campaign into a string to be added to the Campaign text file.
+     *
+     * @return a string to be used to write to the text file.
+     */
+    public String campaignString() {
+        // Add all the information about a campaign to one string
+        String campaign = "name: " +this.name
+                +"Number of Levels: " +this.numLevels
+                +"Maps: ";
+        for(int i = 0; i < this.numLevels; i++) {
+            Map map = this.levels.get(i);
+            campaign += map.getName() +" ";
+        }
+
+        // Return campaign information string
+        return campaign;
     }
 }

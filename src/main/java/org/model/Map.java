@@ -14,6 +14,7 @@ public class Map implements Serializable {
     private List<Character> nonPlayerCharacters;
     private Map nextLevel;
     private List<Item> items;
+    private String name;
 
     private Turn turn;
 
@@ -100,6 +101,14 @@ public class Map implements Serializable {
 
     public void setItems(List<Item> items) {
         this.items = items;
+    }
+
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     @Override

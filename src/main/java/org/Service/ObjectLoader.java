@@ -26,7 +26,7 @@ public class ObjectLoader extends FileProcessor {
     }
 
     public static List<Campaign> loadCampaigns() {
-        List<Campaign> campaign = (List<Campaign>) loadFile("main/java/org/resources/campaigns/campaign.txt");
+        List<Campaign> campaign = (List<Campaign>) loadFile("resources/campaigns/campaign.txt");
         return campaign;
     }
 
@@ -35,8 +35,19 @@ public class ObjectLoader extends FileProcessor {
     }
 
     public static Map loadMap(String fileName) {
+        Map map = new Map();
+        // Read the Map file
+        System.out.println("resources/maps/map.txt");
+        ArrayList<String> mapFile = reader("resources/maps/map.txt");
+        for(int i = 0; i < mapFile.size(); i ++) {
+            if(fileName == mapFile.get(i)) {
+                map.setName(fileName);
+                // TODO Set rest of map attributes here to have a complete map object
+            }
 
-        return (Map) loadFile("./src/test/resources/files/maps/" + fileName);
+        }
+        //return (Map) loadFile("./src/test/resources/files/maps/" + fileName);
+        return map;
     }
 
     public static Campaign loadCampaign(String campName) {
@@ -45,11 +56,12 @@ public class ObjectLoader extends FileProcessor {
         ArrayList<String> campaigns = new ArrayList<String>();
 
         // Read campaign text file and save in campaigns list
-        campaigns = reader("main/java/org/resources/campaigns/campaign.txt");
+        campaigns = reader("resources/campaigns/campaign.txt");
 
         // Search for campaign name to find the information about that campaign
         for(int i = 0; i < campaigns.size(); i++){
             if(campName == campaigns.get(i)){
+                camp.setName(campName);
                 // TODO set the camp object to this campaign
             }
         }

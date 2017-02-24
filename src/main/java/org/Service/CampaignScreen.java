@@ -58,26 +58,37 @@ public class CampaignScreen {
         // Create a new Campaign
         List<Map> levels = new ArrayList<Map>();
         Campaign camp = new Campaign(levels);
+        String name = "";
+        int numLevels = 0;
+
+        System.out.println("Enter the name of the new Campaign (No spaces): ");
+        name = scan.nextLine();
+
+        camp.setName(name);
+
+        System.out.println("Enter the number of levels of the new Campaign: ");
+        numLevels = scan.nextInt();
 
         // Add a Map
-        while(choice == 1) {
+        for(int i = 0; i < numLevels; i++) {
             //Get Map input from user
             String mapName = "";
             System.out.println("Enter the name of the Map you would like to add:");
-            mapName = scan.nextLine();
+            while(mapName.matches("")) {
+                mapName = scan.nextLine();
+            }
 
             //Send Map input to CampaignModule
             camp.addMap(mapName);
-
-            System.out.println("Enter 0 to stop adding maps or 1 to add more maps:");
-            choice = scan.nextInt();
         }
         //Save Campaign
-
-        scan.close();
+        ObjectSaver os = new ObjectSaver();
+        os.saveCampaign(camp.campaignString());
 
         //Back to Main Menu without saving
         this.newCamp = camp;
+
+        //scan.close();
     }
 
     /**

@@ -20,8 +20,13 @@ public class ObjectSaver extends FileProcessor {
         saveFile("/maps/", maps);
     }
 
-    public void saveCampaigns(List<Campaign> campaigns) {
-        saveFile("/campaigns/", campaigns);
+    public void saveCampaign(String camp) {
+        //saveFile("/campaigns/", campaigns);
+        writer("resources/campaigns/campaign.txt", camp);
+    }
+
+    public void editedCampaign(String newCamp, String oldCamp) {
+        rewriter("resources/campaigns/campaign.txt", newCamp, oldCamp);
     }
 
     public void loadCharacters(List<Character> characters) {
