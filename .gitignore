@@ -31,6 +31,8 @@ target/
 
 # Other stuff
 **/*.log
+*.class
+*.jar
 logs/
 work/
 **/minifiedCss/

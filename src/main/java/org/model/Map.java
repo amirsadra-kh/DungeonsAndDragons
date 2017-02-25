@@ -12,9 +12,18 @@ public class Map implements Serializable {
 
     private String[][] screen;
     private Turn turn;
+    private String name;
 
     public Map(){
 
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
     @Override
     public String toString() {
@@ -54,8 +63,8 @@ public class Map implements Serializable {
 
     public void saveObject() {
         ObjectSaver objectSaver = new ObjectSaver();
-        objectSaver.saveMap("/maps/"+ UUID.randomUUID().toString().substring(5),this);
-        objectSaver.saveMap("mo", this);
+        objectSaver.saveMap("src/main/java/org/resources/maps/"+ UUID.randomUUID().toString().substring(5),this);
+        //objectSaver.saveMap("mo", this);
         //TODO save Ma
     }
 
