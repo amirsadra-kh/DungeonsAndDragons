@@ -41,9 +41,13 @@ public class ObjectLoaderTest {
     @Test
     public void testLoadMap(){
         //WHEN
-        Map map = objectLoader.loadMap("test-Map");
-        //THEN
-        assertMapsAreEqual(Fixtures.createMap(),map);
+        try {
+            Map map = objectLoader.loadMap("test-Map");
+            //THEN
+            assertMapsAreEqual(Fixtures.createMap(), map);
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 
     @Test

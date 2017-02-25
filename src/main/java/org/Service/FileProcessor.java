@@ -16,7 +16,7 @@ import java.io.FileOutputStream;
  */
 abstract class FileProcessor {
 
-    Object loadFile(final String path)  {
+    static Object loadFile(final String path)  {
         XMLDecoder d = null;
         try {
             d = new XMLDecoder(
