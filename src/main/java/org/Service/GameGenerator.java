@@ -1,10 +1,23 @@
 package main.java.org.Service;
 
 import main.java.org.model.Campaign;
+<<<<<<< HEAD
+=======
+import main.java.org.Service.CampaignScreen;
+>>>>>>> cc5d9cb3ac34de5fd61a6b87a3c0aa58aeafcd89
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
 
 import java.util.Scanner;
+
+/**
+ * This class is is to Generate/edit game objects .
+ * Game , Map, Campaigns, Items, Characters are created/edited by interacting with user
+ * + *
+ * + * @author Maysam Mokarian
+ * + * @version 1.0
+ * + * @since 2017-02-08
+ */
 
 public class GameGenerator {
     public void showMenuToStartTheGame() throws Exception {
@@ -58,8 +71,7 @@ public class GameGenerator {
     private void createOrEditItems() {
     }
 
-    private Campaign createOrChoseCampaign() {
-        return null;
+    private Campaign createOrChoseCampaign() throws Exception {
     }
 
     private void createOrEditCharacter() {

@@ -14,6 +14,7 @@ public class Map implements Serializable {
     private List<Character> nonPlayerCharacters;
     private Map nextLevel;
     private List<Item> items;
+    private String name;
 
     private Turn turn;
 
@@ -102,10 +103,19 @@ public class Map implements Serializable {
         this.items = items;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     @Override
     public String toString() {
         return "Map{" +
-                "enterPoint=" + enterPoint +
+                "name=" +name +
+                ", enterPoint=" + enterPoint +
                 ", exitPoint=" + exitPoint +
                 ", screen=" + Arrays.toString(screen) +
                 ", character=" + character +

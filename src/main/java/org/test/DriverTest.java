@@ -1,4 +1,4 @@
-package test.java.org;
+package main.java.org.test;
 
 import main.java.org.controller.Driver;
 import org.junit.Test;
