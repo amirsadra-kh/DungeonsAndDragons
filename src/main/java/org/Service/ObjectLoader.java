@@ -25,11 +25,14 @@ public class ObjectLoader extends FileProcessor {
     public static List<Map> loadMaps() {
         return null;
     }
-    public static String campaignsPath = "src/main/java/org/resources/campaigns/campaign.txt";
-    public static String mapsPath = "src/main/java/org/resources/maps/map.txt";
-    public static String charactersPath = "src/main/java/org/resources/characters/character.txt";
-    public static String itemsPath;
+    private final static String CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/campaign.txt";
+    private final static String TEMP_CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/tempCampaign.txt";
+    private final static String MAP_PATH = "src/main/java/org/resources/maps/map.txt";
+    private final static String CHARACTER_PATH = "src/main/java/org/resources/characters/character.txt";
+    //TODO
+    private final static String ITEM_PATH = "";
 
+    // TODO
     public static List<Campaign> loadCampaigns() {
         List<Campaign> campaign = (List<Campaign>) loadFile("resources/campaigns/campaign.txt");
         return campaign;
@@ -43,7 +46,7 @@ public class ObjectLoader extends FileProcessor {
         Map map = new Map();
         boolean found = false;
         // Read the Map file
-        ArrayList<String> mapFile = reader(mapsPath);
+        ArrayList<String> mapFile = reader(MAP_PATH);
         for(int i = 0; i < mapFile.size(); i ++) {
             if(mapName.equals(mapFile.get(i))) {
                 map.setName(mapName);
@@ -59,13 +62,13 @@ public class ObjectLoader extends FileProcessor {
     }
 
     public static Campaign loadCampaign(String campName) throws Exception {
-        List<Map> maps = new ArrayList<Map>();
+        List<Map> maps = new ArrayList<>();
         Campaign camp = new Campaign(maps);
-        ArrayList<String> campaigns = new ArrayList<String>();
+        ArrayList<String> campaigns = new ArrayList<>();
         boolean found = false;
 
         // Read campaign text file and save in campaigns list
-        campaigns = reader(campaignsPath);
+        campaigns = reader(CAMPAIGN_PATH);
 
         // Search for campaign name to find the information about that campaign
         for(int i = 0; i < campaigns.size(); i++){
@@ -93,16 +96,15 @@ public class ObjectLoader extends FileProcessor {
     /**
      * A method for reading a txt file and storing the text in a list.
      *
-     * @author Freyja
      * @since 23.02.2017
      * @param path the path of a txt file
      * @return a list of strings of the text from the txt file
      */
-    public static ArrayList<String> reader(String path) {
-        BufferedReader buffer = null;
-        String lineIn = "";
+    private static ArrayList<String> reader(String path) {
+        BufferedReader buffer;
+        String lineIn;
         int i = 0;
-        ArrayList<String> list = new ArrayList<String>();
+        ArrayList<String> list = new ArrayList<>();
 
         // Try to open the file with the path given
         try {
@@ -119,8 +121,6 @@ public class ObjectLoader extends FileProcessor {
             }
             buffer.close();
         // Show exception stack if file is not found
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
