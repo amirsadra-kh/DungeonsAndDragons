@@ -8,6 +8,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,11 +45,22 @@ class CampaignTest {
     }
 
     @AfterEach
-    void tearDown() {
+    void tearDown() throws FileNotFoundException {
         camp = null;
         map = null;
         levels = null;
         mapName = null;
+        // Clear all text files used
+        try {
+            PrintWriter writer = new PrintWriter("src/main/java/org/resources/campaigns/campaign.txt");
+            writer.print("");
+            writer.close();
+            writer = new PrintWriter("src/main/java/org/resources/campaigns/tempCampaign.txt");
+            writer.print("");
+            writer.close();
+        } catch(FileNotFoundException e){
+            e.printStackTrace();
+        }
     }
 
     @Test

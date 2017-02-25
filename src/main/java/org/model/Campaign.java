@@ -34,7 +34,6 @@ public class Campaign implements Serializable {
      * @return Campaign A new campaign created by the user or an edited campaign
      */
     Campaign generateCampaign(final List<Map> levels) {
-
         return new Campaign(levels);
     }
 
@@ -45,6 +44,8 @@ public class Campaign implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getName() { return this.name; }
 
     /**
      * A method to get the number of levels in a campaign
@@ -61,7 +62,16 @@ public class Campaign implements Serializable {
      * A method to set the number of levels in a campaign
      */
     public void setNumLevels(int num) {
-        this.numLevels = num;
+        if(numLevels < num) {
+            this.numLevels = num;
+        } else {
+            // Remove any additional maps if the new numLevel is less than the previous
+            int diff = num - numLevels;
+            for(int i = numLevels -1; i <= num; i++) {
+                levels.remove(i);
+            }
+            this.numLevels = levels.size();
+        }
     }
 
     /**
@@ -95,7 +105,8 @@ public class Campaign implements Serializable {
     }
 
     public void removeLevel(List<Map> levels) {
-        levels.remove(levels.size() - 1);
+        if(levels.size() != 0)
+            levels.remove(levels.size() - 1);
     }
 
     /**

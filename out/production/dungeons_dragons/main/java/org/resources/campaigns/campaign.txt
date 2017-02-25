@@ -1,2 +1,0 @@
-bla,1,map
-bleh,1,map2
