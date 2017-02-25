@@ -1,10 +1,12 @@
 package main.java.org.view;
 
+import main.java.org.Service.ObjectSaver;
 import main.java.org.model.Map;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.UUID;
 
 import static java.lang.Integer.parseInt;
 
@@ -21,8 +23,10 @@ public class MapFrame implements ActionListener {
     private JLabel NameText;
     private JTextField NameInput;
     private JButton openMapGrid;
+    private JButton saveMapButton;
     public JPanel GridPanel;
     private final int SIZE = 9;
+    private MapGrid grid=null;
 
     public MapFrame() {
         String MapActionInput;
@@ -31,6 +35,8 @@ public class MapFrame implements ActionListener {
         //   showGrid();
         //   final MapGrid mapGrid = new MapGrid(10, 10);
         openMapGrid.addActionListener(this);
+        saveMapButton.addActionListener(this);
+
         //   MapGrid.ShowGrid(10,20);
     }
 
@@ -70,10 +76,24 @@ public class MapFrame implements ActionListener {
 
 
     @Override
-    public void actionPerformed(ActionEvent actionEvent) {
-        int    rows= parseInt(RowsInput.getText());
-        int    cols=parseInt(ColumnsInput.getText());
-        alert( "Rows:"+rows+" Cols:"+cols);
-        MapGrid.ShowGrid(rows,cols);
+    public void actionPerformed(ActionEvent actionEvent ) {
+        int rows = parseInt(RowsInput.getText());
+        int cols = parseInt(ColumnsInput.getText());
+
+        if (actionEvent.getSource()==openMapGrid) {
+            //   alert( "Rows:"+rows+" Cols:"+cols);
+            //  MapGrid.ShowGrid(rows,cols);
+           //  grid = new MapGrid(rows, cols);
+            this.grid = new MapGrid(rows, cols);;
+            this.grid.ShowGrid(rows, cols,this.grid);
+        }
+        else if(actionEvent.getSource()==saveMapButton) {
+
+            String[][] boardArray = MapGrid.CreateBoard(MapGrid.GetTextFromGrid(this.grid), rows, cols);
+            Map map = new Map(boardArray);
+            map.saveObject();
+                //objectSaver.saveMap("./src/main/java/org/resources/maps/"+ UUID.randomUUID().toString().substring(5),map);
+
+        }
     }
 }

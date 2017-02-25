@@ -20,9 +20,9 @@ public class Game {
 
     }
 
-    Map CreateMap(Point enterPoint, Point exitPoint, char[][] screen, Character character, List<Character> nonPlayerCharacters, Map nextLevel){
+    Map CreateMap(String[][] screen ){
         Map map =new Map();
-        return map.generateMap(enterPoint,exitPoint,screen,character,nonPlayerCharacters,nextLevel);
+        return map.generateMap(screen);
 
     }
 

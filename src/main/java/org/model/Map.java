@@ -1,34 +1,41 @@
 package main.java.org.model;
 
+import main.java.org.Service.ObjectSaver;
+
 import java.awt.*;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 
 public class Map implements Serializable {
 
-    private Point enterPoint;
-    private Point exitPoint;
-    private char[][] screen;
-    private Character character;
-    private List<Character> nonPlayerCharacters;
-    private Map nextLevel;
-    private List<Item> items;
-
+    private String[][] screen;
     private Turn turn;
 
     public Map(){
 
     }
+    @Override
+    public String toString() {
+        return "Map{" +
+                "screen=" + Arrays.toString(screen) +
+                ", turn=" + turn +
+                '}';
+    }
 
-    public Map(Point enterPoint, Point exitPoint, char[][] screen, Character character, List<Character> nonPlayerCharacters, Map nextLevel) {
-        this.enterPoint = enterPoint;
-        this.exitPoint = exitPoint;
+    public String[][] getScreen() {
+        return screen;
+    }
+
+    public void setScreen(String[][] screen) {
         this.screen = screen;
-        this.character = character;
-        this.nonPlayerCharacters = nonPlayerCharacters;
-        this.nextLevel = nextLevel;
-        this.turn =new Turn(nonPlayerCharacters,character);
+    }
+
+    public Map( String[][] screen) {
+
+        this.screen = screen;
+
     }
 
 
@@ -40,77 +47,24 @@ public class Map implements Serializable {
         this.turn = turn;
     }
 
-    public Map generateMap(Point enterPoint, Point exitPoint, char[][] screen, Character character, List<Character> nonPlayerChacaters, Map nextLevel){
-        return new Map(enterPoint,exitPoint,screen,character,nonPlayerChacaters,nextLevel);
+    public Map generateMap(String[][] screen){
+        return new Map(screen);
     }
 
-    public Point getEnterPoint() {
-        return enterPoint;
+
+    public void saveObject() {
+        ObjectSaver objectSaver = new ObjectSaver();
+        objectSaver.saveMap("/maps/"+ UUID.randomUUID().toString().substring(5),this);
+        objectSaver.saveMap("mo", this);
+        //TODO save Ma
     }
 
-    public void setEnterPoint(Point enterPoint) {
-        this.enterPoint = enterPoint;
+
+    void setNonPlayerCharacters(List<Character> character){
+        //TODO nothing
     }
 
-    public Point getExitPoint() {
-        return exitPoint;
-    }
-
-    public void setExitPoint(Point exitPoint) {
-        this.exitPoint = exitPoint;
-    }
-
-    public char[][] getScreen() {
-        return screen;
-    }
-
-    public void setScreen(char[][] screen) {
-        this.screen = screen;
-    }
-
-    public Character getCharacter() {
-        return character;
-    }
-
-    public void setCharacter(Character character) throws Exception {
-
-        this.character = character;
-
-    }
-
-    public List<Character> getNonPlayerCharacters() {
-        return nonPlayerCharacters;
-    }
-
-    public void setNonPlayerCharacters(List<Character> nonPlayerCharacters) {
-        this.nonPlayerCharacters = nonPlayerCharacters;
-    }
-
-    public Map getNextLevel() {
-        return nextLevel;
-    }
-
-    public void setNextLevel(Map nextLevel) {
-        this.nextLevel = nextLevel;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
-    public void setItems(List<Item> items) {
-        this.items = items;
-    }
-
-    @Override
-    public String toString() {
-        return "Map{" +
-                "enterPoint=" + enterPoint +
-                ", exitPoint=" + exitPoint +
-                ", screen=" + Arrays.toString(screen) +
-                ", character=" + character +
-                ", nonPlayerCharacters=" + nonPlayerCharacters +
-                ", nextLevel=" + nextLevel +
-                '}';
+    void setCharacter(Character cahacter){
+        //TODO nothing
     }
 }

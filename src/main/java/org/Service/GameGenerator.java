@@ -5,6 +5,7 @@ import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
 import main.java.org.model.Map;
 import main.java.org.view.MapFrame;
+import main.java.org.view.MapGrid;
 
 
 import javax.swing.*;
@@ -84,11 +85,7 @@ public class GameGenerator {
     private void createOrChoseMaps() {
 
         Map map = new MapFrame().makeFrame("Map Builder");
-
         //  MapFrame.Main();
-
-        ObjectSaver objectSaver=new ObjectSaver();
-        objectSaver.saveMap("./src/main/java/org/resources/maps/"+ UUID.randomUUID().toString().substring(5),map);
-    }
+       }
 
 }
