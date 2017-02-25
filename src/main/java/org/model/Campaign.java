@@ -84,7 +84,7 @@ public class Campaign implements Serializable {
      * @param campName the path of the campaign.
      * @return an existing campaign object.
      */
-    public Campaign getCampaign(String campName) {
+    public Campaign getCampaign(String campName) throws Exception {
         Campaign camp = ObjectLoader.loadCampaign(campName);
 
         return camp;

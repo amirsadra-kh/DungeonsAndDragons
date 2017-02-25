@@ -68,9 +68,10 @@ public class GameGenerator {
     private void createOrEditItems() {
     }
 
-    private Campaign createOrChoseCampaign() {
+    private Campaign createOrChoseCampaign() throws Exception {
         CampaignScreen cs = new CampaignScreen();
         cs.CampaignScreen();
+        showMenuToStartTheGame();
         return cs.getNewCamp();
     }
 

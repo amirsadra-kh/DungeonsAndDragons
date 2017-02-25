@@ -2,6 +2,7 @@
 package main.java.org.Service;
 
 import main.java.org.model.Campaign;
+import main.java.org.model.GameConstants;
 import main.java.org.model.Map;
 
 import java.io.BufferedReader;
@@ -40,28 +41,28 @@ public class ObjectLoader extends FileProcessor {
 
     public static Map loadMap(String mapName) throws Exception {
         Map map = new Map();
-        boolean match = false;
+        boolean found = false;
         // Read the Map file
         ArrayList<String> mapFile = reader(mapsPath);
         for(int i = 0; i < mapFile.size(); i ++) {
             if(mapName.equals(mapFile.get(i))) {
                 map.setName(mapName);
-                match = true;
+                found = true;
                 // TODO Set rest of map attributes here to have a complete map object
             }
 
         }
-        if(match)
-            //return (Map) loadFile("./src/test/resources/files/maps/" + fileName);
-            return map;
-        else
+        if(!found)
             throw new Exception("Map not found!");
+        //return (Map) loadFile("./src/test/resources/files/maps/" + fileName);
+        return map;
     }
 
-    public static Campaign loadCampaign(String campName) {
+    public static Campaign loadCampaign(String campName) throws Exception {
         List<Map> maps = new ArrayList<Map>();
         Campaign camp = new Campaign(maps);
         ArrayList<String> campaigns = new ArrayList<String>();
+        boolean found = false;
 
         // Read campaign text file and save in campaigns list
         campaigns = reader(campaignsPath);
@@ -74,8 +75,13 @@ public class ObjectLoader extends FileProcessor {
                 for(int j = 1; j <= camp.getNumLevels(); j++) {
                     camp.addMap(campaigns.get(i+1+j));
                 }
+                found = true;
             }
         }
+
+        if(!found)
+            throw new Exception("Campaign not found!");
+
         // Return the campaign found
         return camp;
     }
