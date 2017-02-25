@@ -34,17 +34,12 @@ public class CampaignScreen {
             // Let user choose an action - Create or Edit a Campaign
             System.out.println("Choose one of the following by entering the number associated with the choice:");
             System.out.println("1. Create a Campaign\n2. Edit a Campaign\n3. Back to Main Menu");
-            try {
-                choice = Integer.parseInt(readLine());
+            choice = readIntHandling(choice);
 
-                // If the user enters an invalid input, they will be asked again
-                while (choice < 1 || choice > 3) {
-                    System.out.println("Your input is invalid, please try again");
-                    choice = Integer.parseInt(readLine());
-                }
-            } catch (NumberFormatException e) {
-                System.out.println(GameConstants.NOT_A_NUMBER);
-                System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+            // If the user enters an invalid input, they will be asked again
+            while (choice < 1 || choice > 3) {
+                System.out.println("Your input is invalid, please try again");
+                choice = readIntHandling(choice);
             }
         }
 
@@ -72,24 +67,14 @@ public class CampaignScreen {
 
         while("".equalsIgnoreCase(name) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(name)) {
             System.out.println("Enter the name of the new Campaign (No spaces): ");
-            try {
-                name = readLine();
-            } catch (IllegalFormatException e) {
-                System.out.println(GameConstants.NOT_A_STRING);
-                System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
-            }
+            name = readStringHandling(name);
         }
 
         camp.setName(name);
 
         while(numLevels == 0) {
             System.out.println("Enter the number of levels of the new Campaign: ");
-            try {
-                numLevels = Integer.parseInt(readLine());
-            } catch (NumberFormatException e) {
-                System.out.println(GameConstants.NOT_A_NUMBER);
-                System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
-            }
+            numLevels = readIntHandling(numLevels);
         }
 
         camp.setNumLevels(numLevels);
@@ -101,12 +86,7 @@ public class CampaignScreen {
 
             while(mapName.equals("") || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(mapName)) {
                 System.out.println("Enter the name of the Map you would like to add:");
-                try {
-                    mapName = readLine();
-                } catch (IllegalFormatException e) {
-                    System.out.println(GameConstants.NOT_A_STRING);
-                    System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
-                }
+                mapName = readStringHandling(mapName);
             }
 
             //Send Map input to CampaignModule
@@ -133,12 +113,7 @@ public class CampaignScreen {
 
         while(campName.equals("")) {
             System.out.println("Enter the name of the Campaign you would like to edit:");
-            try {
-                campName = readLine();
-            } catch (IllegalFormatException e) {
-                System.out.println(GameConstants.NOT_A_STRING);
-                System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
-            }
+            campName = readStringHandling(campName);
         }
 
         camp = camp.getCampaign(campName);
@@ -146,18 +121,14 @@ public class CampaignScreen {
         while(choice == 0) {
             System.out.println("Choose one of the following by entering the number associated with the choice:");
             System.out.println("1. Add a Map\n2. Remove a Map\n3. Back to Main Menu");
-            try {
-                choice = Integer.parseInt(readLine());
+            choice = readIntHandling(choice);
 
-                // If the user enters an invalid input, they will be asked again
-                while (choice < 1 || choice > 3) {
-                    System.out.println("Your input is invalid, please try again");
-                    choice = Integer.parseInt(readLine());
-                }
-            } catch (NumberFormatException e) {
-                System.out.println(GameConstants.NOT_A_NUMBER);
-                System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+            // If the user enters an invalid input, they will be asked again
+            while (choice < 1 || choice > 3) {
+                System.out.println("Your input is invalid, please try again");
+                choice = readIntHandling(choice);
             }
+
         }
 
         // Add a Map
@@ -167,12 +138,7 @@ public class CampaignScreen {
             int addingNum = 0;
             while(addingNum == 0) {
                 System.out.println("Please enter the number of levels you would like to add: ");
-                try {
-                    addingNum = Integer.parseInt(readLine());
-                } catch (NumberFormatException e) {
-                    System.out.println(GameConstants.NOT_A_NUMBER);
-                    System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
-                }
+                addingNum = readIntHandling(addingNum);
             }
 
             num += addingNum;
@@ -183,12 +149,7 @@ public class CampaignScreen {
                 String mapName = "";
                 while (mapName.equals("") || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(mapName)) {
                     System.out.println("Enter the name of the Map you would like to add:");
-                    try {
-                        mapName = readLine();
-                    } catch (IllegalFormatException e) {
-                        System.out.println(GameConstants.NOT_A_STRING);
-                        System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
-                    }
+                    mapName = readStringHandling(mapName);
                 }
 
                 //Send Map input to CampaignModule
@@ -201,12 +162,7 @@ public class CampaignScreen {
             int removeNum = 0;
             while(removeNum == 0) {
                 System.out.println("Please enter the number of levels you would like to remove: ");
-                try {
-                    removeNum = Integer.parseInt(readLine());
-                } catch (NumberFormatException e) {
-                    System.out.println(GameConstants.NOT_A_NUMBER);
-                    System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
-                }
+                removeNum = readIntHandling(removeNum);
             }
 
             levels = camp.getLevels();
@@ -234,5 +190,37 @@ public class CampaignScreen {
      */
     public Campaign getNewCamp() {
         return newCamp;
+    }
+
+    /**
+     * A method that reads in a number, verifies it is a number and returns it.
+     *
+     * @param num to be read
+     * @return new num after reading input
+     */
+    private int readIntHandling(int num) {
+        try {
+            num = Integer.parseInt(readLine());
+        } catch (NumberFormatException e) {
+            System.out.println(GameConstants.NOT_A_NUMBER);
+            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+        }
+        return num;
+    }
+
+    /**
+     * A method that reads in a string, verifies it is a string and returns it.
+     *
+     * @param line to be read
+     * @return new line after reading input
+     */
+    private String readStringHandling(String line) {
+        try {
+            line = readLine();
+        } catch (IllegalFormatException e) {
+            System.out.println(GameConstants.NOT_A_STRING);
+            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+        }
+        return line;
     }
 }
