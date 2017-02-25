@@ -6,6 +6,7 @@ public class Ability {
     Modifier modifier;
 
     private int hitPoints = dice10.roll();
+
     private int level;
     private int armorClass;
     private int attackBonus;

@@ -65,6 +65,12 @@ public class GameGenerator {
     private void createOrEditCharacter() {
         CharacterScreen cs = new CharacterScreen();
         cs.CharacterScreen();
+        try {
+            showMenuToStartTheGame();
+        } catch (Exception exception) {
+            System.out.println("Invalid entry");
+        }
+
     }
 
     private void createOrChoseMaps() {

@@ -15,6 +15,18 @@ import java.util.Scanner;
  */
 public class CharacterScreen {
 
+    /* TODO: 2/25/2017
+    String readText(){
+        Scanner scan = new Scanner(System.in);
+        String str =scan.nextLine();
+...your exception handling...
+    }
+
+    int readInt(){
+        Scanner scan = new Scanner(System.in);
+        scan.nextInt();
+..your exception handling...
+    }*/
 
     public void CharacterScreen(){
         Scanner scan = new Scanner(System.in);
@@ -77,18 +89,18 @@ public class CharacterScreen {
     public void editCharacterScreen(){
         Scanner scan = new Scanner(System.in);
         String charName = "";
-        Character char1 = new Character();
+        Character character = new Character();
 
         System.out.println("Please enter the name of the character you would like to edit");
         charName = scan.nextLine();
 
         // TODO charName should be the path of the character
         ObjectLoader ol = new ObjectLoader();
-        char1 = ol.loadCharacter(charName);
+        character = ol.loadCharacter(charName);
 
         ObjectSaver os = new ObjectSaver();
         try {
-            os.saveCharacter(charName, char1);
+            os.saveCharacter(charName, character);
         } catch (IOException e) {
             e.printStackTrace();
         }
