@@ -16,11 +16,11 @@ import java.util.List;
  */
 
 public class ObjectSaver extends FileProcessor {
-    public static String campaignsPath = "src/main/java/org/resources/campaigns/campaign.txt";
-    public static String tempCampaignsPath = "src/main/java/org/resources/campaigns/tempCampaign.txt";
-    public static String mapsPath = "src/main/java/org/resources/maps/map.txt";
-    public static String charactersPath = "src/main/java/org/resources/characters/character.txt";
-    public static String itemsPath;
+    private static String campaignsPath = "src/main/java/org/resources/campaigns/campaign.txt";
+    private static String tempCampaignsPath = "src/main/java/org/resources/campaigns/tempCampaign.txt";
+    private static String mapsPath = "src/main/java/org/resources/maps/map.txt";
+    private static String charactersPath = "src/main/java/org/resources/characters/character.txt";
+    private static String itemsPath;
 
     public void SaveMaps(List<Map> maps) {
         saveFile("/maps/", maps);
@@ -50,12 +50,11 @@ public class ObjectSaver extends FileProcessor {
     /**
      * A method for adding text to a txt file. For creating purposes
      *
-     * @author Freyja
      * @since 23.02.2017
      * @param path the path of the text file
      * @param object the object as a string to be added to the text file
      */
-    public static void writer(String path, String object) {
+    private static void writer(String path, String object) {
         // Add a new object (Character, Map, Item or Campaign) information to text file.
         try(FileWriter fw = new FileWriter(path, true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -70,18 +69,17 @@ public class ObjectSaver extends FileProcessor {
     /**
      * A method for overriding text to a txt file. For editing purposes
      *
-     * @author Freyja
      * @since 23.02.2017
      * @param path the path of the text file
      * @param tempPath the temporary path for the re-writing
      * @param newObject the edited object as a string to be added to the text file
      * @param oldObject the old object (before editing) as a string to be replaces in the text file
      */
-    public static void reWriter(String path, String tempPath, String newObject, String oldObject) {
+    private static void reWriter(String path, String tempPath, String newObject, String oldObject) {
         // Remove an old object (Character, Map, Item or Campaign) information from text file.
-        BufferedReader br = null;
-        BufferedWriter bw = null;
-        String lineIn = "";
+        BufferedReader br;
+        BufferedWriter bw;
+        String lineIn;
 
         // Try to open the file with the path given
         try {
@@ -102,8 +100,6 @@ public class ObjectSaver extends FileProcessor {
 
             // Read each line of the file
             while ((lineIn = br.readLine()) != null) {
-                System.out.println(lineIn);
-                System.out.println(oldObject);
                 if(lineIn.equals(oldObject))
                     continue;
                 bw.write(lineIn +"\n");
