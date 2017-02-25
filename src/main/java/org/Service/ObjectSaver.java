@@ -16,11 +16,12 @@ import java.util.List;
  */
 
 public class ObjectSaver extends FileProcessor {
-    private static String campaignsPath = "src/main/java/org/resources/campaigns/campaign.txt";
-    private static String tempCampaignsPath = "src/main/java/org/resources/campaigns/tempCampaign.txt";
-    private static String mapsPath = "src/main/java/org/resources/maps/map.txt";
-    private static String charactersPath = "src/main/java/org/resources/characters/character.txt";
-    private static String itemsPath;
+    private final static String CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/campaign.txt";
+    private final static String TEMP_CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/tempCampaign.txt";
+    private final static String MAP_PATH = "src/main/java/org/resources/maps/map.txt";
+    private final static String CHARACTER_PATH = "src/main/java/org/resources/characters/character.txt";
+    //TODO
+    private final static String ITEM_PATH = "";
 
     public void SaveMaps(List<Map> maps) {
         saveFile("/maps/", maps);
@@ -28,11 +29,11 @@ public class ObjectSaver extends FileProcessor {
 
     public void saveCampaign(String camp) {
         //saveFile("/campaigns/", campaigns);
-        writer(campaignsPath, camp);
+        writer(CAMPAIGN_PATH, camp);
     }
 
     public void editedCampaign(String newCamp, String oldCamp) {
-        reWriter(campaignsPath, tempCampaignsPath, newCamp, oldCamp);
+        reWriter(CAMPAIGN_PATH, TEMP_CAMPAIGN_PATH, newCamp, oldCamp);
     }
 
     public void loadCharacters(List<Character> characters) {
@@ -107,8 +108,6 @@ public class ObjectSaver extends FileProcessor {
             br.close();
             bw.close();
             // Show exception stack if file is not found
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -2,11 +2,9 @@
 package main.java.org.Service;
 
 import main.java.org.model.Campaign;
-import main.java.org.model.GameConstants;
 import main.java.org.model.Map;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
