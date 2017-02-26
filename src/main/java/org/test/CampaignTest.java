@@ -4,16 +4,16 @@ import main.java.org.Service.ObjectSaver;
 import main.java.org.model.Campaign;
 import main.java.org.model.Map;
 import org.junit.Assert;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 /**
  * Test for class to allow user to create and edit Campaigns
@@ -32,7 +32,7 @@ class CampaignTest {
     private String mapName;
     private ObjectSaver os = new ObjectSaver();
 
-    @BeforeEach
+    @Before
     void setUp() throws Exception {
         map = new Map();
         // This map has to be saved in map.txt
@@ -44,7 +44,7 @@ class CampaignTest {
         camp.addMap(mapName);
     }
 
-    @AfterEach
+    @After
     void tearDown() throws FileNotFoundException {
         camp = null;
         map = null;

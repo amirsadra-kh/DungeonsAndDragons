@@ -4,14 +4,14 @@ import main.java.org.Service.ObjectLoader;
 import main.java.org.Service.ObjectSaver;
 import main.java.org.model.Campaign;
 import main.java.org.model.Map;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
 
 /**
  * Test Class to test CampaignScreen.java.
@@ -30,7 +30,7 @@ class CampaignScreenTest {
     private ObjectSaver os = new ObjectSaver();
     private ObjectLoader ol = new ObjectLoader();
 
-    @BeforeEach
+    @Before
     void setUp() throws Exception {
         map = new Map();
         // This map has to be saved in map.txt
@@ -42,7 +42,7 @@ class CampaignScreenTest {
         camp.addMap(mapName);
     }
 
-    @AfterEach
+    @After
     void tearDown() {
         camp = null;
         map = null;
