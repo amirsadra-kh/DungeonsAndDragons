@@ -3,7 +3,6 @@ package main.java.org.model;
 
 import main.java.org.Service.GameGenerator;
 import main.java.org.Service.ObjectLoader;
-import main.java.org.Service.Screen;
 
 import java.awt.*;
 import java.util.List;
