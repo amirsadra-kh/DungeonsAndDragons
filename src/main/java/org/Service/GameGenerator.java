@@ -4,8 +4,15 @@ import main.java.org.model.Campaign;
 import main.java.org.Service.CampaignScreen;
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
+import main.java.org.model.Map;
+import main.java.org.view.MapFrame;
+import main.java.org.view.MapGrid;
 
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.Scanner;
+import java.util.UUID;
 
 /**
  * This class is is to Generate/edit game objects .
@@ -80,6 +87,9 @@ public class GameGenerator {
     }
 
     private void createOrChoseMaps() {
-    }
+
+        Map map = new MapFrame().makeFrame("Map Builder");
+        //  MapFrame.Main();
+       }
 
 }

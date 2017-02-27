@@ -40,8 +40,8 @@ public class ObjectSaver extends FileProcessor {
         saveFile("/characters/", characters);
     }
 
-    public void saveMap(String path, Map map) {
-        saveFile(path, map);
+    public void saveMap(String path, Map map ) {
+        this.saveFile(path, map);
     }
 
     public void loadCampaign(String path, Campaign campaign) {
