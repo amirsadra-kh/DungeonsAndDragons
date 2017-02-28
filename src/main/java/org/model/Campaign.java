@@ -11,12 +11,19 @@ public class Campaign implements Serializable {
         this.levels = levels;
     }
 
+    public Campaign() {
+    }
+
     Campaign generateCampaign(final List<Map> levels) {
         return new Campaign(levels);
     }
 
     public List<Map> getLevels() {
         return levels;
+    }
+
+    public void addMap(final Map map){
+        this.getLevels().add(map);
     }
 
     public void setLevels(List<Map> levels) {

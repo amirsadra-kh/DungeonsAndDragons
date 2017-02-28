@@ -6,5 +6,15 @@ package main.java.org.model;
  */
 
 public enum ItemEnum {
-    HELMET, ARMOMR, SHIELD, RING, BELT, BOOTS, WEAPON
+    HELMET, ARMOR, SHIELD, RING, BELT, BOOTS, WEAPON
+
+//    private final int itemCode;
+//
+//    private ItemEnum(int itemCode) {
+//        this.itemCode = itemCode;
+//    }
+//
+//    public int getItemCode() {
+//        return this.itemCode;
+//    }
 }

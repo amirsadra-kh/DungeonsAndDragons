@@ -10,7 +10,7 @@ public class Map implements Serializable {
     private Point enterPoint;
     private Point exitPoint;
     private char[][] screen;
-    private PlayerCharacter character;
+    private Character character;
     private List<Character> nonPlayerCharacters;
     private Map nextLevel;
     private List<Item> items;
@@ -21,14 +21,14 @@ public class Map implements Serializable {
 
     }
 
-    public Map(Point enterPoint, Point exitPoint, char[][] screen, PlayerCharacter character, List<Character> nonPlayerCharacters, Map nextLevel) {
+    public Map(Point enterPoint, Point exitPoint, char[][] screen, Character character, List<Character> nonPlayerCharacters, Map nextLevel) {
         this.enterPoint = enterPoint;
         this.exitPoint = exitPoint;
         this.screen = screen;
         this.character = character;
         this.nonPlayerCharacters = nonPlayerCharacters;
         this.nextLevel = nextLevel;
-        this.turn.setTurnsInit(character,nonPlayerCharacters);
+        this.turn =new Turn(nonPlayerCharacters,character);
     }
 
 
@@ -40,7 +40,7 @@ public class Map implements Serializable {
         this.turn = turn;
     }
 
-    public Map generateMap(Point enterPoint, Point exitPoint, char[][] screen, PlayerCharacter character, List<Character> nonPlayerChacaters, Map nextLevel){
+    public Map generateMap(Point enterPoint, Point exitPoint, char[][] screen, Character character, List<Character> nonPlayerChacaters, Map nextLevel){
         return new Map(enterPoint,exitPoint,screen,character,nonPlayerChacaters,nextLevel);
     }
 
@@ -73,12 +73,9 @@ public class Map implements Serializable {
     }
 
     public void setCharacter(Character character) throws Exception {
-        if(character instanceof  PlayerCharacter){
-        this.character = (PlayerCharacter)character;}
-        else
-        {
-            throw new Exception("The provided character is not a main Character");
-        }
+
+        this.character = character;
+
     }
 
     public List<Character> getNonPlayerCharacters() {

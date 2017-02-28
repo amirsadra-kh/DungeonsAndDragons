@@ -12,6 +12,13 @@ public class Item {
     public Item(ItemEnum item, EnhancementTypes enhancementType, Point coordinate) {
         createItem(item, enhancementType);
         this.coordinate = coordinate;
+        this.item = item;
+    }
+
+    public Item(ItemEnum item, EnhancementTypes enhancementType) {
+        createItem(item, enhancementType);
+        this.item = item;
+
     }
 
     public Point getCoordinate() {
@@ -36,6 +43,19 @@ public class Item {
 
     public void createItem (ItemEnum itemEnum, EnhancementTypes enhancementType){
         //check if the item is "HELMET"
+
+        for(ItemEnum e:ItemEnum.values()){
+            if(e==itemEnum) {
+                this.item = itemEnum;
+                this.enhancementType = enhancementType;
+                enhance = +1;
+            }
+
+        }
+
+
+
+
         if (itemEnum == ItemEnum.HELMET){
             if(enhancementType == EnhancementTypes.ARMORCLASS){
                 //Create Helmet
@@ -44,7 +64,7 @@ public class Item {
                 enhance = +1;
                 //save into file
             }
-            else if(itemEnum == ItemEnum.ARMOMR){
+            else if(itemEnum == ItemEnum.ARMOR){
                 if(enhancementType == EnhancementTypes.ARMORCLASS){
                     //Create ArmorClass
                     this.item = itemEnum;
