@@ -30,7 +30,7 @@ public class ObjectLoader extends FileProcessor {
 
     public static Map loadMap(String fileName) {
 
-        return (Map) loadFile("./src/test/resources/files/maps/" + fileName);
+        return (Map) loadFile(fileName);
     }
     public static Campaign loadCampaign(String path) {
         return null;

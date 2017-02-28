@@ -1,10 +1,13 @@
 package main.java.org.view;
 
+import main.java.org.Service.ObjectLoader;
+import main.java.org.model.Map;
 import org.apache.commons.collections.CollectionUtils;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by misha on 2017-02-23.
@@ -12,24 +15,33 @@ import java.util.*;
 public class MapGrid extends JFrame {
 
     private JPanel gt;
+     final static String MAPS_PATH="./src/main/java/org/resources/maps/";
 
-    public static void ShowGrid(int rows, int cols, MapGrid gt) {
-       // MapGrid gt = new MapGrid(rows, cols);
-        Container pane = gt.getContentPane();
-        String[][] boardArray=CreateBoard(GetTextFromGrid(gt),rows,cols);
-        gt.setDefaultCloseOperation(gt.EXIT_ON_CLOSE);
-        gt.setLocationRelativeTo(null);
-        gt.setSize(rows*100,cols*100);
-        gt.setVisible(true);
+    public MapGrid ShowGrid(int rows, int cols, MapGrid grid, String name, boolean newMap) {
+        // MapGrid gt = new MapGrid(rows, cols);
+
+        if (newMap ) {
+            grid.getContentPane();
+            createBoard(GetTextFromGrid(grid), rows, cols);
+        } else {
+            editBoard(name);
+
+        }
+        grid.setDefaultCloseOperation(grid.EXIT_ON_CLOSE);
+        grid.setLocationRelativeTo(null);
+        grid.setSize( 500, 500);
+        grid.setVisible(true);
+       return  grid;
+
     }
 
-    public static java.util.List<String> GetTextFromGrid(MapGrid gt){
+    public static java.util.List<String> GetTextFromGrid(MapGrid gt) {
         java.util.List<String> list = new ArrayList<>();
-        Container components=gt.getContentPane();
-        for(Component c:components.getComponents()){
-         //   c.ge
-            if(c instanceof  JTextField){
-               String s =((JTextField) c).getText();
+        Container components = gt.getContentPane();
+        for (Component c : components.getComponents()) {
+            //   c.ge
+            if (c instanceof JTextField) {
+                String s = ((JTextField) c).getText();
                 list.add(s);
             }
 
@@ -37,32 +49,60 @@ public class MapGrid extends JFrame {
         return list;
     }
 
-    public static String[][] CreateBoard(java.util.List<String> list,int rows, int cols )
-    {
-     String[][] board = new String[rows][cols];
-     for (int i=0; i<rows; i++) {
-         for (int j = 0; j < cols; j++) {
-             if (CollectionUtils.isNotEmpty(list)) {
-                 board[i][j] = list.get(0);
-                 list.remove(0);
-             }
-         }
-     }
-         return board;
+    public void editBoard( String name) {
 
-     }
+        String[][] exitingBoard = getExistingBoard(MAPS_PATH + name);
 
+        Container pane = getContentPane();
+        if(exitingBoard.length!=0) {
+            pane.setLayout(new GridLayout(exitingBoard.length, exitingBoard[0].length));
+        }
+        for (int i = 0; i < exitingBoard.length; i++) {
+            for (int j = 0; j < exitingBoard[i].length; j++) {
+                JTextField NewTextField = new JTextField(exitingBoard[i][j]);
+                pane.add(NewTextField);
+            }
+        }
+    }
 
+    private String[][] getExistingBoard(String name) {
+
+        main.java.org.model.Map map = ObjectLoader.loadMap(name);
+        return map.getScreen();
+    }
+
+    public Map getExistingMap(String name) {
+
+        return  ObjectLoader.loadMap(MAPS_PATH+name);
+    }
+
+    public String[][] createBoard(java.util.List<String> list, int rows, int cols) {
+        String[][] board = new String[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (CollectionUtils.isNotEmpty(list)) {
+                    board[i][j] = list.get(0);
+                    list.remove(0);
+                }
+            }
+        }
+        return board;
+
+    }
 
 
     public MapGrid(int rows, int cols) {
+        if(rows!=0 && cols!=0) {
         Container pane = getContentPane();
-        pane.setLayout(new GridLayout(rows, cols));
-        for (int j=1 ; j<= cols; j++) {
-            for (int i = 1; i <= rows; i++) {
-                JTextField NewTextField = new JTextField(i+""+j); //Integer.toString(i + 1)
+
+            pane.setLayout(new GridLayout(rows, cols));
+
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                JTextField NewTextField = new JTextField(i + "" + j); //Integer.toString(i + 1)
                 pane.add(NewTextField);
             }
+        }
         }
         //alert(pane.NewTextField.getText());
     }
