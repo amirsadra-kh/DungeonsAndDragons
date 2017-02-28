@@ -71,13 +71,22 @@ public class MapGrid extends JFrame {
 
     private String[][] getExistingBoard(String name) {
 
-        main.java.org.model.Map map = ObjectLoader.loadMap(name);
+        Map map = null;
+        try {
+            map = ObjectLoader.loadMap(name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return map.getScreen();
     }
 
     public Map getExistingMap(String name) {
-
-        return  ObjectLoader.loadMap(MAPS_PATH+name);
+        try {
+            return  ObjectLoader.loadMap(MAPS_PATH+name);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public String[][] createBoard(java.util.List<String> list, int rows, int cols) {
