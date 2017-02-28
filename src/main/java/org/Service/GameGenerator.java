@@ -2,10 +2,18 @@ package main.java.org.Service;
 
 import main.java.org.model.Campaign;
 import main.java.org.Service.CampaignScreen;
+import main.java.org.model.Game;
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
+import main.java.org.model.Map;
+import main.java.org.view.MapFrame;
+import main.java.org.view.MapGrid;
 
+
+import javax.swing.*;
+import java.awt.*;
 import java.util.Scanner;
+import java.util.UUID;
 
 /**
  * This class is is to Generate/edit game objects .
@@ -19,10 +27,13 @@ import java.util.Scanner;
 public class GameGenerator {
     public void showMenuToStartTheGame() throws Exception {
         String chosen = GameConstants.EMPTY_STRING;
-        while ("".equalsIgnoreCase(chosen) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(chosen)) {
+        while ("".equalsIgnoreCase(chosen) ||
+                GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(chosen) ||
+                !GameConstants.END.equalsIgnoreCase(chosen)) {
             Screen.ShowMainMenu();
             chosen = getUserChosenOption();
         }
+        System.exit(0);
     }
 
     String readLine() {
@@ -57,7 +68,12 @@ public class GameGenerator {
                 createOrEditItems();
                 return GameConstants.ITEM;
             case 5:
+                System.out.println("Starting the Game");
+                //TODO next deliverable to implement starting the game
                 return GameConstants.START;
+            case 6:
+                System.out.println("Ending the Game, Thanks!");
+                return GameConstants.END;
             default:
                 System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
                 return GameConstants.CHOSEN_ITEM_NOT_VALID;
@@ -80,6 +96,9 @@ public class GameGenerator {
     }
 
     private void createOrChoseMaps() {
-    }
+
+        Map map = new MapFrame().makeFrame("Map Builder");
+        //  MapFrame.Main();
+       }
 
 }

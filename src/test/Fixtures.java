@@ -28,12 +28,7 @@ public class Fixtures {
         ArrayList<Character> nonPlayerCharacters = new ArrayList<Character>();
         nonPlayerCharacters.add(createCharacter());
 
-        Map map = new Map(new Point(1,2),
-                new Point(1,6),
-                createATestScreen(),
-                createCharacter(),
-                nonPlayerCharacters,
-                null);
+        Map map = new Map(null);
         return map;
     }
 
