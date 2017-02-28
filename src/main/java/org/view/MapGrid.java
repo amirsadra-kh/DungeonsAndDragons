@@ -7,10 +7,14 @@ import org.apache.commons.collections.CollectionUtils;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.List;
+
 
 /**
- * Created by misha on 2017-02-23.
+ * A this class provides an interactive UI for the MAP (Grids)
+ *
+ * @author Maysam/Mehran
+ * @version 2.0
+ * @since 2017-02-17
  */
 public class MapGrid extends JFrame {
 

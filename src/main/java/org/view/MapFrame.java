@@ -10,7 +10,11 @@ import java.awt.event.ActionListener;
 import static java.lang.Integer.parseInt;
 
 /**
- * Created by misha on 2017-02-21.
+ * This class provides an interactive UI for the MAP
+ *
+ * @author Maysam/Mehran
+ * @version 2.0
+ * @since 2017-02-17
  */
 public class MapFrame implements ActionListener {
     public JPanel MapPanel;

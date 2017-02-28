@@ -1,4 +1,4 @@
-package main.java.org.test;
+package test.java.org.service;
 
 import main.java.org.Service.ObjectLoader;
 import main.java.org.Service.ObjectSaver;
