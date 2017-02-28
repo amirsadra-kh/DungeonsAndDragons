@@ -80,24 +80,24 @@ public class CharacterScreen {
         Scanner scan = new Scanner(System.in);
         String charName = "";
 
-        Character char1 = new Character();
+        Character character = new Character();
         Ability ability = new Ability();
-        char1.setAbility(ability);
+        character.setAbility(ability);
 
         System.out.println("please enter a name for character: ");
         charName = readText(charName);
 
-        char1.setCharName(charName);
+        character.setCharName(charName);
 
         BackPackInventory backpack = new BackPackInventory();
-        char1.setBackPackInventory(backpack);
+        character.setBackPackInventory(backpack);
 
         System.out.println(ability.toString());
 
         // TODO charName should be the path of the character
         ObjectSaver os = new ObjectSaver();
         try {
-            os.saveCharacter(charName, char1);
+            os.saveCharacter(charName, character);
         } catch (IOException e) {
             e.printStackTrace();
         }
