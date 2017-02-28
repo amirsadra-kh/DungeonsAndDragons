@@ -4,14 +4,12 @@ import main.java.org.Service.ObjectLoader;
 import main.java.org.Service.ObjectSaver;
 import main.java.org.model.Campaign;
 import main.java.org.model.Map;
+import org.junit.Test;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 /**
  * Test Class to test CampaignScreen.java.

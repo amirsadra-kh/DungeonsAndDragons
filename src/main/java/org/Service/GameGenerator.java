@@ -1,10 +1,6 @@
 package main.java.org.Service;
 
 import main.java.org.model.Campaign;
-<<<<<<< HEAD
-=======
-import main.java.org.Service.CampaignScreen;
->>>>>>> cc5d9cb3ac34de5fd61a6b87a3c0aa58aeafcd89
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
 
@@ -72,17 +68,16 @@ public class GameGenerator {
     }
 
     private Campaign createOrChoseCampaign() throws Exception {
+        CampaignScreen cs = new CampaignScreen();
+        cs.CampaignScreen();
+        showMenuToStartTheGame();
+        return cs.getNewCamp();
     }
 
-    private void createOrEditCharacter() {
+    private void createOrEditCharacter() throws Exception {
         CharacterScreen cs = new CharacterScreen();
         cs.CharacterScreen();
-        try {
-            showMenuToStartTheGame();
-        } catch (Exception exception) {
-            System.out.println("Invalid entry");
-        }
-
+        showMenuToStartTheGame();
     }
 
     private void createOrChoseMaps() {

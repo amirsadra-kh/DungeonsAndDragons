@@ -2,6 +2,7 @@ package main.java.org.model;
 
 import org.apache.commons.collections.CollectionUtils;
 
+
 import java.util.ArrayList;
 import java.util.List;
 

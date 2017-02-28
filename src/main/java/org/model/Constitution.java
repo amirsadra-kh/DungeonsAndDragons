@@ -1,5 +1,7 @@
 package main.java.org.model;
 
+import main.java.org.Service.Calculation;
+
 /**
  * This class is to validate constitution
  * @author Parisa Nikzad

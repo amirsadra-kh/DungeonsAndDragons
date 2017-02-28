@@ -21,6 +21,7 @@ public class ObjectSaver extends FileProcessor {
     private final static String TEMP_CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/tempCampaign.txt";
     private final static String MAP_PATH = "src/main/java/org/resources/maps/map.txt";
     private final static String CHARACTER_PATH = "src/main/java/org/resources/characters/character.txt";
+    private final static String TEMP_CHARACTER_PATH = "main/java/org/resources/characters/tempCharacter.txt";
     //TODO
     private final static String ITEM_PATH = "";
 
@@ -39,6 +40,14 @@ public class ObjectSaver extends FileProcessor {
 
     public void loadCharacters(List<Character> characters) {
         saveFile("/characters/", characters);
+    }
+
+    public void saveCharacter(String name) {
+        writer(CHARACTER_PATH, name);
+    }
+
+    public void editedCharacter(String newChar, String oldChar) {
+        reWriter(CHARACTER_PATH, TEMP_CHARACTER_PATH, newChar, oldChar);
     }
 
     public void saveMap(String path, Map map) {
@@ -68,10 +77,10 @@ public class ObjectSaver extends FileProcessor {
         }
     }
 
-<<<<<<< HEAD
     public void saveCharacter(String path, Character character) throws IOException {
-        saveFile(path,character);
-=======
+        saveFile(path, character);
+    }
+
     /**
      * A method for overriding text to a txt file. For editing purposes
      *
@@ -116,6 +125,5 @@ public class ObjectSaver extends FileProcessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
->>>>>>> cc5d9cb3ac34de5fd61a6b87a3c0aa58aeafcd89
     }
 }

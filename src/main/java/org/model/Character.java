@@ -7,6 +7,7 @@ public class Character {
     private Point currentPosition = new Point(0,0);
     private Ability ability;
     private boolean isPlayerCharacter;
+    private String charName;
 
     public Point getCurrentPosition() {
         return currentPosition;
@@ -53,4 +54,11 @@ public class Character {
         isPlayerCharacter = playerCharacter;
     }
 
+    public void setCharName(String name) {
+        this.charName = name;
+    }
+
+    public void charString() {
+        String character = charName +"," +this.ability.toString();
+    }
 }

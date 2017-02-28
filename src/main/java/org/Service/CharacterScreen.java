@@ -2,6 +2,7 @@ package main.java.org.Service;
 import main.java.org.model.Ability;
 import main.java.org.model.BackPackInventory;
 import main.java.org.model.Character;
+import main.java.org.model.GameConstants;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -13,22 +14,37 @@ import java.util.Scanner;
  * @version 1.0.0
  * @since 2017-02-23
  */
+
+
 public class CharacterScreen {
 
-    /* TODO: 2/25/2017
-    String readText(){
-        Scanner scan = new Scanner(System.in);
-        String str =scan.nextLine();
-...your exception handling...
+    private String readLine(){
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
     }
 
-    int readInt(){
-        Scanner scan = new Scanner(System.in);
-        scan.nextInt();
-..your exception handling...
-    }*/
+    private int readInt(int num){
+        try{
+            num = Integer.parseInt(readLine());
+        } catch (NumberFormatException e){
+            System.out.println(GameConstants.NOT_A_NUMBER);
+            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+        }
+        return num;
+    }
 
-    public void CharacterScreen(){
+    private String readText(String text){
+        try{
+            text = readLine();
+        } catch (NumberFormatException e){
+            System.out.println(GameConstants.NOT_A_STRING);
+            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+        }
+        return text;
+    }
+
+
+    public void CharacterScreen() throws Exception {
         Scanner scan = new Scanner(System.in);
         int choice = 0;
 
@@ -37,12 +53,12 @@ public class CharacterScreen {
         System.out.println("Choose one of the following by entering the number associated with the choice:");
         System.out.println("1. Create a Character\n2. Edit a Character\n3. Back to Main Menu");
         while(choice == 0)
-            choice = scan.nextInt();
+            choice = readInt(choice);
 
         // If the user enters an invalid input, they will be asked again
         while (choice < 1 || choice > 3) {
             System.out.println("Your input is invalid, please try again");
-            choice = scan.nextInt();
+            choice = readInt(choice);
         }
 
         switch (choice) {
@@ -69,7 +85,9 @@ public class CharacterScreen {
         char1.setAbility(ability);
 
         System.out.println("please enter a name for character: ");
-        charName = scan.nextLine();
+        charName = readText(charName);
+
+        char1.setCharName(charName);
 
         BackPackInventory backpack = new BackPackInventory();
         char1.setBackPackInventory(backpack);
@@ -86,13 +104,15 @@ public class CharacterScreen {
         scan.close();
     }
 
-    public void editCharacterScreen(){
+    public void editCharacterScreen() throws Exception {
         Scanner scan = new Scanner(System.in);
         String charName = "";
         Character character = new Character();
 
         System.out.println("Please enter the name of the character you would like to edit");
-        charName = scan.nextLine();
+        charName = readText(charName);
+
+        character.setCharName(charName);
 
         // TODO charName should be the path of the character
         ObjectLoader ol = new ObjectLoader();

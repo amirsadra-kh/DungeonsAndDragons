@@ -1,6 +1,8 @@
 package main.java.org.model;
 
-    /**
+import main.java.org.Service.Calculation;
+
+/**
      * This class is to validate dexterity
      * @author Parisa Nikzad
      * @version 1.0.0
