@@ -28,23 +28,16 @@ public class Fixtures {
         ArrayList<Character> nonPlayerCharacters = new ArrayList<Character>();
         nonPlayerCharacters.add(createCharacter());
 
-        Map map = new Map(new Point(1,2),
-                new Point(1,6),
-                createATestScreen(),
-                createCharacter(),
-                nonPlayerCharacters,
-                null);
+        Map map = new Map(null);
         return map;
     }
 
     public static Character createCharacter(){
         Character character = new Character();
         Ability ability =new Ability();
-        ability.setArmorClass(1);
-        ability.setAttackBonus(12);
-        ability.setAttackBonus(32);
-        ability.setDamageBonus(2);
-        ability.setHitPoints(1);
+        ability.setArmorClass(0);
+        ability.setAttackBonus(1);
+        ability.setDamageBonus(0);
         character.setAbility(ability);
         BackPackInventory inventory = new BackPackInventory();
         inventory.setItems(null);

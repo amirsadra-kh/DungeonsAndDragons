@@ -1,4 +1,5 @@
 target/
+out/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
@@ -31,6 +32,8 @@ target/
 
 # Other stuff
 **/*.log
+*.class
+*.jar
 logs/
 work/
 **/minifiedCss/
