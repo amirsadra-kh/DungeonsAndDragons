@@ -1,17 +1,20 @@
 package main.java.org.view;
 
-import main.java.org.Service.ObjectSaver;
+import main.java.org.model.GameConstants;
 import main.java.org.model.Map;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.UUID;
 
 import static java.lang.Integer.parseInt;
 
 /**
- * Created by misha on 2017-02-21.
+ * This class provides an interactive UI for the MAP
+ *
+ * @author Maysam/Mehran
+ * @version 2.0
+ * @since 2017-02-17
  */
 public class MapFrame implements ActionListener {
     public JPanel MapPanel;
@@ -25,75 +28,84 @@ public class MapFrame implements ActionListener {
     private JButton openMapGrid;
     private JButton saveMapButton;
     public JPanel GridPanel;
+    private JCheckBox newCheckBox;
+    private JTextPane useTheFollowingGuidTextPane1;
     private final int SIZE = 9;
-    private MapGrid grid=null;
+    private MapGrid grid = null;
+    private boolean newMap = false;
+    static int rows;
+    static int cols;
 
     public MapFrame() {
         String MapActionInput;
-        //    MapActionInput=input("Make or Edit");
-        //    alert("You Select : "+MapActionInput);
-        //   showGrid();
-        //   final MapGrid mapGrid = new MapGrid(10, 10);
         openMapGrid.addActionListener(this);
         saveMapButton.addActionListener(this);
-
-        //   MapGrid.ShowGrid(10,20);
+        newCheckBox.addActionListener(this);
     }
 
     public static void alert(String message) {
-        JOptionPane.showMessageDialog(null,message);
+        JOptionPane.showMessageDialog(null, message);
     }
 
     public String input(String message) {
         return JOptionPane.showInputDialog(message);
     }
 
-    public Map makeFrame (String frameTitle) {
+    public Map makeFrame(String frameTitle) {
         Map map = new Map();
         JFrame MapFrame = new JFrame(frameTitle);
-        MapFrame.setContentPane(new MapFrame().MapPanel);
-        MapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        MapFrame.setContentPane(this.MapPanel);
+
+        //MapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         //      MapFrame.add(GridPanel);
-        MapFrame.setSize(800,500);
+        MapFrame.setSize(800, 500);
         MapFrame.setLocationRelativeTo(null);
         MapFrame.setVisible(true);
-        //  MapFrame.setAlwaysOnTop(true);
-//        int    rows= parseInt(RowsInput.getText());
- //       int    cols=parseInt(ColumnsInput.getText());
 
-        //   MapFrame.pack();
         return map;
     }
 
 
-
-    public static void showGrid(){
-
-        //   GridPanel = new JPanel(new GridLayout(4, 4, 5, 5));
-
-
-    }
-
-
     @Override
-    public void actionPerformed(ActionEvent actionEvent ) {
-        int rows = parseInt(RowsInput.getText());
-        int cols = parseInt(ColumnsInput.getText());
+    public void actionPerformed(ActionEvent actionEvent) {
 
-        if (actionEvent.getSource()==openMapGrid) {
-            //   alert( "Rows:"+rows+" Cols:"+cols);
-            //  MapGrid.ShowGrid(rows,cols);
-           //  grid = new MapGrid(rows, cols);
-            this.grid = new MapGrid(rows, cols);;
-            this.grid.ShowGrid(rows, cols,this.grid);
+        newMap = newCheckBox.isSelected();
+        try {
+            if (newMap) {
+                rows = parseInt(RowsInput.getText());
+                cols = parseInt(ColumnsInput.getText());
+            }
+        } catch (NumberFormatException e) {
+            System.out.println(GameConstants.NOT_A_NUMBER + e.getMessage());
         }
-        else if(actionEvent.getSource()==saveMapButton) {
 
-            String[][] boardArray = MapGrid.CreateBoard(MapGrid.GetTextFromGrid(this.grid), rows, cols);
-            Map map = new Map(boardArray);
+
+        String name = NameInput.getText();
+
+        if (actionEvent.getSource() == openMapGrid) {
+            grid = new MapGrid(rows, cols);
+            this.grid = this.grid.ShowGrid(rows, cols, this.grid, name, newMap);
+
+        } else if (actionEvent.getSource() == saveMapButton) {
+            Map map=new Map();
+            if (!newMap) {
+                 map = grid.getExistingMap(name);
+                rows=map.getRows();
+                cols=map.getCols();
+            }
+            String[][] boardArray = grid.createBoard(MapGrid.GetTextFromGrid(this.grid), rows, cols);
+            map.setScreen(boardArray);
+            map.setCols(cols);
+            map.setRows(rows);
+            map.setName(name);
             map.saveObject();
-                //objectSaver.saveMap("./src/main/java/org/resources/maps/"+ UUID.randomUUID().toString().substring(5),map);
 
         }
     }
+
+    private void editMap(int rows, int cols, String name) {
+
+    }
+
+
 }

@@ -13,9 +13,27 @@ public class Map implements Serializable {
     private String[][] screen;
     private Turn turn;
     private String name;
+    private int cols;
+    private int rows;
 
     public Map(){
 
+    }
+
+    public int getCols() {
+        return cols;
+    }
+
+    public void setCols(int cols) {
+        this.cols = cols;
+    }
+
+    public int getRows() {
+        return rows;
+    }
+
+    public void setRows(int rows) {
+        this.rows = rows;
     }
 
     public String getName() {
@@ -63,9 +81,7 @@ public class Map implements Serializable {
 
     public void saveObject() {
         ObjectSaver objectSaver = new ObjectSaver();
-        objectSaver.saveMap("src/main/java/org/resources/maps/"+ UUID.randomUUID().toString().substring(5),this);
-        //objectSaver.saveMap("mo", this);
-        //TODO save Ma
+        objectSaver.saveMap("src/main/java/org/resources/maps/"+ this.name ,this);
     }
 
 
