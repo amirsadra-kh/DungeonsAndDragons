@@ -5,6 +5,14 @@ import main.java.org.model.Constitution;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * A class to test the Constitution class
+ *
+ * @see main.java.org.model.Constitution
+ * @author Parisa Nikzad
+ * @version 1.0
+ * @since 20.02.2017
+ */
 public class ConstitutionTest {
     @Test
     public void getConstitutionTest() {

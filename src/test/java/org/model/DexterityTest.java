@@ -5,6 +5,14 @@ import main.java.org.model.Dexterity;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
+/**
+ * A class to test the Dexterity class
+ *
+ * @see main.java.org.model.Dexterity
+ * @author Parisa Nikzad
+ * @version 1.0
+ * @since 20.02.2017
+ */
 public class DexterityTest {
     @Test
     public void getConstitutionTest() {
