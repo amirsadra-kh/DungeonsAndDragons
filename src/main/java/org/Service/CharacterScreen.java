@@ -8,22 +8,30 @@ import java.io.IOException;
 import java.util.Scanner;
 
 /**
- * This class is make the character, save it and edit the character.
+ * This class is to interact with user to create the character, save it and edit it.
  *
- * @author Parisa Nikzad
- * @version 1.0.0
+ * @author Parisa Nikzad/Freyja Jokulsdottir
+ * @version 1.0
  * @since 2017-02-23
  */
-
-
 public class CharacterScreen {
-
-    // TODO we should find a way to close the scanner when it is not need anymore.
+    /**
+     * A Scanner for reading input from user
+     * TODO we should find a way to close the scanner when it is not need anymore.
+     *
+     * @return a String which has been read from input
+     */
     private String readLine(){
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
+    /**
+     * A method for reading an integer input from user and handling a wrong input
+     *
+     * @param num an input from the user
+     * @return the integer if it was in fact an integer
+     */
     private int readInt(int num){
         try{
             num = Integer.parseInt(readLine());
@@ -34,6 +42,12 @@ public class CharacterScreen {
         return num;
     }
 
+    /**
+     * A method for reading in text input from user and handling the wrong input
+     *
+     * @param text input from userr
+     * @return the text if it was in fact a string
+     */
     private String readText(String text){
         try{
             text = readLine();
@@ -44,7 +58,11 @@ public class CharacterScreen {
         return text;
     }
 
-
+    /**
+     * The interactino screen with the user to create or edit a character
+     *
+     * @throws Exception
+     */
     public void CharacterScreen() throws Exception {
         int choice = 0;
 
@@ -74,6 +92,9 @@ public class CharacterScreen {
             }
     }
 
+    /**
+     * The interaction screen with iuser to create a new character
+     */
     public void createCharacterScreen(){
         String charName = "";
 
@@ -100,6 +121,11 @@ public class CharacterScreen {
         }
     }
 
+    /**
+     * The interaction screen with user to edit an existing character.
+     *
+     * @throws Exception
+     */
     public void editCharacterScreen() throws Exception {
         String charName = "";
         Character character = new Character();
@@ -121,6 +147,9 @@ public class CharacterScreen {
         }
     }
 
+    /**
+     * A method to go back to the main menu
+     */
     public void backToMain(){
         new GameGenerator();
     }

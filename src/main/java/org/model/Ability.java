@@ -1,5 +1,12 @@
 package main.java.org.model;
 
+/**
+ * A class for the ability object
+ *
+ * @author Parisa Nikzad
+ * @version 1.0
+ * @since 2017-02-23
+ */
 public class Ability {
     RollDice dice6 = new RollDice(6);
     RollDice dice10 = new RollDice(10);

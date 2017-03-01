@@ -4,6 +4,7 @@ import main.java.org.Service.Calculation;
 
     /**
      * This class represent a dexterity object and implement AbilityInterface
+     *
      * @author Parisa Nikzad
      * @version 1.0.0
      * @since 2017-02-22
