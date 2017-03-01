@@ -60,6 +60,10 @@ public class ObjectLoader extends FileProcessor {
         return map;
     }
 
+    public static Map loadMapFromXML(String mapName) throws Exception {
+        return (Map) loadFile(mapName);
+    }
+
     public static Campaign loadCampaign(String campName) throws Exception {
         List<Map> maps = new ArrayList<>();
         Campaign camp = new Campaign(maps);

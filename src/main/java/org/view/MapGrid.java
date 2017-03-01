@@ -41,7 +41,6 @@ public class MapGrid extends JFrame {
             editBoard(name);
 
         }
-        grid.setDefaultCloseOperation(grid.EXIT_ON_CLOSE);
         grid.setLocationRelativeTo(null);
         grid.setSize( 500, 500);
         grid.setVisible(true);
@@ -100,7 +99,7 @@ public class MapGrid extends JFrame {
 
         Map map = null;
         try {
-            map = ObjectLoader.loadMap(name);
+            map = ObjectLoader.loadMapFromXML(name);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -115,7 +114,7 @@ public class MapGrid extends JFrame {
      */
     public Map getExistingMap(String name) {
         try {
-            return  ObjectLoader.loadMap(MAPS_PATH+name);
+            return  ObjectLoader.loadMapFromXML(MAPS_PATH+name);
         } catch (Exception e) {
             e.printStackTrace();
         }
