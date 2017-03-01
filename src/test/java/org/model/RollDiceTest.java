@@ -1,8 +1,17 @@
-package test.java.com;
+package test.java.org.model;
+
 
 import main.java.org.model.RollDice;
 import org.junit.Test;
 
+/**
+ * A class to test the RollDice class
+ *
+ * @see main.java.org.model.RollDice
+ * @author Parisa Nikzad
+ * @version 1.0
+ * @since 20.02.2017
+ */
 public class RollDiceTest {
 
     @Test

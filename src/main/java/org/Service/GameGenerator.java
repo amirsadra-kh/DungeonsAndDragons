@@ -1,30 +1,27 @@
 package main.java.org.Service;
 
 import main.java.org.model.Campaign;
-import main.java.org.Service.CampaignScreen;
-import main.java.org.model.Game;
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
 import main.java.org.model.Map;
 import main.java.org.view.MapFrame;
-import main.java.org.view.MapGrid;
-
-
-import javax.swing.*;
-import java.awt.*;
 import java.util.Scanner;
-import java.util.UUID;
 
 /**
  * This class is is to Generate/edit game objects .
  * Game , Map, Campaigns, Items, Characters are created/edited by interacting with user
- * + *
- * + * @author Maysam Mokarian
- * + * @version 1.0
- * + * @since 2017-02-08
+ *
+ * @author Maysam Mokarian
+ * @version 1.0
+ * @since 2017-02-08
  */
 
 public class GameGenerator {
+    /**
+     * A start screen for the game, offers choices for the user
+     *
+     * @throws Exception in case the choice is no valid
+     */
     public void showMenuToStartTheGame() throws Exception {
         String chosen = GameConstants.EMPTY_STRING;
         while ("".equalsIgnoreCase(chosen) ||
@@ -36,11 +33,22 @@ public class GameGenerator {
         System.exit(0);
     }
 
+    /**
+     * A Scanner for reading input from user
+     *
+     * @return a String which has been read from input
+     */
     String readLine() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
+    /**
+     * A method for getting an input from the user to determine what they would like to do.
+     *
+     * @return the users option such as create, edit, play or quit
+     * @throws Exception in case the choice is no valid
+     */
     String getUserChosenOption() throws Exception {
         int option = 0;
         GameShoppingCard gameShoppingCard = new GameShoppingCard();
@@ -81,9 +89,20 @@ public class GameGenerator {
 
     }
 
+    /**
+     * A method that calls the Item screen to interact with a user after the user has chosen to create, edit or
+     * choose an item
+     */
     private void createOrEditItems() {
     }
 
+    /**
+     * A method that calls the Campaign screen to interact with a user after the user has chosen to create, edit or
+     * choose a campaign
+     *
+     * @return a Campaign object
+     * @throws Exception
+     */
     private Campaign createOrChoseCampaign() throws Exception {
         CampaignScreen cs = new CampaignScreen();
         cs.CampaignScreen();
@@ -91,10 +110,22 @@ public class GameGenerator {
         return cs.getNewCamp();
     }
 
-    private void createOrEditCharacter() {
-
+    /**
+     * A method that calls the Character screen to interact with a user after the user has chosen to create or edit
+     * a character
+     *
+     * @throws Exception
+     */
+    private void createOrEditCharacter() throws Exception {
+        CharacterScreen cs = new CharacterScreen();
+        cs.CharacterScreen();
+        showMenuToStartTheGame();
     }
 
+    /**
+     * A method that calls the map frame to interact with a user after the user has chosen to create or edit
+     * a map
+     */
     private void createOrChoseMaps() {
 
         Map map = new MapFrame().makeFrame("Map Builder");
