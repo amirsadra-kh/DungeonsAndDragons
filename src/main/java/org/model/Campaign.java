@@ -111,6 +111,7 @@ public class Campaign implements Serializable {
 
     /**
      * This method returns a Campaign which will be used for playing
+     *
      * @return Information about the Campaign
      */
     @Override
