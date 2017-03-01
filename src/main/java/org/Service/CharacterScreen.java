@@ -18,6 +18,7 @@ import java.util.Scanner;
 
 public class CharacterScreen {
 
+    // TODO we should find a way to close the scanner when it is not need anymore.
     private String readLine(){
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
@@ -45,7 +46,6 @@ public class CharacterScreen {
 
 
     public void CharacterScreen() throws Exception {
-        Scanner scan = new Scanner(System.in);
         int choice = 0;
 
 
@@ -72,12 +72,9 @@ public class CharacterScreen {
                 backToMain();
                 break;
             }
-
-        scan.close();
-
     }
+
     public void createCharacterScreen(){
-        Scanner scan = new Scanner(System.in);
         String charName = "";
 
         Character character = new Character();
@@ -101,11 +98,9 @@ public class CharacterScreen {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        scan.close();
     }
 
     public void editCharacterScreen() throws Exception {
-        Scanner scan = new Scanner(System.in);
         String charName = "";
         Character character = new Character();
 
@@ -124,8 +119,6 @@ public class CharacterScreen {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        scan.close();
     }
 
     public void backToMain(){

@@ -10,7 +10,7 @@ public class Character {
     private String charName;
 
     public Point getCurrentPosition() {
-        return currentPosition;
+        return this.currentPosition;
     }
 
     public void setCurrentPosition(Point currentPosition) {
@@ -59,6 +59,6 @@ public class Character {
     }
 
     public void charString() {
-        String character = charName +"," +this.ability.toString();
+        String character = this.charName +"," +this.ability.toString();
     }
 }

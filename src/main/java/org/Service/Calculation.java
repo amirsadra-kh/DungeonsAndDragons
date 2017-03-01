@@ -18,11 +18,11 @@ public class Calculation {
         RollDice dice6 = new RollDice(6);
 
         for (int i = 0; i < 4; i++) {
-            diceResult[i] = dice6.roll();
+            this.diceResult[i] = dice6.roll();
         }
-        //System.out.println(java.util.Arrays.toString(diceResult));
-        Arrays.sort(diceResult);
-        return diceResult[1] + diceResult[2] + diceResult[3];
+
+        Arrays.sort(this.diceResult);
+        return this.diceResult[1] + this.diceResult[2] + this.diceResult[3];
     }
 
 }

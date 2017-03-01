@@ -3,7 +3,7 @@ package main.java.org.model;
 import main.java.org.Service.Calculation;
 
 /**
- * This class is to validate constitution
+ * This class represent a constitution object and implement AbilityInterface
  * @author Parisa Nikzad
  * @version 1.0.0
  * @since 2017-02-22
@@ -11,22 +11,22 @@ import main.java.org.Service.Calculation;
 public class Constitution implements AbilityInterface {
     protected int constitution;
 
+    /**
+     * Constructor
+     */
     public Constitution() {
         Calculation score = new Calculation();
         this.constitution = score.getCalculation();
-        //System.out.println("New Constitution Value " + this.constitution);
     }
 
     @Override
     public int get() {
-        //System.out.println("Get Constitution Value " + this.constitution);
         return this.constitution;
     }
 
     @Override
     public void set(int value) {
         this.constitution = value;
-        //System.out.println("Newly Set Constitution Value " + this.constitution);
     }
 
     @Override

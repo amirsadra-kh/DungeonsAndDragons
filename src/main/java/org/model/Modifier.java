@@ -13,7 +13,7 @@ public class Modifier {
     /**
      * Constructor
      *
-     * @param value This parameter take the value to calculate the modifier.
+     * @param value This parameter is the value to calculate the modifier.
      */
     public Modifier(int value) {
         float floatValue = (float) value;

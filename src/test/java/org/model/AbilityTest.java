@@ -4,6 +4,13 @@ import main.java.org.model.Ability;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * This class is to test the Ability Object.
+ + *
+ + * @author Parisa Nikzad
+ + * @version 1.0
+ + * @since 2017-02-22
+ */
 public class AbilityTest {
     Ability ability;
 
