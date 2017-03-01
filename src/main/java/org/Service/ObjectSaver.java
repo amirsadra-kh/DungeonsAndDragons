@@ -42,21 +42,12 @@ public class ObjectSaver extends FileProcessor {
         saveFile("/characters/", characters);
     }
 
-<<<<<<< HEAD
-    public void saveMap(String path, Map map ) {
-        this.saveFile(path, map);
-=======
     public void saveCharacter(String name) {
         writer(CHARACTER_PATH, name);
     }
 
     public void editedCharacter(String newChar, String oldChar) {
         reWriter(CHARACTER_PATH, TEMP_CHARACTER_PATH, newChar, oldChar);
-    }
-
-    public void saveMap(String path, Map map) {
-        saveFile(path, map);
->>>>>>> df0f26e5c0fc5ca2728d07b7a3b1cd0fa1d1df22
     }
 
     public void loadCampaign(String path, Campaign campaign) {

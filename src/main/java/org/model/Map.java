@@ -81,7 +81,7 @@ public class Map implements Serializable {
 
     public void saveObject() {
         ObjectSaver objectSaver = new ObjectSaver();
-        objectSaver.saveMap("src/main/java/org/resources/maps/"+ this.name ,this);
+        //objectSaver.saveMap("src/main/java/org/resources/maps/"+ this.name ,this);
     }
 
 
