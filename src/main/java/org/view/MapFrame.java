@@ -63,9 +63,6 @@ public class MapFrame implements ActionListener {
         Map map = new Map();
         JFrame MapFrame = new JFrame(frameTitle);
         MapFrame.setContentPane(this.MapPanel);
-
-        //MapFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //      MapFrame.add(GridPanel);
         MapFrame.setSize(800, 500);
         MapFrame.setLocationRelativeTo(null);
         MapFrame.setVisible(true);
