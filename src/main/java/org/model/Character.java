@@ -7,9 +7,10 @@ public class Character {
     private Point currentPosition = new Point(0,0);
     private Ability ability;
     private boolean isPlayerCharacter;
+    private String charName;
 
     public Point getCurrentPosition() {
-        return currentPosition;
+        return this.currentPosition;
     }
 
     public void setCurrentPosition(Point currentPosition) {
@@ -21,6 +22,10 @@ public class Character {
     }
 
     public void setAbility(Ability ability) {
+        ability.setArmorClass(0);
+        ability.setDamageBonus(0);
+        ability.setAttackBonus(0);
+        ability.setLevel(1);
         this.ability = ability;
     }
     public Character create(final BackPackInventory backPackInventory) {
@@ -49,4 +54,11 @@ public class Character {
         isPlayerCharacter = playerCharacter;
     }
 
+    public void setCharName(String name) {
+        this.charName = name;
+    }
+
+    public void charString() {
+        String character = this.charName +"," +this.ability.toString();
+    }
 }

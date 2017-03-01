@@ -1,7 +1,5 @@
 package main.java.org.model;
 
-import org.apache.commons.collections.CollectionUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +17,7 @@ public class Turn {
 
     public Turn(List<Character> nonPlayerCharacters, Character character) {
         List<Character> characters = new ArrayList<>();
-        if (character != null && CollectionUtils.isNotEmpty(nonPlayerCharacters)) {
+        if (character != null ) {
             characters.addAll(nonPlayerCharacters);
             characters.add(character);
 

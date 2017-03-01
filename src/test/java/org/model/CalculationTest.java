@@ -1,6 +1,6 @@
 package test.java.org.model;
 
-import main.java.org.model.Calculation;
+import main.java.org.Service.Calculation;
 import org.junit.Test;
 
 /**

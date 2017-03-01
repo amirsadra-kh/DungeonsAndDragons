@@ -2,6 +2,7 @@
 package main.java.org.Service;
 
 import main.java.org.model.Campaign;
+import main.java.org.model.Character;
 import main.java.org.model.Map;
 
 import java.io.BufferedReader;
@@ -87,7 +88,25 @@ public class ObjectLoader extends FileProcessor {
         return camp;
     }
 
-    public static Character loadCharacter(String path) {
+    public static Character loadCharacter(String charName) throws Exception {
+        Character character = new Character();
+        ArrayList<String> characters = new ArrayList<>();
+        boolean found = false;
+
+        // Read campaign text file and save in campaigns list
+        characters = reader(CHARACTER_PATH);
+
+        // Search for campaign name to find the information about that campaign
+        for(int i = 0; i < characters.size(); i++){
+            if(charName.equals(characters.get(i))){
+                character.setCharName(charName);
+                //TODO set rest of attributes of a character
+                found = true;
+            }
+        }
+
+        if(!found)
+            throw new Exception("Character not found!");
         return null;
     }
 

@@ -1,6 +1,5 @@
 package main.java.org.Service;
 
-import main.java.org.model.Ability;
 import main.java.org.model.Campaign;
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
@@ -84,12 +83,10 @@ public class GameGenerator {
         return cs.getNewCamp();
     }
 
-    private void createOrEditCharacter() {
-        Ability ability = new Ability();
-        System.out.println("The new character is made with the following Ability: ");
-        System.out.println(ability.toString());
-
-
+    private void createOrEditCharacter() throws Exception {
+        CharacterScreen cs = new CharacterScreen();
+        cs.CharacterScreen();
+        showMenuToStartTheGame();
     }
 
     private void createOrChoseMaps() {

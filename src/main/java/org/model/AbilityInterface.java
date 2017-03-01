@@ -1,7 +1,7 @@
 package main.java.org.model;
 
 /**
- * This is an interface for Ability Class
+ * This is an interface for Certain abilities
  * @author Parisa Nikzad
  * @version 1.0.0
  * @since 2017-02-22
