@@ -4,16 +4,29 @@ import main.java.org.model.Ability;
 import main.java.org.model.Campaign;
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
-
+import main.java.org.model.Map;
+import main.java.org.view.MapFrame;
 import java.util.Scanner;
+
+/**
+ * This class is is to Generate/edit game objects .
+ * Game , Map, Campaigns, Items, Characters are created/edited by interacting with user
+ * + *
+ * + * @author Maysam Mokarian
+ * + * @version 1.0
+ * + * @since 2017-02-08
+ */
 
 public class GameGenerator {
     public void showMenuToStartTheGame() throws Exception {
         String chosen = GameConstants.EMPTY_STRING;
-        while ("".equalsIgnoreCase(chosen) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(chosen)) {
+        while ("".equalsIgnoreCase(chosen) ||
+                GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(chosen) ||
+                !GameConstants.END.equalsIgnoreCase(chosen)) {
             Screen.ShowMainMenu();
             chosen = getUserChosenOption();
         }
+        System.exit(0);
     }
 
     String readLine() {
@@ -48,7 +61,12 @@ public class GameGenerator {
                 createOrEditItems();
                 return GameConstants.ITEM;
             case 5:
+                System.out.println("Starting the Game");
+                //TODO next deliverable to implement starting the game
                 return GameConstants.START;
+            case 6:
+                System.out.println("Ending the Game, Thanks!");
+                return GameConstants.END;
             default:
                 System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
                 return GameConstants.CHOSEN_ITEM_NOT_VALID;
@@ -59,8 +77,11 @@ public class GameGenerator {
     private void createOrEditItems() {
     }
 
-    private Campaign createOrChoseCampaign() {
-        return null;
+    private Campaign createOrChoseCampaign() throws Exception {
+        CampaignScreen cs = new CampaignScreen();
+        cs.CampaignScreen();
+        showMenuToStartTheGame();
+        return cs.getNewCamp();
     }
 
     private void createOrEditCharacter() {
@@ -72,6 +93,9 @@ public class GameGenerator {
     }
 
     private void createOrChoseMaps() {
-    }
+
+        Map map = new MapFrame().makeFrame("Map Builder");
+        //  MapFrame.Main();
+       }
 
 }

@@ -3,7 +3,6 @@ package main.java.org.model;
 
 import main.java.org.Service.GameGenerator;
 import main.java.org.Service.ObjectLoader;
-import main.java.org.Service.Screen;
 
 import java.awt.*;
 import java.util.List;
@@ -20,9 +19,9 @@ public class Game {
 
     }
 
-    Map CreateMap(Point enterPoint, Point exitPoint, char[][] screen, Character character, List<Character> nonPlayerCharacters, Map nextLevel){
+    Map CreateMap(String[][] screen ){
         Map map =new Map();
-        return map.generateMap(enterPoint,exitPoint,screen,character,nonPlayerCharacters,nextLevel);
+        return map.generateMap(screen);
 
     }
 
