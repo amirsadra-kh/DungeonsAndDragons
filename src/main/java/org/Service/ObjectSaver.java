@@ -50,6 +50,10 @@ public class ObjectSaver extends FileProcessor {
         reWriter(CHARACTER_PATH, TEMP_CHARACTER_PATH, newChar, oldChar);
     }
 
+    public void saveMap(String path, Map map ) {
+        this.saveFile(path, map);
+    }
+
     public void loadCampaign(String path, Campaign campaign) {
         saveFile(path, campaign);
     }
