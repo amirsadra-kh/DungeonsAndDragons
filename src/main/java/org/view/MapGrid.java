@@ -2,7 +2,6 @@ package main.java.org.view;
 
 import main.java.org.Service.ObjectLoader;
 import main.java.org.model.Map;
-import org.apache.commons.collections.CollectionUtils;
 
 import javax.swing.*;
 import java.awt.*;

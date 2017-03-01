@@ -10,16 +10,16 @@ import java.util.List;
 
 /**
  * This class is is to Save the Objects to the File.
- * + *
- * + * @author Maysam Mokarian
- * + * @version 1.0
- * + * @since 2017-02-08
+ *
+ * @author Maysam Mokarian/Freyja Jokulsdottir
+ * @version 1.0
+ * @since 2017-02-08
  */
 
 public class ObjectSaver extends FileProcessor {
     private final static String CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/campaign.txt";
     private final static String TEMP_CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/tempCampaign.txt";
-    private final static String MAP_PATH = "src/main/java/org/resources/maps/map.txt";
+    //private final static String MAP_PATH = "src/main/java/org/resources/maps/map.txt";
     private final static String CHARACTER_PATH = "src/main/java/org/resources/characters/character.txt";
     private final static String TEMP_CHARACTER_PATH = "main/java/org/resources/characters/tempCharacter.txt";
     //TODO

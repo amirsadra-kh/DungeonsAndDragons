@@ -13,10 +13,10 @@ import java.util.List;
 
 /**
  * This class is is to Load the Objects from the File.
- * + *
- * + * @author Maysam Mokarian
- * + * @version 1.0
- * + * @since 2017-02-08
+ *
+ * @author Maysam Mokarian/Freyja Jokulsdottir
+ * @version 1.0
+ * @since 2017-02-08
  */
 
 public class ObjectLoader extends FileProcessor {

@@ -13,7 +13,11 @@ import java.nio.file.Paths;
 import static org.junit.Assert.assertEquals;
 
 /**
- * Created by mmokarian on 2/6/17.
+ * A unit test for saving objects
+ *
+ * @author Maysam
+ * @version 1.0
+ * @since 2017-02-25
  */
 public class ObjectSaverTest {
 
