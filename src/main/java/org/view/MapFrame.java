@@ -36,13 +36,15 @@ public class MapFrame implements ActionListener {
     static int rows;
     static int cols;
 
+    /**
+     * A MapFrame object
+     */
     public MapFrame() {
         String MapActionInput;
         openMapGrid.addActionListener(this);
         saveMapButton.addActionListener(this);
         newCheckBox.addActionListener(this);
     }
-
     public static void alert(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
@@ -51,6 +53,12 @@ public class MapFrame implements ActionListener {
         return JOptionPane.showInputDialog(message);
     }
 
+    /**
+     * A mehtod to make a frame
+     *
+     * @param frameTitle the title of the frame
+     * @return a map
+     */
     public Map makeFrame(String frameTitle) {
         Map map = new Map();
         JFrame MapFrame = new JFrame(frameTitle);

@@ -2,12 +2,18 @@ package main.java.org.model;
 
 import main.java.org.Service.ObjectSaver;
 
-import java.awt.*;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.List;
-import java.util.UUID;
 
+/**
+ * A this class provides a MAP object
+ * All the methods in this class are straight forward and therefore do not has JavaDoc comments
+ *
+ * @author Maysam/Mehran
+ * @version 2.0
+ * @since 2017-02-17
+ */
 public class Map implements Serializable {
 
     private String[][] screen;
@@ -89,7 +95,7 @@ public class Map implements Serializable {
         //TODO nothing
     }
 
-    void setCharacter(Character cahacter){
+    void setCharacter(Character character){
         //TODO nothing
     }
 }

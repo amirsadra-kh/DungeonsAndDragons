@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import test.Fixtures;
 
-
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;

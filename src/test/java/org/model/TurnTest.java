@@ -13,10 +13,11 @@ import static org.junit.Assert.*;
 
 /**
  * This class is to test the Turn Object.
- + *
- + * @author Maysam Mokarian
- + * @version 1.0
- + * @since 2017-02-08
+ *
+ * @see main.java.org.model.Turn
+ * @author Maysam Mokarian
+ * @version 1.0
+ * @since 2017-02-08
  */
 public class TurnTest {
 
