@@ -4,7 +4,12 @@ import main.java.org.Service.Calculation;
 import org.junit.Test;
 
 /**
- * Created by Parisa Nikzad on 2/20/2017.
+ * A class to test the Calculation class
+ *
+ * @see main.java.org.Service.Calculation
+ * @author Parisa Nikzad
+ * @version 1.0
+ * @since 20.02.2017
  */
 public class CalculationTest {
     Calculation calculation = new Calculation();
