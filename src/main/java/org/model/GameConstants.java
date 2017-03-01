@@ -1,7 +1,11 @@
 package main.java.org.model;
 
 /**
- * Created by mmokarian on 2/4/17.
+ * An interface for the game constants used in the main menu as well as in the different object screens
+ *
+ * @author Maysam Mokarian
+ * @since 02.04.2017
+ * @version 1.0
  */
 public interface GameConstants {
     String CAMPAIGN = "Campaign";

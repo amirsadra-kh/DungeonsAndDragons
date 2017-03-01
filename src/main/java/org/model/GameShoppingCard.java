@@ -2,6 +2,9 @@ package main.java.org.model;
 
 import java.util.List;
 
+/**
+ * A class to be used to choose objects in play mode
+ */
 public class GameShoppingCard {
     Campaign campaign;
     Character character;

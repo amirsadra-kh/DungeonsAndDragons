@@ -21,6 +21,16 @@ public class MapGrid extends JFrame {
     private JPanel gt;
      final static String MAPS_PATH="./src/main/java/org/resources/maps/";
 
+    /**
+     * A method to show the map grid
+     *
+     * @param rows number of rows for the map
+     * @param cols number of columns for the map
+     * @param grid the MapGrid object
+     * @param name the name of the map
+     * @param newMap a boolean to indicate if it is a new map or not
+     * @return grid
+     */
     public MapGrid ShowGrid(int rows, int cols, MapGrid grid, String name, boolean newMap) {
         // MapGrid gt = new MapGrid(rows, cols);
 
@@ -39,6 +49,12 @@ public class MapGrid extends JFrame {
 
     }
 
+    /**
+     * A method to get text input from user from the grid
+     *
+     * @param gt a MapGrid object
+     * @return a list of Strings inputted to the grid
+     */
     public static java.util.List<String> GetTextFromGrid(MapGrid gt) {
         java.util.List<String> list = new ArrayList<>();
         Container components = gt.getContentPane();
@@ -53,6 +69,11 @@ public class MapGrid extends JFrame {
         return list;
     }
 
+    /**
+     * A method to edit the board
+     *
+     * @param name of the map
+     */
     public void editBoard( String name) {
 
         String[][] exitingBoard = getExistingBoard(MAPS_PATH + name);
@@ -69,6 +90,12 @@ public class MapGrid extends JFrame {
         }
     }
 
+    /**
+     * A method to get an existing board to edit it or for any other purposes
+     *
+     * @param name the path of the board along with the name of the map
+     * @return a 2D String Array - the board
+     */
     private String[][] getExistingBoard(String name) {
 
         Map map = null;
@@ -80,6 +107,12 @@ public class MapGrid extends JFrame {
         return map.getScreen();
     }
 
+    /**
+     * A method to get an existing map
+     *
+     * @param name of the map
+     * @return a map or nothing if the map does not exist
+     */
     public Map getExistingMap(String name) {
         try {
             return  ObjectLoader.loadMap(MAPS_PATH+name);
@@ -89,6 +122,14 @@ public class MapGrid extends JFrame {
         return null;
     }
 
+    /**
+     * A method to create the board
+     *
+     * @param list of Strings
+     * @param rows number of rows
+     * @param cols number of columns
+     * @return a 2D array of strings - a new board
+     */
     public String[][] createBoard(java.util.List<String> list, int rows, int cols) {
         String[][] board = new String[rows][cols];
         for (int i = 0; i < rows; i++) {
@@ -103,7 +144,12 @@ public class MapGrid extends JFrame {
 
     }
 
-
+    /**
+     * A MapGrid object
+     *
+     * @param rows number of rows
+     * @param cols number of columns
+     */
     public MapGrid(int rows, int cols) {
         if(rows!=0 && cols!=0) {
         Container pane = getContentPane();
