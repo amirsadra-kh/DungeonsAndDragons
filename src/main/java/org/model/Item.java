@@ -37,6 +37,10 @@ public class Item {
         this.item = item;
     }
 
+    //public EnhancementTypes getEnhancement(){ return enhancement;}
+
+    public void setEnhancement (EnhancementTypes enhancement) {this.enhance = enhance;}
+
     //create getter setter for enhance
 
 
