@@ -1,13 +1,12 @@
 package main.java.org.Service;
 
-
 import main.java.org.model.Campaign;
+import main.java.org.model.Item;
 import main.java.org.model.Character;
 import main.java.org.model.Map;
 
 import java.io.*;
 import java.util.List;
-
 /**
  * This class is is to Save the Objects to the File.
  *
@@ -27,13 +26,25 @@ public class ObjectSaver extends FileProcessor {
         saveFile("/maps/", maps);
     }
 
-    /**
-     * A method for saving a campaign
-     * @param campName
-     * @param camp
-     */
-    public void saveCampaign(String campName, Campaign camp) {
-        saveFile(CAMPAIGN_PATH +campName, camp);
+    public void saveItem(String path, Item item) {
+        saveFile(path, item);
+    }
+
+    public void saveCampaigns(List<Campaign> campaigns) {
+        saveFile("/campaigns/", campaigns);
+    }
+
+    public void saveCampaign(String camp) {
+        //saveFile("/campaigns/", campaigns);
+        writer(CAMPAIGN_PATH, camp);
+    }
+
+    public void loadCharacters(List<Character> characters) {
+        saveFile("/characters/", characters);
+    }
+
+    public void saveCharacter(String name) {
+        writer(CHARACTER_PATH, name);
     }
 
     public void saveMap(String path, Map map ) {

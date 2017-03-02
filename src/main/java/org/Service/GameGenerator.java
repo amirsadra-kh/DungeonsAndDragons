@@ -3,6 +3,7 @@ package main.java.org.Service;
 import main.java.org.model.Campaign;
 import main.java.org.model.GameConstants;
 import main.java.org.model.GameShoppingCard;
+import main.java.org.model.Item;
 import main.java.org.model.Map;
 import main.java.org.view.MapFrame;
 import java.util.Scanner;
@@ -93,8 +94,10 @@ public class GameGenerator {
      * A method that calls the Item screen to interact with a user after the user has chosen to create, edit or
      * choose an item
      */
-    private void createOrEditItems() {
-    }
+    public Item createOrEditItems() {
+        ItemScreen itemScreen =new ItemScreen();
+        return itemScreen.askUserToCreateOrEditItem();
+      }
 
     /**
      * A method that calls the Campaign screen to interact with a user after the user has chosen to create, edit or

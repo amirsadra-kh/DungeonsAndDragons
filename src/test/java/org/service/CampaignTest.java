@@ -92,8 +92,7 @@ class CampaignTest {
     @Test
     void testGetCampaign() throws Exception {
         //Save a campaign
-        ObjectSaver os = new ObjectSaver();
-        os.saveCampaign(camp.campaignString(), camp);
+        camp.saveCampaign();
         camp.getCampaign(camp.getName());
     }
 
@@ -101,7 +100,7 @@ class CampaignTest {
     void testRemoveLevel() throws Exception {
         //Save a campaign
         String campName = camp.getName();
-        os.saveCampaign(campName, camp);
+        camp.saveCampaign();
         camp = camp.getCampaign(camp.getName());
         levels = camp.getLevels();
         camp.removeLevel(levels);
