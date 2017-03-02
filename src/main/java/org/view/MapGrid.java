@@ -2,7 +2,6 @@ package main.java.org.view;
 
 import main.java.org.Service.ObjectLoader;
 import main.java.org.model.Map;
-import org.apache.commons.collections4.CollectionUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -132,7 +131,7 @@ public class MapGrid extends JFrame {
         String[][] board = new String[rows][cols];
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                if (CollectionUtils.isNotEmpty(list)) {
+                if (list!=null && list.size()!=0) {
                     board[i][j] = list.get(0);
                     list.remove(0);
                 }
