@@ -2,7 +2,7 @@ package main.java.org.view;
 
 import main.java.org.Service.ObjectLoader;
 import main.java.org.model.Map;
-import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.collections4.CollectionUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class MapGrid extends JFrame {
 
     private JPanel gt;
-     final static String MAPS_PATH="./src/main/java/org/resources/maps/";
 
     /**
      * A method to show the map grid
@@ -75,7 +74,7 @@ public class MapGrid extends JFrame {
      */
     public void editBoard( String name) {
 
-        String[][] exitingBoard = getExistingBoard(MAPS_PATH + name);
+        String[][] exitingBoard = getExistingBoard(name);
 
         Container pane = getContentPane();
         if(exitingBoard.length!=0) {
@@ -114,7 +113,7 @@ public class MapGrid extends JFrame {
      */
     public Map getExistingMap(String name) {
         try {
-            return  ObjectLoader.loadMapFromXML(MAPS_PATH+name);
+            return  ObjectLoader.loadMapFromXML(name);
         } catch (Exception e) {
             e.printStackTrace();
         }
