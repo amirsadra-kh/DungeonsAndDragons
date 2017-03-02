@@ -30,8 +30,8 @@ public class ObjectSaver extends FileProcessor {
         saveFile("/maps/", maps);
     }
 
-    public void SaveItem(Item item) {
-        saveFile("/items/"+ UUID.randomUUID(), item);
+    public void saveItem(String path,Item item) {
+        saveFile(path, item);
     }
 
     public void saveCampaigns(List<Campaign> campaigns) {

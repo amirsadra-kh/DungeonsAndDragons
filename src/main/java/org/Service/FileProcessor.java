@@ -4,6 +4,7 @@ import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -44,5 +45,14 @@ abstract class FileProcessor {
         }
         e.writeObject(obj);
         e.close();
+    }
+
+
+     void showItemNames(String path) {
+        File folder = new File(path);
+        File[] listOfFiles = folder.listFiles();
+        for(File file:listOfFiles){
+            System.out.println(file.toString().split("/")[file.toString().split("/").length-1]);
+        }
     }
 }
