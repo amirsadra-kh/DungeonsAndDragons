@@ -24,16 +24,15 @@ public class ObjectLoader extends FileProcessor {
     public static List<Map> loadMaps() {
         return null;
     }
-    private final static String CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/campaign.txt";
-    private final static String TEMP_CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/tempCampaign.txt";
-    private final static String MAP_PATH = "src/main/java/org/resources/maps/map.txt";
-    private final static String CHARACTER_PATH = "src/main/java/org/resources/characters/character.txt";
+    private final static String CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/";
+    private final static String MAP_PATH = "src/main/java/org/resources/maps/";
+    private final static String CHARACTER_PATH = "src/main/java/org/resources/characters/";
     //TODO
     private final static String ITEM_PATH = "";
 
     // TODO
     public static List<Campaign> loadCampaigns() {
-        List<Campaign> campaign = (List<Campaign>) loadFile("resources/campaigns/campaign.txt");
+        List<Campaign> campaign = (List<Campaign>) loadFile(CAMPAIGN_PATH);
         return campaign;
     }
 
@@ -41,77 +40,12 @@ public class ObjectLoader extends FileProcessor {
         return null;
     }
 
-    public static Map loadMap(String mapName) throws Exception {
-        Map map = new Map();
-        boolean found = false;
-        // Read the Map file
-        ArrayList<String> mapFile = reader(MAP_PATH);
-        for(int i = 0; i < mapFile.size(); i ++) {
-            if(mapName.equals(mapFile.get(i))) {
-                map.setName(mapName);
-                found = true;
-                // TODO Set rest of map attributes here to have a complete map object
-            }
-
-        }
-        if(!found)
-            throw new Exception("Map not found!");
-        //return (Map) loadFile("./src/test/resources/files/maps/" + fileName);
-        return map;
-    }
-
     public static Map loadMapFromXML(String mapName) throws Exception {
-        return (Map) loadFile(mapName);
+        return (Map) loadFile(MAP_PATH +mapName);
     }
 
-    public static Campaign loadCampaign(String campName) throws Exception {
-        List<Map> maps = new ArrayList<>();
-        Campaign camp = new Campaign(maps);
-        ArrayList<String> campaigns = new ArrayList<>();
-        boolean found = false;
-
-        // Read campaign text file and save in campaigns list
-        campaigns = reader(CAMPAIGN_PATH);
-
-        // Search for campaign name to find the information about that campaign
-        for(int i = 0; i < campaigns.size(); i++){
-            if(campName.equals(campaigns.get(i))){
-                camp.setName(campName);
-                camp.setNumLevels(Integer.parseInt(campaigns.get(i+1)));
-                for(int j = 1; j <= camp.getNumLevels(); j++) {
-                    camp.addMap(campaigns.get(i+1+j));
-                }
-                found = true;
-            }
-        }
-
-        if(!found)
-            throw new Exception("Campaign not found!");
-
-        // Return the campaign found
-        return camp;
-    }
-
-    public static Character loadCharacter(String charName) throws Exception {
-        Character character = new Character();
-        ArrayList<String> characters = new ArrayList<>();
-        boolean found = false;
-
-        // Read campaign text file and save in campaigns list
-        characters = reader(CHARACTER_PATH);
-
-        // Search for campaign name to find the information about that campaign
-        for(int i = 0; i < characters.size(); i++){
-            if(charName.equals(characters.get(i))){
-                character.setCharName(charName);
-                //TODO set rest of attributes of a character
-                found = true;
-            }
-        }
-
-        if(!found)
-            throw new Exception("Character not found!");
-        return null;
+    public static Character loadCharacterFromXML(String charName) throws Exception {
+        return (Character) loadFile(CHARACTER_PATH +charName);
     }
 
     /**
@@ -148,4 +82,5 @@ public class ObjectLoader extends FileProcessor {
         // Return the list of words from the file.
         return list;
     }
+
 }

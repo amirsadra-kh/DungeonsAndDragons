@@ -1,13 +1,12 @@
 package main.java.org.Service;
 
-
 import main.java.org.model.Campaign;
+import main.java.org.model.Item;
 import main.java.org.model.Character;
 import main.java.org.model.Map;
 
 import java.io.*;
 import java.util.List;
-
 /**
  * This class is is to Save the Objects to the File.
  *
@@ -17,11 +16,9 @@ import java.util.List;
  */
 
 public class ObjectSaver extends FileProcessor {
-    private final static String CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/campaign.txt";
-    private final static String TEMP_CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/tempCampaign.txt";
+    private final static String CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/";
     //private final static String MAP_PATH = "src/main/java/org/resources/maps/map.txt";
-    private final static String CHARACTER_PATH = "src/main/java/org/resources/characters/character.txt";
-    private final static String TEMP_CHARACTER_PATH = "main/java/org/resources/characters/tempCharacter.txt";
+    private final static String CHARACTER_PATH = "src/main/java/org/resources/characters/";
     //TODO
     private final static String ITEM_PATH = "";
 
@@ -29,13 +26,17 @@ public class ObjectSaver extends FileProcessor {
         saveFile("/maps/", maps);
     }
 
+    public void saveItem(String path, Item item) {
+        saveFile(path, item);
+    }
+
+    public void saveCampaigns(List<Campaign> campaigns) {
+        saveFile("/campaigns/", campaigns);
+    }
+
     public void saveCampaign(String camp) {
         //saveFile("/campaigns/", campaigns);
         writer(CAMPAIGN_PATH, camp);
-    }
-
-    public void editedCampaign(String newCamp, String oldCamp) {
-        reWriter(CAMPAIGN_PATH, TEMP_CAMPAIGN_PATH, newCamp, oldCamp);
     }
 
     public void loadCharacters(List<Character> characters) {
@@ -46,16 +47,19 @@ public class ObjectSaver extends FileProcessor {
         writer(CHARACTER_PATH, name);
     }
 
-    public void editedCharacter(String newChar, String oldChar) {
-        reWriter(CHARACTER_PATH, TEMP_CHARACTER_PATH, newChar, oldChar);
-    }
-
     public void saveMap(String path, Map map ) {
         this.saveFile(path, map);
     }
 
-    public void loadCampaign(String path, Campaign campaign) {
-        saveFile(path, campaign);
+    /**
+     * A method for saving a character object
+     *
+     * @param charName the name of the character
+     * @param character the character object
+     * @throws IOException in case the path does not exist
+     */
+    public void saveCharacter(String charName, Character character) throws IOException {
+        saveFile(CHARACTER_PATH +charName, character);
     }
 
     /**
@@ -75,10 +79,6 @@ public class ObjectSaver extends FileProcessor {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public void saveCharacter(String path, Character character) throws IOException {
-        saveFile(path, character);
     }
 
     /**
