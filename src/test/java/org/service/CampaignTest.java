@@ -33,7 +33,7 @@ class CampaignTest {
     private ObjectSaver os = new ObjectSaver();
 
     @Before
-    void setUp() throws Exception {
+    void setUp() {
         map = new Map();
         // This map has to be saved in map.txt
         mapName = "SomeMap";
@@ -45,22 +45,11 @@ class CampaignTest {
     }
 
     @After
-    void tearDown() throws FileNotFoundException {
+    void tearDown() {
         camp = null;
         map = null;
         levels = null;
         mapName = null;
-        // Clear all text files used
-        try {
-            PrintWriter writer = new PrintWriter("src/main/java/org/resources/campaigns/campaign.txt");
-            writer.print("");
-            writer.close();
-            writer = new PrintWriter("src/main/java/org/resources/campaigns/tempCampaign.txt");
-            writer.print("");
-            writer.close();
-        } catch(FileNotFoundException e){
-            e.printStackTrace();
-        }
     }
 
     @Test
@@ -104,14 +93,15 @@ class CampaignTest {
     void testGetCampaign() throws Exception {
         //Save a campaign
         ObjectSaver os = new ObjectSaver();
-        os.saveCampaign(camp.campaignString());
+        os.saveCampaign(camp.campaignString(), camp);
         camp.getCampaign(camp.getName());
     }
 
     @Test
     void testRemoveLevel() throws Exception {
         //Save a campaign
-        os.saveCampaign(camp.campaignString());
+        String campName = camp.getName();
+        os.saveCampaign(campName, camp);
         camp = camp.getCampaign(camp.getName());
         levels = camp.getLevels();
         camp.removeLevel(levels);

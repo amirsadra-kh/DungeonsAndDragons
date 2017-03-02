@@ -128,17 +128,108 @@ public class CharacterScreen {
      */
     public void editCharacterScreen() throws Exception {
         String charName = "";
-        Character character = new Character();
+        int choice = 0;
 
         System.out.println("Please enter the name of the character you would like to edit");
         charName = readText(charName);
 
-        character.setCharName(charName);
-
         // TODO charName should be the path of the character
         ObjectLoader ol = new ObjectLoader();
-        character = ol.loadCharacter(charName);
+        Character character = ol.loadCharacterFromXML(charName);
 
+        // What does the user want to edit about the character?
+        System.out.println("Which of these would you like to edit?");
+        System.out.println("1. Ability\n2. BackPack\n3. Exit");
+        choice = readInt(choice);
+
+
+        switch (choice) {
+            case 1:
+                editAbility(character, charName);
+                System.out.println();
+                CharacterScreen();
+                break;
+            case 2:
+                character = editBackPack(character);
+                System.out.println();
+                CharacterScreen();
+                break;
+            case 3:
+                backToMain();
+        }
+    }
+
+    /**
+     * A method to interact with the user for editing the ability of a character
+     *
+     * @param character the existing character to be edited
+     * @return the edited character object
+     */
+    private void editAbility(Character character, String charName) {
+        int level = 0;
+        int choice = 0;
+        Ability ability = character.getAbility();
+
+        // Edit the level of the character
+        System.out.println("Please enter the level you would like the character to be at (0 if not changed): ");
+        level = readInt(level);
+        if(level != 0)
+            ability.setLevel(level);
+
+        // Change the strength of the character
+        System.out.println("Please enter the strength you would like the character to have (0 if not changed): ");
+        choice = readInt(choice);
+        if(choice != 0)
+            ability.setStrength(choice);
+
+        // Change the constitution of the character
+        choice = 0;
+        System.out.println("Please enter the constitution you would like the character to have (0 if not changed): ");
+        choice = readInt(choice);
+        if(choice != 0)
+            ability.setConstitution(choice);
+
+        // Change the dexterity of the character
+        choice = 0;
+        System.out.println("Please enter the dexterity you would like the character to have (0 if not changed): ");
+        choice = readInt(choice);
+        if(choice != 0)
+            ability.setDexterity(choice);
+
+        // Set the new ability for the character
+        character.setAbility(ability);
+
+        System.out.println("The other ability points depend on what the character has on them!\n");
+
+        // Save changes?
+        String save = "";
+        System.out.println("Would you like to save your changes?");
+        save = readText(save);
+        while(!save.equals("Y") && !save.equals("N")) {
+            System.out.println("Invalid input! Please tray again: ");
+            save = readText(save);
+        }
+        if(save.equals("Y"))
+            Save(charName, character);
+    }
+
+    /**
+     * A method to interact with the user for editing the backpack of a character
+     *
+     * @param character the existing character to be edited
+     * @return the edited character object
+     */
+    private Character editBackPack(Character character) {
+        return character;
+    }
+
+    /**
+     * A method for overriding the edited character and exit the game
+     *
+     * @param charName name of the character
+     * @param character the character object
+     */
+    private void Save(String charName, Character character) {
         ObjectSaver os = new ObjectSaver();
         try {
             os.saveCharacter(charName, character);
@@ -150,10 +241,7 @@ public class CharacterScreen {
     /**
      * A method to go back to the main menu
      */
-    public void backToMain(){
+    private void backToMain(){
         new GameGenerator();
     }
-
-
-
 }

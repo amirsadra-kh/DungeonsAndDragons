@@ -4,6 +4,7 @@ import main.java.org.model.Campaign;
 import main.java.org.model.GameConstants;
 import main.java.org.model.Map;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.IllegalFormatException;
 import java.util.List;
@@ -80,21 +81,10 @@ public class CampaignScreen {
         camp.setNumLevels(numLevels);
 
         // Add a Map
-        for(int i = 0; i < numLevels; i++) {
-            //Get Map input from user
-            String mapName = "";
+        addMaps(numLevels, camp);
 
-            while(mapName.equals("") || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(mapName)) {
-                System.out.println("Enter the name of the Map you would like to add:");
-                mapName = readStringHandling(mapName);
-            }
-
-            //Send Map input to CampaignModule
-            camp.addMap(mapName);
-        }
         //Save Campaign
-        ObjectSaver os = new ObjectSaver();
-        os.saveCampaign(camp.campaignString());
+        camp.saveCampaign();
 
         CampaignScreen();
 
@@ -144,17 +134,7 @@ public class CampaignScreen {
             num += addingNum;
             camp.setNumLevels(num);
 
-            for(int i = 0; i < addingNum; i++) {
-                //Get Map input from user
-                String mapName = "";
-                while (mapName.equals("") || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(mapName)) {
-                    System.out.println("Enter the name of the Map you would like to add:");
-                    mapName = readStringHandling(mapName);
-                }
-
-                //Send Map input to CampaignModule
-                camp.addMap(mapName);
-            }
+            addMaps(addingNum, camp);
         }
 
         // Remove a Map - the last one
@@ -177,8 +157,7 @@ public class CampaignScreen {
         }
 
         //Save Campaign
-        ObjectSaver os = new ObjectSaver();
-        os.editedCampaign(camp.campaignString(), campName);
+        camp.saveCampaign();
 
         CampaignScreen();
 
@@ -222,5 +201,26 @@ public class CampaignScreen {
             System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
         }
         return line;
+    }
+
+    /**
+     * A method for getting the maps based on map names from user
+     *
+     * @param num number of maps to be added
+     * @param camp the campaign object which the maps will be added to
+     * @return campaign object with maps
+     */
+    private void addMaps(int num, Campaign camp){
+        for(int i = 0; i < num; i++) {
+            //Get Map input from user
+            String mapName = "";
+            while (mapName.equals("") || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(mapName)) {
+                System.out.println("Enter the name of the Map you would like to add:");
+                mapName = readStringHandling(mapName);
+            }
+
+            //Send Map input to CampaignModule
+            camp.addMap(mapName);
+        }
     }
 }
