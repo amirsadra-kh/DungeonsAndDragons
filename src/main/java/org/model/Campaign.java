@@ -1,6 +1,5 @@
 package main.java.org.model;
 
-import com.sun.xml.internal.txw2.annotation.XmlElement;
 import main.java.org.Service.ObjectLoader;
 
 import javax.xml.bind.JAXBContext;

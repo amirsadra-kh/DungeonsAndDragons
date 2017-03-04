@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_74" class="java.beans.XMLDecoder">
+ <object class="main.java.org.model.Character">
+  <void property="ability">
+   <object class="main.java.org.model.Ability">
+    <void property="constitution">
+     <int>10</int>
+    </void>
+    <void property="dexterity">
+     <int>14</int>
+    </void>
+    <void property="strength">
+     <int>12</int>
+    </void>
+   </object>
+  </void>
+  <void property="backPackInventory">
+   <object class="main.java.org.model.BackPackInventory"/>
+  </void>
+ </object>
+</java>
