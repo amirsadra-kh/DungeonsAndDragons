@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<campaign>
+    <levels>
+        <cols>3</cols>
+        <name>map1</name>
+        <rows>2</rows>
+        <screen>
+            <item></item>
+            <item>W</item>
+            <item></item>
+        </screen>
+        <screen>
+            <item>W</item>
+            <item></item>
+            <item></item>
+        </screen>
+    </levels>
+    <name>camp2</name>
+    <numLevels>1</numLevels>
+</campaign>
