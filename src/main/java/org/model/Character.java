@@ -4,7 +4,7 @@ import java.awt.*;
 
 /**
  * This class is the character object
- *
+ * TODO we should be able to equipped the character with items in inventory
  * @author Parisa Nikzad
  * @version 1.0
  * @since 2017-02-23
