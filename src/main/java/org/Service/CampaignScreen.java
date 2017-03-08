@@ -65,10 +65,18 @@ public class CampaignScreen {
         Campaign camp = new Campaign(levels);
         String name = "";
         int numLevels = 0;
+        boolean campExist = false;
 
-        while("".equalsIgnoreCase(name) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(name)) {
+        while("".equalsIgnoreCase(name) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(name) || campExist == true) {
             System.out.println("Enter the name of the new Campaign (No spaces): ");
             name = readStringHandling(name);
+            try{
+                //camp = camp.getCampaign(name);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            //if()
+              //  System.out.println("A Campaign with this name already exists!");
         }
 
         camp.setName(name);

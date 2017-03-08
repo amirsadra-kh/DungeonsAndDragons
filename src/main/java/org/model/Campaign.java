@@ -24,6 +24,7 @@ public class Campaign implements Serializable {
     private List<Map> levels;
     private String name;
     private int numLevels;
+    private List<String> mapNames;
 
     /**
      * A default constructor
@@ -71,6 +72,10 @@ public class Campaign implements Serializable {
         return numLevels;
     }
 
+    public List<String> getMapNames() {
+        return this.mapNames;
+    }
+
     /**
      * A method to set the number of levels in a campaign
      */
@@ -88,17 +93,33 @@ public class Campaign implements Serializable {
     }
 
     /**
-     * This is the method for adding maps to the campaign
+     * This is the method for adding maps by names to the campaign
      * @param mapName a name of a map which will be added to the list of levels in the campaign
      */
     public void addMap(String mapName){
+        try {
+            getMap(mapName);
+            this.mapNames.add(mapName);
+        } catch(Exception e) {
+            e.printStackTrace();
+            System.out.println("Map does not exist!");
+        }
+    }
+
+    /**
+     * This is the method for getting the maps connected by names
+     * @param mapName
+     * @return a map object
+     */
+    public Map getMap(String mapName){
         // Get Map using Map name
         try {
             Map map = ObjectLoader.loadMapFromXML(mapName);
-            this.levels.add(map);
+            return map;
         } catch(Exception e) {
-            System.out.println("Map not found!");
+            e.printStackTrace();
         }
+        return null;
     }
 
     /**
@@ -133,25 +154,8 @@ public class Campaign implements Serializable {
     }
 
     /**
-     * A method for changing the campaign into a string to be added to the Campaign text file.
-     *
-     * @return a string to be used to write to the text file.
+     * A method for saving a campaign
      */
-    public String campaignString() {
-        List<Map> maps = this.levels;
-        String mapName = "";
-        // Add all the information about a campaign to one string
-        String campaign = this.name
-                +"," +this.numLevels;
-        for(int i = 0; i < this.numLevels; i++) {
-            mapName = maps.get(i).getName();
-            campaign += "," +mapName;
-        }
-
-        // Return campaign information string
-        return campaign;
-    }
-
     public void saveCampaign()  {
 
         JAXBContext context = null;
@@ -166,7 +170,12 @@ public class Campaign implements Serializable {
         }
     }
 
-
+    /**
+     * A method for loading an existing campaign
+     *
+     * @param name of the campaign
+     * @return an exisiting campaign object
+     */
     public Campaign loadCampaign(String name){
         try {
             JAXBContext jc = JAXBContext.newInstance(Campaign.class);
