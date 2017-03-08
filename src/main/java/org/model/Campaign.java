@@ -1,6 +1,7 @@
 package main.java.org.model;
 
 import main.java.org.Service.ObjectLoader;
+import main.java.org.Service.ObjectSaver;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -38,7 +39,6 @@ public class Campaign implements Serializable {
      * @param mapNames these are a list of maps which are in the campaign object
      */
     public Campaign(final List<String> mapNames) {
-
         this.mapNames = mapNames;
     }
 
@@ -94,14 +94,8 @@ public class Campaign implements Serializable {
      * This is the method for adding maps by names to the campaign
      * @param mapName a name of a map which will be added to the list of levels in the campaign
      */
-    public void addMap(String mapName){
-        try {
-            getMap(mapName);
-            this.mapNames.add(mapName);
-        } catch(Exception e) {
-            e.printStackTrace();
-            System.out.println("Map does not exist!");
-        }
+    public void setMapNames(String mapName){
+        this.mapNames.add(mapName);
     }
 
     /**
@@ -155,7 +149,6 @@ public class Campaign implements Serializable {
      * A method for saving a campaign
      */
     public void saveCampaign()  {
-
         JAXBContext context = null;
         try {
             context = JAXBContext.newInstance(Campaign.class);

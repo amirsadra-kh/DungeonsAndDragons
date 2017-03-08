@@ -228,7 +228,7 @@ public class CampaignScreen {
             }
 
             //Send Map input to CampaignModule
-            camp.addMap(mapName);
+            camp.setMapNames(mapName);
         }
     }
 }
