@@ -61,8 +61,8 @@ public class CampaignScreen {
      */
     private void createCampaignScreen() throws Exception {
         // Create a new Campaign
-        List<Map> levels = new ArrayList<>();
-        Campaign camp = new Campaign(levels);
+        List<String> levelNames = new ArrayList<>();
+        Campaign camp = new Campaign(levelNames);
         String name = "";
         int numLevels = 0;
         boolean campExist = false;
@@ -106,8 +106,8 @@ public class CampaignScreen {
     private void editCampaignScreen() throws Exception {
         String campName = "";
         int choice = 0;
-        List<Map> levels = new ArrayList<>();
-        Campaign camp = new Campaign(levels);
+        List<String> levelNames = new ArrayList<>();
+        Campaign camp = new Campaign(levelNames);
 
         while(campName.equals("")) {
             System.out.println("Enter the name of the Campaign you would like to edit:");
@@ -153,12 +153,12 @@ public class CampaignScreen {
                 removeNum = readIntHandling(removeNum);
             }
 
-            levels = camp.getLevels();
+            levelNames = camp.getMapNames();
 
             for (int i = 0; i < removeNum; i++) {
                 // Remove the last map if there are any maps in the Campaign
                 if (camp.getNumLevels() != 0) {
-                    camp.removeLevel(levels);
+                    camp.removeLevel(levelNames);
                 } else
                     System.out.println("There are no maps left in this campaign");
             }

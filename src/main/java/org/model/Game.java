@@ -29,8 +29,8 @@ public class Game {
         new GameGenerator().showMenuToStartTheGame();
     }
 
-    Campaign CreateCampign(List<Map> maps){
-        return new Campaign(maps);
+    Campaign CreateCampign(List<String> mapNames){
+        return new Campaign(mapNames);
     }
 
     public List<Campaign> loadCampaigns(){
