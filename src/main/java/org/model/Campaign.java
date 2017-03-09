@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  * Class to allow user to create and edit Campaign
- * //TODO
+ *
  * @author Freyja Jokulsdottir
  * @version 1.5
  * @since 2017-02-05

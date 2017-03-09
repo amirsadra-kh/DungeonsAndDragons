@@ -6,85 +6,60 @@ import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by freyjaj93 on 2017-03-09.
+ * Class to test the Campaign class which allows user to create and edit Campaign
+ *
+ * @author Freyja Jokulsdottir
+ * @version 2.0
+ * @since 2017-02-05
  */
-class CampaignTest {
+public class CampaignTest {
     private Campaign camp;
+    private List<String> mapNames;
 
     @Before
-    void setUp() {
-        camp = new Campaign();
+    public void setUp() {
+        this.camp = new Campaign();
+        this.mapNames = new ArrayList<>();
     }
 
     @After
-    void tearDown() {
-
+    public void tearDown() {
+        this.camp = null;
+        this.mapNames = null;
     }
 
     @Test
-    void generateCampaign() {
-
-    }
-
-    @Test
-    void setName() {
+    public void testSetName() {
         String name = "camp1";
         camp.setName(name);
         Assert.assertEquals(name, camp.getName());
     }
 
     @Test
-    void getName() {
-
+    public void testSetNumLevels() {
+        int num = 2;
+        camp.setNumLevels(num);
+        Assert.assertEquals(num, camp.getNumLevels());
     }
 
     @Test
-    void getNumLevels() {
-
+    public void testSetMapNames() {
+        String mapName = "map1";
+        mapNames.add(mapName);
+        camp.setMapNames(mapName);
+        Assert.assertEquals(mapNames, camp.getMapNames());
     }
 
     @Test
-    void getMapNames() {
-
+    public void testRemoveLevel() {
+        int num = 2;
+        camp.setNumLevels(num);
+        mapNames.add("map1");
+        camp.removeLevel(mapNames);
+        Assert.assertEquals(num-1, camp.getNumLevels());
     }
-
-    @Test
-    void setNumLevels() {
-
-    }
-
-    @Test
-    void setMapNames() {
-
-    }
-
-    @Test
-    void getMap() {
-
-    }
-
-    @Test
-    void getCampaign() {
-
-    }
-
-    @Test
-    void removeLevel() {
-
-    }
-
-    @Test
-    void saveCampaign() {
-
-    }
-
-    @Test
-    void loadCampaign() {
-
-    }
-
 }
