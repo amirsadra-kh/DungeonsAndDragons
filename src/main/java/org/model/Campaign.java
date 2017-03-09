@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,10 +23,10 @@ import java.util.List;
 @XmlRootElement
 public class Campaign implements Serializable {
 
-    private List<Map> levels;
+    //private List<Map> levels;
     private String name;
     private int numLevels;
-    private List<String> mapNames;
+    private List<String> mapNames = new ArrayList<>();
 
     /**
      * A default constructor
@@ -51,10 +52,11 @@ public class Campaign implements Serializable {
         return new Campaign(mapNames);
     }
 
+    /*
     public List<Map> getLevels() {
         return levels;
     }
-
+    */
     public void setName(String name) {
         this.name = name;
     }
@@ -78,16 +80,7 @@ public class Campaign implements Serializable {
      * A method to set the number of levels in a campaign
      */
     public void setNumLevels(int num) {
-        if(numLevels < num) {
-            this.numLevels = num;
-        } else {
-            // Remove any additional maps if the new numLevel is less than the previous
-            int diff = num - numLevels;
-            for(int i = numLevels -1; i <= num; i++) {
-                levels.remove(i);
-            }
-            this.numLevels = levels.size();
-        }
+            this.numLevels += num;
     }
 
     /**
@@ -110,8 +103,8 @@ public class Campaign implements Serializable {
             return map;
         } catch(Exception e) {
             e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
     /**
@@ -123,14 +116,16 @@ public class Campaign implements Serializable {
         return this.loadCampaign(campName);
     }
 
+    /*
     public void setLevels(List<Map> levels) {
 
         this.levels = levels;
     }
-
+    */
     public void removeLevel(List<String> mapNames) {
-        if(levels.size() != 0)
-            levels.remove(mapNames.size() - 1);
+        if(mapNames.size() != 0)
+            mapNames.remove(mapNames.size() - 1);
+        this.numLevels -= 1;
     }
 
     /**
@@ -141,7 +136,7 @@ public class Campaign implements Serializable {
     @Override
     public String toString() {
         return "Campaign{" +
-                "levels=" + levels +
+                "levels=" + mapNames +
                 '}';
     }
 
@@ -175,9 +170,9 @@ public class Campaign implements Serializable {
             File f = new File("src/main/java/org/resources/campaigns/"+name);
             return (Campaign) u.unmarshal(f);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            return null;
         }
-        return null;
     }
 
 }

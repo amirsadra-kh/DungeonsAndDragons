@@ -65,9 +65,9 @@ public class CampaignScreen {
         Campaign camp = new Campaign(levelNames);
         String name = "";
         int numLevels = 0;
-        boolean campExist = false;
+        boolean campExist = true;
 
-        while("".equalsIgnoreCase(name) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(name) || campExist == true) {
+        while("".equalsIgnoreCase(name) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(name) || campExist) {
             System.out.println("Enter the name of the new Campaign (No spaces): ");
             name = readStringHandling(name);
             try{
@@ -75,8 +75,14 @@ public class CampaignScreen {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //if()
-              //  System.out.println("A Campaign with this name already exists!");
+
+            // Check if a campaign with the name chose already exists
+            if(camp.getCampaign(name) == null) {
+                campExist = false;
+            }
+            else {
+                System.out.println("A Campaign with this name already exists!");
+            }
         }
 
         camp.setName(name);
@@ -116,6 +122,9 @@ public class CampaignScreen {
 
         camp = camp.getCampaign(campName);
 
+        System.out.println("Number of levels: " +camp.getNumLevels());
+        System.out.println("Name: " +camp.getName());
+
         while(choice == 0) {
             System.out.println("Choose one of the following by entering the number associated with the choice:");
             System.out.println("1. Add a Map\n2. Remove a Map\n3. Back to Main Menu");
@@ -132,20 +141,18 @@ public class CampaignScreen {
         // Add a Map
         if(choice == 1) {
             //Get the number of maps the user would like to add
-            int num = camp.getNumLevels();
             int addingNum = 0;
             while(addingNum == 0) {
                 System.out.println("Please enter the number of levels you would like to add: ");
                 addingNum = readIntHandling(addingNum);
             }
 
-            num += addingNum;
-            camp.setNumLevels(num);
+            camp.setNumLevels(addingNum);
 
             addMaps(addingNum, camp);
         }
 
-        // Remove a Map - the last one
+        // Remove a Map - the last one in the list
         if(choice == 2) {
             int removeNum = 0;
             while(removeNum == 0) {
