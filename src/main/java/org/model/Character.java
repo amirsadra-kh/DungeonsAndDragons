@@ -11,6 +11,7 @@ import java.awt.*;
  */
 public class Character {
     BackPackInventory backPackInventory;
+
     private Point currentPosition = new Point(0,0);
     private Ability ability;
     private boolean isPlayerCharacter;
