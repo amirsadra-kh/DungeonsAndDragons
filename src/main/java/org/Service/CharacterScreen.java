@@ -3,8 +3,10 @@ import main.java.org.model.Ability;
 import main.java.org.model.BackPackInventory;
 import main.java.org.model.Character;
 import main.java.org.model.GameConstants;
+import main.java.org.model.Item;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
@@ -109,8 +111,17 @@ public class CharacterScreen {
 
         BackPackInventory backpack = new BackPackInventory();
         character.setBackPackInventory(backpack);
+        System.out.println("Please enter the name of Items to add to your character from the list below:");
+
+        /* TODO fix backpack setItems, presently crash
+        Item item = new Item();
+        new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
+        item=item.loadItem(readLine());
+        backpack.setItems(Arrays.asList(item.getItem()));
+        */
 
         System.out.println(ability.toString());
+
 
         // TODO charName should be the path of the character
         ObjectSaver os = new ObjectSaver();

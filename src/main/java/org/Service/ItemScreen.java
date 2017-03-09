@@ -72,6 +72,7 @@ public class ItemScreen {
         for (ItemEnum e : ItemEnum.values()) {
             itemsArray.add(e.ordinal(), e.name());
         }
+//        TODO fix this, this fails and run in an infinite loop.
         while (!itemsArray.contains(item)) {
             System.out.println("The Entered Item is not valid! \nPlease enter your item Type from the provided list below:");
             for (ItemEnum e : ItemEnum.values()) {

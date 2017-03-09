@@ -1,6 +1,5 @@
 package main.java.org.model;
 
-import com.sun.xml.internal.txw2.annotation.XmlElement;
 import main.java.org.Service.ObjectLoader;
 
 import javax.xml.bind.JAXBContext;
@@ -13,8 +12,8 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Class to allow user to create and edit Campaigns.
- *
+ * Class to allow user to create and edit Campaign
+ * //TODO
  * @author Freyja Jokulsdottir
  * @version 1.5
  * @since 2017-02-05
