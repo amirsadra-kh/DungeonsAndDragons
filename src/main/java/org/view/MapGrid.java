@@ -2,7 +2,6 @@ package main.java.org.view;
 
 import main.java.org.Service.ObjectLoader;
 import main.java.org.model.Map;
-import org.apache.commons.collections.CollectionUtils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -132,14 +131,6 @@ public class MapGrid extends JFrame {
      */
     public String[][] createBoard(java.util.List<String> list, int rows, int cols) {
         String[][] board = new String[rows][cols];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if (CollectionUtils.isNotEmpty(list)) {
-                    board[i][j] = list.get(0);
-                    list.remove(0);
-                }
-            }
-        }
         return board;
 
     }
