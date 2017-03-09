@@ -128,13 +128,14 @@ public class CharacterScreen {
                 Item item = new Item();
                 new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
                 item = item.loadItem(readLine());
-                if(wearingItem.contains(item.getItem())){
+                if((wearingItem.contains(item.getItem()))){
                     System.out.println("You cannot wear the same type of item");
                     i = i-1;
                 }else {
-                    if (!(item.getEnhancementType() == EnhancementTypes.STRENGTH)) {
+                    if (item.getEnhancementType() == EnhancementTypes.STRENGTH) {
                         ability.setStrength(ability.getStrength() + item.getEnhance());
-                        ability.setDamageBonus(item.getEnhance());
+                        ability.setDamageBonus(item.getEnhance()-1);
+                        ability.setHitPoints();
                     } else if (item.getEnhancementType() == EnhancementTypes.CONSTITUTION) {
                         ability.setConstitution(ability.getConstitution() + item.getEnhance());
                     } else if (item.getEnhancementType() == EnhancementTypes.DEXTERITY) {
