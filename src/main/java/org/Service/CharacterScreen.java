@@ -96,7 +96,7 @@ public class CharacterScreen {
     }
 
     /**
-     * The interaction screen with iuser to create a new character
+     * The interaction screen with user to create a new character
      */
     public void createCharacterScreen(){
         String charName = "";
@@ -133,20 +133,31 @@ public class CharacterScreen {
                     System.out.println("You cannot wear the same type of item");
                     i = i-1;
                 }else {
-                    if (item.getEnhancementType() == EnhancementTypes.STRENGTH) {
-                        ability.setStrength(ability.getStrength() + item.getEnhance());
-                        ability.setDamageBonus(item.getEnhance()-1);
-                        ability.setHitPoints();
-                    } else if (item.getEnhancementType() == EnhancementTypes.CONSTITUTION) {
-                        ability.setConstitution(ability.getConstitution() + item.getEnhance());
-                    } else if (item.getEnhancementType() == EnhancementTypes.DEXTERITY) {
-                        ability.setDexterity(ability.getConstitution() + item.getEnhance());
-                    } else if (item.getEnhancementType() == EnhancementTypes.ARMORCLASS) {
-                        ability.setArmorClass(ability.getArmorClass() + item.getEnhance() - 10);
-                    } else if (item.getEnhancementType() == EnhancementTypes.ATTACKBONUS) {
-                        ability.setAttackBonus(ability.getAttackBonus() + item.getEnhance());
-                    } else if (item.getEnhancementType() == EnhancementTypes.DAMAGEBONUS) {
-                        ability.setDamageBonus(item.getEnhance());
+                    switch(item.getEnhancementType()) {
+                        case STRENGTH:
+                            ability.setStrength(ability.getStrength() + item.getEnhance());
+                            ability.setDamageBonus(item.getEnhance()-1);
+                            ability.setHitPoints();
+                            break;
+                        case CONSTITUTION:
+                            ability.setConstitution(ability.getConstitution() + item.getEnhance());
+                            break;
+                        case DEXTERITY:
+                            ability.setDexterity(ability.getConstitution() + item.getEnhance());
+                            break;
+                        case ARMORCLASS:
+                            ability.setArmorClass(ability.getArmorClass() + item.getEnhance() - 10);
+                            break;
+                        case ATTACKBONUS:
+                            ability.setAttackBonus(ability.getAttackBonus() + item.getEnhance());
+                            break;
+                        case DAMAGEBONUS:
+                            ability.setDamageBonus(item.getEnhance());
+                            break;
+                        case HITPOINTS:
+                            break;
+                        case LEVEL:
+                            break;
                     }
 
                     wearingItem.add(item);
