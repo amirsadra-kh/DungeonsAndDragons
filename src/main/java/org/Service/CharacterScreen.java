@@ -124,7 +124,8 @@ public class CharacterScreen {
 
 
             for (int i = 1; i<8 && yn ; i++) {
-                System.out.println("Please enter the name of the item no." + i +  "  that you want the character to wear from the list below:");
+                System.out.println("Please enter the name of the item no." +i
+                        +"  that you want the character to wear from the list below:");
                 Item item = new Item();
                 new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
                 item = item.loadItem(readLine());
@@ -169,17 +170,11 @@ public class CharacterScreen {
                     }
                 }
             }
-        System.out.println("THE CHARACTER HAS :");
-        System.out.println(ability.toString());
-        System.out.println("iT WEARS " + wearingItem);
+            character.setItemsWearing(wearingItem);
 
-
-
-
-
-
-
-
+            System.out.println("THE CHARACTER HAS :");
+            System.out.println(ability.toString());
+            System.out.println("iT WEARS " + wearingItem);
 
         /* TODO fix backpack setItems, presently crash
         Item item = new Item();

@@ -1,6 +1,7 @@
 package main.java.org.model;
 
 import java.awt.*;
+import java.util.Set;
 
 /**
  * This class is the character object
@@ -16,6 +17,7 @@ public class Character {
     private Ability ability;
     private boolean isPlayerCharacter;
     private String charName;
+    private Set<Item> itemsWearing;
 
     public Point getCurrentPosition() {
         return this.currentPosition;
@@ -40,6 +42,24 @@ public class Character {
         ability.setAttackBonus(0);
         ability.setLevel(1);
         this.ability = ability;
+    }
+
+    /**
+     * A method for setting the items the character is wearing.
+     *
+     * @param items a set of items the user has chosen
+     */
+    public void setItemsWearing(Set<Item> items) {
+        this.itemsWearing = items;
+    }
+
+    /**
+     * A method for getting the items the character is wearing.
+     *
+     * @return the items the character is wearing.
+     */
+    public Set<Item> getItemsWearing() {
+        return this.itemsWearing;
     }
 
     /**
