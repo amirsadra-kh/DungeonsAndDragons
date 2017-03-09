@@ -4,10 +4,7 @@ import main.java.org.model.EnhancementTypes;
 import main.java.org.model.Item;
 import main.java.org.model.ItemEnum;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Created by Sadra on 2/23/17.
@@ -39,10 +36,9 @@ public class ItemScreen {
     private  Item create() {
         String item = getItemEnum();
         String enhancement = getEnhancementType(item);
+        int enhancementAmount = getEnhancementAmount();
 
-        // TODO Enhancement
-
-        Item itemToCreate = new Item(getItemEnumfromString(item), getEnhancementEnumfromString(enhancement));
+        Item itemToCreate = new Item(getItemEnumfromString(item), getEnhancementEnumfromString(enhancement), enhancementAmount);
 
         ObjectSaver objectSave= new ObjectSaver();
         objectSave.SaveItem(itemToCreate);
@@ -111,6 +107,23 @@ public class ItemScreen {
         }
         System.out.println("ENHANCEMENT RECEIVED SUCCESSFULLY");
         return enhancement;
+    }
+
+    public int getEnhancementAmount(){
+        int enhancementAmount = 0;
+        Scanner scn = new Scanner(System.in);
+        try {
+            System.out.println("Please give the enhancement amount (from 1-5):" + '\n');
+            enhancementAmount = scn.nextInt();
+            while (enhancementAmount > 5 || enhancementAmount < 1) {
+                System.out.println("Invalid input! Please enter between 1 to 5." + '\n');
+                enhancementAmount = scn.nextInt();
+            }
+        }
+        catch (InputMismatchException exception){
+            System.out.println("Input is not an integer.");
+        }
+        return enhancementAmount;
     }
 
 
