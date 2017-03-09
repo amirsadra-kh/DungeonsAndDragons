@@ -2,22 +2,35 @@ package main.java.org.model;
 
 import main.java.org.Service.ObjectLoader;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.List;
 
 /**
- * Class to allow user to create and edit Campaigns.
- *
+ * Class to allow user to create and edit Campaign
+ * //TODO
  * @author Freyja Jokulsdottir
  * @version 1.5
  * @since 2017-02-05
  */
-
+@XmlRootElement
 public class Campaign implements Serializable {
 
     private List<Map> levels;
     private String name;
     private int numLevels;
+
+    /**
+     * A default constructor
+     */
+    public Campaign() {
+
+    }
 
     /**
      * This is the campaign object to be created or edited
@@ -81,7 +94,7 @@ public class Campaign implements Serializable {
     public void addMap(String mapName){
         // Get Map using Map name
         try {
-            Map map = ObjectLoader.loadMap(mapName);
+            Map map = ObjectLoader.loadMapFromXML(mapName);
             this.levels.add(map);
         } catch(Exception e) {
             System.out.println("Map not found!");
@@ -94,9 +107,7 @@ public class Campaign implements Serializable {
      * @return an existing campaign object.
      */
     public Campaign getCampaign(String campName) throws Exception {
-        Campaign camp = ObjectLoader.loadCampaign(campName);
-
-        return camp;
+        return this.loadCampaign(campName);
     }
 
     public void setLevels(List<Map> levels) {
@@ -140,4 +151,33 @@ public class Campaign implements Serializable {
         // Return campaign information string
         return campaign;
     }
+
+    public void saveCampaign()  {
+
+        JAXBContext context = null;
+        try {
+            context = JAXBContext.newInstance(Campaign.class);
+
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            m.marshal(this,new FileOutputStream("src/main/java/org/resources/campaigns/"+this.name));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public Campaign loadCampaign(String name){
+        try {
+            JAXBContext jc = JAXBContext.newInstance(Campaign.class);
+            Unmarshaller u = null;
+            u = jc.createUnmarshaller();
+            File f = new File("src/main/java/org/resources/campaigns/"+name);
+            return (Campaign) u.unmarshal(f);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

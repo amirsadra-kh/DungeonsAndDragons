@@ -18,7 +18,6 @@ import java.util.ArrayList;
 public class MapGrid extends JFrame {
 
     private JPanel gt;
-     final static String MAPS_PATH="./src/main/java/org/resources/maps/";
 
     /**
      * A method to show the map grid
@@ -40,7 +39,6 @@ public class MapGrid extends JFrame {
             editBoard(name);
 
         }
-        grid.setDefaultCloseOperation(grid.EXIT_ON_CLOSE);
         grid.setLocationRelativeTo(null);
         grid.setSize( 500, 500);
         grid.setVisible(true);
@@ -75,7 +73,7 @@ public class MapGrid extends JFrame {
      */
     public void editBoard( String name) {
 
-        String[][] exitingBoard = getExistingBoard(MAPS_PATH + name);
+        String[][] exitingBoard = getExistingBoard(name);
 
         Container pane = getContentPane();
         if(exitingBoard.length!=0) {
@@ -99,7 +97,7 @@ public class MapGrid extends JFrame {
 
         Map map = null;
         try {
-            map = ObjectLoader.loadMap(name);
+            map = ObjectLoader.loadMapFromXML(name);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -114,7 +112,7 @@ public class MapGrid extends JFrame {
      */
     public Map getExistingMap(String name) {
         try {
-            return  ObjectLoader.loadMap(MAPS_PATH+name);
+            return  ObjectLoader.loadMapFromXML(name);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -131,6 +129,14 @@ public class MapGrid extends JFrame {
      */
     public String[][] createBoard(java.util.List<String> list, int rows, int cols) {
         String[][] board = new String[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                if (list!=null && list.size()!=0) {
+                    board[i][j] = list.get(0);
+                    list.remove(0);
+                }
+            }
+        }
         return board;
 
     }

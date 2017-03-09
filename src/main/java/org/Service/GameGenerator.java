@@ -109,7 +109,6 @@ public class GameGenerator {
     private Campaign createOrChoseCampaign() throws Exception {
         CampaignScreen cs = new CampaignScreen();
         cs.CampaignScreen();
-        showMenuToStartTheGame();
         return cs.getNewCamp();
     }
 
@@ -122,7 +121,6 @@ public class GameGenerator {
     private void createOrEditCharacter() throws Exception {
         CharacterScreen cs = new CharacterScreen();
         cs.CharacterScreen();
-        showMenuToStartTheGame();
     }
 
     /**

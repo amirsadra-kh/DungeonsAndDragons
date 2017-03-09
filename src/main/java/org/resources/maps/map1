@@ -2,100 +2,38 @@
 <java version="1.8.0_74" class="java.beans.XMLDecoder">
  <object class="main.java.org.model.Map">
   <void property="cols">
-   <int>6</int>
+   <int>3</int>
   </void>
   <void property="name">
    <string>map1</string>
   </void>
   <void property="rows">
-   <int>4</int>
+   <int>2</int>
   </void>
   <void property="screen">
-   <array class="[Ljava.lang.String;" length="4">
+   <array class="[Ljava.lang.String;" length="2">
     <void index="0">
-     <array class="java.lang.String" length="6">
+     <array class="java.lang.String" length="3">
       <void index="0">
-       <string> </string>
+       <string></string>
       </void>
       <void index="1">
        <string>W</string>
       </void>
       <void index="2">
        <string></string>
-      </void>
-      <void index="3">
-       <string></string>
-      </void>
-      <void index="4">
-       <string></string>
-      </void>
-      <void index="5">
-       <string> Q</string>
       </void>
      </array>
     </void>
     <void index="1">
-     <array class="java.lang.String" length="6">
+     <array class="java.lang.String" length="3">
       <void index="0">
-       <string></string>
-      </void>
-      <void index="1">
        <string>W</string>
-      </void>
-      <void index="2">
-       <string>W</string>
-      </void>
-      <void index="3">
-       <string>W</string>
-      </void>
-      <void index="4">
-       <string></string>
-      </void>
-      <void index="5">
-       <string></string>
-      </void>
-     </array>
-    </void>
-    <void index="2">
-     <array class="java.lang.String" length="6">
-      <void index="0">
-       <string></string>
-      </void>
-      <void index="1">
-       <string>W</string>
-      </void>
-      <void index="2">
-       <string></string>
-      </void>
-      <void index="3">
-       <string></string>
-      </void>
-      <void index="4">
-       <string>B</string>
-      </void>
-      <void index="5">
-       <string></string>
-      </void>
-     </array>
-    </void>
-    <void index="3">
-     <array class="java.lang.String" length="6">
-      <void index="0">
-       <string>E</string>
       </void>
       <void index="1">
        <string></string>
       </void>
       <void index="2">
-       <string></string>
-      </void>
-      <void index="3">
-       <string></string>
-      </void>
-      <void index="4">
-       <string>M</string>
-      </void>
-      <void index="5">
        <string></string>
       </void>
      </array>

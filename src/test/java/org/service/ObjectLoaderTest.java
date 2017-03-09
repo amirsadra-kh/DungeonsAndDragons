@@ -41,7 +41,7 @@ public class ObjectLoaderTest {
     public void testLoadMap(){
         //WHEN
         try {
-            Map map = objectLoader.loadMap("test-Map");
+            Map map = objectLoader.loadMapFromXML("test-Map");
             //THEN
             assertMapsAreEqual(Fixtures.createMap(), map);
         } catch (Exception e) {

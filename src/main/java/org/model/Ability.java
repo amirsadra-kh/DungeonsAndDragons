@@ -99,6 +99,7 @@ public class Ability {
 
     /**
      * This method set the ArmorClass base on dexteirty modifier and predefined armorClass
+     * TODO get instead of set
      * @param armorClass
      */
     public void setArmorClass(int armorClass) {
@@ -107,6 +108,7 @@ public class Ability {
 
     /**
      * Set the attackBonus
+     * TODO 1 should be level dynamic
       * @param attackBonus
      */
     public void setAttackBonus(int attackBonus) {
