@@ -97,6 +97,10 @@ public class Ability {
         this.level = level;
     }
 
+    public int getArmorClass() {
+        return this.armorClass;
+    }
+
     /**
      * This method set the ArmorClass base on dexteirty modifier and predefined armorClass
      * TODO get instead of set
@@ -106,6 +110,9 @@ public class Ability {
         this.armorClass = 10 + this.dexterity.modifier() + armorClass;
     }
 
+    public int getAttackBonus() {
+        return this.attackBonus;
+    }
     /**
      * Set the attackBonus
      * TODO 1 should be level dynamic
@@ -115,11 +122,16 @@ public class Ability {
         this.attackBonus = 1 + attackBonus;
     }
 
+    public int getDamageBonus() {
+        return this.damageBonus;
+    }
+
     /**
      * Set the DamageBonus base on the strength modfier and  any Bonus to items that are active.
      * @param itemBonus
      */
     public void setDamageBonus(int itemBonus) {
+
         this.damageBonus = this.strength.modifier() + itemBonus;
     }
 
