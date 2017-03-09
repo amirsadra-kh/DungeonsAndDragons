@@ -35,7 +35,11 @@ public class MapFrame implements ActionListener {
     private boolean newMap = false;
     static int rows;
     static int cols;
-
+    private boolean validMap;
+    private boolean EntryPointExist= false;
+    private boolean ExitPointExist= false;
+    private boolean MonsterExist= false;
+    private String errorValidMap="";
     /**
      * A MapFrame object
      */
@@ -103,7 +107,40 @@ public class MapFrame implements ActionListener {
             map.setCols(cols);
             map.setRows(rows);
             map.setName(name);
-            map.saveObject();
+            validMap =false;
+
+            for (int i=0;i<boardArray.length;i++) {
+                for (int j = 0; j < boardArray[i].length; j++) {
+                    switch (boardArray[i][j]) {
+                        case "E":
+                            EntryPointExist = true;
+                            break;
+                        case "Q":
+                            ExitPointExist = true;
+                            break;
+                        case "M":
+                            MonsterExist = true;
+                            break;
+                        default:
+                    }
+                }
+            }
+if(EntryPointExist==false || ExitPointExist == false || MonsterExist == false){
+
+    if (EntryPointExist==false){errorValidMap="Please add entry point by E";}
+    if (ExitPointExist==false){errorValidMap="Please add exit point by Q";}
+    if (MonsterExist==false){errorValidMap="Please add Monsters by M";}
+
+                validMap=false;
+                alert("Not Valid "+errorValidMap);
+            }else{
+    map.saveObject();
+    alert("Your map is saved. you may close the map");
+}
+
+
+
+
 
         }
     }
