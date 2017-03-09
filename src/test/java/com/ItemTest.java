@@ -6,8 +6,6 @@ import main.java.org.model.ItemEnum;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
-
 import static junit.framework.TestCase.assertTrue;
 
 /**
@@ -20,8 +18,8 @@ public class ItemTest {
 
     @Before
     public  void  beforeMethod(){
-        item1 = new Item(ItemEnum.HELMET, EnhancementTypes.ARMORCLASS,new Point(0,0));
-        item2 = new Item(ItemEnum.HELMET, EnhancementTypes.ARMORCLASS,new Point(0,0));
+        item1 = new Item(ItemEnum.HELMET, EnhancementTypes.ARMORCLASS, 5);
+        item2 = new Item(ItemEnum.HELMET, EnhancementTypes.ARMORCLASS, 5);
 
     }
 

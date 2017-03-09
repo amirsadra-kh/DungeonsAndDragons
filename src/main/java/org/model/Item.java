@@ -1,9 +1,6 @@
 package main.java.org.model;
 
-import main.java.org.Service.ObjectSaver;
-
 import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -24,14 +21,14 @@ public class Item {
 
     }
 
-    public Item(ItemEnum item, EnhancementTypes enhancementType, Point coordinate) {
-        createItem(item, enhancementType);
+    public Item(ItemEnum item, EnhancementTypes enhancementType, Point coordinate, int enhance) {
+        createItem(item, enhancementType, enhance);
         this.coordinate = coordinate;
         this.item = item;
     }
 
-    public Item(ItemEnum item, EnhancementTypes enhancementType) {
-        createItem(item, enhancementType);
+    public Item(ItemEnum item, EnhancementTypes enhancementType, int enhance) {
+        createItem(item, enhancementType, enhance);
         this.item = item;
 
     }
@@ -61,14 +58,14 @@ public class Item {
     //create getter setter for enhance
 
 
-    public void createItem(ItemEnum itemEnum, EnhancementTypes enhancementType) {
+    public void createItem(ItemEnum itemEnum, EnhancementTypes enhancementType, int enhance) {
         //check if the item is "HELMET"
 
         for (ItemEnum e : ItemEnum.values()) {
             if (e == itemEnum) {
                 this.item = itemEnum;
                 this.enhancementType = enhancementType;
-                enhance = +1;
+                this.enhance = enhance;
             }
 
         }
@@ -79,14 +76,14 @@ public class Item {
                 //Create Helmet
                 this.item = itemEnum;
                 this.enhancementType = enhancementType;
-                enhance = +1;
+                this.enhance = enhance;
                 //save into file
             } else if (itemEnum == ItemEnum.ARMOR) {
                 if (enhancementType == EnhancementTypes.ARMORCLASS) {
                     //Create ArmorClass
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
-                    enhance = +1;
+                    this.enhance = enhance;
                     //save into file
                 }
 
@@ -95,7 +92,7 @@ public class Item {
                     //Create Shield
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
-                    enhance = +1;
+                    this.enhance = enhance;
                     //save into file
                 }
             } else if (itemEnum == ItemEnum.RING) {
@@ -103,7 +100,7 @@ public class Item {
                     //Create Ring
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
-                    enhance = +1;
+                    this.enhance = enhance;
                     //save into file
                 }
             } else if (itemEnum == ItemEnum.BELT) {
@@ -111,7 +108,7 @@ public class Item {
                     //Create Belt
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
-                    enhance = +1;
+                    this.enhance = enhance;
                     //save into file
                 }
             } else if (itemEnum == ItemEnum.BOOTS) {
@@ -119,7 +116,7 @@ public class Item {
                     //Create Boots
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
-                    enhance = +1;
+                    this.enhance = enhance;
                     //save into file
                 }
             } else if (itemEnum == ItemEnum.WEAPON) {
@@ -127,7 +124,7 @@ public class Item {
                     //Crete weapon
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
-                    enhance = +1;
+                    this.enhance = enhance;
                     //save into file
                 }
             } else {
@@ -136,13 +133,13 @@ public class Item {
         }
     }
 
-    public void editItem(boolean remove, EnhancementTypes abilityEnum) {
-        if (remove) {
-            // load and save functions
-        } else {
-            createItem(this.item, abilityEnum);
-        }
-    }
+//    public void editItem(boolean remove, EnhancementTypes abilityEnum) {
+//        if (remove) {
+//            // load and save functions
+//        } else {
+//            createItem(this.item, abilityEnum);
+//        }
+//    }
 
     public void enhancement(int enhance) {
         // character should call this when enters the map to enhance the item regarding to his level

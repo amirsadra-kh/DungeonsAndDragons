@@ -41,7 +41,7 @@ public class ItemScreen {
         System.out.println("Your Item had the followings:" + item.toString());
         //String itemEnum = getItemEnum();
         String enhancement = getEnhancementType(item.getItem().name());
-        Item itemToCreate = new Item(getItemEnumfromString(item.getItem().name()), getEnhancementEnumfromString(enhancement));
+        Item itemToCreate = new Item(getItemEnumfromString(item.getItem().name()), getEnhancementEnumfromString(enhancement), getEnhancementAmount());
         itemToCreate.saveItem();
 
         return itemToCreate;
@@ -52,7 +52,7 @@ public class ItemScreen {
         String enhancement = getEnhancementType(item);
         int enhancementAmount = getEnhancementAmount();
 
-        Item itemToCreate = new Item(getItemEnumfromString(item), getEnhancementEnumfromString(enhancement));
+        Item itemToCreate = new Item(getItemEnumfromString(item), getEnhancementEnumfromString(enhancement), enhancementAmount);
 
         itemToCreate.saveItem();
 
