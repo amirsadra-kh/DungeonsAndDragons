@@ -2,6 +2,7 @@ package main.java.org.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Set;
 
 import main.java.org.Service.Observer;
@@ -19,8 +20,14 @@ public class Inventory {
     private BackPackInventory backpack;
     private Set<Item> itemsWearing;
 
+    /**
+     * A method for getting the inventory from a character.
+     *
+     * @param character either the player or a monster from a map
+     */
     public void Inventory(Character character) {
         this.itemsWearing = character.getItemsWearing();
+        this.backpack = character.getBackPackInventory();
     }
 
     /**
