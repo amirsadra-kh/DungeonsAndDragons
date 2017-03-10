@@ -1,6 +1,6 @@
 package main.java.org.Service;
 
-import main.java.org.model.EnhancementTypes;
+import main.java.org.model.EnhancementTypesEnum;
 import main.java.org.model.Item;
 import main.java.org.model.ItemEnum;
 
@@ -92,24 +92,24 @@ public class ItemScreen {
 //        }
 
         if (item.equals("HELMET") || item.equals("ARMOR") || item.equals("SHIELD")) {
-            System.out.println(EnhancementTypes.ARMORCLASS);
+            System.out.println(EnhancementTypesEnum.ARMORCLASS);
         } else if (item.equals("RING")) {
-            System.out.println(EnhancementTypes.ARMORCLASS + "\n" + EnhancementTypes.CONSTITUTION + "\n" + EnhancementTypes.STRENGTH);
+            System.out.println(EnhancementTypesEnum.ARMORCLASS + "\n" + EnhancementTypesEnum.CONSTITUTION + "\n" + EnhancementTypesEnum.STRENGTH);
         } else if (item.equals("BELT")) {
-            System.out.println(EnhancementTypes.CONSTITUTION + "\n" + EnhancementTypes.STRENGTH);
+            System.out.println(EnhancementTypesEnum.CONSTITUTION + "\n" + EnhancementTypesEnum.STRENGTH);
         } else if (item.equals("BOOTS")) {
-            System.out.println(EnhancementTypes.ARMORCLASS + "\n" + EnhancementTypes.DEXTERITY);
+            System.out.println(EnhancementTypesEnum.ARMORCLASS + "\n" + EnhancementTypesEnum.DEXTERITY);
         } else {
-            System.out.println(EnhancementTypes.ATTACKBONUS + "\n" + EnhancementTypes.DAMAGEBONUS);
+            System.out.println(EnhancementTypesEnum.ATTACKBONUS + "\n" + EnhancementTypesEnum.DAMAGEBONUS);
         }
         String enhancement = readLine();
         ArrayList<String> EnhancementArray = new ArrayList<>();
-        for (EnhancementTypes e : EnhancementTypes.values()) {
+        for (EnhancementTypesEnum e : EnhancementTypesEnum.values()) {
             EnhancementArray.add(e.ordinal(), e.name());
         }
         while (!EnhancementArray.contains(enhancement)) {
             System.out.println("The Enetered Enhancement is not valid! \nPlease enter your Enhancement from the provided list below:");
-            for (EnhancementTypes e : EnhancementTypes.values()) {
+            for (EnhancementTypesEnum e : EnhancementTypesEnum.values()) {
                 System.out.println(e.ordinal() + ". " + e.name());
             }
             enhancement = readLine();
@@ -135,9 +135,9 @@ public class ItemScreen {
 
     }
 
-    EnhancementTypes getEnhancementEnumfromString(String enhancement) {
-        List<EnhancementTypes> bonus = Arrays.asList(EnhancementTypes.values());
-        for (EnhancementTypes i : bonus) {
+    EnhancementTypesEnum getEnhancementEnumfromString(String enhancement) {
+        List<EnhancementTypesEnum> bonus = Arrays.asList(EnhancementTypesEnum.values());
+        for (EnhancementTypesEnum i : bonus) {
             if (i.name().equalsIgnoreCase(enhancement)) {
                 return i;
             }

@@ -1,13 +1,10 @@
 package main.java.org.Service;
 
 import main.java.org.model.Campaign;
-import main.java.org.model.GameConstants;
-import main.java.org.model.Map;
+import main.java.org.model.GameConstantsInterface;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.IllegalFormatException;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -71,7 +68,7 @@ public class CampaignScreen {
         int numLevels = 0;
         boolean campExist = true;
 
-        while("".equalsIgnoreCase(name) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(name) || campExist) {
+        while("".equalsIgnoreCase(name) || GameConstantsInterface.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(name) || campExist) {
             System.out.println("Enter the name of the new Campaign (No spaces): ");
             name = readStringHandling(name);
 
@@ -204,8 +201,8 @@ public class CampaignScreen {
         try {
             num = Integer.parseInt(readLine());
         } catch (NumberFormatException e) {
-            System.out.println(GameConstants.NOT_A_NUMBER);
-            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+            System.out.println(GameConstantsInterface.NOT_A_NUMBER);
+            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
         }
         return num;
     }
@@ -220,8 +217,8 @@ public class CampaignScreen {
         try {
             line = readLine();
         } catch (IllegalFormatException e) {
-            System.out.println(GameConstants.NOT_A_STRING);
-            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+            System.out.println(GameConstantsInterface.NOT_A_STRING);
+            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
         }
         return line;
     }
@@ -237,7 +234,7 @@ public class CampaignScreen {
         for(int i = 0; i < num; i++) {
             //Get Map input from user
             String mapName = "";
-            while (mapName.equals("") || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(mapName)) {
+            while (mapName.equals("") || GameConstantsInterface.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(mapName)) {
                 System.out.println("Enter the name of the Map you would like to add:");
                 mapName = readStringHandling(mapName);
                 //Send Map input to CampaignModule

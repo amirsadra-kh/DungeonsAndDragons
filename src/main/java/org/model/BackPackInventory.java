@@ -14,7 +14,7 @@ import java.util.Set;
 public class BackPackInventory {
     private Set<Item> items;
     // The maximum number of items allowed in the backpack
-    private int MAX = 10;
+    private final int MAX_ITEMS = 10;
 
     /**
      * A method to get the items in the backpack
@@ -31,7 +31,7 @@ public class BackPackInventory {
     public void setItems(Set<Item> items) {
         this.items = items;
         // Remove last items added in case there were more than MAX items added
-        while(this.items.size() > MAX){
+        while(this.items.size() > MAX_ITEMS){
             Item lastItem = getLastItem();
             this.items.remove(lastItem);
         }
@@ -66,7 +66,7 @@ public class BackPackInventory {
      */
     public void addItem(Item item) {
         // The backpack only allows for 10 items add a time
-        if(items.size() >= MAX)
+        if(items.size() >= MAX_ITEMS)
             System.out.println("Sorry the backpack is full!");
         else {
             this.items.add(item);

@@ -39,8 +39,8 @@ public class CharacterScreen {
         try{
             num = Integer.parseInt(readLine());
         } catch (NumberFormatException e){
-            System.out.println(GameConstants.NOT_A_NUMBER);
-            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+            System.out.println(GameConstantsInterface.NOT_A_NUMBER);
+            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
         }
         return num;
     }
@@ -55,8 +55,8 @@ public class CharacterScreen {
         try{
             text = readLine();
         } catch (NumberFormatException e){
-            System.out.println(GameConstants.NOT_A_STRING);
-            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+            System.out.println(GameConstantsInterface.NOT_A_STRING);
+            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
         }
         return text;
     }

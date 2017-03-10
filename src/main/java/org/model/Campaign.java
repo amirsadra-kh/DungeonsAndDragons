@@ -14,7 +14,7 @@ import java.util.List;
 
 /**
  * Class to allow user to create and edit Campaign
- *
+
  * @author Freyja Jokulsdottir
  * @version 1.5
  * @since 2017-02-05
@@ -176,7 +176,7 @@ public class Campaign implements Serializable {
      * A method for loading an existing campaign
      *
      * @param name of the campaign
-     * @return an exisiting campaign object
+     * @return an existing campaign object
      */
     public Campaign loadCampaign(String name){
         try {
