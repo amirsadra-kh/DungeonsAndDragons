@@ -116,6 +116,7 @@ public class CharacterScreen {
         BackPackInventory backpack = new BackPackInventory();
         // Ask user what they want to have in the backpack and use that as an input to the method below.
         Set<Item> backpackItems = new HashSet<>();
+        System.out.println("The backpack inventory choices: ");
         userChooseItems(backpackItems, ability, wearing);
         backpack.setItems(backpackItems);
         character.setBackPackInventory(backpack);
@@ -124,6 +125,7 @@ public class CharacterScreen {
 
         // Get the user to choose items for the character to wear
         wearing = true;
+        System.out.println("The character's item wearing choices: ");
         userChooseItems(wearingItem, ability, wearing);
 
         character.setItemsWearing(wearingItem);
