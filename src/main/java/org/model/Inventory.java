@@ -2,6 +2,7 @@ package main.java.org.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import main.java.org.Service.Observer;
 
@@ -15,6 +16,12 @@ import main.java.org.Service.Observer;
 public class Inventory {
     private List<Observer> observers = new ArrayList<>();
     private int state;
+    private BackPackInventory backpack;
+    private Set<Item> itemsWearing;
+
+    public void Inventory(Character character) {
+        this.itemsWearing = character.getItemsWearing();
+    }
 
     /**
      * A method to get the state of the inventory

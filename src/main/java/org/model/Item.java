@@ -188,7 +188,8 @@ public class Item {
         File f = new File("src/main/java/org/resources/items/"+name);
         return (Item) u.unmarshal(f);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
+            System.out.println("No such item exists!");
         }
         return null;
     }
