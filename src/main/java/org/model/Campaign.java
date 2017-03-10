@@ -26,7 +26,7 @@ public class Campaign implements Serializable {
     //private List<Map> levels;
     private String name;
     private int numLevels;
-    private List<String> mapNames = new ArrayList<>();
+    private ArrayList<String> mapNames;
 
     /**
      * A default constructor
@@ -39,7 +39,7 @@ public class Campaign implements Serializable {
      * This is the campaign object to be created or edited
      * @param mapNames these are a list of maps which are in the campaign object
      */
-    public Campaign(final List<String> mapNames) {
+    public Campaign(final ArrayList<String> mapNames) {
         this.mapNames = mapNames;
     }
 
@@ -48,7 +48,7 @@ public class Campaign implements Serializable {
      * @param mapNames these are a list of maps which were used to create or modify the campaign
      * @return Campaign A new campaign created by the user or an edited campaign
      */
-    Campaign generateCampaign(final List<String> mapNames) {
+    Campaign generateCampaign(final ArrayList<String> mapNames) {
         return new Campaign(mapNames);
     }
 
@@ -72,7 +72,7 @@ public class Campaign implements Serializable {
         return this.numLevels;
     }
 
-    public List<String> getMapNames() {
+    public ArrayList<String> getMapNames() {
         return this.mapNames;
     }
 
@@ -135,8 +135,9 @@ public class Campaign implements Serializable {
      */
     @Override
     public String toString() {
-        return "Campaign{" +
-                "levels=" + mapNames +
+        return "Campaign{" + name +
+                " levels=" + mapNames +
+                "number of levels: " +numLevels +
                 '}';
     }
 
@@ -147,7 +148,7 @@ public class Campaign implements Serializable {
         JAXBContext context = null;
         try {
             context = JAXBContext.newInstance(Campaign.class);
-
+            System.out.println("Levels: " +mapNames);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             m.marshal(this,new FileOutputStream("src/main/java/org/resources/campaigns/"+this.name));

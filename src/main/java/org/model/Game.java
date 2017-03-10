@@ -5,6 +5,7 @@ import main.java.org.Service.GameGenerator;
 import main.java.org.Service.ObjectLoader;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -29,7 +30,7 @@ public class Game {
         new GameGenerator().showMenuToStartTheGame();
     }
 
-    Campaign CreateCampign(List<String> mapNames){
+    Campaign CreateCampign(ArrayList<String> mapNames){
         return new Campaign(mapNames);
     }
 

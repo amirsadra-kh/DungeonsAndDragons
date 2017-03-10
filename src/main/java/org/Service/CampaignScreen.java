@@ -61,7 +61,7 @@ public class CampaignScreen {
      */
     private void createCampaignScreen() throws Exception {
         // Create a new Campaign
-        List<String> levelNames = new ArrayList<>();
+        ArrayList<String> levelNames = new ArrayList<>();
         Campaign camp = new Campaign(levelNames);
         String name = "";
         int numLevels = 0;
@@ -98,6 +98,7 @@ public class CampaignScreen {
         addMaps(numLevels, camp);
 
         //Save Campaign
+        System.out.println(camp.toString());
         camp.saveCampaign();
 
         CampaignScreen();
@@ -112,7 +113,7 @@ public class CampaignScreen {
     private void editCampaignScreen() throws Exception {
         String campName = "";
         int choice = 0;
-        List<String> levelNames = new ArrayList<>();
+        ArrayList<String> levelNames = new ArrayList<>();
         Campaign camp = new Campaign(levelNames);
 
         while(campName.equals("")) {
