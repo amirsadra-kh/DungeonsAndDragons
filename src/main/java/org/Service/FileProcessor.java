@@ -25,7 +25,7 @@ abstract class FileProcessor {
                             new FileInputStream(path)));
         } catch (FileNotFoundException e) {
             System.err.println("Could not load the file");
-            e.printStackTrace();
+            //e.printStackTrace();
         }
         Object result = d.readObject();
         d.close();

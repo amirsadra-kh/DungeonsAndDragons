@@ -24,9 +24,9 @@ import java.util.List;
 public class Campaign implements Serializable {
 
     //private List<Map> levels;
+    private ArrayList<String> mapNames;
     private String name;
     private int numLevels;
-    private ArrayList<String> mapNames;
 
     /**
      * A default constructor
@@ -87,8 +87,19 @@ public class Campaign implements Serializable {
      * This is the method for adding maps by names to the campaign
      * @param mapName a name of a map which will be added to the list of levels in the campaign
      */
-    public void setMapNames(String mapName){
-        this.mapNames.add(mapName);
+    public boolean setMapNames(String mapName){
+        ObjectLoader ol = new ObjectLoader();
+        boolean mapExist = false;
+        try {
+            Map map = ol.loadMapFromXML(mapName);
+        } catch (Exception e) {
+            System.out.println("Sorry this map does not exist!");
+            mapExist = true;
+        }
+        if(mapExist == false)
+            this.mapNames.add(mapName);
+
+        return mapExist;
     }
 
     /**

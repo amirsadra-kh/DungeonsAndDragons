@@ -233,10 +233,10 @@ public class CampaignScreen {
             while (mapName.equals("") || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(mapName)) {
                 System.out.println("Enter the name of the Map you would like to add:");
                 mapName = readStringHandling(mapName);
+                //Send Map input to CampaignModule
+                if(camp.setMapNames(mapName))
+                    i -= 1;
             }
-
-            //Send Map input to CampaignModule
-            camp.setMapNames(mapName);
         }
     }
 }
