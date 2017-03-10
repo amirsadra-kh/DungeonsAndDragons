@@ -1,6 +1,7 @@
 package main.java.org.Service;
 
 import main.java.org.model.EnhancementTypes;
+import main.java.org.model.GameConstants;
 import main.java.org.model.Item;
 import main.java.org.model.ItemEnum;
 
@@ -15,24 +16,57 @@ import java.util.*;
  */
 public class ItemScreen {
 
+    /**
+     * A method for reading an integer input from user and handling a wrong input
+     *
+     * @param num an input from the user
+     * @return the integer if it was in fact an integer
+     */
+    private int readInt(int num){
+        try{
+            num = Integer.parseInt(readLine());
+        } catch (NumberFormatException e){
+            System.out.println(GameConstants.NOT_A_NUMBER);
+            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+        }
+        return num;
+    }
+
+    /**
+     *  A method for interacting with the user to create or edit an item.
+     * @return an item
+     */
     public Item askUserToCreateOrEditItem() {
-        System.out.println("Please enter E for editing and C for creating the Item");
-        String entered = readLine();
-        while (entered.charAt(0) != 'E' && entered.charAt(0) != 'C') {
-            System.out.println("Entered value was not valid \n Please enter E for editing and C for creating the Item");
-            entered = readLine();
+        int choice = 0;
+
+        // Let user choose an action - Create or Edit an Item
+        System.out.println("Choose one of the following by entering the number associated with the choice:");
+        System.out.println("1. Create an Item\n2. Edit an Item\n3. Back to Main Menu");
+        while(choice == 0)
+            choice = readInt(choice);
+
+        // If the user enters an invalid input, they will be asked again
+        while (choice < 1 || choice > 3) {
+            System.out.println("Your input is invalid, please try again");
+            choice = readInt(choice);
         }
 
-        if (entered.charAt(0) == 'E') {
-            return edit();
-        } else if (entered.charAt(0) == 'C') {
-            return create();
+        switch (choice) {
+            case 1:
+                return create();
+            case 2:
+                return edit();
+            case 3:
+                return null;
         }
 
         return null;
-
     }
 
+    /**
+     * TODO add comment here
+     * @return
+     */
     private Item edit() {
         Item item = new Item();
         System.out.println("Please enter the name of the Item you would like to edit:");
@@ -47,6 +81,10 @@ public class ItemScreen {
         return itemToCreate;
     }
 
+    /**
+     * TODO add comment here
+     * @return
+     */
     private Item create() {
         String item = getItemEnum();
         String enhancement = getEnhancementType(item);
@@ -60,12 +98,18 @@ public class ItemScreen {
 
     }
 
+    /**
+     * TODO add comment here
+     * @return
+     */
     public String getItemEnum() {
+        // Get input from user
         System.out.println("Please enter your item Type from the provided list below:");
         for (ItemEnum e : ItemEnum.values()) {
             System.out.println(e.ordinal() + ". " + e.name());
         }
         String item = readLine();
+
         ArrayList<String> itemsArray = new ArrayList<>();
         for (ItemEnum e : ItemEnum.values()) {
             itemsArray.add(e.ordinal(), e.name());
@@ -81,18 +125,21 @@ public class ItemScreen {
         return item;
     }
 
+    /**
+     * TODO add comment here!!
+     * @param item
+     * @return
+     */
     private String getEnhancementType(String item) {
-
+        // Get the user to choose which enhancement type to define
         System.out.println("Please enter your Enhancement from the provided list below:");
-//        for(EnhancementTypes e:EnhancementTypes.values())
-//        {
-//            System.out.println(e.ordinal() + ". " + e.name());
-//        }
 
+        // TODO ask user here for enhancement number to decrease number of steps for user
+        // TODO also user should choose a number for all enhancement types related to an item and not just one.
         if (item.equals("HELMET") || item.equals("ARMOR") || item.equals("SHIELD")) {
             System.out.println(EnhancementTypes.ARMORCLASS);
         } else if (item.equals("RING")) {
-            System.out.println(EnhancementTypes.ARMORCLASS + "\n" + EnhancementTypes.CONSTITUTION + "\n" + EnhancementTypes.STRENGTH);
+            System.out.println("" +EnhancementTypes.ARMORCLASS + "\n" + EnhancementTypes.CONSTITUTION + "\n" + EnhancementTypes.STRENGTH);
         } else if (item.equals("BELT")) {
             System.out.println(EnhancementTypes.CONSTITUTION + "\n" + EnhancementTypes.STRENGTH);
         } else if (item.equals("BOOTS")) {
@@ -116,11 +163,15 @@ public class ItemScreen {
         return enhancement;
     }
 
+    /**
+     * TODO add comment here!!
+     * @return
+     */
     public int getEnhancementAmount(){
         int enhancementAmount = 0;
         Scanner scn = new Scanner(System.in);
         try {
-            System.out.println("Please give the enhancement amount (from 1-5):" + '\n');
+            System.out.println("Please give the enhancement amount (from 1-5): ");
             enhancementAmount = scn.nextInt();
             while (enhancementAmount > 5 || enhancementAmount < 1) {
                 System.out.println("Invalid input! Please enter between 1 to 5." + '\n');
