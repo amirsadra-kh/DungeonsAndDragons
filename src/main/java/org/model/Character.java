@@ -1,6 +1,8 @@
 package main.java.org.model;
 
 import java.awt.*;
+import java.util.*;
+import main.java.org.Service.Observer;
 
 /**
  * This class is the character object
@@ -15,6 +17,9 @@ public class Character {
     private Ability ability;
     private boolean isPlayerCharacter;
     private String charName;
+
+    private java.util.List<Observer> observers = new ArrayList<>();
+    private int state;
 
     public Point getCurrentPosition() {
         return this.currentPosition;
@@ -79,5 +84,39 @@ public class Character {
 
     public void charString() {
         String character = this.charName +"," +this.ability.toString();
+    }
+
+    /**
+     * A method to get the state of the inventory
+     * @return state of the inventory
+     */
+    public int getState() {
+        return this.state;
+    }
+
+    /**
+     * A method to set the state of the inventory
+     * @param state of the inventory
+     */
+    public void setState(int state) {
+        this.state = state;
+        notifyAllObservers();
+    }
+
+    /**
+     * A method to attach the observer to the inventory
+     * @param observer
+     */
+    public void attach(Observer observer){
+        this.observers.add(observer);
+    }
+
+    /**
+     * A method to notify all the observers.
+     */
+    public void notifyAllObservers(){
+        for (Observer observer : this.observers) {
+            observer.update();
+        }
     }
 }
