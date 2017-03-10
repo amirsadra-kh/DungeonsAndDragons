@@ -20,6 +20,11 @@ import java.util.Scanner;
 public class CampaignScreen {
     private Campaign newCamp;
 
+    /**
+     * A method to read input to prevent copied code
+     *
+     * @return a String input from user
+     */
     private String readLine() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();

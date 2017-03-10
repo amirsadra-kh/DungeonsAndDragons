@@ -78,7 +78,7 @@ public class GameGenerator {
                 return GameConstants.ITEM;
             case 5:
                 System.out.println("Starting the Game");
-                //TODO next deliverable to implement starting the game
+                playGame();
                 return GameConstants.START;
             case 6:
                 System.out.println("Ending the Game, Thanks!");
@@ -131,6 +131,14 @@ public class GameGenerator {
 
         Map map = new MapFrame().makeFrame("Map Builder");
         //  MapFrame.Main();
-       }
+    }
+
+    /**
+     * A method that calls the play screen to interact with the user to play the game
+     */
+    private void playGame() throws Exception {
+        PlayScreen ps = new PlayScreen();
+        ps.PlayScreen();
+    }
 
 }
