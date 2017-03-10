@@ -21,6 +21,6 @@ public class CharacterObserver extends Observer{
 
     @Override
     public void update(){
-        System.out.println("Character is wearing: " +character.getState());
+        System.out.println("Character's ability: " +character.getState());
     }
 }
