@@ -100,15 +100,10 @@ public class CharacterScreen {
      */
     public void createCharacterScreen(){
         String charName = "";
-        Scanner sc = new Scanner(System.in);
-        String answer;
-        boolean yn = true;
-        Set<Item> wearingItem = new HashSet<Item>();
-
+        Set<Item> wearingItem = new HashSet<>();
 
         Character character = new Character();
         Ability ability = new Ability();
-        Strength strength = new Strength();
         character.setAbility(ability);
 
         System.out.println("please enter a name for character: ");
@@ -116,76 +111,23 @@ public class CharacterScreen {
 
         character.setCharName(charName);
 
+        // Set the backpack for this character
         BackPackInventory backpack = new BackPackInventory();
+        // Ask user what they want to have in the backpack and use that as an input to the method below.
+        // Should add this: backpack.setItems();
+        // setItems() takes a List of ItemEnums but the wearingItem is a hashset... This may be an issue
         character.setBackPackInventory(backpack);
 
         System.out.println(ability.toString());
 
+        // Get the user to choose items for the character to wear
+        userChooseItems(wearingItem, ability);
 
+        character.setItemsWearing(wearingItem);
 
-            for (int i = 1; i<8 && yn ; i++) {
-                System.out.println("Please enter the name of the item no." +i
-                        +"  that you want the character to wear from the list below:");
-                Item item = new Item();
-                new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
-                item = item.loadItem(readLine());
-                if((wearingItem.contains(item.getItem()))){
-                    System.out.println("You cannot wear the same type of item");
-                    i = i-1;
-                }else {
-                    switch(item.getEnhancementType()) {
-                        case STRENGTH:
-                            ability.setStrength(ability.getStrength() + item.getEnhance());
-                            ability.setDamageBonus(item.getEnhance()-1);
-                            ability.setHitPoints();
-                            break;
-                        case CONSTITUTION:
-                            ability.setConstitution(ability.getConstitution() + item.getEnhance());
-                            break;
-                        case DEXTERITY:
-                            ability.setDexterity(ability.getConstitution() + item.getEnhance());
-                            break;
-                        case ARMORCLASS:
-                            ability.setArmorClass(ability.getArmorClass() + item.getEnhance() - 10);
-                            break;
-                        case ATTACKBONUS:
-                            ability.setAttackBonus(ability.getAttackBonus() + item.getEnhance());
-                            break;
-                        case DAMAGEBONUS:
-                            ability.setDamageBonus(item.getEnhance());
-                            break;
-                        case HITPOINTS:
-                            break;
-                        case LEVEL:
-                            break;
-                    }
-
-                    wearingItem.add(item);
-
-                    System.out.println("Your Item had the followings:" + item.toString());
-                    System.out.println("According to this new item your character have the following ability");
-                    System.out.println(ability.toString());
-                    System.out.println("do you  want to add the another item ? Y/N");
-
-                    while (true) {
-                        answer = sc.nextLine().trim().toLowerCase();
-                        if (answer.equals("y")) {
-                            yn = true;
-                            break;
-                        } else if (answer.equals("n")) {
-                            yn = false;
-                            break;
-                        } else {
-                            System.out.println("Sorry, I didn't catch that. Please answer y/n");
-                        }
-                    }
-                }
-            }
-            character.setItemsWearing(wearingItem);
-
-            System.out.println("THE CHARACTER HAS :");
-            System.out.println(ability.toString());
-            System.out.println("iT WEARS " + wearingItem);
+        System.out.println("THE CHARACTER HAS :");
+        System.out.println(ability.toString());
+        System.out.println("iT WEARS " + wearingItem);
 
         /* TODO fix backpack setItems, presently crash
         Item item = new Item();
@@ -340,5 +282,75 @@ public class CharacterScreen {
      */
     private void backToMain(){
         new GameGenerator();
+    }
+
+    /**
+     * A method to get the user to choose items
+     * Called when the user choose items to wear and when the user chooses items to have in the backpack.
+     * TODO modify so it works for backpack as well
+     */
+    private void userChooseItems(Set<Item> wearingItem, Ability ability) {
+        Scanner sc = new Scanner(System.in);
+        String answer;
+        boolean yn = true;
+
+        for (int i = 1; i<8 && yn ; i++) {
+            System.out.println("Please enter the name of the item no." +i
+                    +"  that you want the character to wear from the list below:");
+            Item item = new Item();
+            new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
+            item = item.loadItem(readLine());
+            if((wearingItem.contains(item.getItem()))){
+                System.out.println("You cannot wear the same type of item");
+                i = i-1;
+            }else {
+                switch(item.getEnhancementType()) {
+                    case STRENGTH:
+                        ability.setStrength(ability.getStrength() + item.getEnhance());
+                        ability.setDamageBonus(item.getEnhance()-1);
+                        ability.setHitPoints();
+                        break;
+                    case CONSTITUTION:
+                        ability.setConstitution(ability.getConstitution() + item.getEnhance());
+                        break;
+                    case DEXTERITY:
+                        ability.setDexterity(ability.getConstitution() + item.getEnhance());
+                        break;
+                    case ARMORCLASS:
+                        ability.setArmorClass(ability.getArmorClass() + item.getEnhance() - 10);
+                        break;
+                    case ATTACKBONUS:
+                        ability.setAttackBonus(ability.getAttackBonus() + item.getEnhance());
+                        break;
+                    case DAMAGEBONUS:
+                        ability.setDamageBonus(item.getEnhance());
+                        break;
+                    case HITPOINTS:
+                        break;
+                    case LEVEL:
+                        break;
+                }
+
+                wearingItem.add(item);
+
+                System.out.println("Your Item had the followings:" + item.toString());
+                System.out.println("According to this new item your character have the following ability");
+                System.out.println(ability.toString());
+                System.out.println("do you  want to add the another item ? Y/N");
+
+                while (true) {
+                    answer = sc.nextLine().trim().toLowerCase();
+                    if (answer.equals("y")) {
+                        yn = true;
+                        break;
+                    } else if (answer.equals("n")) {
+                        yn = false;
+                        break;
+                    } else {
+                        System.out.println("Sorry, I didn't catch that. Please answer y/n");
+                    }
+                }
+            }
+        }
     }
 }
