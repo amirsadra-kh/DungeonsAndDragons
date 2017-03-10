@@ -30,8 +30,8 @@ public class Game {
         new GameGenerator().showMenuToStartTheGame();
     }
 
-    Campaign CreateCampign(ArrayList<String> mapNames){
-        return new Campaign(mapNames);
+    Campaign CreateCampign(ArrayList<String> mapNames, String name, int numLevels){
+        return new Campaign(mapNames, name, numLevels);
     }
 
     public List<Campaign> loadCampaigns(){

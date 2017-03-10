@@ -61,8 +61,7 @@ public class CampaignScreen {
      */
     private void createCampaignScreen() throws Exception {
         // Create a new Campaign
-        ArrayList<String> levelNames = new ArrayList<>();
-        Campaign camp = new Campaign(levelNames);
+        Campaign camp = new Campaign();
         String name = "";
         int numLevels = 0;
         boolean campExist = true;
@@ -70,11 +69,6 @@ public class CampaignScreen {
         while("".equalsIgnoreCase(name) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(name) || campExist) {
             System.out.println("Enter the name of the new Campaign (No spaces): ");
             name = readStringHandling(name);
-            try{
-                //camp = camp.getCampaign(name);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
             // Check if a campaign with the name chose already exists
             if(camp.getCampaign(name) == null) {
@@ -97,9 +91,14 @@ public class CampaignScreen {
         // Add a Map
         addMaps(numLevels, camp);
 
+        System.out.println("Number of levels: " +camp.getNumLevels());
+        System.out.println("Name: " +camp.getName());
+        System.out.println("MapNames: " +camp.getMapNames());
+
         //Save Campaign
-        System.out.println(camp.toString());
         camp.saveCampaign();
+        //ObjectSaver os = new ObjectSaver();
+        //os.saveCampaign(camp.getName(), camp);
 
         CampaignScreen();
 
@@ -113,8 +112,8 @@ public class CampaignScreen {
     private void editCampaignScreen() throws Exception {
         String campName = "";
         int choice = 0;
-        ArrayList<String> levelNames = new ArrayList<>();
-        Campaign camp = new Campaign(levelNames);
+        ArrayList<String> levelNames;
+        Campaign camp = new Campaign();
 
         while(campName.equals("")) {
             System.out.println("Enter the name of the Campaign you would like to edit:");
@@ -125,6 +124,7 @@ public class CampaignScreen {
 
         System.out.println("Number of levels: " +camp.getNumLevels());
         System.out.println("Name: " +camp.getName());
+        System.out.println("MapNames: " +camp.getMapNames());
 
         while(choice == 0) {
             System.out.println("Choose one of the following by entering the number associated with the choice:");
@@ -174,6 +174,8 @@ public class CampaignScreen {
 
         //Save Campaign
         camp.saveCampaign();
+        //ObjectSaver os = new ObjectSaver();
+        //os.saveCampaign(camp.getName(), camp);
 
         CampaignScreen();
 

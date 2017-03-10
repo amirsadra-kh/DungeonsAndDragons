@@ -1,7 +1,6 @@
 package main.java.org.model;
 
 import main.java.org.Service.ObjectLoader;
-import main.java.org.Service.ObjectSaver;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -24,7 +23,7 @@ import java.util.List;
 public class Campaign implements Serializable {
 
     //private List<Map> levels;
-    private ArrayList<String> mapNames;
+    private ArrayList<String> mapNames = new ArrayList<>();
     private String name;
     private int numLevels;
 
@@ -39,8 +38,10 @@ public class Campaign implements Serializable {
      * This is the campaign object to be created or edited
      * @param mapNames these are a list of maps which are in the campaign object
      */
-    public Campaign(final ArrayList<String> mapNames) {
+    public Campaign(ArrayList<String> mapNames, String name, int numLevels) {
         this.mapNames = mapNames;
+        this.name = name;
+        this.numLevels = numLevels;
     }
 
     /**
@@ -48,8 +49,9 @@ public class Campaign implements Serializable {
      * @param mapNames these are a list of maps which were used to create or modify the campaign
      * @return Campaign A new campaign created by the user or an edited campaign
      */
-    Campaign generateCampaign(final ArrayList<String> mapNames) {
-        return new Campaign(mapNames);
+    private Campaign generateCampaign(ArrayList<String> mapNames,  String name, int numLevels) {
+        Campaign campaign = new Campaign(mapNames, name, numLevels);
+        return campaign;
     }
 
     /*
@@ -92,6 +94,7 @@ public class Campaign implements Serializable {
         boolean mapExist = false;
         try {
             Map map = ol.loadMapFromXML(mapName);
+            mapExist = false;
         } catch (Exception e) {
             System.out.println("Sorry this map does not exist!");
             mapExist = true;
@@ -125,6 +128,8 @@ public class Campaign implements Serializable {
      */
     public Campaign getCampaign(String campName) throws Exception {
         return this.loadCampaign(campName);
+        //ObjectLoader ol = new ObjectLoader();
+        //return ol.loadCampaignFromXML(campName);
     }
 
     /*
@@ -159,7 +164,6 @@ public class Campaign implements Serializable {
         JAXBContext context = null;
         try {
             context = JAXBContext.newInstance(Campaign.class);
-            System.out.println("Levels: " +mapNames);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             m.marshal(this,new FileOutputStream("src/main/java/org/resources/campaigns/"+this.name));

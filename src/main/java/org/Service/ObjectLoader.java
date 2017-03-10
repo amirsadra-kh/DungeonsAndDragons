@@ -6,6 +6,7 @@ import main.java.org.model.Character;
 import main.java.org.model.Map;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -45,7 +46,13 @@ public class ObjectLoader extends FileProcessor {
     }
 
     public static Campaign loadCampaignFromXML(String campName) throws Exception {
-        return (Campaign) loadFile(CAMPAIGN_PATH+campName);
+        Campaign camp;
+        try {
+            camp = (Campaign) loadFile(CAMPAIGN_PATH + campName);
+        } catch (Exception e) {
+            camp = null;
+        }
+        return camp;
     }
 
     public static Character loadCharacterFromXML(String charName) throws Exception {
