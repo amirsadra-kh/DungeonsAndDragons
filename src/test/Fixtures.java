@@ -34,8 +34,8 @@ public class Fixtures {
 
     public static Character createCharacter(){
         Character character = new Character();
-        Ability ability =new Ability();
-        ability.setArmorClass(0);
+        Ability ability = new Ability();
+        ability.getArmorClass(0);
         ability.setAttackBonus(1);
         ability.setDamageBonus(0);
         character.setAbility(ability);

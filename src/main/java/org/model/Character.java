@@ -11,13 +11,14 @@ import java.util.Set;
  * @since 2017-02-23
  */
 public class Character {
-    BackPackInventory backPackInventory;
+    private BackPackInventory backPackInventory;
 
     private Point currentPosition = new Point(0,0);
     private Ability ability;
     private boolean isPlayerCharacter;
     private String charName;
     private Set<Item> itemsWearing;
+    private int level;
 
     public Point getCurrentPosition() {
         return this.currentPosition;
@@ -32,15 +33,32 @@ public class Character {
     }
 
     /**
-     * A method for setting the ability for the character
+     * set Level of the Character
+     * @param level
+     */
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    /**
+     * Get the level of the character
+     * @return level of the character
+     */
+    public int getLevel() {
+        return this.level;
+    }
+
+    /**
+     * A method for initializing the ability for the character
      *
      * @param ability object to be used to set the ability of this character
      */
     public void setAbility(Ability ability) {
-        ability.setArmorClass(0);
+        ability.getArmorClass(0);
         ability.setDamageBonus(0);
         ability.setAttackBonus(0);
-        ability.setLevel(1);
+        ability.level = 1;
+        this.level = 1;
         this.ability = ability;
     }
 
