@@ -167,15 +167,14 @@ public class ItemScreen {
      * TODO add comment here!!
      * @return
      */
-    public int getEnhancementAmount(){
+    private int getEnhancementAmount(){
         int enhancementAmount = 0;
-        Scanner scn = new Scanner(System.in);
         try {
             System.out.println("Please give the enhancement amount (from 1-5): ");
-            enhancementAmount = scn.nextInt();
+            enhancementAmount = Integer.parseInt(readLine());
             while (enhancementAmount > 5 || enhancementAmount < 1) {
                 System.out.println("Invalid input! Please enter between 1 to 5." + '\n');
-                enhancementAmount = scn.nextInt();
+                enhancementAmount = Integer.parseInt(readLine());
             }
         }
         catch (InputMismatchException exception){
@@ -184,13 +183,21 @@ public class ItemScreen {
         return enhancementAmount;
     }
 
-
-    String readLine() {
+    /**
+     * TODO add comment here!!
+     * @return
+     */
+    private String readLine() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
     }
 
-    ItemEnum getItemEnumfromString(String item) {
+    /**
+     * TODO add comment here!!
+     * @param item
+     * @return
+     */
+    private ItemEnum getItemEnumfromString(String item) {
         List<ItemEnum> items = Arrays.asList(ItemEnum.values());
         for (ItemEnum i : items) {
             if (i.name().equalsIgnoreCase(item)) {
@@ -201,7 +208,12 @@ public class ItemScreen {
 
     }
 
-    EnhancementTypes getEnhancementEnumfromString(String enhancement) {
+    /**
+     * TODO add comment here!!
+     * @param enhancement
+     * @return
+     */
+    private EnhancementTypes getEnhancementEnumfromString(String enhancement) {
         List<EnhancementTypes> bonus = Arrays.asList(EnhancementTypes.values());
         for (EnhancementTypes i : bonus) {
             if (i.name().equalsIgnoreCase(enhancement)) {
