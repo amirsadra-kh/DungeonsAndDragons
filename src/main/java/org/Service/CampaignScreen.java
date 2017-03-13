@@ -19,6 +19,7 @@ public class CampaignScreen {
 
     /**
      * A method to read input to prevent copied code
+     * TODO extract this method to the closest common class of all screen classes to reduce copied code.
      *
      * @return a String input from user
      */
@@ -193,6 +194,7 @@ public class CampaignScreen {
 
     /**
      * A method that reads in a number, verifies it is a number and returns it.
+     * TODO extract this method to the closest common class of all screen classes to reduce copied code.
      *
      * @param num to be read
      * @return new num after reading input
@@ -209,6 +211,7 @@ public class CampaignScreen {
 
     /**
      * A method that reads in a string, verifies it is a string and returns it.
+     * TODO extract this method to the closest common class of all screen classes to reduce copied code.
      *
      * @param line to be read
      * @return new line after reading input
