@@ -9,7 +9,7 @@ import java.util.Random;
  * @since 02.08.2017
  * @version 1.0
  */
-public class Dice6 implements Dice{
+public class Dice6 implements DiceInterface{
     @Override
     public int roll() {
         return new Random().nextInt(6) + 1;

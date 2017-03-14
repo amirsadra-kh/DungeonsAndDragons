@@ -1,7 +1,7 @@
 package main.java.org.Service;
 
-import main.java.org.model.EnhancementTypes;
-import main.java.org.model.GameConstants;
+import main.java.org.model.GameConstantsInterface;
+import main.java.org.model.EnhancementTypesEnum;
 import main.java.org.model.Item;
 import main.java.org.model.ItemEnum;
 
@@ -30,8 +30,8 @@ public class ItemScreen {
         try{
             num = Integer.parseInt(readLine());
         } catch (NumberFormatException e){
-            System.out.println(GameConstants.NOT_A_NUMBER);
-            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+            System.out.println(GameConstantsInterface.NOT_A_NUMBER);
+            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
         }
         return num;
     }
@@ -76,7 +76,7 @@ public class ItemScreen {
         String itemName = "";
         boolean itemExists = false;
 
-        while("".equalsIgnoreCase(itemName) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(itemName) || itemExists == false) {
+        while("".equalsIgnoreCase(itemName) || GameConstantsInterface.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(itemName) || itemExists == false) {
             System.out.println("Please enter the name of the Item you would like to edit:");
             new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
             itemName = readLine();
@@ -110,7 +110,7 @@ public class ItemScreen {
         String itemName = "";
         boolean itemExists = true;
 
-        while("".equalsIgnoreCase(itemName) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(itemName) || itemExists) {
+        while("".equalsIgnoreCase(itemName) || GameConstantsInterface.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(itemName) || itemExists) {
             System.out.println("Enter the name of the new item: ");
             itemName = readLine();
 
@@ -179,23 +179,24 @@ public class ItemScreen {
         System.out.println("Please enter your Enhancement from the provided list below:");
 
         if (item.equals("HELMET") || item.equals("ARMOR") || item.equals("SHIELD")) {
-            System.out.println(EnhancementTypes.ARMORCLASS);
+            System.out.println(EnhancementTypesEnum.ARMORCLASS);
             EnhancementArray.add("ARMORCLASS");
         } else if (item.equals("RING")) {
-            System.out.println("" +EnhancementTypes.ARMORCLASS + "\n" + EnhancementTypes.CONSTITUTION + "\n" + EnhancementTypes.STRENGTH);
+            System.out.println("" +EnhancementTypesEnum.ARMORCLASS + "\n" + EnhancementTypesEnum.CONSTITUTION + "\n"
+                    + EnhancementTypesEnum.STRENGTH);
             EnhancementArray.add("ARMORCLASS");
             EnhancementArray.add("CONSTITUTION");
             EnhancementArray.add("STRENGTH");
         } else if (item.equals("BELT")) {
-            System.out.println(EnhancementTypes.CONSTITUTION + "\n" + EnhancementTypes.STRENGTH);
+            System.out.println(EnhancementTypesEnum.CONSTITUTION + "\n" + EnhancementTypesEnum.STRENGTH);
             EnhancementArray.add("CONSTITUTION");
             EnhancementArray.add("STRENGTH");
         } else if (item.equals("BOOTS")) {
-            System.out.println(EnhancementTypes.ARMORCLASS + "\n" + EnhancementTypes.DEXTERITY);
+            System.out.println(EnhancementTypesEnum.ARMORCLASS + "\n" + EnhancementTypesEnum.DEXTERITY);
             EnhancementArray.add("ARMORCLASS");
             EnhancementArray.add("DEXTERITY");
         } else {
-            System.out.println(EnhancementTypes.ATTACKBONUS + "\n" + EnhancementTypes.DAMAGEBONUS);
+            System.out.println(EnhancementTypesEnum.ATTACKBONUS + "\n" + EnhancementTypesEnum.DAMAGEBONUS);
             EnhancementArray.add("ATTACKBONUS");
             EnhancementArray.add("DAMAGEBONUS");
         }
@@ -267,9 +268,9 @@ public class ItemScreen {
      * @param enhancement a String containing an EnhancementType
      * @return an EnhancementType gotten from the String inputted
      */
-    private EnhancementTypes getEnhancementEnumfromString(String enhancement) {
-        List<EnhancementTypes> bonus = Arrays.asList(EnhancementTypes.values());
-        for (EnhancementTypes i : bonus) {
+    private EnhancementTypesEnum getEnhancementEnumfromString(String enhancement) {
+        List<EnhancementTypesEnum> bonus = Arrays.asList(EnhancementTypesEnum.values());
+        for (EnhancementTypesEnum i : bonus) {
             if (i.name().equalsIgnoreCase(enhancement)) {
                 return i;
             }
