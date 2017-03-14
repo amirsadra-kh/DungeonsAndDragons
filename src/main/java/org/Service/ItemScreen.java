@@ -20,10 +20,10 @@ public class ItemScreen {
 
     public Item askUserToCreateOrEditItem() {
         System.out.println("Please enter E for editing and C for creating the Item");
-        String entered = readLine();
+        String entered = readLine().toUpperCase();
         while (entered.charAt(0) != 'E' && entered.charAt(0) != 'C') {
             System.out.println("Entered value was not valid \n Please enter E for editing and C for creating the Item");
-            entered = readLine();
+            entered = readLine().toUpperCase();
         }
 
         if (entered.charAt(0) == 'E') {
@@ -67,17 +67,16 @@ public class ItemScreen {
         for (ItemEnum e : ItemEnum.values()) {
             System.out.println(e.ordinal() + ". " + e.name());
         }
-        String item = readLine();
+
         ArrayList<String> itemsArray = new ArrayList<>();
         for (ItemEnum e : ItemEnum.values()) {
             itemsArray.add(e.ordinal(), e.name());
         }
-//        TODO fix this, this fails and run in an infinite loop.
+        String item = readLine().toUpperCase();
+
         while (!itemsArray.contains(item)) {
-            System.out.println("The Entered Item is not valid! \nPlease enter your item Type from the provided list below:");
-            for (ItemEnum e : ItemEnum.values()) {
-                System.out.println(e.ordinal() + ". " + e.name());
-            }
+            System.out.println("The Entered Item is not valid! \nPlease enter your item Type ");
+            item = readLine().toUpperCase();
         }
         System.out.println("ITEM RECEIVED SUCCESSFULLY!");
         return item;
@@ -86,10 +85,6 @@ public class ItemScreen {
     private String getEnhancementType(String item) {
 
         System.out.println("Please enter your Enhancement from the provided list below:");
-//        for(EnhancementTypes e:EnhancementTypes.values())
-//        {
-//            System.out.println(e.ordinal() + ". " + e.name());
-//        }
 
         if (item.equals("HELMET") || item.equals("ARMOR") || item.equals("SHIELD")) {
             System.out.println(EnhancementTypes.ARMORCLASS);
@@ -102,7 +97,7 @@ public class ItemScreen {
         } else {
             System.out.println(EnhancementTypes.ATTACKBONUS + "\n" + EnhancementTypes.DAMAGEBONUS);
         }
-        String enhancement = readLine();
+        String enhancement = readLine().toUpperCase();
         ArrayList<String> EnhancementArray = new ArrayList<>();
         for (EnhancementTypes e : EnhancementTypes.values()) {
             EnhancementArray.add(e.ordinal(), e.name());
@@ -112,7 +107,7 @@ public class ItemScreen {
             for (EnhancementTypes e : EnhancementTypes.values()) {
                 System.out.println(e.ordinal() + ". " + e.name());
             }
-            enhancement = readLine();
+            enhancement = readLine().toUpperCase();
         }
         System.out.println("ENHANCEMENT RECEIVED SUCCESSFULLY");
         return enhancement;

@@ -307,7 +307,7 @@ public class CharacterScreen {
                     +"  that you want the character to have from the list below:");
             Item item = new Item();
             new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
-            item = item.loadItem(readLine());
+            item = item.loadItem(readLine().toUpperCase());
             if(item == null){
                 System.out.println("This item does not exist");
                 i = i-1;
