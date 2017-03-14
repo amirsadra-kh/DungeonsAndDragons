@@ -207,7 +207,7 @@ public class ItemScreen {
             for (int i = 0; i < EnhancementArray.size(); i++) {
                 System.out.println(EnhancementArray.get(i));
             }
-            enhancement = readLine();
+            enhancement = readLine().toUpperCase();
 
             // Exit while loop if the input is correct.
             if(EnhancementArray.contains(enhancement)){
