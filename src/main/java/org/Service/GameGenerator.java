@@ -1,7 +1,7 @@
 package main.java.org.Service;
 
 import main.java.org.model.Campaign;
-import main.java.org.model.GameConstants;
+import main.java.org.model.GameConstantsInterface;
 import main.java.org.model.GameShoppingCard;
 import main.java.org.model.Item;
 import main.java.org.model.Map;
@@ -24,10 +24,10 @@ public class GameGenerator {
      * @throws Exception in case the choice is no valid
      */
     public void showMenuToStartTheGame() throws Exception {
-        String chosen = GameConstants.EMPTY_STRING;
+        String chosen = GameConstantsInterface.EMPTY_STRING;
         while ("".equalsIgnoreCase(chosen) ||
-                GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(chosen) ||
-                !GameConstants.END.equalsIgnoreCase(chosen)) {
+                GameConstantsInterface.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(chosen) ||
+                !GameConstantsInterface.END.equalsIgnoreCase(chosen)) {
             Screen.ShowMainMenu();
             chosen = getUserChosenOption();
         }
@@ -57,8 +57,8 @@ public class GameGenerator {
         try {
             option = Integer.parseInt(readLine());
         } catch (NumberFormatException e) {
-            System.out.println(GameConstants.NOT_A_NUMBER);
-            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+            System.out.println(GameConstantsInterface.NOT_A_NUMBER);
+            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
             getUserChosenOption();
         }
 
@@ -66,26 +66,26 @@ public class GameGenerator {
             case 1:
                 //first index is the player character and the rest are non-player-characters
                 createOrEditCharacter();
-                return GameConstants.CHARACTER;
+                return GameConstantsInterface.CHARACTER;
             case 2:
                 createOrChoseMaps();
-                return GameConstants.MAP;
+                return GameConstantsInterface.MAP;
             case 3:
                 gameShoppingCard.setCampaign(createOrChoseCampaign());
-                return GameConstants.CAMPAIGN;
+                return GameConstantsInterface.CAMPAIGN;
             case 4:
                 createOrEditItems();
-                return GameConstants.ITEM;
+                return GameConstantsInterface.ITEM;
             case 5:
                 System.out.println("Starting the Game");
                 playGame();
-                return GameConstants.START;
+                return GameConstantsInterface.START;
             case 6:
                 System.out.println("Ending the Game, Thanks!");
-                return GameConstants.END;
+                return GameConstantsInterface.END;
             default:
-                System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
-                return GameConstants.CHOSEN_ITEM_NOT_VALID;
+                System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
+                return GameConstantsInterface.CHOSEN_ITEM_NOT_VALID;
         }
 
     }
