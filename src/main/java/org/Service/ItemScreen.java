@@ -15,7 +15,7 @@ import java.util.InputMismatchException;
  * This class is is to Item objects
  *
  * @author Sadra
- * @version 1.0
+ * @version 2.0
  * @since 2017-03-01
  */
 public class ItemScreen {
