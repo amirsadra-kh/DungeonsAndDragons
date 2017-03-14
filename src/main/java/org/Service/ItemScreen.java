@@ -69,13 +69,17 @@ public class ItemScreen {
      */
     private Item edit() {
         Item item = new Item();
+        String itemName;
+
         System.out.println("Please enter the name of the Item you would like to edit:");
+        itemName = readLine();
+
         new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
         item = item.loadItem(readLine());
         System.out.println("Your Item had the followings:" + item.toString());
         //String itemEnum = getItemEnum();
         String enhancement = getEnhancementType(item.getItem().name());
-        Item itemToCreate = new Item(getItemEnumfromString(item.getItem().name()), getEnhancementEnumfromString(enhancement), getEnhancementAmount());
+        Item itemToCreate = new Item(itemName, getItemEnumfromString(item.getItem().name()), getEnhancementEnumfromString(enhancement), getEnhancementAmount());
         itemToCreate.saveItem();
 
         return itemToCreate;
@@ -89,8 +93,12 @@ public class ItemScreen {
         String item = getItemEnum();
         String enhancement = getEnhancementType(item);
         int enhancementAmount = getEnhancementAmount();
+        String itemName = "";
 
-        Item itemToCreate = new Item(getItemEnumfromString(item), getEnhancementEnumfromString(enhancement), enhancementAmount);
+        System.out.println("Enter the name of the new item: ");
+        itemName = readLine();
+
+        Item itemToCreate = new Item(itemName, getItemEnumfromString(item), getEnhancementEnumfromString(enhancement), enhancementAmount);
 
         itemToCreate.saveItem();
 

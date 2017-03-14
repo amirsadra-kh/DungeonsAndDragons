@@ -18,8 +18,8 @@ public class ItemTest {
 
     @Before
     public  void  beforeMethod(){
-        item1 = new Item(ItemEnum.HELMET, EnhancementTypes.ARMORCLASS, 5);
-        item2 = new Item(ItemEnum.HELMET, EnhancementTypes.ARMORCLASS, 5);
+        item1 = new Item("item1", ItemEnum.HELMET, EnhancementTypes.ARMORCLASS, 5);
+        item2 = new Item("item2", ItemEnum.HELMET, EnhancementTypes.ARMORCLASS, 5);
 
     }
 

@@ -8,57 +8,105 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
 
+/**
+ * TODO Add a comment here
+ */
 @XmlRootElement
 public class Item {
+    private ItemEnum item;
+    private EnhancementTypes enhancementType;
+    private int enhance;
+    private Point coordinate;
+    private String name;
 
-    ItemEnum item;
-    EnhancementTypes enhancementType;
-    int enhance;
-    Point coordinate;
-
-
+    /**
+     * TODO add a comment here
+     */
     public Item(){
 
     }
 
-    public Item(ItemEnum item, EnhancementTypes enhancementType, Point coordinate, int enhance) {
-        createItem(item, enhancementType, enhance);
+    /**
+     * TODO Add a comment here
+     * @param name
+     * @param item
+     * @param enhancementType
+     * @param coordinate
+     * @param enhance
+     */
+    public Item(String name, ItemEnum item, EnhancementTypes enhancementType, Point coordinate, int enhance) {
+        createItem(name, item, enhancementType, enhance);
         this.coordinate = coordinate;
         this.item = item;
+        this.name = name;
     }
 
-    public Item(ItemEnum item, EnhancementTypes enhancementType, int enhance) {
-        createItem(item, enhancementType, enhance);
+    /**
+     * TODO Add a comment here
+     * @param name
+     * @param item
+     * @param enhancementType
+     * @param enhance
+     */
+    public Item(String name, ItemEnum item, EnhancementTypes enhancementType, int enhance) {
+        createItem(name, item, enhancementType, enhance);
         this.item = item;
+        this.name = name;
 
     }
 
+    /**
+     * TODO Add a comment here
+     * @return
+     */
     public Point getCoordinate() {
         return coordinate;
     }
 
+    /**
+     * TODO Add a comment here
+     * @param coordinate
+     */
     public void setCoordinate(Point coordinate) {
         this.coordinate = coordinate;
     }
 
+    /**
+     * TODO Add a comment here
+     * @return
+     */
     public ItemEnum getItem() {
         return item;
     }
 
+    /**
+     * TODO Add a comment here
+     * @param item
+     */
     public void setItem(ItemEnum item) {
         this.item = item;
     }
 
     //public EnhancementTypes getEnhancement(){ return enhancement;}
 
+    /**
+     * TODO Add a comment here
+     * @param enhancement
+     */
     public void setEnhancement(EnhancementTypes enhancement) {
         this.enhance = enhance;
     }
 
     //create getter setter for enhance
 
-
-    public void createItem(ItemEnum itemEnum, EnhancementTypes enhancementType, int enhance) {
+    /**
+     * TODO Add a comment here
+     * @param name
+     * @param itemEnum
+     * @param enhancementType
+     * @param enhance
+     */
+    public void createItem(String name, ItemEnum itemEnum, EnhancementTypes enhancementType, int enhance) {
         //check if the item is "HELMET"
 
         for (ItemEnum e : ItemEnum.values()) {
@@ -66,6 +114,7 @@ public class Item {
                 this.item = itemEnum;
                 this.enhancementType = enhancementType;
                 this.enhance = enhance;
+                this.name = name;
             }
 
         }
@@ -77,6 +126,7 @@ public class Item {
                 this.item = itemEnum;
                 this.enhancementType = enhancementType;
                 this.enhance = enhance;
+                this.name = name;
                 //save into file
             } else if (itemEnum == ItemEnum.ARMOR) {
                 if (enhancementType == EnhancementTypes.ARMORCLASS) {
@@ -84,6 +134,7 @@ public class Item {
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
+                    this.name = name;
                     //save into file
                 }
 
@@ -93,6 +144,7 @@ public class Item {
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
+                    this.name = name;
                     //save into file
                 }
             } else if (itemEnum == ItemEnum.RING) {
@@ -109,6 +161,7 @@ public class Item {
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
+                    this.name = name;
                     //save into file
                 }
             } else if (itemEnum == ItemEnum.BOOTS) {
@@ -117,6 +170,7 @@ public class Item {
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
+                    this.name = name;
                     //save into file
                 }
             } else if (itemEnum == ItemEnum.WEAPON) {
@@ -125,6 +179,7 @@ public class Item {
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
+                    this.name = name;
                     //save into file
                 }
             } else {
@@ -141,6 +196,10 @@ public class Item {
 //        }
 //    }
 
+    /**
+     * TODO Add a comment here
+     * @param enhance
+     */
     public void enhancement(int enhance) {
         // character should call this when enters the map to enhance the item regarding to his level
     }
@@ -162,6 +221,9 @@ public class Item {
         return false;
     }
 
+    /**
+     * TODO Add a comment here
+     */
     public void saveItem()  {
 
         JAXBContext context = null;
@@ -170,13 +232,17 @@ public class Item {
 
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        m.marshal(this,new FileOutputStream("src/main/java/org/resources/items/"+this.item.name()));
+        m.marshal(this,new FileOutputStream("src/main/java/org/resources/items/"+this.name));
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
+    /**
+     * TODO Add a comment here
+     * @param name
+     * @return
+     */
     public Item loadItem(String name){
         try {
         JAXBContext jc = JAXBContext.newInstance(Item.class);
@@ -190,18 +256,34 @@ public class Item {
         return null;
     }
 
+    /**
+     * TODO Add a comment here
+     * @return
+     */
     public EnhancementTypes getEnhancementType() {
         return enhancementType;
     }
 
+    /**
+     * TODO Add a comment here
+     * @param enhancementType
+     */
     public void setEnhancementType(EnhancementTypes enhancementType) {
         this.enhancementType = enhancementType;
     }
 
+    /**
+     * TODO Add a comment here
+     * @return
+     */
     public int getEnhance() {
         return enhance;
     }
 
+    /**
+     * TODO Add a comment here
+     * @param enhance
+     */
     public void setEnhance(int enhance) {
         this.enhance = enhance;
     }
