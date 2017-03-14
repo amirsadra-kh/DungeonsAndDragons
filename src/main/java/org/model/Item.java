@@ -188,14 +188,6 @@ public class Item {
         }
     }
 
-//    public void editItem(boolean remove, EnhancementTypes abilityEnum) {
-//        if (remove) {
-//            // load and save functions
-//        } else {
-//            createItem(this.item, abilityEnum);
-//        }
-//    }
-
     /**
      * TODO Add a comment here
      * @param enhance
