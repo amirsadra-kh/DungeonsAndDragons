@@ -9,7 +9,11 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 /**
- * TODO Add a comment here
+ * A Item object class for creating and editing an Item
+ *
+ * @author Sadra
+ * @version 2.0
+ * @since 2017-03-01
  */
 @XmlRootElement
 public class Item {
@@ -20,19 +24,18 @@ public class Item {
     private String name;
 
     /**
-     * TODO add a comment here
+     * An empty Item constructor for the save and load methods.
      */
-    public Item(){
-
-    }
+    public Item(){}
 
     /**
-     * TODO Add a comment here
-     * @param name
-     * @param item
-     * @param enhancementType
-     * @param coordinate
-     * @param enhance
+     * An Item constructor for item in maps.
+     *
+     * @param name of the item
+     * @param item ItemEnum of the item
+     * @param enhancementType of the item
+     * @param coordinate a point on the map the item is at
+     * @param enhance an integer representing the enhancement amount of the item
      */
     public Item(String name, ItemEnum item, EnhancementTypes enhancementType, Point coordinate, int enhance) {
         createItem(name, item, enhancementType, enhance);
@@ -42,11 +45,11 @@ public class Item {
     }
 
     /**
-     * TODO Add a comment here
-     * @param name
-     * @param item
-     * @param enhancementType
-     * @param enhance
+     * An item constructor for creating or editing an item
+     * @param name of the item
+     * @param item ItemEnum of the item
+     * @param enhancementType of the item
+     * @param enhance an integer representing the enhancement amount of the item
      */
     public Item(String name, ItemEnum item, EnhancementTypes enhancementType, int enhance) {
         createItem(name, item, enhancementType, enhance);
@@ -56,59 +59,78 @@ public class Item {
     }
 
     /**
-     * TODO Add a comment here
-     * @return
+     * A method to get the coordinate of the item on a map.
+     * @return a point on the map
      */
     public Point getCoordinate() {
         return coordinate;
     }
 
     /**
-     * TODO Add a comment here
-     * @param coordinate
+     * A method to set the coordinate on a map of an item
+     * @param coordinate to be set
      */
     public void setCoordinate(Point coordinate) {
         this.coordinate = coordinate;
     }
 
     /**
-     * TODO Add a comment here
-     * @return
+     * a method to get the itemEnum of this item
+     * @return an Item Enum
      */
     public ItemEnum getItem() {
-        return item;
+        return this.item;
     }
 
     /**
-     * TODO Add a comment here
-     * @param item
+     * A method to set the itemEnum of this item
+     * @param item the itemEnum to set this items itemEnum to
      */
     public void setItem(ItemEnum item) {
         this.item = item;
     }
 
-    //public EnhancementTypes getEnhancement(){ return enhancement;}
-
     /**
-     * TODO Add a comment here
-     * @param enhancement
+     * A method to get the EnhancementType of this item
+     * @return
      */
-    public void setEnhancement(EnhancementTypes enhancement) {
-        this.enhance = enhance;
+    public EnhancementTypes getEnhancementType() {
+        return this.enhancementType;
     }
 
-    //create getter setter for enhance
+    /**
+     * A method to set the EnhancementType of this item
+     * @param enhancementType
+     */
+    public void setEnhancementType(EnhancementTypes enhancementType) {
+        this.enhancementType = enhancementType;
+    }
 
     /**
-     * TODO Add a comment here
-     * @param name
-     * @param itemEnum
-     * @param enhancementType
-     * @param enhance
+     * A method to get the enhance amount for this item
+     * @return the enhance amount as an integer
+     */
+    public int getEnhance() {
+        return this.enhance;
+    }
+
+    /**
+     * A method to set the enhance amount for this item
+     * @param enhance the enhance amount to set the enhance of this item to
+     */
+    public void setEnhance(int enhance) {
+        this.enhance = enhance;
+    }
+    
+    /**
+     * A method for creating an item
+     * @param name of the item to be created
+     * @param itemEnum itemEnum of the item to be created
+     * @param enhancementType EnhancementType of the item to be created
+     * @param enhance an integer for the enhancement amount of the item to be created
      */
     public void createItem(String name, ItemEnum itemEnum, EnhancementTypes enhancementType, int enhance) {
-        //check if the item is "HELMET"
-
+        // Set the values of the item
         for (ItemEnum e : ItemEnum.values()) {
             if (e == itemEnum) {
                 this.item = itemEnum;
@@ -116,71 +138,55 @@ public class Item {
                 this.enhance = enhance;
                 this.name = name;
             }
-
         }
 
-
+        //check the itemEnum of the item
         if (itemEnum == ItemEnum.HELMET) {
             if (enhancementType == EnhancementTypes.ARMORCLASS) {
-                //Create Helmet
                 this.item = itemEnum;
                 this.enhancementType = enhancementType;
                 this.enhance = enhance;
                 this.name = name;
-                //save into file
             } else if (itemEnum == ItemEnum.ARMOR) {
                 if (enhancementType == EnhancementTypes.ARMORCLASS) {
-                    //Create ArmorClass
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
-                    //save into file
                 }
-
             } else if (itemEnum == ItemEnum.SHIELD) {
                 if (enhancementType == EnhancementTypes.ARMORCLASS || enhancementType == EnhancementTypes.STRENGTH || enhancementType == EnhancementTypes.CONSTITUTION) {
-                    //Create Shield
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
-                    //save into file
                 }
             } else if (itemEnum == ItemEnum.RING) {
                 if (enhancementType == EnhancementTypes.ARMORCLASS || enhancementType == EnhancementTypes.STRENGTH || enhancementType == EnhancementTypes.CONSTITUTION) {
-                    //Create Ring
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
-                    //save into file
                 }
             } else if (itemEnum == ItemEnum.BELT) {
                 if (enhancementType == EnhancementTypes.STRENGTH || enhancementType == EnhancementTypes.CONSTITUTION) {
-                    //Create Belt
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
-                    //save into file
                 }
             } else if (itemEnum == ItemEnum.BOOTS) {
                 if (enhancementType == EnhancementTypes.ARMORCLASS || enhancementType == EnhancementTypes.DEXTERITY) {
-                    //Create Boots
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
-                    //save into file
                 }
             } else if (itemEnum == ItemEnum.WEAPON) {
                 if (enhancementType == EnhancementTypes.ATTACKBONUS || enhancementType == EnhancementTypes.DAMAGEBONUS) {
-                    //Crete weapon
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
-                    //save into file
                 }
             } else {
                 System.out.println("Invalid item");
@@ -189,18 +195,40 @@ public class Item {
     }
 
     /**
-     * TODO Add a comment here
-     * @param enhance
+     * This method is for setting the enhance amount of items on a map depending on the level of the character.
+     * @param enhance the enhancement amount
+     * @param level the level of the character
      */
-    public void enhancement(int enhance) {
-        // character should call this when enters the map to enhance the item regarding to his level
+    public void setItemOnMapEnhancement(int enhance, int level) {
+        // Check if the level is a valid number
+        if(level < 1) {
+            System.out.println("ERROR!! The level of the Character is less than 1!!");
+            return;
+        }
+
+        // enhancement according to the level of a character
+        if(level > 0 && level < 5) {
+            this.enhance = 1;
+            return;
+        } else if(level > 4 && level < 9) {
+            this.enhance = 2;
+            return;
+        } else if(level > 8 && level < 13) {
+            this.enhance = 3;
+            return;
+        } else if(level > 12 && level < 17) {
+            this.enhance = 4;
+            return;
+        } else {
+            this.enhance = 5;
+        }
     }
 
     /**
      * Overriding equals function for testing.
      *
-     * @param object
-     * @return
+     * @param object an object to be compared
+     * @return a boolean indicating it the items are equal.
      */
     @Override
     public boolean equals(Object object) {
@@ -208,13 +236,14 @@ public class Item {
         if (object instanceof Item) {
             Item ob = (Item) object;
 
-            return ob.item == this.item && ob.enhancementType == this.enhancementType && ob.coordinate == this.coordinate && ob.enhance == this.enhance;
+            return ob.item == this.item && ob.enhancementType == this.enhancementType && ob.coordinate == this.coordinate
+                    && ob.enhance == this.enhance;
         }
         return false;
     }
 
     /**
-     * TODO Add a comment here
+     * A method for saving an Item object using JAXB
      */
     public void saveItem()  {
 
@@ -231,9 +260,9 @@ public class Item {
     }
 
     /**
-     * TODO Add a comment here
-     * @param name
-     * @return
+     * A method for loading an Item object using JAXB
+     * @param name of the item to be loaded
+     * @return an existing item
      */
     public Item loadItem(String name){
         try {
@@ -249,37 +278,9 @@ public class Item {
     }
 
     /**
-     * TODO Add a comment here
-     * @return
+     * A method to set the Item object to a string
+     * @return a string containing the information about this item.
      */
-    public EnhancementTypes getEnhancementType() {
-        return enhancementType;
-    }
-
-    /**
-     * TODO Add a comment here
-     * @param enhancementType
-     */
-    public void setEnhancementType(EnhancementTypes enhancementType) {
-        this.enhancementType = enhancementType;
-    }
-
-    /**
-     * TODO Add a comment here
-     * @return
-     */
-    public int getEnhance() {
-        return enhance;
-    }
-
-    /**
-     * TODO Add a comment here
-     * @param enhance
-     */
-    public void setEnhance(int enhance) {
-        this.enhance = enhance;
-    }
-
     @Override
     public String toString() {
         return "Item{" +

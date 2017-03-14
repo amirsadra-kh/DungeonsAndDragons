@@ -68,8 +68,8 @@ public class ItemScreen {
     }
 
     /**
-     * TODO add comment here
-     * @return
+     * This method is for interacting with the user to edit an item
+     * @return an edited Item object
      */
     private Item edit() {
         Item item = new Item();
@@ -102,8 +102,8 @@ public class ItemScreen {
     }
 
     /**
-     * TODO add comment here
-     * @return
+     * This method is for interacting with the user to create a new item
+     * @return a new Item object.
      */
     private Item create() {
         Item itemObj = new Item();
@@ -133,8 +133,8 @@ public class ItemScreen {
     }
 
     /**
-     * TODO add comment here
-     * @return
+     * This method is to interact with the user to get the item type from the user
+     * @return a string with the item type
      */
     public String getItemEnum() {
         ArrayList<String> itemsArray = new ArrayList<>();
@@ -169,9 +169,9 @@ public class ItemScreen {
     }
 
     /**
-     * TODO add comment here!!
-     * @param item
-     * @return
+     * This method is for getting the enhancement type from the user
+     * @param item String with the item type
+     * @return a string with the enhancement type
      */
     private String getEnhancementType(String item) {
         ArrayList<String> EnhancementArray = new ArrayList<>();
@@ -218,8 +218,8 @@ public class ItemScreen {
     }
 
     /**
-     * TODO add comment here!!
-     * @return
+     * A method to get the enhancement amount from user for an item
+     * @return an integer between +1 and +5 for the enhancement amount
      */
     private int getEnhancementAmount(){
         int enhancementAmount = 0;
@@ -238,8 +238,8 @@ public class ItemScreen {
     }
 
     /**
-     * TODO add comment here!!
-     * @return
+     * A method for reading string input from user
+     * @return input String
      */
     private String readLine() {
         Scanner scanner = new Scanner(System.in);
@@ -247,9 +247,9 @@ public class ItemScreen {
     }
 
     /**
-     * TODO add comment here!!
-     * @param item
-     * @return
+     * A method for getting the ItemEnum from a string
+     * @param item A String containing the item type
+     * @return an ItemEnum gotten from the String inputted
      */
     private ItemEnum getItemEnumfromString(String item) {
         List<ItemEnum> items = Arrays.asList(ItemEnum.values());
@@ -263,9 +263,9 @@ public class ItemScreen {
     }
 
     /**
-     * TODO add comment here!!
-     * @param enhancement
-     * @return
+     * A method to get the EnhancementType from a string
+     * @param enhancement a String containing an EnhancementType
+     * @return an EnhancementType gotten from the String inputted
      */
     private EnhancementTypes getEnhancementEnumfromString(String enhancement) {
         List<EnhancementTypes> bonus = Arrays.asList(EnhancementTypes.values());
