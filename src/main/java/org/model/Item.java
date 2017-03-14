@@ -121,7 +121,7 @@ public class Item {
     public void setEnhance(int enhance) {
         this.enhance = enhance;
     }
-    
+
     /**
      * A method for creating an item
      * @param name of the item to be created
