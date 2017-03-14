@@ -6,6 +6,7 @@ import main.java.org.model.Character;
 import main.java.org.model.Map;
 
 import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -44,43 +45,18 @@ public class ObjectLoader extends FileProcessor {
         return (Map) loadFile(MAP_PATH +mapName);
     }
 
-    public static Character loadCharacterFromXML(String charName) throws Exception {
-        return (Character) loadFile(CHARACTER_PATH +charName);
+    public static Campaign loadCampaignFromXML(String campName) throws Exception {
+        Campaign camp;
+        try {
+            camp = (Campaign) loadFile(CAMPAIGN_PATH + campName);
+        } catch (Exception e) {
+            camp = null;
+        }
+        return camp;
     }
 
-    /**
-     * A method for reading a txt file and storing the text in a list.
-     *
-     * @since 23.02.2017
-     * @param path the path of a txt file
-     * @return a list of strings of the text from the txt file
-     */
-    private static ArrayList<String> reader(String path) {
-        BufferedReader buffer;
-        String lineIn;
-        int i = 0;
-        ArrayList<String> list = new ArrayList<>();
-
-        // Try to open the file with the path given
-        try {
-            buffer = new BufferedReader(new FileReader(path));
-
-            // Read each line of the file
-            while ((lineIn = buffer.readLine()) != null) {
-                // Split each line by commas
-                String[] temp = lineIn.split(",");
-                for(int j = 0; j < temp.length; j++){
-                    //store words in list
-                    list.add(temp[j]);
-                }
-            }
-            buffer.close();
-        // Show exception stack if file is not found
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        // Return the list of words from the file.
-        return list;
+    public static Character loadCharacterFromXML(String charName) throws Exception {
+        return (Character) loadFile(CHARACTER_PATH +charName);
     }
 
 }

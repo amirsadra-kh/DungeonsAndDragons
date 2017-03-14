@@ -1,13 +1,10 @@
 package main.java.org.Service;
 
 import main.java.org.model.Campaign;
-import main.java.org.model.GameConstants;
-import main.java.org.model.Map;
+import main.java.org.model.GameConstantsInterface;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.IllegalFormatException;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -20,6 +17,12 @@ import java.util.Scanner;
 public class CampaignScreen {
     private Campaign newCamp;
 
+    /**
+     * A method to read input to prevent copied code
+     * TODO extract this method to the closest common class of all screen classes to reduce copied code.
+     *
+     * @return a String input from user
+     */
     private String readLine() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
@@ -61,14 +64,22 @@ public class CampaignScreen {
      */
     private void createCampaignScreen() throws Exception {
         // Create a new Campaign
-        List<Map> levels = new ArrayList<>();
-        Campaign camp = new Campaign(levels);
+        Campaign camp = new Campaign();
         String name = "";
         int numLevels = 0;
+        boolean campExist = true;
 
-        while("".equalsIgnoreCase(name) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(name)) {
+        while("".equalsIgnoreCase(name) || GameConstantsInterface.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(name) || campExist) {
             System.out.println("Enter the name of the new Campaign (No spaces): ");
             name = readStringHandling(name);
+
+            // Check if a campaign with the name chose already exists
+            if(camp.getCampaign(name) == null) {
+                campExist = false;
+            }
+            else {
+                System.out.println("A Campaign with this name already exists!");
+            }
         }
 
         camp.setName(name);
@@ -83,8 +94,14 @@ public class CampaignScreen {
         // Add a Map
         addMaps(numLevels, camp);
 
+        System.out.println("Number of levels: " +camp.getNumLevels());
+        System.out.println("Name: " +camp.getName());
+        System.out.println("MapNames: " +camp.getMapNames());
+
         //Save Campaign
         camp.saveCampaign();
+        //ObjectSaver os = new ObjectSaver();
+        //os.saveCampaign(camp.getName(), camp);
 
         CampaignScreen();
 
@@ -98,8 +115,8 @@ public class CampaignScreen {
     private void editCampaignScreen() throws Exception {
         String campName = "";
         int choice = 0;
-        List<Map> levels = new ArrayList<>();
-        Campaign camp = new Campaign(levels);
+        ArrayList<String> levelNames;
+        Campaign camp = new Campaign();
 
         while(campName.equals("")) {
             System.out.println("Enter the name of the Campaign you would like to edit:");
@@ -107,6 +124,10 @@ public class CampaignScreen {
         }
 
         camp = camp.getCampaign(campName);
+
+        System.out.println("Number of levels: " +camp.getNumLevels());
+        System.out.println("Name: " +camp.getName());
+        System.out.println("MapNames: " +camp.getMapNames());
 
         while(choice == 0) {
             System.out.println("Choose one of the following by entering the number associated with the choice:");
@@ -124,20 +145,18 @@ public class CampaignScreen {
         // Add a Map
         if(choice == 1) {
             //Get the number of maps the user would like to add
-            int num = camp.getNumLevels();
             int addingNum = 0;
             while(addingNum == 0) {
                 System.out.println("Please enter the number of levels you would like to add: ");
                 addingNum = readIntHandling(addingNum);
             }
 
-            num += addingNum;
-            camp.setNumLevels(num);
+            camp.setNumLevels(addingNum);
 
             addMaps(addingNum, camp);
         }
 
-        // Remove a Map - the last one
+        // Remove a Map - the last one in the list
         if(choice == 2) {
             int removeNum = 0;
             while(removeNum == 0) {
@@ -145,12 +164,12 @@ public class CampaignScreen {
                 removeNum = readIntHandling(removeNum);
             }
 
-            levels = camp.getLevels();
+            levelNames = camp.getMapNames();
 
             for (int i = 0; i < removeNum; i++) {
                 // Remove the last map if there are any maps in the Campaign
                 if (camp.getNumLevels() != 0) {
-                    camp.removeLevel(levels);
+                    camp.removeLevel(levelNames);
                 } else
                     System.out.println("There are no maps left in this campaign");
             }
@@ -158,6 +177,8 @@ public class CampaignScreen {
 
         //Save Campaign
         camp.saveCampaign();
+        //ObjectSaver os = new ObjectSaver();
+        //os.saveCampaign(camp.getName(), camp);
 
         CampaignScreen();
 
@@ -173,6 +194,7 @@ public class CampaignScreen {
 
     /**
      * A method that reads in a number, verifies it is a number and returns it.
+     * TODO extract this method to the closest common class of all screen classes to reduce copied code.
      *
      * @param num to be read
      * @return new num after reading input
@@ -181,14 +203,15 @@ public class CampaignScreen {
         try {
             num = Integer.parseInt(readLine());
         } catch (NumberFormatException e) {
-            System.out.println(GameConstants.NOT_A_NUMBER);
-            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+            System.out.println(GameConstantsInterface.NOT_A_NUMBER);
+            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
         }
         return num;
     }
 
     /**
      * A method that reads in a string, verifies it is a string and returns it.
+     * TODO extract this method to the closest common class of all screen classes to reduce copied code.
      *
      * @param line to be read
      * @return new line after reading input
@@ -197,8 +220,8 @@ public class CampaignScreen {
         try {
             line = readLine();
         } catch (IllegalFormatException e) {
-            System.out.println(GameConstants.NOT_A_STRING);
-            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+            System.out.println(GameConstantsInterface.NOT_A_STRING);
+            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
         }
         return line;
     }
@@ -214,13 +237,13 @@ public class CampaignScreen {
         for(int i = 0; i < num; i++) {
             //Get Map input from user
             String mapName = "";
-            while (mapName.equals("") || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(mapName)) {
+            while (mapName.equals("") || GameConstantsInterface.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(mapName)) {
                 System.out.println("Enter the name of the Map you would like to add:");
                 mapName = readStringHandling(mapName);
+                //Send Map input to CampaignModule
+                if(camp.setMapNames(mapName))
+                    i -= 1;
             }
-
-            //Send Map input to CampaignModule
-            camp.addMap(mapName);
         }
     }
 }

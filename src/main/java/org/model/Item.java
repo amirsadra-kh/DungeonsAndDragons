@@ -18,7 +18,7 @@ import java.io.FileOutputStream;
 @XmlRootElement
 public class Item {
     private ItemEnum item;
-    private EnhancementTypes enhancementType;
+    private EnhancementTypesEnum enhancementType;
     private int enhance;
     private Point coordinate;
     private String name;
@@ -37,7 +37,7 @@ public class Item {
      * @param coordinate a point on the map the item is at
      * @param enhance an integer representing the enhancement amount of the item
      */
-    public Item(String name, ItemEnum item, EnhancementTypes enhancementType, Point coordinate, int enhance) {
+    public Item(String name, ItemEnum item, EnhancementTypesEnum enhancementType, Point coordinate, int enhance) {
         createItem(name, item, enhancementType, enhance);
         this.coordinate = coordinate;
         this.item = item;
@@ -51,7 +51,7 @@ public class Item {
      * @param enhancementType of the item
      * @param enhance an integer representing the enhancement amount of the item
      */
-    public Item(String name, ItemEnum item, EnhancementTypes enhancementType, int enhance) {
+    public Item(String name, ItemEnum item, EnhancementTypesEnum enhancementType, int enhance) {
         createItem(name, item, enhancementType, enhance);
         this.item = item;
         this.name = name;
@@ -94,7 +94,7 @@ public class Item {
      * A method to get the EnhancementType of this item
      * @return
      */
-    public EnhancementTypes getEnhancementType() {
+    public EnhancementTypesEnum getEnhancementType() {
         return this.enhancementType;
     }
 
@@ -102,7 +102,7 @@ public class Item {
      * A method to set the EnhancementType of this item
      * @param enhancementType
      */
-    public void setEnhancementType(EnhancementTypes enhancementType) {
+    public void setEnhancementType(EnhancementTypesEnum enhancementType) {
         this.enhancementType = enhancementType;
     }
 
@@ -129,7 +129,7 @@ public class Item {
      * @param enhancementType EnhancementType of the item to be created
      * @param enhance an integer for the enhancement amount of the item to be created
      */
-    public void createItem(String name, ItemEnum itemEnum, EnhancementTypes enhancementType, int enhance) {
+    public void createItem(String name, ItemEnum itemEnum, EnhancementTypesEnum enhancementType, int enhance) {
         // Set the values of the item
         for (ItemEnum e : ItemEnum.values()) {
             if (e == itemEnum) {
@@ -142,47 +142,62 @@ public class Item {
 
         //check the itemEnum of the item
         if (itemEnum == ItemEnum.HELMET) {
-            if (enhancementType == EnhancementTypes.ARMORCLASS) {
+            if (enhancementType == EnhancementTypesEnum.ARMORCLASS) {
+                //Create Helmet
                 this.item = itemEnum;
                 this.enhancementType = enhancementType;
                 this.enhance = enhance;
                 this.name = name;
             } else if (itemEnum == ItemEnum.ARMOR) {
-                if (enhancementType == EnhancementTypes.ARMORCLASS) {
+                if (enhancementType == EnhancementTypesEnum.ARMORCLASS) {
+                    //Create ArmorClass
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
                 }
             } else if (itemEnum == ItemEnum.SHIELD) {
-                if (enhancementType == EnhancementTypes.ARMORCLASS || enhancementType == EnhancementTypes.STRENGTH || enhancementType == EnhancementTypes.CONSTITUTION) {
+                if (enhancementType == EnhancementTypesEnum.ARMORCLASS ||
+                        enhancementType == EnhancementTypesEnum.STRENGTH ||
+                        enhancementType == EnhancementTypesEnum.CONSTITUTION) {
+                    //Create Shield
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
                 }
             } else if (itemEnum == ItemEnum.RING) {
-                if (enhancementType == EnhancementTypes.ARMORCLASS || enhancementType == EnhancementTypes.STRENGTH || enhancementType == EnhancementTypes.CONSTITUTION) {
+
+                if (enhancementType == EnhancementTypesEnum.ARMORCLASS ||
+                        enhancementType == EnhancementTypesEnum.STRENGTH ||
+                        enhancementType == EnhancementTypesEnum.CONSTITUTION) {
+                    //Create Ring
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                 }
             } else if (itemEnum == ItemEnum.BELT) {
-                if (enhancementType == EnhancementTypes.STRENGTH || enhancementType == EnhancementTypes.CONSTITUTION) {
+                if (enhancementType == EnhancementTypesEnum.STRENGTH ||
+                        enhancementType == EnhancementTypesEnum.CONSTITUTION) {
+                    //Create Belt
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
                 }
             } else if (itemEnum == ItemEnum.BOOTS) {
-                if (enhancementType == EnhancementTypes.ARMORCLASS || enhancementType == EnhancementTypes.DEXTERITY) {
+                if (enhancementType == EnhancementTypesEnum.ARMORCLASS ||
+                        enhancementType == EnhancementTypesEnum.DEXTERITY) {
+                    //Create Boots
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
                 }
             } else if (itemEnum == ItemEnum.WEAPON) {
-                if (enhancementType == EnhancementTypes.ATTACKBONUS || enhancementType == EnhancementTypes.DAMAGEBONUS) {
+                if (enhancementType == EnhancementTypesEnum.ATTACKBONUS ||
+                        enhancementType == EnhancementTypesEnum.DAMAGEBONUS) {
+                    //Crete weapon
                     this.item = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
@@ -273,6 +288,7 @@ public class Item {
         return (Item) u.unmarshal(f);
         } catch (Exception e) {
             //e.printStackTrace();
+            System.out.println("No such item exists!");
         }
         return null;
     }

@@ -7,7 +7,7 @@ package main.java.org.model;
  * @since 02.08.2017
  * @version 1.0
  */
-public interface Dice {
+public interface DiceInterface {
 
     public int roll();
 }
