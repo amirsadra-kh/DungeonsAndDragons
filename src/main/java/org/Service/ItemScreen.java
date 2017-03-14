@@ -69,13 +69,25 @@ public class ItemScreen {
      */
     private Item edit() {
         Item item = new Item();
-        String itemName;
+        String itemName = "";
+        boolean itemExists = false;
 
-        System.out.println("Please enter the name of the Item you would like to edit:");
-        itemName = readLine();
+        while("".equalsIgnoreCase(itemName) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(itemName) || itemExists == false) {
+            System.out.println("Please enter the name of the Item you would like to edit:");
+            new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
+            itemName = readLine();
 
-        new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
-        item = item.loadItem(readLine());
+            // Check if an item with the name chosen does not exists
+            if (item.loadItem(itemName) != null) {
+                itemExists = true;
+            } else {
+                System.out.println("An Item with this name does not exists!");
+            }
+        }
+
+
+        item = item.loadItem(itemName);
+
         System.out.println("Your Item had the followings:" + item.toString());
         //String itemEnum = getItemEnum();
         String enhancement = getEnhancementType(item.getItem().name());
@@ -90,20 +102,30 @@ public class ItemScreen {
      * @return
      */
     private Item create() {
+        Item itemObj = new Item();
+        String itemName = "";
+        boolean itemExists = true;
+
+        while("".equalsIgnoreCase(itemName) || GameConstants.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(itemName) || itemExists) {
+            System.out.println("Enter the name of the new item: ");
+            itemName = readLine();
+
+            // Check if an item with the name chosen already exists
+            if (itemObj.loadItem(itemName) == null) {
+                itemExists = false;
+            } else {
+                System.out.println("An Item with this name already exists!");
+            }
+        }
+
         String item = getItemEnum();
         String enhancement = getEnhancementType(item);
         int enhancementAmount = getEnhancementAmount();
-        String itemName = "";
-
-        System.out.println("Enter the name of the new item: ");
-        itemName = readLine();
-
         Item itemToCreate = new Item(itemName, getItemEnumfromString(item), getEnhancementEnumfromString(enhancement), enhancementAmount);
 
         itemToCreate.saveItem();
 
         return itemToCreate;
-
     }
 
     /**
@@ -111,24 +133,33 @@ public class ItemScreen {
      * @return
      */
     public String getItemEnum() {
+        ArrayList<String> itemsArray = new ArrayList<>();
+
         // Get input from user
         System.out.println("Please enter your item Type from the provided list below:");
         for (ItemEnum e : ItemEnum.values()) {
             System.out.println(e.ordinal() + ". " + e.name());
+            itemsArray.add(e.ordinal(), e.name());
         }
         String item = readLine();
 
-        ArrayList<String> itemsArray = new ArrayList<>();
-        for (ItemEnum e : ItemEnum.values()) {
-            itemsArray.add(e.ordinal(), e.name());
-        }
-//        TODO fix this, this fails and run in an infinite loop.
-        while (!itemsArray.contains(item)) {
+        // Check if the input of the enum is valid
+        while(!itemsArray.contains(item)) {
             System.out.println("The Entered Item is not valid! \nPlease enter your item Type from the provided list below:");
             for (ItemEnum e : ItemEnum.values()) {
                 System.out.println(e.ordinal() + ". " + e.name());
             }
+            item = readLine();
+
+            for (ItemEnum e : ItemEnum.values()) {
+                itemsArray.add(e.ordinal(), e.name());
+            }
+
+            // Exist while loop is a correct enum is chosen
+            if(itemsArray.contains(item))
+                break;
         }
+
         System.out.println("ITEM RECEIVED SUCCESSFULLY!");
         return item;
     }
@@ -139,33 +170,44 @@ public class ItemScreen {
      * @return
      */
     private String getEnhancementType(String item) {
+        ArrayList<String> EnhancementArray = new ArrayList<>();
         // Get the user to choose which enhancement type to define
         System.out.println("Please enter your Enhancement from the provided list below:");
 
-        // TODO ask user here for enhancement number to decrease number of steps for user
-        // TODO also user should choose a number for all enhancement types related to an item and not just one.
         if (item.equals("HELMET") || item.equals("ARMOR") || item.equals("SHIELD")) {
             System.out.println(EnhancementTypes.ARMORCLASS);
+            EnhancementArray.add("ARMORCLASS");
         } else if (item.equals("RING")) {
             System.out.println("" +EnhancementTypes.ARMORCLASS + "\n" + EnhancementTypes.CONSTITUTION + "\n" + EnhancementTypes.STRENGTH);
+            EnhancementArray.add("ARMORCLASS");
+            EnhancementArray.add("CONSTITUTION");
+            EnhancementArray.add("STRENGTH");
         } else if (item.equals("BELT")) {
             System.out.println(EnhancementTypes.CONSTITUTION + "\n" + EnhancementTypes.STRENGTH);
+            EnhancementArray.add("CONSTITUTION");
+            EnhancementArray.add("STRENGTH");
         } else if (item.equals("BOOTS")) {
             System.out.println(EnhancementTypes.ARMORCLASS + "\n" + EnhancementTypes.DEXTERITY);
+            EnhancementArray.add("ARMORCLASS");
+            EnhancementArray.add("DEXTERITY");
         } else {
             System.out.println(EnhancementTypes.ATTACKBONUS + "\n" + EnhancementTypes.DAMAGEBONUS);
+            EnhancementArray.add("ATTACKBONUS");
+            EnhancementArray.add("DAMAGEBONUS");
         }
         String enhancement = readLine();
-        ArrayList<String> EnhancementArray = new ArrayList<>();
-        for (EnhancementTypes e : EnhancementTypes.values()) {
-            EnhancementArray.add(e.ordinal(), e.name());
-        }
+
         while (!EnhancementArray.contains(enhancement)) {
-            System.out.println("The Enetered Enhancement is not valid! \nPlease enter your Enhancement from the provided list below:");
-            for (EnhancementTypes e : EnhancementTypes.values()) {
-                System.out.println(e.ordinal() + ". " + e.name());
+            System.out.println("The Entered Enhancement is not valid! \nPlease enter your Enhancement from the provided list below:");
+            for (int i = 0; i < EnhancementArray.size(); i++) {
+                System.out.println(EnhancementArray.get(i));
             }
             enhancement = readLine();
+
+            // Exit while loop if the input is correct.
+            if(EnhancementArray.contains(enhancement)){
+                break;
+            }
         }
         System.out.println("ENHANCEMENT RECEIVED SUCCESSFULLY");
         return enhancement;
