@@ -1,6 +1,6 @@
 package main.java.org.Service;
 
-import main.java.org.model.GameConstants;
+import main.java.org.model.GameConstantsInterface;
 
 public class Screen {
 
@@ -9,7 +9,7 @@ public class Screen {
     }
 
     static void ShowMainMenu(){
-        System.out.println(GameConstants.MAIN_MENU_TO_LOAD_EDIT_GAME);
+        System.out.println(GameConstantsInterface.MAIN_MENU_TO_LOAD_EDIT_GAME);
     }
 
 

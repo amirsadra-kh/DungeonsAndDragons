@@ -1,6 +1,6 @@
 package main.java.org.view;
 
-import main.java.org.model.GameConstants;
+import main.java.org.model.GameConstantsInterface;
 import main.java.org.model.Map;
 
 import javax.swing.*;
@@ -85,7 +85,7 @@ public class MapFrame implements ActionListener {
                 cols = parseInt(ColumnsInput.getText());
             }
         } catch (NumberFormatException e) {
-            System.out.println(GameConstants.NOT_A_NUMBER + e.getMessage());
+            System.out.println(GameConstantsInterface.NOT_A_NUMBER + e.getMessage());
         }
 
 
