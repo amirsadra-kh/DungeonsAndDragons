@@ -18,7 +18,7 @@ import java.util.List;
  * Class to allow user to create and edit Campaign
 
  * @author Freyja Jokulsdottir
- * @version 1.5
+ * @version 2.0
  * @since 2017-02-05
  */
 @XmlRootElement
