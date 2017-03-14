@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <item>
-    <enhance>1</enhance>
-    <enhancementType>DEXTERITY</enhancementType>
+    <enhance>3</enhance>
+    <enhancementType>ARMORCLASS</enhancementType>
     <item>BOOTS</item>
 </item>
