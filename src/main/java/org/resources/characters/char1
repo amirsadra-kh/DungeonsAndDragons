@@ -11,13 +11,13 @@
      </void>
     </void>
     <void property="constitution">
-     <int>17</int>
+     <int>12</int>
     </void>
-    <void property="dexterity">
-     <int>18</int>
+    <void property="damageBonus">
+     <int>2</int>
     </void>
     <void property="strength">
-     <int>9</int>
+     <int>13</int>
     </void>
    </object>
   </void>
@@ -31,15 +31,34 @@
          <int>1</int>
         </void>
         <void property="enhancementType">
-         <object class="java.lang.Enum" method="valueOf">
-          <class>main.java.org.model.EnhancementTypes</class>
+         <object class="java.lang.Enum" id="EnhancementTypesEnum0" method="valueOf">
+          <class>main.java.org.model.EnhancementTypesEnum</class>
           <string>CONSTITUTION</string>
          </object>
         </void>
         <void property="item">
-         <object class="java.lang.Enum" method="valueOf">
+         <object class="java.lang.Enum" id="ItemEnum0" method="valueOf">
           <class>main.java.org.model.ItemEnum</class>
           <string>BELT</string>
+         </object>
+        </void>
+       </object>
+      </void>
+      <void method="add">
+       <object class="main.java.org.model.Item">
+        <void property="enhance">
+         <int>3</int>
+        </void>
+        <void property="enhancementType">
+         <object class="java.lang.Enum" id="EnhancementTypesEnum1" method="valueOf">
+          <class>main.java.org.model.EnhancementTypesEnum</class>
+          <string>ARMORCLASS</string>
+         </object>
+        </void>
+        <void property="item">
+         <object class="java.lang.Enum" id="ItemEnum1" method="valueOf">
+          <class>main.java.org.model.ItemEnum</class>
+          <string>BOOTS</string>
          </object>
         </void>
        </object>
@@ -53,19 +72,26 @@
     <void method="add">
      <object class="main.java.org.model.Item">
       <void property="enhance">
+       <int>3</int>
+      </void>
+      <void property="enhancementType">
+       <object idref="EnhancementTypesEnum1"/>
+      </void>
+      <void property="item">
+       <object idref="ItemEnum1"/>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="main.java.org.model.Item">
+      <void property="enhance">
        <int>1</int>
       </void>
       <void property="enhancementType">
-       <object class="java.lang.Enum" method="valueOf">
-        <class>main.java.org.model.EnhancementTypes</class>
-        <string>DEXTERITY</string>
-       </object>
+       <object idref="EnhancementTypesEnum0"/>
       </void>
       <void property="item">
-       <object class="java.lang.Enum" method="valueOf">
-        <class>main.java.org.model.ItemEnum</class>
-        <string>BOOTS</string>
-       </object>
+       <object idref="ItemEnum0"/>
       </void>
      </object>
     </void>

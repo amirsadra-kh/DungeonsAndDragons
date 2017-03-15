@@ -20,8 +20,8 @@ public class CharacterEditor {
         return map;
     }
 
-    void addItem(Character chacater, Item item){
-        chacater.getBackPackInventory().getItems().add(item);
+    void addItem(Character character, Item item){
+        character.getBackPackInventory().add(item);
     }
 
 }

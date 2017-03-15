@@ -2,6 +2,7 @@ package main.java.org.Service;
 
 import main.java.org.model.Campaign;
 import main.java.org.model.Character;
+import main.java.org.model.Inventory;
 
 import java.util.Scanner;
 
@@ -53,6 +54,31 @@ public class PlayScreen {
             System.out.println("This campaign does not exist! Please try again: ");
             this.campaign = campaign.getCampaign(readLine());
         }
+
+        // TODO change this is done as the user clicks on a character on a map
+        // TODO when campaign and map are working as they should
+        // Testing the Character Observer
+        Character observeChar;
+
+        System.out.println("Please enter the name of the character you would like to observe from the list below: ");
+        this.character = new Character();
+        ol.showItemNames("src/main/java/org/resources/characters/");
+        observeChar = ol.loadCharacterFromXML(readLine());
+
+        while(this.character == null) {
+            System.out.println("This character does not exist! Please try again: ");
+            observeChar = ol.loadCharacterFromXML(readLine());
+        }
+
+        // This gets the character's abilities - Observer
+        new CharacterObserver(observeChar);
+        observeChar.setState(observeChar.getAbility());
+
+        // This gets the character's inventory - Observer
+        Inventory observeInventory = new Inventory();
+        observeInventory.setItems(observeChar);
+        new InventoryObserver(observeInventory);
+        observeInventory.setState(observeInventory.getItems());
     }
 
     /**
@@ -70,4 +96,6 @@ public class PlayScreen {
     public Campaign getCampaign() {
         return this.campaign;
     }
+
+    //TODO Add a load map from campaign
 }

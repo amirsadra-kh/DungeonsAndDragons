@@ -23,7 +23,10 @@ public class Character {
     private int level;
 
     private java.util.List<Observer> observers = new ArrayList<>();
-    private int state;
+    private Ability state;
+
+    public Character() {
+    }
 
     public Point getCurrentPosition() {
         return this.currentPosition;
@@ -101,8 +104,8 @@ public class Character {
 
     }
 
-    public BackPackInventory getBackPackInventory() {
-        return backPackInventory;
+    public Set<Item> getBackPackInventory() {
+        return backPackInventory.getItems();
     }
 
     public void setBackPackInventory(BackPackInventory backPackInventory) {
@@ -129,7 +132,7 @@ public class Character {
      * A method to get the state of the inventory
      * @return state of the inventory
      */
-    public int getState() {
+    public Ability getState() {
         return this.state;
     }
 
@@ -137,7 +140,7 @@ public class Character {
      * A method to set the state of the inventory
      * @param state of the inventory
      */
-    public void setState(int state) {
+    public void setState(Ability state) {
         this.state = state;
         notifyAllObservers();
     }

@@ -12,7 +12,7 @@ import java.util.Set;
  * @since 02.08.2017
  */
 public class BackPackInventory {
-    private Set<Item> items;
+    protected Set<Item> items;
     // The maximum number of items allowed in the backpack
     private final int MAX_ITEMS = 10;
 
