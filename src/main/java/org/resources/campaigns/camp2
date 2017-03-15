@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <campaign>
+    <mapNames>map1</mapNames>
     <mapNames>map2</mapNames>
-    <name>c</name>
-    <numLevels>1</numLevels>
+    <name>c1</name>
+    <numLevels>2</numLevels>
 </campaign>

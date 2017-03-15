@@ -3,8 +3,8 @@ package main.java.org.Service;
 import main.java.org.model.Campaign;
 import main.java.org.model.GameConstantsInterface;
 
-import java.util.ArrayList;
 import java.util.IllegalFormatException;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -115,7 +115,7 @@ public class CampaignScreen {
     private void editCampaignScreen() throws Exception {
         String campName = "";
         int choice = 0;
-        ArrayList<String> levelNames;
+        List<String> levelNames;
         Campaign camp = new Campaign();
 
         while(campName.equals("")) {
@@ -177,8 +177,6 @@ public class CampaignScreen {
 
         //Save Campaign
         camp.saveCampaign();
-        //ObjectSaver os = new ObjectSaver();
-        //os.saveCampaign(camp.getName(), camp);
 
         CampaignScreen();
 
