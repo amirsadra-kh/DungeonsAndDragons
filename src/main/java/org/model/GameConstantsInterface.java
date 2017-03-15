@@ -7,7 +7,7 @@ package main.java.org.model;
  * @since 02.04.2017
  * @version 1.0
  */
-public interface GameConstants {
+public interface GameConstantsInterface {
     String CAMPAIGN = "Campaign";
     String CHARACTER = "Character";
     String MAP ="Map";

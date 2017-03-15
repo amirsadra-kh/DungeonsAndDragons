@@ -13,7 +13,7 @@ public class Ability {
 
     private int hitPoints = dice10.roll();
 
-    private int level;
+    public int level;
     private int armorClass;
     private int attackBonus;
     private int damageBonus;
@@ -88,31 +88,33 @@ public class Ability {
         return this.hitPoints;
     }
 
-    /**
-     * set Level of the Character
-     * @param level
-     * @todo we should probably move this method in the Character class.
-     */
-    public void setLevel(int level) {
-        this.level = level;
+    public int getArmorClass() {
+        return this.armorClass;
     }
 
     /**
      * This method set the ArmorClass base on dexteirty modifier and predefined armorClass
-     * TODO get instead of set
+     *
      * @param armorClass
      */
-    public void setArmorClass(int armorClass) {
+    public void getArmorClass(int armorClass) {
         this.armorClass = 10 + this.dexterity.modifier() + armorClass;
     }
 
+    public int getAttackBonus() {
+        return this.attackBonus;
+    }
     /**
      * Set the attackBonus
-     * TODO 1 should be level dynamic
-      * @param attackBonus
+     *
+     * @param attackBonus
      */
     public void setAttackBonus(int attackBonus) {
-        this.attackBonus = 1 + attackBonus;
+        this.attackBonus = this.level + attackBonus;
+    }
+
+    public int getDamageBonus() {
+        return this.damageBonus;
     }
 
     /**
@@ -120,6 +122,7 @@ public class Ability {
      * @param itemBonus
      */
     public void setDamageBonus(int itemBonus) {
+
         this.damageBonus = this.strength.modifier() + itemBonus;
     }
 

@@ -1,10 +1,11 @@
 package main.java.org.Service;
-import main.java.org.model.Ability;
-import main.java.org.model.BackPackInventory;
+import main.java.org.model.*;
 import main.java.org.model.Character;
-import main.java.org.model.GameConstants;
-import main.java.org.model.Item;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -38,8 +39,8 @@ public class CharacterScreen {
         try{
             num = Integer.parseInt(readLine());
         } catch (NumberFormatException e){
-            System.out.println(GameConstants.NOT_A_NUMBER);
-            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+            System.out.println(GameConstantsInterface.NOT_A_NUMBER);
+            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
         }
         return num;
     }
@@ -47,15 +48,15 @@ public class CharacterScreen {
     /**
      * A method for reading in text input from user and handling the wrong input
      *
-     * @param text input from userr
+     * @param text input from user
      * @return the text if it was in fact a string
      */
     private String readText(String text){
         try{
             text = readLine();
         } catch (NumberFormatException e){
-            System.out.println(GameConstants.NOT_A_STRING);
-            System.out.println(GameConstants.CHOSEN_ITEM_NOT_VALID);
+            System.out.println(GameConstantsInterface.NOT_A_STRING);
+            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
         }
         return text;
     }
@@ -95,23 +96,43 @@ public class CharacterScreen {
     }
 
     /**
-     * The interaction screen with iuser to create a new character
+     * The interaction screen with user to create a new character
      */
     public void createCharacterScreen(){
         String charName = "";
+        Set<Item> wearingItem = new HashSet<>();
 
         Character character = new Character();
         Ability ability = new Ability();
         character.setAbility(ability);
+        boolean wearing = false;
 
         System.out.println("please enter a name for character: ");
         charName = readText(charName);
 
         character.setCharName(charName);
 
+        // Set the backpack for this character
         BackPackInventory backpack = new BackPackInventory();
+        // Ask user what they want to have in the backpack and use that as an input to the method below.
+        Set<Item> backpackItems = new HashSet<>();
+        System.out.println("The backpack inventory choices: ");
+        userChooseItems(backpackItems, ability, wearing);
+        backpack.setItems(backpackItems);
         character.setBackPackInventory(backpack);
-        System.out.println("Please enter the name of Items to add to your character from the list below:");
+
+        System.out.println(ability.toString());
+
+        // Get the user to choose items for the character to wear
+        wearing = true;
+        System.out.println("The character's item wearing choices: ");
+        userChooseItems(wearingItem, ability, wearing);
+
+        character.setItemsWearing(wearingItem);
+
+        System.out.println("THE CHARACTER HAS :");
+        System.out.println(ability.toString());
+        System.out.println("iT WEARS " + wearingItem);
 
         /* TODO fix backpack setItems, presently crash
         Item item = new Item();
@@ -150,7 +171,7 @@ public class CharacterScreen {
 
         // What does the user want to edit about the character?
         System.out.println("Which of these would you like to edit?");
-        System.out.println("1. Ability\n2. BackPack\n3. Exit");
+        System.out.println("1. Ability\n2. Wearing Item\n3. BackPack\n4. Exit");
         choice = readInt(choice);
 
 
@@ -161,11 +182,16 @@ public class CharacterScreen {
                 CharacterScreen();
                 break;
             case 2:
-                character = editBackPack(character);
+                editWearingItem(character);
                 System.out.println();
                 CharacterScreen();
                 break;
             case 3:
+                editBackPack(character);
+                System.out.println();
+                CharacterScreen();
+                break;
+            case 4:
                 backToMain();
         }
     }
@@ -185,7 +211,7 @@ public class CharacterScreen {
         System.out.println("Please enter the level you would like the character to be at (0 if not changed): ");
         level = readInt(level);
         if(level != 0)
-            ability.setLevel(level);
+            character.setLevel(level);
 
         // Change the strength of the character
         System.out.println("Please enter the strength you would like the character to have (0 if not changed): ");
@@ -210,26 +236,33 @@ public class CharacterScreen {
         // Set the new ability for the character
         character.setAbility(ability);
 
-        System.out.println("The other ability points depend on what the character has on them!\n");
+        System.out.println("The other ability points depend on what the character has on item!\n");
 
         // Save changes?
         String save = "";
-        System.out.println("Would you like to save your changes?");
+        System.out.println("Would you like to save your changes?Y/N");
         save = readText(save);
-        while(!save.equals("Y") && !save.equals("N")) {
-            System.out.println("Invalid input! Please tray again: ");
+        while(!save.equals("Y") && !save.equals("N") && !save.equals("y") && !save.equals("n")) {
+            System.out.println("Invalid input! Please try again: ");
             save = readText(save);
         }
-        if(save.equals("Y"))
+        if(save.equals("Y") || save.equals("y"))
             Save(charName, character);
     }
 
     /**
-     * A method to interact with the user for editing the backpack of a character
+     * A method to interact with the user for editing the items that character is wearing
      *
      * @param character the existing character to be edited
      * @return the edited character object
      */
+
+    private Character editWearingItem(Character character) {
+
+        return character;
+    }
+
+
     private Character editBackPack(Character character) {
         return character;
     }
@@ -254,5 +287,86 @@ public class CharacterScreen {
      */
     private void backToMain(){
         new GameGenerator();
+    }
+
+    /**
+     * A method to get the user to choose items
+     * Called when the user choose items to wear and when the user chooses items to have in the backpack.
+     * TODO modify so it works for backpack as well
+     *
+     * @param items a list of items o be added to - wearing or backpack
+     * @param ability to be modified according to wearing items.
+     */
+
+    private void userChooseItems(Set<Item> items, Ability ability, boolean wearing) {
+        String answer;
+        boolean yn = true;
+
+        for (int i = 1; i<8 && yn ; i++) {
+            System.out.println("Please enter the name of the item no." +i
+                    +"  that you want the character to have from the list below:");
+            Item item = new Item();
+            new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
+            item = item.loadItem(readLine());
+            if(item == null){
+                System.out.println("This item does not exist");
+                i = i-1;
+            }
+            else if((items.contains(item.getItem()))){
+                System.out.println("You cannot wear the same type of item");
+                i = i-1;
+            }else {
+                if(wearing) {
+                    switch (item.getEnhancementType()) {
+                        case STRENGTH:
+                            ability.setStrength(ability.getStrength() + item.getEnhance());
+                            ability.setDamageBonus(item.getEnhance() - 1);
+                            ability.setHitPoints();
+                            break;
+                        case CONSTITUTION:
+                            ability.setConstitution(ability.getConstitution() + item.getEnhance());
+                            break;
+                        case DEXTERITY:
+                            ability.setDexterity(ability.getConstitution() + item.getEnhance());
+                            break;
+                        case ARMORCLASS:
+                            ability.getArmorClass(ability.getArmorClass() + item.getEnhance() - 10);
+                            break;
+                        case ATTACKBONUS:
+                            ability.setAttackBonus(ability.getAttackBonus() + item.getEnhance());
+                            break;
+                        case DAMAGEBONUS:
+                            ability.setDamageBonus(item.getEnhance());
+                            break;
+                        case HITPOINTS:
+                            break;
+                        case LEVEL:
+                            break;
+                    }
+                }
+
+                items.add(item);
+
+                System.out.println("Your Item had the followings:" + item.toString());
+                if(wearing) {
+                    System.out.println("According to this new item your character have the following ability");
+                    System.out.println(ability.toString());
+                }
+                System.out.println("do you  want to add the another item ? Y/N");
+
+                while (true) {
+                    answer = readLine().trim().toLowerCase();
+                    if (answer.equals("y")) {
+                        yn = true;
+                        break;
+                    } else if (answer.equals("n")) {
+                        yn = false;
+                        break;
+                    } else {
+                        System.out.println("Sorry, I didn't catch that. Please answer y/n");
+                    }
+                }
+            }
+        }
     }
 }
