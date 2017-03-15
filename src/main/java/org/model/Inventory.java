@@ -16,33 +16,54 @@ import main.java.org.Service.Observer;
  */
 public class Inventory {
     private List<Observer> observers = new ArrayList<>();
-    private int state;
-    private BackPackInventory backpack;
-    private Set<Item> itemsWearing;
+    protected Set<Item> items;
+    private Set<Item> state;
 
     /**
-     * A method for getting the inventory from a character.
-     *
-     * @param character either the player or a monster from a map
+     * A Constructor for Inventory
      */
-    public void Inventory(Character character) {
-        this.itemsWearing = character.getItemsWearing();
-        this.backpack = character.getBackPackInventory();
+    public void Inventory() {
+    }
+
+    /**
+     * A method to get the items in the inventory
+     * @return a set of inventory items
+     */
+    public Set<Item> getItems() {
+        return this.items;
+    }
+
+    /**
+     * A method to set the items in the inventory
+     * @param character that has items
+     */
+    public void setItems(Character character) {
+        Set<Item> backpack = character.getBackPackInventory();
+        Set<Item> itemsWearing = character.getItemsWearing();
+        items = backpack;
+        items.addAll(itemsWearing);
+    }
+
+    @Override
+    public String toString() {
+        String inventoryString;
+        inventoryString = "Items: " +this.items;
+        return inventoryString;
     }
 
     /**
      * A method to get the state of the inventory
      * @return state of the inventory
      */
-    public int getState() {
+    public Set<Item> getState() {
         return this.state;
     }
 
     /**
      * A method to set the state of the inventory
-     * @param state of the inventory
+     * @param state for the inventory
      */
-    public void setState(int state) {
+    public void setState(Set<Item>  state) {
         this.state = state;
         notifyAllObservers();
     }
