@@ -95,7 +95,8 @@ public class CharacterScreen {
     /**
      * The interaction screen with user to create a new character
      */
-    public void createCharacterScreen(){
+    public void createCharacterScreen() throws Exception {
+        ObjectLoader ol = new ObjectLoader();
         String charName = "";
         Set<Item> wearingItem = new HashSet<>();
 
@@ -103,9 +104,21 @@ public class CharacterScreen {
         Ability ability = new Ability();
         character.setAbility(ability);
         boolean wearing = false;
+        boolean charExist = true;
 
-        System.out.println("please enter a name for character: ");
-        charName = readText(charName);
+        // Check if a character with the name chosen already exists and prompt for a new name if it does
+        while("".equalsIgnoreCase(charName) || GameConstantsInterface.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(charName) || charExist) {
+            System.out.println("Enter the name of the new Character (No spaces): ");
+            charName = readText(charName);
+
+            // Check if a campaign with the name chose already exists
+            if(ol.loadCharacterFromXML(charName) == null) {
+                charExist = false;
+            }
+            else {
+                System.out.println("A Character with this name already exists!");
+            }
+        }
 
         character.setCharName(charName);
 
