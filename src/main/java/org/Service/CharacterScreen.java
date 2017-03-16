@@ -5,7 +5,6 @@ import main.java.org.model.Character;
 import java.util.HashSet;
 import java.util.Set;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * This class is to interact with user to create the character, save it and edit it.
@@ -15,48 +14,7 @@ import java.util.Scanner;
  * @since 2017-02-23
  */
 public class CharacterScreen {
-    /**
-     * A Scanner for reading input from user
-     * TODO we should find a way to close the scanner when it is not need anymore.
-     *
-     * @return a String which has been read from input
-     */
-    private String readLine(){
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
-    /**
-     * A method for reading an integer input from user and handling a wrong input
-     *
-     * @param num an input from the user
-     * @return the integer if it was in fact an integer
-     */
-    private int readInt(int num){
-        try{
-            num = Integer.parseInt(readLine());
-        } catch (NumberFormatException e){
-            System.out.println(GameConstantsInterface.NOT_A_NUMBER);
-            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
-        }
-        return num;
-    }
-
-    /**
-     * A method for reading in text input from user and handling the wrong input
-     *
-     * @param text input from user
-     * @return the text if it was in fact a string
-     */
-    private String readText(String text){
-        try{
-            text = readLine();
-        } catch (NumberFormatException e){
-            System.out.println(GameConstantsInterface.NOT_A_STRING);
-            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
-        }
-        return text;
-    }
+    private ReadInput readInput = new ReadInput();
 
     /**
      * The interactino screen with the user to create or edit a character
@@ -71,12 +29,12 @@ public class CharacterScreen {
         System.out.println("Choose one of the following by entering the number associated with the choice:");
         System.out.println("1. Create a Character\n2. Edit a Character\n3. Back to Main Menu");
         while(choice == 0)
-            choice = readInt(choice);
+            choice = readInput.readIntHandling(choice);
 
         // If the user enters an invalid input, they will be asked again
         while (choice < 1 || choice > 3) {
             System.out.println("Your input is invalid, please try again");
-            choice = readInt(choice);
+            choice = readInput.readIntHandling(choice);
         }
 
         switch (choice) {
@@ -109,7 +67,7 @@ public class CharacterScreen {
         // Check if a character with the name chosen already exists and prompt for a new name if it does
         while("".equalsIgnoreCase(charName) || GameConstantsInterface.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(charName) || charExist) {
             System.out.println("Enter the name of the new Character (No spaces): ");
-            charName = readText(charName);
+            charName = readInput.readStringHandling(charName);
 
             // Check if a campaign with the name chose already exists
             if(ol.loadCharacterFromXML(charName) == null) {
@@ -173,7 +131,7 @@ public class CharacterScreen {
         int choice = 0;
 
         System.out.println("Please enter the name of the character you would like to edit");
-        charName = readText(charName);
+        charName = readInput.readStringHandling(charName);
 
         // TODO charName should be the path of the character
         ObjectLoader ol = new ObjectLoader();
@@ -182,7 +140,7 @@ public class CharacterScreen {
         // What does the user want to edit about the character?
         System.out.println("Which of these would you like to edit?");
         System.out.println("1. Ability\n2. Wearing Item\n3. BackPack\n4. Exit");
-        choice = readInt(choice);
+        choice = readInput.readIntHandling(choice);
 
 
         switch (choice) {
@@ -219,27 +177,27 @@ public class CharacterScreen {
 
         // Edit the level of the character
         System.out.println("Please enter the level you would like the character to be at (0 if not changed): ");
-        level = readInt(level);
+        level = readInput.readIntHandling(level);
         if(level != 0)
             character.setLevel(level);
 
         // Change the strength of the character
         System.out.println("Please enter the strength you would like the character to have (0 if not changed): ");
-        choice = readInt(choice);
+        choice = readInput.readIntHandling(choice);
         if(choice != 0)
             ability.setStrength(choice);
 
         // Change the constitution of the character
         choice = 0;
         System.out.println("Please enter the constitution you would like the character to have (0 if not changed): ");
-        choice = readInt(choice);
+        choice = readInput.readIntHandling(choice);
         if(choice != 0)
             ability.setConstitution(choice);
 
         // Change the dexterity of the character
         choice = 0;
         System.out.println("Please enter the dexterity you would like the character to have (0 if not changed): ");
-        choice = readInt(choice);
+        choice = readInput.readIntHandling(choice);
         if(choice != 0)
             ability.setDexterity(choice);
 
@@ -251,10 +209,10 @@ public class CharacterScreen {
         // Save changes?
         String save = "";
         System.out.println("Would you like to save your changes?Y/N");
-        save = readText(save);
+        save = readInput.readStringHandling(save);
         while(!save.equals("Y") && !save.equals("N") && !save.equals("y") && !save.equals("n")) {
             System.out.println("Invalid input! Please try again: ");
-            save = readText(save);
+            save = readInput.readStringHandling(save);
         }
         if(save.equals("Y") || save.equals("y"))
             Save(charName, character);
@@ -317,7 +275,7 @@ public class CharacterScreen {
                     +"  that you want the character to have from the list below:");
             Item item = new Item();
             new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
-            item = item.loadItem(readLine());
+            item = item.loadItem(readInput.readLine());
             if(item == null){
                 System.out.println("This item does not exist");
                 i = i-1;
@@ -365,7 +323,7 @@ public class CharacterScreen {
                 System.out.println("do you  want to add the another item ? Y/N");
 
                 while (true) {
-                    answer = readLine().trim().toLowerCase();
+                    answer = readInput.readLine().trim().toLowerCase();
                     if (answer.equals("y")) {
                         yn = true;
                         break;

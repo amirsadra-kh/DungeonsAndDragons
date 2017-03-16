@@ -1,9 +1,6 @@
 package main.java.org.Service;
 
-import main.java.org.model.GameConstantsInterface;
-import main.java.org.model.EnhancementTypesEnum;
-import main.java.org.model.Item;
-import main.java.org.model.ItemEnum;
+import main.java.org.model.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,22 +16,7 @@ import java.util.InputMismatchException;
  * @since 2017-03-01
  */
 public class ItemScreen {
-
-    /**
-     * A method for reading an integer input from user and handling a wrong input
-     *
-     * @param num an input from the user
-     * @return the integer if it was in fact an integer
-     */
-    private int readInt(int num){
-        try{
-            num = Integer.parseInt(readLine());
-        } catch (NumberFormatException e){
-            System.out.println(GameConstantsInterface.NOT_A_NUMBER);
-            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
-        }
-        return num;
-    }
+    private ReadInput readInput = new ReadInput();
 
     /**
      *  A method for interacting with the user to create or edit an item.
@@ -47,12 +29,12 @@ public class ItemScreen {
         System.out.println("Choose one of the following by entering the number associated with the choice:");
         System.out.println("1. Create an Item\n2. Edit an Item\n3. Back to Main Menu");
         while(choice == 0)
-            choice = readInt(choice);
+            choice = readInput.readIntHandling(choice);
 
         // If the user enters an invalid input, they will be asked again
         while (choice < 1 || choice > 3) {
             System.out.println("Your input is invalid, please try again");
-            choice = readInt(choice);
+            choice = readInput.readIntHandling(choice);
         }
 
         switch (choice) {

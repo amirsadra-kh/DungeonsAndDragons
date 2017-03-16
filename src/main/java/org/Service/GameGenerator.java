@@ -1,10 +1,6 @@
 package main.java.org.Service;
 
-import main.java.org.model.Campaign;
-import main.java.org.model.GameConstantsInterface;
-import main.java.org.model.GameShoppingCard;
-import main.java.org.model.Item;
-import main.java.org.model.Map;
+import main.java.org.model.*;
 import main.java.org.view.MapFrame;
 import java.util.Scanner;
 
@@ -18,6 +14,7 @@ import java.util.Scanner;
  */
 
 public class GameGenerator {
+    private ReadInput readInput = new ReadInput();
     /**
      * A start screen for the game, offers choices for the user
      *
@@ -35,16 +32,6 @@ public class GameGenerator {
     }
 
     /**
-     * A Scanner for reading input from user
-     *
-     * @return a String which has been read from input
-     */
-    String readLine() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
-    /**
      * A method for getting an input from the user to determine what they would like to do.
      *
      * @return the users option such as create, edit, play or quit
@@ -55,7 +42,7 @@ public class GameGenerator {
         GameShoppingCard gameShoppingCard = new GameShoppingCard();
 
         try {
-            option = Integer.parseInt(readLine());
+            option = Integer.parseInt(readInput.readLine());
         } catch (NumberFormatException e) {
             System.out.println(GameConstantsInterface.NOT_A_NUMBER);
             System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
