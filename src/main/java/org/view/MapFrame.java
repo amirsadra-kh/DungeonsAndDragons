@@ -171,25 +171,6 @@ if(EntryPointExist==false || ExitPointExist == false || MonsterExist == false){
     map.saveObject();
     alert("Your map is saved. you may close the map");
 }
-
-
-
-
-
         }
     }
-
-    /**
-     * A method for editin a map
-     * TODO Remove?
-     *
-     * @param rows number of rows of the map
-     * @param cols number of columns of the map
-     * @param name the name of the map
-     */
-    private void editMap(int rows, int cols, String name) {
-
-    }
-
-
 }
