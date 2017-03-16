@@ -69,11 +69,7 @@ public class MapFrame implements ActionListener {
 
 
     /**
-     * This class is is to load Character & Items to the Map and assign to according Labels.
-     + *
-     + * @author Mehran Ishanian
-     + * @version 1.0
-     + * @since 2017-03-16
+     * This method is is to load Character & Items to the Map and assign to according Labels.
      */
     private void loadObjectsNames(){
         String Characters=new ObjectLoader().returnItemNames("src/main/java/org/resources/characters/", "C");
