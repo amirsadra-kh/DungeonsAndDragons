@@ -24,7 +24,7 @@ import java.util.List;
 public class Campaign implements Serializable {
 
     //private List<Map> levels;
-    private ArrayList<String> mapNames=new ArrayList<>();
+    private ArrayList<String> mapNames = new ArrayList<>();
     private String name;
     private int numLevels;
 
