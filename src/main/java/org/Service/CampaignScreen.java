@@ -94,10 +94,6 @@ public class CampaignScreen {
         // Add a Map
         addMaps(numLevels, camp);
 
-        System.out.println("Number of levels: " +camp.getNumLevels());
-        System.out.println("Name: " +camp.getName());
-        System.out.println("MapNames: " +camp.getMapNames());
-
         //Save Campaign
         camp.saveCampaign();
         //ObjectSaver os = new ObjectSaver();
@@ -124,10 +120,6 @@ public class CampaignScreen {
         }
 
         camp = camp.getCampaign(campName);
-
-        System.out.println("Number of levels: " +camp.getNumLevels());
-        System.out.println("Name: " +camp.getName());
-        System.out.println("MapNames: " +camp.getMapNames());
 
         while(choice == 0) {
             System.out.println("Choose one of the following by entering the number associated with the choice:");
