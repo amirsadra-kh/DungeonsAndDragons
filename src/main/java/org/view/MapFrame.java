@@ -1,11 +1,14 @@
 package main.java.org.view;
 
+import main.java.org.Service.ObjectLoader;
+import main.java.org.model.Character;
 import main.java.org.model.GameConstantsInterface;
 import main.java.org.model.Map;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -30,6 +33,10 @@ public class MapFrame implements ActionListener {
     public JPanel GridPanel;
     private JCheckBox newCheckBox;
     private JTextPane useTheFollowingGuidTextPane1;
+    private JLabel characterLabel;
+    private JLabel characterList;
+    private JLabel itemLabel;
+    private JLabel itemList;
     private final int SIZE = 9;
     private MapGrid grid = null;
     private boolean newMap = false;
@@ -48,10 +55,19 @@ public class MapFrame implements ActionListener {
         openMapGrid.addActionListener(this);
         saveMapButton.addActionListener(this);
         newCheckBox.addActionListener(this);
+        loadC();
     }
     public static void alert(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
+
+    private void loadC(){
+        String Characters=new ObjectLoader().returnItemNames("src/main/java/org/resources/characters/");
+        characterList.setText(Characters);
+        String Items=new ObjectLoader().returnItemNames("src/main/java/org/resources/items/");
+        itemList.setText(Items);
+    }
+
 
     public String input(String message) {
         return JOptionPane.showInputDialog(message);

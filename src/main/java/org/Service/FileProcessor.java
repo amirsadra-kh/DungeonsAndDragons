@@ -56,4 +56,19 @@ abstract class FileProcessor {
             System.out.println(file.toString().split("/")[file.toString().split("/").length-1]);
         }
     }
+
+    public String returnItemNames(String path) {
+        String fileNames="<html>",fileName;
+        File folder = new File(path);
+        File[] listOfFiles = folder.listFiles();
+        for(File file:listOfFiles){
+            fileName=file.toString().split("\\\\")[file.toString().split("\\\\").length-1];
+            fileNames += fileName+"<br>";
+        }
+        fileNames += "</html>";
+        return fileNames;
+    }
+
+
+
 }
