@@ -10,10 +10,10 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 /**
  * This class is is to Load/save the files. it encapsulates the load and save files.
- + *
- + * @author Maysam Mokarian
- + * @version 1.0
- + * @since 2017-02-08
+ *
+ * @author Maysam Mokarian
+ * @version 1.0
+ * @since 2017-02-08
  */
 abstract class FileProcessor {
 
@@ -58,11 +58,11 @@ abstract class FileProcessor {
     }
 
     /**
-     * This class is is to return  the file names. You may add prefix as well.
-     + *
-     + * @author Mehran Ishanian
-     + * @version 1.0
-     + * @since 2017-03-16
+     * This method is is to return  the file names. You may add prefix as well.
+     *
+     * @param path of the file
+     * @param prefix that can be added to the file name
+     * @return filenames the filenames at the path given with the prefix
      */
     public String returnItemNames(String path, String prefixName) {
         String fileNames="<html>",fileName;
