@@ -57,13 +57,22 @@ abstract class FileProcessor {
         }
     }
 
-    public String returnItemNames(String path) {
+    /**
+     * This class is is to return  the file names. You may add prefix as well.
+     + *
+     + * @author Mehran Ishanian
+     + * @version 1.0
+     + * @since 2017-03-16
+     */
+    public String returnItemNames(String path, String prefixName) {
         String fileNames="<html>",fileName;
+        int Counter=0;
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();
         for(File file:listOfFiles){
+            Counter++;
             fileName=file.toString().split("\\\\")[file.toString().split("\\\\").length-1];
-            fileNames += fileName+"<br>";
+            fileNames += prefixName+Counter+" - "+fileName+"<br>";
         }
         fileNames += "</html>";
         return fileNames;

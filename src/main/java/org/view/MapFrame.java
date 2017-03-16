@@ -32,7 +32,7 @@ public class MapFrame implements ActionListener {
     private JButton saveMapButton;
     public JPanel GridPanel;
     private JCheckBox newCheckBox;
-    private JTextPane useTheFollowingGuidTextPane1;
+    private JTextPane useTheFollowingGuidTextPane;
     private JLabel characterLabel;
     private JLabel characterList;
     private JLabel itemLabel;
@@ -55,16 +55,24 @@ public class MapFrame implements ActionListener {
         openMapGrid.addActionListener(this);
         saveMapButton.addActionListener(this);
         newCheckBox.addActionListener(this);
-        loadC();
+        loadObjectsNames();
     }
     public static void alert(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
 
-    private void loadC(){
-        String Characters=new ObjectLoader().returnItemNames("src/main/java/org/resources/characters/");
+
+    /**
+     * This class is is to load Character & Items to the Map and assign to according Labels.
+     + *
+     + * @author Mehran Ishanian
+     + * @version 1.0
+     + * @since 2017-03-16
+     */
+    private void loadObjectsNames(){
+        String Characters=new ObjectLoader().returnItemNames("src/main/java/org/resources/characters/", "C");
         characterList.setText(Characters);
-        String Items=new ObjectLoader().returnItemNames("src/main/java/org/resources/items/");
+        String Items=new ObjectLoader().returnItemNames("src/main/java/org/resources/items/", "I");
         itemList.setText(Items);
     }
 
