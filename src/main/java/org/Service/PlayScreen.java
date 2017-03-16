@@ -65,7 +65,7 @@ public class PlayScreen {
         // Load the maps in the campaign to a Map List
         List<String> mapNames = campaign.getMapNames();
         for(String map : mapNames) {
-            levels.add(ol.loadMapFromXML(map));
+            levels.add(campaign.getMap(map));
         }
 
         // Get the current map being played according to the level
