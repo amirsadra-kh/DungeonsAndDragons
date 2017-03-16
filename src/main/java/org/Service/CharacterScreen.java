@@ -295,6 +295,8 @@ public class CharacterScreen {
 
     private void userChooseItems(Set<Item> items, Ability ability, boolean yn) {
         String answer;
+        ArrayList<ItemEnum> keys = new ArrayList<ItemEnum>();
+        ItemEnum key;
 
 
         for (int i = 1; i<8 && yn ; i++) {
@@ -303,11 +305,13 @@ public class CharacterScreen {
             Item item = new Item();
             new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
             item = item.loadItem(readLine().toUpperCase());
+            key = item.getItem();
+
             if(item == null){
                 System.out.println("This item does not exist");
                 i = i-1;
             }
-            else if((items.contains(item.getItem()))){
+            else if( keys.contains(key)){
                 System.out.println("You cannot wear the same type of item");
                 i = i-1;
             }else {
@@ -341,6 +345,7 @@ public class CharacterScreen {
                 }
 
                 items.add(item);
+                keys.add(item.getItem());
 
                 System.out.println("do you  want to add the another item ? Y/N");
 
