@@ -57,6 +57,12 @@ public class MapFrame implements ActionListener {
         newCheckBox.addActionListener(this);
         loadObjectsNames();
     }
+    
+    /**
+     * A method to show a message
+     *
+     * @param message a message to show
+     */
     public static void alert(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
@@ -76,7 +82,11 @@ public class MapFrame implements ActionListener {
         itemList.setText(Items);
     }
 
-
+    /**
+     * An input method
+     *
+     * @param message a message to input
+     */
     public String input(String message) {
         return JOptionPane.showInputDialog(message);
     }
@@ -98,7 +108,11 @@ public class MapFrame implements ActionListener {
         return map;
     }
 
-
+    /**
+     * A method to handle actions
+     *
+     * @param actionEvent
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
@@ -169,6 +183,14 @@ if(EntryPointExist==false || ExitPointExist == false || MonsterExist == false){
         }
     }
 
+    /**
+     * A method for editin a map
+     * TODO Remove?
+     *
+     * @param rows number of rows of the map
+     * @param cols number of columns of the map
+     * @param name the name of the map
+     */
     private void editMap(int rows, int cols, String name) {
 
     }
