@@ -130,9 +130,7 @@ public class CharacterScreen {
 
         character.setItemsWearing(wearingItem);
 
-        System.out.println("THE CHARACTER HAS :");
-        System.out.println(ability.toString());
-        System.out.println("iT WEARS " + wearingItem);
+        System.out.println("The character wear " + wearingItem);
 
         /* TODO fix backpack setItems, presently crash
         Item item = new Item();
@@ -298,9 +296,9 @@ public class CharacterScreen {
      * @param ability to be modified according to wearing items.
      */
 
-    private void userChooseItems(Set<Item> items, Ability ability, boolean wearing) {
+    private void userChooseItems(Set<Item> items, Ability ability, boolean yn) {
         String answer;
-        boolean yn = true;
+
 
         for (int i = 1; i<8 && yn ; i++) {
             System.out.println("Please enter the name of the item no." +i
@@ -316,7 +314,7 @@ public class CharacterScreen {
                 System.out.println("You cannot wear the same type of item");
                 i = i-1;
             }else {
-                if(wearing) {
+                if(yn) {
                     switch (item.getEnhancementType()) {
                         case STRENGTH:
                             ability.setStrength(ability.getStrength() + item.getEnhance());
@@ -347,11 +345,6 @@ public class CharacterScreen {
 
                 items.add(item);
 
-                System.out.println("Your Item had the followings:" + item.toString());
-                if(wearing) {
-                    System.out.println("According to this new item your character have the following ability");
-                    System.out.println(ability.toString());
-                }
                 System.out.println("do you  want to add the another item ? Y/N");
 
                 while (true) {
