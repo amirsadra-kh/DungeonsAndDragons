@@ -5,7 +5,9 @@ import main.java.org.Service.ObjectLoader;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.Serializable;
@@ -23,7 +25,7 @@ import java.util.List;
 public class Campaign implements Serializable {
 
     //private List<Map> levels;
-    private ArrayList<String> mapNames = new ArrayList<>();
+    private ArrayList<String> mapNames=new ArrayList<>();
     private String name;
     private int numLevels;
 
@@ -31,7 +33,6 @@ public class Campaign implements Serializable {
      * A default constructor
      */
     public Campaign() {
-
     }
 
     /**
@@ -39,7 +40,7 @@ public class Campaign implements Serializable {
      * @param mapNames these are a list of maps which are in the campaign object
      */
     public Campaign(ArrayList<String> mapNames, String name, int numLevels) {
-        this.mapNames = mapNames;
+        this.mapNames=mapNames;
         this.name = name;
         this.numLevels = numLevels;
     }
@@ -73,9 +74,9 @@ public class Campaign implements Serializable {
     public int getNumLevels() {
         return this.numLevels;
     }
-
-    public ArrayList<String> getMapNames() {
-        return this.mapNames;
+    @XmlElement
+    public List<String> getMapNames() {
+        return  mapNames;
     }
 
     /**
