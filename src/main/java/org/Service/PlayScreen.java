@@ -4,6 +4,7 @@ import main.java.org.model.Campaign;
 import main.java.org.model.Character;
 import main.java.org.model.Inventory;
 import main.java.org.model.Map;
+import main.java.org.view.MapFrame;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +68,7 @@ public class PlayScreen {
             levels.add(ol.loadMapFromXML(map));
         }
 
-        // Get the current mao being played according to the level
+        // Get the current map being played according to the level
         Map currentMap = levels.get(level - 1);
 
         /* TODO Add character player to the map
@@ -87,6 +88,9 @@ public class PlayScreen {
          *      item.setItemOnMapEnhancement(this.level);
          * currenMap.setItems(mapItems);
          */
+
+        // TODO load an existing map from campaign
+        //currentMap = new MapFrame().makeFrame("Map");
 
         // TODO change this is done as the user clicks on a character on a map
         // TODO when campaign and map are working as they should
