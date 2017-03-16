@@ -2,12 +2,9 @@ package main.java.org.Service;
 import main.java.org.model.*;
 import main.java.org.model.Character;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Set;
 import java.io.IOException;
-import java.util.Arrays;
 import java.util.Scanner;
 
 /**
