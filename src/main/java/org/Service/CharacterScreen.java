@@ -306,13 +306,20 @@ public class CharacterScreen {
      * @param ability to be modified according to wearing items.
      */
 
-    private void userChooseItems(Set<Item> items, Ability ability, boolean yn) {
+    private void userChooseItems(Set<Item> items, Ability ability, boolean wearing) {
         String answer;
+        boolean yn = true;
         ArrayList<ItemEnum> keys = new ArrayList<ItemEnum>();
         ItemEnum key;
+        int size = 0;
+        
+        if(wearing)
+            size = 8;
+        else
+            size = 10;
 
 
-        for (int i = 1; i<8 && yn ; i++) {
+        for (int i = 1; i < size && yn ; i++) {
             System.out.println("Please enter the name of the item no." +i
                     +"  that you want the character to have from the list below:");
             Item item = new Item();
@@ -324,11 +331,11 @@ public class CharacterScreen {
                 System.out.println("This item does not exist");
                 i = i-1;
             }
-            else if( keys.contains(key)){
+            else if( keys.contains(key) && wearing){
                 System.out.println("You cannot wear the same type of item");
                 i = i-1;
             }else {
-                if(yn) {
+                if(yn && wearing) {
                     switch (item.getEnhancementType()) {
                         case STRENGTH:
                             ability.setStrength(ability.getStrength() + item.getEnhance());
