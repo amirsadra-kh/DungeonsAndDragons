@@ -145,7 +145,7 @@ public class ItemScreen {
             System.out.println(e.ordinal() + ". " + e.name());
             itemsArray.add(e.ordinal(), e.name());
         }
-        String item = readLine();
+        String item = readLine().toUpperCase();
 
         // Check if the input of the enum is valid
         while(!itemsArray.contains(item)) {
@@ -200,7 +200,7 @@ public class ItemScreen {
             EnhancementArray.add("ATTACKBONUS");
             EnhancementArray.add("DAMAGEBONUS");
         }
-        String enhancement = readLine();
+        String enhancement = readLine().toUpperCase();
 
         while (!EnhancementArray.contains(enhancement)) {
             System.out.println("The Entered Enhancement is not valid! \nPlease enter your Enhancement from the provided list below:");

@@ -130,9 +130,7 @@ public class CharacterScreen {
 
         character.setItemsWearing(wearingItem);
 
-        System.out.println("THE CHARACTER HAS :");
-        System.out.println(ability.toString());
-        System.out.println("iT WEARS " + wearingItem);
+        System.out.println("The character wear " + wearingItem);
 
         /* TODO fix backpack setItems, presently crash
         Item item = new Item();
@@ -301,22 +299,33 @@ public class CharacterScreen {
     private void userChooseItems(Set<Item> items, Ability ability, boolean wearing) {
         String answer;
         boolean yn = true;
+        ArrayList<ItemEnum> keys = new ArrayList<ItemEnum>();
+        ItemEnum key;
+        int size = 0;
+        
+        if(wearing)
+            size = 8;
+        else
+            size = 10;
 
-        for (int i = 1; i<8 && yn ; i++) {
+
+        for (int i = 1; i < size && yn ; i++) {
             System.out.println("Please enter the name of the item no." +i
                     +"  that you want the character to have from the list below:");
             Item item = new Item();
             new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
             item = item.loadItem(readLine().toUpperCase());
+            key = item.getItem();
+
             if(item == null){
                 System.out.println("This item does not exist");
                 i = i-1;
             }
-            else if((items.contains(item.getItem()))){
+            else if( keys.contains(key) && wearing){
                 System.out.println("You cannot wear the same type of item");
                 i = i-1;
             }else {
-                if(wearing) {
+                if(yn && wearing) {
                     switch (item.getEnhancementType()) {
                         case STRENGTH:
                             ability.setStrength(ability.getStrength() + item.getEnhance());
@@ -346,12 +355,8 @@ public class CharacterScreen {
                 }
 
                 items.add(item);
+                keys.add(item.getItem());
 
-                System.out.println("Your Item had the followings:" + item.toString());
-                if(wearing) {
-                    System.out.println("According to this new item your character have the following ability");
-                    System.out.println(ability.toString());
-                }
                 System.out.println("do you  want to add the another item ? Y/N");
 
                 while (true) {
