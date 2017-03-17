@@ -14,7 +14,6 @@ import java.util.Set;
  */
 public class Character {
     private BackPackInventory backPackInventory;
-
     private Point currentPosition = new Point(0,0);
     private Ability ability;
     private boolean isPlayerCharacter;
