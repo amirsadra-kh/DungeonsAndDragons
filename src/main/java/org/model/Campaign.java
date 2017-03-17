@@ -124,13 +124,11 @@ public class Campaign implements Serializable {
 
     /**
      * This is the method that retrieves campaigns for editing.
-     * @param campName the path of the campaign.
+     * @param campName the name of the campaign.
      * @return an existing campaign object.
      */
     public Campaign getCampaign(String campName) throws Exception {
-        return this.loadCampaign(campName);
-        //ObjectLoader ol = new ObjectLoader();
-        //return ol.loadCampaignFromXML(campName);
+        return loadCampaign(campName);
     }
 
     /*

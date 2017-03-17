@@ -1,6 +1,9 @@
 package test.java.org.model;
 
+import main.java.org.Service.ObjectLoader;
 import main.java.org.model.Campaign;
+import main.java.org.model.Character;
+import main.java.org.model.Map;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.After;
@@ -75,6 +78,32 @@ public class CampaignTest {
         mapNames.add(mapName);
         camp.setMapNames(mapName);
         Assert.assertEquals(mapNames, camp.getMapNames());
+    }
+
+    /**
+     * A test method fot getting the next level in a campaign.
+     * The method takes in 2 parameters, int levelsPlayed and
+     * a the character being played.
+     * It return the current map to play
+     */
+    @Test
+    public void testNextLevel() {
+        int levelsPlayed = 0;
+        ObjectLoader ol = new ObjectLoader();
+        try {
+            Character character = ol.loadCharacterFromXML("char1");
+            camp = camp.loadCampaign("camp1");
+            Map current = camp.nextLevel(levelsPlayed, character);
+            Map correct = camp.getMap("map2");
+            // TODO Check if the name is correct
+            //Assert.assertEquals(correct.getName(), current.getName());
+            // TODO Check if the non-player character level is correct
+            // TODO Check if the chest item enhancement is correct
+        } catch (Exception e) {
+            System.out.println("This character or campaign does not exist!");
+            e.printStackTrace();
+        }
+
     }
 
     /**
