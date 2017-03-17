@@ -6,8 +6,6 @@ import main.java.org.model.Inventory;
 import main.java.org.model.Map;
 import main.java.org.view.MapFrame;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -20,9 +18,6 @@ import java.util.Scanner;
 public class PlayScreen {
     private Character character;
     private Campaign campaign;
-    // The level each map represents
-    private int level = 1;
-    private ArrayList<Map> levels = new ArrayList<>();
 
     /**
      * A method to read input to prevent copied code
@@ -62,35 +57,32 @@ public class PlayScreen {
             this.campaign = campaign.getCampaign(readLine());
         }
 
-        // Load the maps in the campaign to a Map List
-        List<String> mapNames = campaign.getMapNames();
-        for(String map : mapNames) {
-            levels.add(campaign.getMap(map));
+        // The number of levels played
+        int levelsPlayed = 0;
+        // Indicator if the user has finished a map or not
+        boolean playing = true;
+
+        while(levelsPlayed <= this.campaign.getNumLevels()) {
+            if(playing == true) {
+                // Get the current map being played according to the level
+                // This currentMap has the player character and the level adjusted
+                Map currentMap = this.campaign.nextLevel(levelsPlayed, this.character);
+
+                // TODO load an existing map from campaign
+                //currentMap = new MapFrame().makeFrame("Map");
+
+                // TODO When player reaches Exit point, set playing = false
+                playing = false;
+            }
+
+            if(playing == false) {
+                // Get the next level to play
+                levelsPlayed += 1;
+                // The player character goes up a level since it finished a map
+                this.character.setLevel(this.character.getLevel() + 1);
+                playing = true;
+            }
         }
-
-        // Get the current map being played according to the level
-        Map currentMap = levels.get(level - 1);
-
-        /* TODO Add character player to the map
-         * currentMap.addPlayer(this.character);
-         */
-
-        /* TODO Modify the level of the characters on the map according to the player
-         * ArrayList<Character> mapChars = currentMap.getCharacters()
-         * for each mapChar in mapChars
-         *      mapChar.setLevel(character.getLevel());
-         * currentMap.setCharacters(mapChars);
-         */
-
-        /* TODO Set the enhance of the items on a map according to the level
-         * Set<Items> mapItems = currenMap.getItems()
-         * for each item in mapItems
-         *      item.setItemOnMapEnhancement(this.level);
-         * currenMap.setItems(mapItems);
-         */
-
-        // TODO load an existing map from campaign
-        //currentMap = new MapFrame().makeFrame("Map");
 
         // TODO change this is done as the user clicks on a character on a map
         // TODO when campaign and map are working as they should
