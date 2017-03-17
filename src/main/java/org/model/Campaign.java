@@ -1,5 +1,6 @@
 package main.java.org.model;
 
+import main.java.org.Service.GameGenerator;
 import main.java.org.Service.ObjectLoader;
 
 import javax.xml.bind.JAXBContext;
@@ -12,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Class to allow user to create and edit Campaign
@@ -22,7 +24,6 @@ import java.util.List;
  */
 @XmlRootElement
 public class Campaign implements Serializable {
-
     //private List<Map> levels;
     private ArrayList<String> mapNames = new ArrayList<>();
     private String name;
@@ -142,6 +143,51 @@ public class Campaign implements Serializable {
         if(mapNames.size() != 0)
             mapNames.remove(mapNames.size() - 1);
         this.numLevels -= 1;
+    }
+
+    /**
+     * A method to get the map to play and that goes back to main menu if the campaign is finished.
+     *
+     * @param levelsPlayed the number of levels already played in this campaign
+     * @param character the player character to be added to the map
+     * @return the map to play or go back to main menu
+     */
+    public Map nextLevel(int levelsPlayed, Character character) throws Exception {
+        // Check if there are any levels left to play
+        if(levelsPlayed <= numLevels) {
+            //get the name of the next level to play
+            String nextMap = this.mapNames.get(levelsPlayed);
+            // Set the current map to the next map to play
+            Map currentMap = getMap(nextMap);
+
+            // Add character player to the map
+            currentMap.addPlayer(character);
+
+            // Modify the level of the characters on the map according to the player
+            List<Character> mapChars = currentMap.getNonPLayerCharacters();
+            for (Character mapChar : mapChars) {
+                mapChar.setLevel(character.getLevel());
+            }
+            currentMap.setNonPlayerCharacters(mapChars);
+
+            // Set the enhance of the items on a map according to the level
+            BackPackInventory chest = currentMap.getChest();
+            Set<Item> chestItems = chest.getItems();
+            for(Item item : chestItems) {
+                item.setItemOnMapEnhancement(character.getLevel());
+            }
+            chest.setItems(chestItems);
+            currentMap.setChest(chest);
+
+            return currentMap;
+        }
+        // The game is finished! Go back to main menu
+        else {
+            System.out.println("CONGRATULATIONS YOU WON!!");
+            GameGenerator game = new GameGenerator();
+            game.showMenuToStartTheGame();
+        }
+        return null;
     }
 
     /**
