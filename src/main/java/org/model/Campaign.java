@@ -170,7 +170,7 @@ public class Campaign implements Serializable {
 
             // Set the enhance of the items on a map according to the level
             BackPackInventory chest = currentMap.getChest();
-            Set<Item> chestItems = chest.getItems();
+            List<Item> chestItems = chest.getItems();
             for(Item item : chestItems) {
                 item.setItemOnMapEnhancement(character.getLevel());
             }
