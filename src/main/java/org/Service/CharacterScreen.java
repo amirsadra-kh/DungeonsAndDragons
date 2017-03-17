@@ -82,41 +82,54 @@ public class CharacterScreen {
 
         character.setCharName(charName);
 
+        System.out.println("The hit points of the character before items have been added: " +character.getHitPoints());
+
         // Set the backpack for this character
         BackPackInventory backpack = new BackPackInventory();
         // Ask user what they want to have in the backpack and use that as an input to the method below.
-        List<Item> backpackItems = new ArrayList<Item>();
-        System.out.println("The backpack inventory choices: ");
-        userChooseItems(backpackItems, ability, wearing);
-        backpack.setItems(backpackItems);
-        character.setBackPackInventory(backpack);
-
-        System.out.println(ability.toString());
+        List<Item> backpackItems = new ArrayList<>();
+        System.out.println("Would you like to choose the backpack items for the character? Y/N");
+        while (true) {
+            String answer = readInput.readLine().trim().toLowerCase();
+            if (answer.equals("y")) {
+                System.out.println("The backpack inventory choices: ");
+                userChooseItems(backpackItems, ability, wearing, character);
+                backpack.setItems(backpackItems);
+                character.setBackPackInventory(backpack);
+                break;
+            } else if (answer.equals("n")) {
+                break;
+            } else {
+                System.out.println("Sorry, I didn't catch that. Please answer y/n");
+            }
+        }
 
         // Get the user to choose items for the character to wear
-        List<Item> listWearingItems = new ArrayList<>(wearingItem);
-        wearing = true;
-        System.out.println("The character's item wearing choices: ");
-        userChooseItems(listWearingItems, ability, wearing);
-        wearingItem = new HashSet<>(listWearingItems);
+        System.out.println("Would you like to choose the wearing items for the character? Y/N");
+        while (true) {
+            String answer = readInput.readLine().trim().toLowerCase();
+            if (answer.equals("y")) {
+                wearing = true;
+                List<Item> listWearingItems = new ArrayList<>(wearingItem);
+                System.out.println("The character's item wearing choices: ");
+                userChooseItems(listWearingItems, ability, wearing, character);
+                wearingItem = new HashSet<>(listWearingItems);
+                break;
+            } else if (answer.equals("n")) {
+                break;
+            } else {
+                System.out.println("Sorry, I didn't catch that. Please answer y/n");
+            }
+        }
 
         character.setItemsWearing(wearingItem);
 
-        System.out.println("THE CHARACTER HAS :");
-        System.out.println(ability.toString());
-        System.out.println("iT WEARS " + wearingItem);
-
-        /* TODO fix backpack setItems, presently crash
-        Item item = new Item();
-        new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
-        item=item.loadItem(readLine());
-        backpack.setItems(Arrays.asList(item.getItem()));
-        */
+        System.out.println("The character wear " + wearingItem);
 
         System.out.println(ability.toString());
+        System.out.println(character.charString());
 
-
-        // TODO charName should be the path of the character
+        // Save the character
         ObjectSaver os = new ObjectSaver();
         try {
             os.saveCharacter(charName, character);
@@ -230,6 +243,50 @@ public class CharacterScreen {
      */
 
     private Character editWearingItem(Character character) {
+        boolean wearing = true;
+        Set<Item> wearingItem = character.getItemsWearing();
+        Ability ability = character.getAbility();
+
+        // Get the user to choose items for the character to wear
+        System.out.println("Would you like to add to the wearing items for the character? Y/N");
+        while (true) {
+            String answer = readInput.readLine().trim().toLowerCase();
+            if (answer.equals("y")) {
+                wearing = true;
+                List<Item> listWearingItems = new ArrayList<>(wearingItem);
+                System.out.println("The character's item wearing choices: ");
+                userChooseItems(listWearingItems, ability, wearing, character);
+                wearingItem = new HashSet<>(listWearingItems);
+                break;
+            } else if (answer.equals("n")) {
+                break;
+            } else {
+                System.out.println("Sorry, I didn't catch that. Please answer y/n");
+            }
+        }
+
+        character.setItemsWearing(wearingItem);
+        wearingItem = character.getItemsWearing();
+
+        // Get the user to choose items for the character to wear
+        System.out.println("Would you like to remove from the wearing items for the character? Y/N");
+        while (true) {
+            String answer = readInput.readLine().trim().toLowerCase();
+            if (answer.equals("y")) {
+                System.out.println("Choose an item from the list below of the items the character is wearing: ");
+                for(Item item : wearingItem)
+                    System.out.println(item.getName());
+                String itemName = readInput.readLine();
+                Item item = new Item();
+                item = item.loadItem(itemName);
+                wearingItem.remove(item);
+                break;
+            } else if (answer.equals("n")) {
+                break;
+            } else {
+                System.out.println("Sorry, I didn't catch that. Please answer y/n");
+            }
+        }
 
         return character;
     }
@@ -269,31 +326,40 @@ public class CharacterScreen {
      * @param items a list of items o be added to - wearing or backpack
      * @param ability to be modified according to wearing items.
      */
-
-    private void userChooseItems(List<Item> items, Ability ability, boolean wearing) {
+    private void userChooseItems(List<Item> items, Ability ability, boolean wearing, Character character) {
         String answer;
         boolean yn = true;
+        ArrayList<ItemEnum> keys = new ArrayList<ItemEnum>();
+        ItemEnum key;
+        int size = 0;
+        
+        if(wearing)
+            size = 8;
+        else
+            size = 10;
 
-        for (int i = 1; i < items.size() && yn ; i++) {
+        for (int i = 1; i <= size && yn ; i++) {
             System.out.println("Please enter the name of the item no." +i
                     +"  that you want the character to have from the list below:");
             Item item = new Item();
             new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
-            item = item.loadItem(readInput.readLine());
+            item = item.loadItem(readInput.readLine().toUpperCase());
+            key = item.getItem();
+
             if(item == null){
                 System.out.println("This item does not exist");
                 i = i-1;
             }
-            else if((items.contains(item.getItem()))){
+            else if( keys.contains(key) && wearing){
                 System.out.println("You cannot wear the same type of item");
                 i = i-1;
             }else {
-                if(wearing) {
+                if(yn && wearing) {
                     switch (item.getEnhancementType()) {
                         case STRENGTH:
                             ability.setStrength(ability.getStrength() + item.getEnhance());
                             ability.setDamageBonus(item.getEnhance() - 1);
-                            ability.setHitPoints();
+                            character.setHitPoints();
                             break;
                         case CONSTITUTION:
                             ability.setConstitution(ability.getConstitution() + item.getEnhance());
@@ -318,12 +384,8 @@ public class CharacterScreen {
                 }
 
                 items.add(item);
+                keys.add(item.getItem());
 
-                System.out.println("Your Item had the followings:" + item.toString());
-                if(wearing) {
-                    System.out.println("According to this new item your character have the following ability");
-                    System.out.println(ability.toString());
-                }
                 System.out.println("do you  want to add the another item ? Y/N");
 
                 while (true) {
