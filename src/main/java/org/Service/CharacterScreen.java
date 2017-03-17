@@ -94,9 +94,11 @@ public class CharacterScreen {
         System.out.println(ability.toString());
 
         // Get the user to choose items for the character to wear
+        List<Item> listWearingItems = new ArrayList<>(wearingItem);
         wearing = true;
         System.out.println("The character's item wearing choices: ");
-        userChooseItems((List<Item>) wearingItem, ability, wearing);
+        userChooseItems(listWearingItems, ability, wearing);
+        wearingItem = new HashSet<>(listWearingItems);
 
         character.setItemsWearing(wearingItem);
 
@@ -272,7 +274,7 @@ public class CharacterScreen {
         String answer;
         boolean yn = true;
 
-        for (int i = 1; i<8 && yn ; i++) {
+        for (int i = 1; i < items.size() && yn ; i++) {
             System.out.println("Please enter the name of the item no." +i
                     +"  that you want the character to have from the list below:");
             Item item = new Item();
