@@ -126,17 +126,37 @@ public class CharacterScreen {
         BackPackInventory backpack = new BackPackInventory();
         // Ask user what they want to have in the backpack and use that as an input to the method below.
         Set<Item> backpackItems = new HashSet<>();
-        System.out.println("The backpack inventory choices: ");
-        userChooseItems(backpackItems, ability, wearing);
-        backpack.setItems(backpackItems);
-        character.setBackPackInventory(backpack);
-
-        System.out.println(ability.toString());
+        System.out.println("Would you like to choose the backpack items for the character? Y/N");
+        while (true) {
+            String answer = readLine().trim().toLowerCase();
+            if (answer.equals("y")) {
+                System.out.println("The backpack inventory choices: ");
+                userChooseItems(backpackItems, ability, wearing);
+                backpack.setItems(backpackItems);
+                character.setBackPackInventory(backpack);
+                break;
+            } else if (answer.equals("n")) {
+                break;
+            } else {
+                System.out.println("Sorry, I didn't catch that. Please answer y/n");
+            }
+        }
 
         // Get the user to choose items for the character to wear
-        wearing = true;
-        System.out.println("The character's item wearing choices: ");
-        userChooseItems(wearingItem, ability, wearing);
+        System.out.println("Would you like to choose the wearing items for the character? Y/N");
+        while (true) {
+            String answer = readLine().trim().toLowerCase();
+            if (answer.equals("y")) {
+                wearing = true;
+                System.out.println("The character's item wearing choices: ");
+                userChooseItems(wearingItem, ability, wearing);
+                break;
+            } else if (answer.equals("n")) {
+                break;
+            } else {
+                System.out.println("Sorry, I didn't catch that. Please answer y/n");
+            }
+        }
 
         character.setItemsWearing(wearingItem);
 
@@ -319,7 +339,7 @@ public class CharacterScreen {
             size = 10;
 
 
-        for (int i = 1; i < size && yn ; i++) {
+        for (int i = 1; i <= size && yn ; i++) {
             System.out.println("Please enter the name of the item no." +i
                     +"  that you want the character to have from the list below:");
             Item item = new Item();
