@@ -9,11 +9,7 @@ package main.java.org.model;
  */
 public class Ability {
     RollDice dice6 = new RollDice(6);
-    RollDice dice10 = new RollDice(10);
 
-    private int dice = dice10.roll();
-
-    private int hitPoints = dice;
     public int level;
     private int armorClass;
     private int attackBonus;
@@ -72,23 +68,6 @@ public class Ability {
         this.dexterity.set(value);
     }
 
-    /**
-     * This method set the HitPoint base on the Strength and Modifier.
-     * @return integer value of the HitPoints
-     * @todo This method should be move where we do an attack, it does not belong in ability.
-     */
-    public void setHitPoints() {
-        this.hitPoints = this.strength.modifier() + dice;
-    }
-
-    /**
-     * @todo This method should be move where we do an attack, it does not belong in ability.
-     * @return the hitPoints
-     */
-    public int getHitPoints() {
-        return this.hitPoints;
-    }
-
     public int getArmorClass() {
         return this.armorClass;
     }
@@ -130,11 +109,10 @@ public class Ability {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        setHitPoints();
         sb.append("Ability{strength = ").append(strength.get()).append(", strength modifier = ").append(strength.modifier());
         sb.append(", constitution=").append(constitution.get()).append(", constitution modifier = ").append(constitution.modifier());
         sb.append(", dexterity=").append(dexterity.get()).append(", dexterity modifier = ").append(dexterity.modifier());
-        sb.append(", hitPoints=").append(getHitPoints()).append(", level=").append(this.level).append(", armorClass=").append( this.armorClass);
+        sb.append(", level=").append(this.level).append(", armorClass=").append( this.armorClass);
         sb.append( ", attackBonus=").append(this.attackBonus).append(", damageBonus=").append(this.damageBonus).append('}');
         return sb.toString();
     }
