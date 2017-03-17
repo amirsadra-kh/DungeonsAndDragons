@@ -35,6 +35,9 @@ public class BackPackInventory {
             Item lastItem = getLastItem();
             this.items.remove(lastItem);
         }
+        if(this.items.size() == MAX_ITEMS){
+            System.out.println("The backpack is full!! Cannot add more items!");
+        }
     }
 
     /**
