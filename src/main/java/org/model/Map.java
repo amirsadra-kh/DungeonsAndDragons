@@ -169,6 +169,14 @@ public class Map implements Serializable {
     }
 
     /**
+     * A method for adding characters to map using CharacterEditor
+     * @param character to be added
+     */
+    public void setCharacter(Character character) {
+        //TODO something?
+    }
+
+    /**
      * A method to set the chest of a map
      * @param chest a BackPackInventory object with Item objects.
      */
