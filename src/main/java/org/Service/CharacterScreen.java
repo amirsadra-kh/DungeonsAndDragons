@@ -2,7 +2,9 @@ package main.java.org.Service;
 import main.java.org.model.*;
 import main.java.org.model.Character;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.io.IOException;
 
@@ -83,7 +85,7 @@ public class CharacterScreen {
         // Set the backpack for this character
         BackPackInventory backpack = new BackPackInventory();
         // Ask user what they want to have in the backpack and use that as an input to the method below.
-        Set<Item> backpackItems = new HashSet<>();
+        List<Item> backpackItems = new ArrayList<Item>();
         System.out.println("The backpack inventory choices: ");
         userChooseItems(backpackItems, ability, wearing);
         backpack.setItems(backpackItems);
@@ -94,7 +96,7 @@ public class CharacterScreen {
         // Get the user to choose items for the character to wear
         wearing = true;
         System.out.println("The character's item wearing choices: ");
-        userChooseItems(wearingItem, ability, wearing);
+        userChooseItems((List<Item>) wearingItem, ability, wearing);
 
         character.setItemsWearing(wearingItem);
 
@@ -266,7 +268,7 @@ public class CharacterScreen {
      * @param ability to be modified according to wearing items.
      */
 
-    private void userChooseItems(Set<Item> items, Ability ability, boolean wearing) {
+    private void userChooseItems(List<Item> items, Ability ability, boolean wearing) {
         String answer;
         boolean yn = true;
 

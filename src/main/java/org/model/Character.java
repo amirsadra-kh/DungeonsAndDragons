@@ -3,6 +3,8 @@ package main.java.org.model;
 import java.awt.*;
 import java.util.*;
 import main.java.org.Service.Observer;
+
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -103,7 +105,7 @@ public class Character {
 
     }
 
-    public Set<Item> getBackPackInventory() {
+    public List<Item> getBackPackInventory() {
         return backPackInventory.getItems();
     }
 

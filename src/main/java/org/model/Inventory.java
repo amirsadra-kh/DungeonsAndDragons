@@ -15,8 +15,8 @@ import main.java.org.Service.Observer;
  */
 public class Inventory {
     private List<Observer> observers = new ArrayList<>();
-    protected Set<Item> items;
-    private Set<Item> state;
+    protected List<Item> items;
+    private List<Item> state;
 
     /**
      * A Constructor for Inventory
@@ -28,7 +28,7 @@ public class Inventory {
      * A method to get the items in the inventory
      * @return a set of inventory items
      */
-    public Set<Item> getItems() {
+    public List<Item> getItems() {
         return this.items;
     }
 
@@ -37,7 +37,7 @@ public class Inventory {
      * @param character that has items
      */
     public void setItems(Character character) {
-        Set<Item> backpack = character.getBackPackInventory();
+        List<Item> backpack = character.getBackPackInventory();
         Set<Item> itemsWearing = character.getItemsWearing();
         items = backpack;
         items.addAll(itemsWearing);
@@ -54,7 +54,7 @@ public class Inventory {
      * A method to get the state of the inventory
      * @return state of the inventory
      */
-    public Set<Item> getState() {
+    public List<Item> getState() {
         return this.state;
     }
 
@@ -62,7 +62,7 @@ public class Inventory {
      * A method to set the state of the inventory
      * @param state for the inventory
      */
-    public void setState(Set<Item>  state) {
+    public void setState(List<Item>  state) {
         this.state = state;
         notifyAllObservers();
     }
