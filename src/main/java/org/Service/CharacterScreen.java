@@ -122,6 +122,8 @@ public class CharacterScreen {
 
         character.setCharName(charName);
 
+        System.out.println("The hit points of the character before items have been added: " +character.getHitPoints());
+
         // Set the backpack for this character
         BackPackInventory backpack = new BackPackInventory();
         // Ask user what they want to have in the backpack and use that as an input to the method below.
@@ -131,7 +133,7 @@ public class CharacterScreen {
             String answer = readLine().trim().toLowerCase();
             if (answer.equals("y")) {
                 System.out.println("The backpack inventory choices: ");
-                userChooseItems(backpackItems, ability, wearing);
+                userChooseItems(backpackItems, ability, wearing, character);
                 backpack.setItems(backpackItems);
                 character.setBackPackInventory(backpack);
                 break;
@@ -149,7 +151,7 @@ public class CharacterScreen {
             if (answer.equals("y")) {
                 wearing = true;
                 System.out.println("The character's item wearing choices: ");
-                userChooseItems(wearingItem, ability, wearing);
+                userChooseItems(wearingItem, ability, wearing, character);
                 break;
             } else if (answer.equals("n")) {
                 break;
@@ -162,17 +164,10 @@ public class CharacterScreen {
 
         System.out.println("The character wear " + wearingItem);
 
-        /* TODO fix backpack setItems, presently crash
-        Item item = new Item();
-        new ObjectLoader().showItemNames("src/main/java/org/resources/items/");
-        item=item.loadItem(readLine());
-        backpack.setItems(Arrays.asList(item.getItem()));
-        */
-
         System.out.println(ability.toString());
+        System.out.println(character.charString());
 
-
-        // TODO charName should be the path of the character
+        // Save the character
         ObjectSaver os = new ObjectSaver();
         try {
             os.saveCharacter(charName, character);
@@ -286,6 +281,48 @@ public class CharacterScreen {
      */
 
     private Character editWearingItem(Character character) {
+        boolean wearing = true;
+        Set<Item> wearingItem = character.getItemsWearing();
+        Ability ability = character.getAbility();
+
+        // Get the user to choose items for the character to wear
+        System.out.println("Would you like to add to the wearing items for the character? Y/N");
+        while (true) {
+            String answer = readLine().trim().toLowerCase();
+            if (answer.equals("y")) {
+                wearing = true;
+                System.out.println("The character's item wearing choices: ");
+                userChooseItems(wearingItem, ability, wearing, character);
+                break;
+            } else if (answer.equals("n")) {
+                break;
+            } else {
+                System.out.println("Sorry, I didn't catch that. Please answer y/n");
+            }
+        }
+
+        character.setItemsWearing(wearingItem);
+        wearingItem = character.getItemsWearing();
+
+        // Get the user to choose items for the character to wear
+        System.out.println("Would you like to remove from the wearing items for the character? Y/N");
+        while (true) {
+            String answer = readLine().trim().toLowerCase();
+            if (answer.equals("y")) {
+                System.out.println("Choose an item from the list below of the items the character is wearing: ");
+                for(Item item : wearingItem)
+                    System.out.println(item.getName());
+                String itemName = readLine();
+                Item item = new Item();
+                item = item.loadItem(itemName);
+                wearingItem.remove(item);
+                break;
+            } else if (answer.equals("n")) {
+                break;
+            } else {
+                System.out.println("Sorry, I didn't catch that. Please answer y/n");
+            }
+        }
 
         return character;
     }
@@ -326,7 +363,7 @@ public class CharacterScreen {
      * @param ability to be modified according to wearing items.
      */
 
-    private void userChooseItems(Set<Item> items, Ability ability, boolean wearing) {
+    private void userChooseItems(Set<Item> items, Ability ability, boolean wearing, Character character) {
         String answer;
         boolean yn = true;
         ArrayList<ItemEnum> keys = new ArrayList<ItemEnum>();
@@ -360,7 +397,7 @@ public class CharacterScreen {
                         case STRENGTH:
                             ability.setStrength(ability.getStrength() + item.getEnhance());
                             ability.setDamageBonus(item.getEnhance() - 1);
-                            ability.setHitPoints();
+                            character.setHitPoints();
                             break;
                         case CONSTITUTION:
                             ability.setConstitution(ability.getConstitution() + item.getEnhance());

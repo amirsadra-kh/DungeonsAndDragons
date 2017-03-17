@@ -23,6 +23,12 @@ public class Character {
     private Set<Item> itemsWearing;
     private int level;
 
+    RollDice dice10 = new RollDice(10);
+
+    private int dice = dice10.roll();
+
+    private int hitPoints = dice;
+
     private java.util.List<Observer> observers = new ArrayList<>();
     private Ability state;
 
@@ -58,6 +64,26 @@ public class Character {
     }
 
     /**
+     * This method set the HitPoint base on the Strength and Modifier.
+     * @return integer value of the HitPoints
+     * @todo This method should be move where we do an attack, it does not belong in ability.
+     */
+    public void setHitPoints() {
+        Strength strength = new Strength();
+        int integerStrength  = this.ability.getStrength();
+        strength.set(integerStrength);
+        this.hitPoints = strength.modifier() + dice;
+    }
+
+    /**
+     * @todo This method should be move where we do an attack, it does not belong in ability.
+     * @return the hitPoints
+     */
+    public int getHitPoints() {
+        return this.hitPoints;
+    }
+
+    /**
      * A method for initializing the ability for the character
      *
      * @param ability object to be used to set the ability of this character
@@ -78,6 +104,7 @@ public class Character {
      */
     public void setItemsWearing(Set<Item> items) {
         this.itemsWearing = items;
+        setHitPoints();
     }
 
     /**
@@ -125,8 +152,8 @@ public class Character {
         this.charName = name;
     }
 
-    public void charString() {
-        String character = this.charName +"," +this.ability.toString();
+    public String charString() {
+        return "Name: " +this.charName +"\nAbility: " +this.ability.toString() +"\nHit points: " +this.hitPoints;
     }
 
     /**
