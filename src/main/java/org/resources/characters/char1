@@ -1,67 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_101" class="java.beans.XMLDecoder">
- <object class="main.java.org.model.Character">
-  <void property="ability">
-   <object class="main.java.org.model.Ability" id="Ability0">
-    <void class="main.java.org.model.Ability" method="getField">
-     <string>level</string>
-     <void method="set">
-      <object idref="Ability0"/>
-      <int>1</int>
-     </void>
-    </void>
-    <void property="constitution">
-     <int>6</int>
-    </void>
-    <void property="dexterity">
-     <int>12</int>
-    </void>
-    <void property="strength">
-     <int>9</int>
-    </void>
-   </object>
-  </void>
-  <void property="itemsWearing">
-   <object class="java.util.HashSet">
-    <void method="add">
-     <object class="main.java.org.model.Item">
-      <void property="enhance">
-       <int>3</int>
-      </void>
-      <void property="enhancementType">
-       <object class="java.lang.Enum" method="valueOf">
-        <class>main.java.org.model.EnhancementTypesEnum</class>
-        <string>ARMORCLASS</string>
-       </object>
-      </void>
-      <void property="item">
-       <object class="java.lang.Enum" method="valueOf">
-        <class>main.java.org.model.ItemEnum</class>
-        <string>BOOTS</string>
-       </object>
-      </void>
-     </object>
-    </void>
-    <void method="add">
-     <object class="main.java.org.model.Item">
-      <void property="enhance">
-       <int>1</int>
-      </void>
-      <void property="enhancementType">
-       <object class="java.lang.Enum" method="valueOf">
-        <class>main.java.org.model.EnhancementTypesEnum</class>
-        <string>CONSTITUTION</string>
-       </object>
-      </void>
-      <void property="item">
-       <object class="java.lang.Enum" method="valueOf">
-        <class>main.java.org.model.ItemEnum</class>
-        <string>BELT</string>
-       </object>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
- </object>
-</java>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<character>
+    <ability>
+        <level>1</level>
+        <attackBonus>0</attackBonus>
+        <constitution>8</constitution>
+        <damageBonus>0</damageBonus>
+        <dexterity>15</dexterity>
+        <strength>10</strength>
+    </ability>
+    <backPackInventory>
+        <enhance>1</enhance>
+        <enhancementType>CONSTITUTION</enhancementType>
+        <item>BELT</item>
+    </backPackInventory>
+    <charName>char1</charName>
+    <itemsWearing>
+        <enhance>3</enhance>
+        <enhancementType>ARMORCLASS</enhancementType>
+        <item>BOOTS</item>
+    </itemsWearing>
+    <level>1</level>
+    <playerCharacter>false</playerCharacter>
+</character>

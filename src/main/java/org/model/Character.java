@@ -1,9 +1,16 @@
 package main.java.org.model;
 
 import java.awt.*;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.*;
 import main.java.org.Service.Observer;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 import java.util.Set;
 
@@ -14,9 +21,10 @@ import java.util.Set;
  * @version 1.0
  * @since 2017-02-23
  */
+@XmlRootElement
 public class Character {
     private BackPackInventory backPackInventory;
-    private Point currentPosition = new Point(0,0);
+    private Point currentPosition;
     private Ability ability;
     private boolean isPlayerCharacter;
     private String charName;
@@ -36,6 +44,11 @@ public class Character {
      * Empty Character Constructor
      */
     public Character() {
+    }
+
+    public void newCharacter() {
+        this.isPlayerCharacter = false;
+        this.level = 1;
     }
 
     /**
@@ -131,6 +144,7 @@ public class Character {
      *
      * @return the items the character is wearing.
      */
+    @XmlElement
     public Set<Item> getItemsWearing() {
         return this.itemsWearing;
     }
@@ -159,6 +173,7 @@ public class Character {
      *
      * @return a list of items that are in the backpack
      */
+    @XmlElement
     public List<Item> getBackPackInventory() {
         return backPackInventory.getItems();
     }
@@ -213,6 +228,40 @@ public class Character {
      */
     public String charString() {
         return "Name: " +this.charName +"\nAbility: " +this.ability.toString() +"\nHit points: " +this.hitPoints;
+    }
+
+    /**
+     * A method for saving a character
+     */
+    public void saveCharacter()  {
+        JAXBContext context = null;
+        try {
+            context = JAXBContext.newInstance(Character.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            m.marshal(this,new FileOutputStream("src/main/java/org/resources/characters/"+this.charName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * A method for loading an existing character
+     *
+     * @param name of the character
+     * @return an existing character object
+     */
+    public Campaign loadCharacter(String name){
+        try {
+            JAXBContext jc = JAXBContext.newInstance(Character.class);
+            Unmarshaller u = null;
+            u = jc.createUnmarshaller();
+            File f = new File("src/main/java/org/resources/character/"+name);
+            return (Campaign) u.unmarshal(f);
+        } catch (Exception e) {
+            //e.printStackTrace();
+            return null;
+        }
     }
 
     /**

@@ -13,7 +13,6 @@ import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Class to allow user to create and edit Campaign
@@ -24,7 +23,6 @@ import java.util.Set;
  */
 @XmlRootElement
 public class Campaign implements Serializable {
-    //private List<Map> levels;
     private ArrayList<String> mapNames = new ArrayList<>();
     private String name;
     private int numLevels;
@@ -46,24 +44,17 @@ public class Campaign implements Serializable {
     }
 
     /**
-     * This is the method for returning finished campaigns
-     * @param mapNames these are a list of maps which were used to create or modify the campaign
-     * @return Campaign A new campaign created by the user or an edited campaign
+     * A method to set the name of the campaign object
+     * @param name the name to be set
      */
-    private Campaign generateCampaign(ArrayList<String> mapNames,  String name, int numLevels) {
-        Campaign campaign = new Campaign(mapNames, name, numLevels);
-        return campaign;
-    }
-
-    /*
-    public List<Map> getLevels() {
-        return levels;
-    }
-    */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * A method fot getting the name of a campaign
+     * @return the name as a String
+     */
     public String getName() { return this.name; }
 
     /**
@@ -74,6 +65,11 @@ public class Campaign implements Serializable {
     public int getNumLevels() {
         return this.numLevels;
     }
+
+    /**
+     * A method for getting the mapNames of the campaign
+     * @return a list of strings containing the map names
+     */
     @XmlElement
     public List<String> getMapNames() {
         return  mapNames;
@@ -131,12 +127,11 @@ public class Campaign implements Serializable {
         return loadCampaign(campName);
     }
 
-    /*
-    public void setLevels(List<Map> levels) {
-
-        this.levels = levels;
-    }
-    */
+    /**
+     * A method to remove the last map or level in a campaign
+     *
+     * @param mapNames the list of mapNames in the campaign
+     */
     public void removeLevel(List<String> mapNames) {
         if(mapNames.size() != 0)
             mapNames.remove(mapNames.size() - 1);

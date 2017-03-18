@@ -61,6 +61,7 @@ public class CharacterScreen {
         Set<Item> wearingItem = new HashSet<>();
 
         Character character = new Character();
+        character.newCharacter();
         Ability ability = new Ability();
         character.setAbility(ability);
         boolean wearing = false;
@@ -130,12 +131,7 @@ public class CharacterScreen {
         System.out.println(character.charString());
 
         // Save the character
-        ObjectSaver os = new ObjectSaver();
-        try {
-            os.saveCharacter(charName, character);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        character.saveCharacter();
     }
 
     /**
@@ -146,13 +142,13 @@ public class CharacterScreen {
     public void editCharacterScreen() throws Exception {
         String charName = "";
         int choice = 0;
+        Character character = new Character();
 
         System.out.println("Please enter the name of the character you would like to edit");
         charName = readInput.readStringHandling(charName);
 
-        // TODO charName should be the path of the character
-        ObjectLoader ol = new ObjectLoader();
-        Character character = ol.loadCharacterFromXML(charName);
+        // Load the character for editing
+        character.loadCharacter(charName);
 
         // What does the user want to edit about the character?
         System.out.println("Which of these would you like to edit?");
@@ -367,22 +363,7 @@ public class CharacterScreen {
             save = readInput.readStringHandling(save);
         }
         if(save.equals("Y") || save.equals("y"))
-            Save(charName, character);
-    }
-
-    /**
-     * A method for overriding the edited character and exit the game
-     *
-     * @param charName name of the character
-     * @param character the character object
-     */
-    private void Save(String charName, Character character) {
-        ObjectSaver os = new ObjectSaver();
-        try {
-            os.saveCharacter(charName, character);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+            character.saveCharacter();
     }
 
     /**
