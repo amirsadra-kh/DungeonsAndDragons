@@ -184,4 +184,22 @@ public class Character {
             observer.update();
         }
     }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "backPackInventory=" + backPackInventory +
+                ", currentPosition=" + currentPosition +
+                ", ability=" + ability +
+                ", isPlayerCharacter=" + isPlayerCharacter +
+                ", charName='" + charName + '\'' +
+                ", itemsWearing=" + itemsWearing +
+                ", level=" + level +
+                ", dice10=" + dice10 +
+                ", dice=" + dice +
+                ", hitPoints=" + hitPoints +
+                ", observers=" + observers +
+                ", state=" + state +
+                '}';
+    }
 }
