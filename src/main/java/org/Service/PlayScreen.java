@@ -1,9 +1,7 @@
 package main.java.org.Service;
 
-import main.java.org.model.Campaign;
+import main.java.org.model.*;
 import main.java.org.model.Character;
-import main.java.org.model.Inventory;
-import main.java.org.model.Map;
 import main.java.org.view.MapFrame;
 
 import java.util.Scanner;
@@ -18,16 +16,7 @@ import java.util.Scanner;
 public class PlayScreen {
     private Character character;
     private Campaign campaign;
-
-    /**
-     * A method to read input to prevent copied code
-     *
-     * @return a String input from user
-     */
-    private String readLine() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
+    private ReadInput readInput = new ReadInput();
 
     /**
      *  A basic interaction screen after the user chooses Play
@@ -39,22 +28,25 @@ public class PlayScreen {
         System.out.println("Please enter the name of the character you would like to play from the list below: ");
         this.character = new Character();
         ol.showItemNames("src/main/java/org/resources/characters/");
-        this.character = ol.loadCharacterFromXML(readLine());
+        this.character = ol.loadCharacterFromXML(readInput.readLine());
 
         while(this.character == null) {
             System.out.println("This character does not exist! Please try again: ");
-            this.character = ol.loadCharacterFromXML(readLine());
+            this.character = ol.loadCharacterFromXML(readInput.readLine());
         }
+
+        // Set the character chosen to player character
+        character.setPlayerCharacter(true);
 
         // Get the user to choose an existing map from a list to play
         System.out.println("Please enter the name of the campaign you would like to play from the list below: ");
         this.campaign = new Campaign();
         ol.showItemNames("src/main/java/org/resources/campaigns/");
-        this.campaign = campaign.getCampaign(readLine());
+        this.campaign = campaign.getCampaign(readInput.readLine());
 
         while(this.campaign == null) {
             System.out.println("This campaign does not exist! Please try again: ");
-            this.campaign = campaign.getCampaign(readLine());
+            this.campaign = campaign.getCampaign(readInput.readLine());
         }
 
         // The number of levels played
@@ -92,11 +84,11 @@ public class PlayScreen {
         System.out.println("Please enter the name of the character you would like to observe from the list below: ");
         this.character = new Character();
         ol.showItemNames("src/main/java/org/resources/characters/");
-        observeChar = ol.loadCharacterFromXML(readLine());
+        observeChar = ol.loadCharacterFromXML(readInput.readLine());
 
         while(this.character == null) {
             System.out.println("This character does not exist! Please try again: ");
-            observeChar = ol.loadCharacterFromXML(readLine());
+            observeChar = ol.loadCharacterFromXML(readInput.readLine());
         }
 
         // This gets the character's abilities - Observer
