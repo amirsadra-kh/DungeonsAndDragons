@@ -3,11 +3,13 @@ package main.java.org.model;
 import java.awt.*;
 import java.util.*;
 import main.java.org.Service.Observer;
+
+import java.util.List;
 import java.util.Set;
 
 /**
  * This class is the character object
- * TODO we should be able to equipped the character with items in inventory
+ *
  * @author Parisa Nikzad
  * @version 1.0
  * @since 2017-02-23
@@ -21,30 +23,52 @@ public class Character {
     private Set<Item> itemsWearing;
     private int level;
 
+    // A base line for the hit points
     RollDice dice10 = new RollDice(10);
-
     private int dice = dice10.roll();
-
     private int hitPoints = dice;
 
+    // For the observer
     private java.util.List<Observer> observers = new ArrayList<>();
-    private int state;
+    private Ability state;
 
+    /**
+     * Empty Character Constructor
+     */
+    public Character() {
+    }
+
+    /**
+     * A method for getting the current position of the character
+     *
+     * @return the current position as an x,y point
+     */
     public Point getCurrentPosition() {
         return this.currentPosition;
     }
 
+    /**
+     * A method for setting the current position of a character
+     *
+     * @param currentPosition an x,y point of the character on a map
+     */
     public void setCurrentPosition(Point currentPosition) {
         this.currentPosition = currentPosition;
     }
 
+    /**
+     * A method to get the ability of a character
+     *
+     * @return the ability of a character
+     */
     public Ability getAbility() {
         return ability;
     }
 
     /**
-     * set Level of the Character
-     * @param level
+     * set the level of the Character
+     *
+     * @param level a level integer to change the level to.
      */
     public void setLevel(int level) {
         this.level = level;
@@ -52,16 +76,15 @@ public class Character {
 
     /**
      * Get the level of the character
-     * @return level of the character
+     *
+     * @return the level of the character
      */
     public int getLevel() {
         return this.level;
     }
 
     /**
-     * This method set the HitPoint base on the Strength and Modifier.
-     * @return integer value of the HitPoints
-     * @todo This method should be move where we do an attack, it does not belong in ability.
+     * This method set the HitPoints based on the Strength modifier.
      */
     public void setHitPoints() {
         Strength strength = new Strength();
@@ -71,8 +94,9 @@ public class Character {
     }
 
     /**
-     * @todo This method should be move where we do an attack, it does not belong in ability.
-     * @return the hitPoints
+     * This method is for getting the HitPoints of a character
+     *
+     * @return the hitPoints of a character
      */
     public int getHitPoints() {
         return this.hitPoints;
@@ -123,53 +147,101 @@ public class Character {
         return character;
     }
 
+    /**
+     * This method is for attacks when the game is being played.
+     */
     public void attack() {
 
     }
 
-    public BackPackInventory getBackPackInventory() {
-        return backPackInventory;
+    /**
+     * This method is for getting the items in the backpack inventory of a character
+     *
+     * @return a list of items that are in the backpack
+     */
+    public List<Item> getBackPackInventory() {
+        if(backPackInventory!=null){
+            return backPackInventory.getItems();
+        }
+        List<Item> items=new ArrayList<>();
+         items.add(new Item());
+        return items;
     }
 
+    /**
+     * This method is for setting the backpack inventory of a character
+     *
+     * @param backPackInventory the backpack inventory to set the backpack to
+     */
     public void setBackPackInventory(BackPackInventory backPackInventory) {
         this.backPackInventory = backPackInventory;
     }
 
+    /**
+     * This method is for knowing if the character is the player or a non-player character
+     *
+     * @return true or false based in if this is the character being played or not
+     */
     public boolean isPlayerCharacter() {
         return isPlayerCharacter;
     }
 
+    /**
+     * This method is for setting the value of the playerCharacter
+     *
+     * @param playerCharacter true or false based on if this is th echaracter being played or not.
+     */
     public void setPlayerCharacter(boolean playerCharacter) {
         isPlayerCharacter = playerCharacter;
     }
 
+    /**
+     * A method for setting the name of the character.
+     *
+     * @param name of the character
+     */
     public void setCharName(String name) {
         this.charName = name;
     }
 
+    /**
+     * A method for getting the name of a character
+     *
+     * @return the name of the character
+     */
+    public String getCharName() { return this.charName; }
+
+    /**
+     * A method to get the character object as a string
+     *
+     * @return a string containing the name, ability and hitPoints of a character
+     */
     public String charString() {
         return "Name: " +this.charName +"\nAbility: " +this.ability.toString() +"\nHit points: " +this.hitPoints;
     }
 
     /**
-     * A method to get the state of the inventory
+     * A method to get the state of the character's ability
+     *
      * @return state of the inventory
      */
-    public int getState() {
+    public Ability getState() {
         return this.state;
     }
 
     /**
-     * A method to set the state of the inventory
+     * A method to set the state of the character's ability
+     *
      * @param state of the inventory
      */
-    public void setState(int state) {
+    public void setState(Ability state) {
         this.state = state;
         notifyAllObservers();
     }
 
     /**
-     * A method to attach the observer to the inventory
+     * A method to attach the observer to the character's ability
+     *
      * @param observer
      */
     public void attach(Observer observer){

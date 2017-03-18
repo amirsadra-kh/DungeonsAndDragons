@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_74" class="java.beans.XMLDecoder">
+<java version="1.8.0_101" class="java.beans.XMLDecoder">
  <object class="main.java.org.model.Character">
   <void property="ability">
    <object class="main.java.org.model.Ability" id="Ability0">
@@ -11,43 +11,13 @@
      </void>
     </void>
     <void property="constitution">
-     <int>14</int>
-    </void>
-    <void property="damageBonus">
-     <int>1</int>
+     <int>6</int>
     </void>
     <void property="dexterity">
-     <int>14</int>
+     <int>12</int>
     </void>
     <void property="strength">
-     <int>11</int>
-    </void>
-   </object>
-  </void>
-  <void property="backPackInventory">
-   <object class="main.java.org.model.BackPackInventory">
-    <void property="items">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <object class="main.java.org.model.Item">
-        <void property="enhance">
-         <int>1</int>
-        </void>
-        <void property="enhancementType">
-         <object class="java.lang.Enum" method="valueOf">
-          <class>main.java.org.model.EnhancementTypesEnum</class>
-          <string>CONSTITUTION</string>
-         </object>
-        </void>
-        <void property="item">
-         <object class="java.lang.Enum" method="valueOf">
-          <class>main.java.org.model.ItemEnum</class>
-          <string>BELT</string>
-         </object>
-        </void>
-       </object>
-      </void>
-     </object>
+     <int>9</int>
     </void>
    </object>
   </void>
@@ -68,6 +38,25 @@
        <object class="java.lang.Enum" method="valueOf">
         <class>main.java.org.model.ItemEnum</class>
         <string>BOOTS</string>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="main.java.org.model.Item">
+      <void property="enhance">
+       <int>1</int>
+      </void>
+      <void property="enhancementType">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>main.java.org.model.EnhancementTypesEnum</class>
+        <string>CONSTITUTION</string>
+       </object>
+      </void>
+      <void property="item">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>main.java.org.model.ItemEnum</class>
+        <string>BELT</string>
        </object>
       </void>
      </object>

@@ -2,7 +2,6 @@ package main.java.org.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
 import java.util.Set;
 
 import main.java.org.Service.Observer;
@@ -16,33 +15,54 @@ import main.java.org.Service.Observer;
  */
 public class Inventory {
     private List<Observer> observers = new ArrayList<>();
-    private int state;
-    private BackPackInventory backpack;
-    private Set<Item> itemsWearing;
+    protected List<Item> items=new ArrayList<>();
+    private List<Item> state=new ArrayList<>();
 
     /**
-     * A method for getting the inventory from a character.
-     *
-     * @param character either the player or a monster from a map
+     * A Constructor for Inventory
      */
-    public void Inventory(Character character) {
-        this.itemsWearing = character.getItemsWearing();
-        this.backpack = character.getBackPackInventory();
+    public void Inventory() {
+    }
+
+    /**
+     * A method to get the items in the inventory
+     * @return a set of inventory items
+     */
+    public List<Item> getItems() {
+        return this.items;
+    }
+
+    /**
+     * A method to set the items in the inventory
+     * @param character that has items
+     */
+    public void setItems(Character character) {
+        List<Item> backpack = character.getBackPackInventory();
+        Set<Item> itemsWearing = character.getItemsWearing();
+        items = backpack;
+        items.addAll(itemsWearing);
+    }
+
+    @Override
+    public String toString() {
+        String inventoryString;
+        inventoryString = "Items: " +this.items;
+        return inventoryString;
     }
 
     /**
      * A method to get the state of the inventory
      * @return state of the inventory
      */
-    public int getState() {
+    public List<Item> getState() {
         return this.state;
     }
 
     /**
      * A method to set the state of the inventory
-     * @param state of the inventory
+     * @param state for the inventory
      */
-    public void setState(int state) {
+    public void setState(List<Item>  state) {
         this.state = state;
         notifyAllObservers();
     }

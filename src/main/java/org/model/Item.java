@@ -217,10 +217,9 @@ public class Item {
 
     /**
      * This method is for setting the enhance amount of items on a map depending on the level of the character.
-     * @param enhance the enhancement amount
      * @param level the level of the character
      */
-    public void setItemOnMapEnhancement(int enhance, int level) {
+    public void setItemOnMapEnhancement(int level) {
         // Check if the level is a valid number
         if(level < 1) {
             System.out.println("ERROR!! The level of the Character is less than 1!!");

@@ -1,5 +1,6 @@
 package main.java.org.model;
 
+import main.java.org.Service.GameGenerator;
 import main.java.org.Service.ObjectLoader;
 
 import javax.xml.bind.JAXBContext;
@@ -7,25 +8,24 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Class to allow user to create and edit Campaign
 
  * @author Freyja Jokulsdottir
- * @version 1.5
+ * @version 2.0
  * @since 2017-02-05
  */
 @XmlRootElement
 public class Campaign implements Serializable {
-
     //private List<Map> levels;
-    private ArrayList<String> mapNames=new ArrayList<>();
+    private ArrayList<String> mapNames = new ArrayList<>();
     private String name;
     private int numLevels;
 
@@ -124,13 +124,11 @@ public class Campaign implements Serializable {
 
     /**
      * This is the method that retrieves campaigns for editing.
-     * @param campName the path of the campaign.
+     * @param campName the name of the campaign.
      * @return an existing campaign object.
      */
     public Campaign getCampaign(String campName) throws Exception {
-        return this.loadCampaign(campName);
-        //ObjectLoader ol = new ObjectLoader();
-        //return ol.loadCampaignFromXML(campName);
+        return loadCampaign(campName);
     }
 
     /*
@@ -143,6 +141,56 @@ public class Campaign implements Serializable {
         if(mapNames.size() != 0)
             mapNames.remove(mapNames.size() - 1);
         this.numLevels -= 1;
+    }
+
+    /**
+     * A method to get the map to play and that goes back to main menu if the campaign is finished.
+     *
+     * @param levelsPlayed the number of levels already played in this campaign
+     * @param character the player character to be added to the map
+     * @return the map to play or go back to main menu
+     */
+    public Map nextLevel(int levelsPlayed, Character character) throws Exception {
+        // Check if there are any levels left to play
+        if(levelsPlayed <= numLevels) {
+            //get the name of the next level to play
+            if(this.mapNames.size()<levelsPlayed) {
+                String nextMap = this.mapNames.get(levelsPlayed);
+
+                // Set the current map to the next map to play
+                Map currentMap = getMap(nextMap);
+
+                // Add character player to the map
+                currentMap.addPlayer(character);
+
+                // Modify the level of the characters on the map according to the player
+                List<Character> mapChars = currentMap.getNonPLayerCharacters();
+                for (Character mapChar : mapChars) {
+                    mapChar.setLevel(character.getLevel());
+                }
+                currentMap.setNonPlayerCharacters(mapChars);
+
+                // Set the enhance of the items on a map according to the level
+                BackPackInventory chest = currentMap.getChest();
+                if (chest != null) {
+                    List<Item> chestItems = chest.getItems();
+                    for (Item item : chestItems) {
+                        item.setItemOnMapEnhancement(character.getLevel());
+                    }
+                    chest.setItems(chestItems);
+                    currentMap.setChest(chest);
+                }
+                return currentMap;
+            }
+            return null;
+        }
+        // The game is finished! Go back to main menu
+        else {
+            System.out.println("CONGRATULATIONS YOU WON!!");
+            GameGenerator game = new GameGenerator();
+            game.showMenuToStartTheGame();
+        }
+        return null;
     }
 
     /**
