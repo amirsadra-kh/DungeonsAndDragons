@@ -5,11 +5,6 @@ import main.java.org.model.Campaign;
 import main.java.org.model.Character;
 import main.java.org.model.Map;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,28 +14,49 @@ import java.util.List;
  * @version 1.0
  * @since 2017-02-08
  */
-
 public class ObjectLoader extends FileProcessor {
-
-    public static List<Map> loadMaps() {
-        return null;
-    }
     private final static String CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/";
     private final static String MAP_PATH = "src/main/java/org/resources/maps/";
     private final static String CHARACTER_PATH = "src/main/java/org/resources/characters/";
-    //TODO
-    private final static String ITEM_PATH = "";
 
-    // TODO
+    /**
+     * A method to load a list of maps
+     * TODO figure out what the point of this method is.
+     *
+     * @return null
+     */
+    public static List<Map> loadMaps() {
+        return null;
+    }
+
+    /**
+     * A method for loading a list of campaigns
+     * TODO figure out what the point of this method is.
+     *
+     * @return a list of campaigns
+     */
     public static List<Campaign> loadCampaigns() {
         List<Campaign> campaign = (List<Campaign>) loadFile(CAMPAIGN_PATH);
         return campaign;
     }
 
+    /**
+     * A method for loading a list of characters
+     * TODO remove this method? It is not being used.
+     *
+     * @return null
+     */
     public static List<Character> loadCharacters() {
         return null;
     }
 
+    /**
+     * A method to load a map object
+     *
+     * @param mapName the name of the map to be saved
+     * @return
+     * @throws Exception
+     */
     public static Map loadMapFromXML(String mapName) throws Exception {
         return (Map) loadFile(MAP_PATH +mapName);
     }

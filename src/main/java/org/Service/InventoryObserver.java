@@ -21,6 +21,6 @@ public class InventoryObserver extends Observer {
 
     @Override
     public void update(){
-        System.out.println("Character is wearing & has in his backpack: " +inventory.getState());
+        System.out.println("Character is wearing & has in his backpack: " +this.inventory.getState());
     }
 }
