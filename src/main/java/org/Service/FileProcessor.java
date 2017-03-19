@@ -79,15 +79,8 @@ abstract class FileProcessor {
      * This method is is to return  the file names. You may add prefix as well.
      *
      * @param path of the file
-     * @param prefix that can be added to the file name
+     * @param prefixName that can be added to the file name
      * @return filenames the filenames at the path given with the prefix
-     */
-    /**
-     * This class is is to return  the file names. You may add prefix as well.
-     + *
-     + * @author Mehran Ishanian
-     + * @version 1.2
-     + * @since 2017-03-16
      */
     public ArrayList returnItemNames(String path, String prefixName) {
         ArrayList<String> fileArray = new ArrayList();;
