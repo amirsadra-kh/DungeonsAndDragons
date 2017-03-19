@@ -1,12 +1,16 @@
 package main.java.org.view;
 
 import main.java.org.Service.ObjectLoader;
+import main.java.org.model.Character;
 import main.java.org.model.GameConstantsInterface;
 import main.java.org.model.Map;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import static java.lang.Integer.parseInt;
 
@@ -35,6 +39,8 @@ public class MapFrame implements ActionListener {
     private JLabel characterList;
     private JLabel itemLabel;
     private JLabel itemList;
+    private JList characterJList;
+    private JList itemJList;
     private final int SIZE = 9;
     private MapGrid grid = null;
     private boolean newMap = false;
@@ -45,6 +51,7 @@ public class MapFrame implements ActionListener {
     private boolean ExitPointExist= false;
     private boolean MonsterExist= false;
     private String errorValidMap="";
+    private DefaultListModel listModel;
     /**
      * A MapFrame object
      */
@@ -55,32 +62,43 @@ public class MapFrame implements ActionListener {
         newCheckBox.addActionListener(this);
         loadObjectsNames();
     }
-    
-    /**
-     * A method to show a message
-     *
-     * @param message a message to show
-     */
     public static void alert(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
 
 
     /**
-     * This method is is to load Character & Items to the Map and assign to according Labels.
+     * This class is is to load Character & Items to the Map and assign to according Labels.
+     + *
+     + * @author Mehran Ishanian
+     + * @version 1.2
+     + * @since 2017-03-16
      */
     private void loadObjectsNames(){
-        String Characters=new ObjectLoader().returnItemNames("src/main/java/org/resources/characters/", "C");
-        characterList.setText(Characters);
-        String Items=new ObjectLoader().returnItemNames("src/main/java/org/resources/items/", "I");
-        itemList.setText(Items);
+        ArrayList<String> charactersArrayList=new ObjectLoader().returnItemNames("src/main/java/org/resources/characters/", "C");
+        ArrayList<String> itemsArrayList=new ObjectLoader().returnItemNames("src/main/java/org/resources/items/", "I");
+
+        DefaultListModel modelC = new DefaultListModel<String>();
+        for (String c: charactersArrayList) {
+            modelC.addElement(c);
+        }
+
+        DefaultListModel modelI = new DefaultListModel<String>();
+        for (String c: itemsArrayList) {
+            modelI.addElement(c);
+        }
+
+        characterJList.setModel(modelC);
+        characterJList.setDragEnabled(true);
+        characterJList.setSelectedIndex(0);
+
+        itemJList.setModel(modelI);
+        itemJList.setDragEnabled(true);
+        itemJList.setSelectedIndex(0);
+
     }
 
-    /**
-     * An input method
-     *
-     * @param message a message to input
-     */
+
     public String input(String message) {
         return JOptionPane.showInputDialog(message);
     }
@@ -102,11 +120,7 @@ public class MapFrame implements ActionListener {
         return map;
     }
 
-    /**
-     * A method to handle actions
-     *
-     * @param actionEvent
-     */
+
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
@@ -130,7 +144,7 @@ public class MapFrame implements ActionListener {
         } else if (actionEvent.getSource() == saveMapButton) {
             Map map=new Map();
             if (!newMap) {
-                 map = grid.getExistingMap(name);
+                map = grid.getExistingMap(name);
                 rows=map.getRows();
                 cols=map.getCols();
             }
@@ -157,18 +171,29 @@ public class MapFrame implements ActionListener {
                     }
                 }
             }
-if(EntryPointExist==false || ExitPointExist == false || MonsterExist == false){
+            if(EntryPointExist==false || ExitPointExist == false || MonsterExist == false){
 
-    if (EntryPointExist==false){errorValidMap="Please add entry point by E";}
-    if (ExitPointExist==false){errorValidMap="Please add exit point by Q";}
-    if (MonsterExist==false){errorValidMap="Please add Monsters by M";}
+                if (EntryPointExist==false){errorValidMap="Please add entry point by E";}
+                if (ExitPointExist==false){errorValidMap="Please add exit point by Q";}
+                if (MonsterExist==false){errorValidMap="Please add Monsters by M";}
 
                 validMap=false;
                 alert("Not Valid "+errorValidMap);
             }else{
-    map.saveObject();
-    alert("Your map is saved. you may close the map");
-}
+                map.saveObject();
+                alert("Your map is saved. you may close the map");
+            }
+
+
+
+
+
         }
     }
+
+    private void editMap(int rows, int cols, String name) {
+
+    }
+
+
 }
