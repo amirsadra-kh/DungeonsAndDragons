@@ -11,40 +11,13 @@
      </void>
     </void>
     <void property="constitution">
-     <int>17</int>
+     <int>6</int>
     </void>
     <void property="dexterity">
-     <int>18</int>
+     <int>12</int>
     </void>
     <void property="strength">
      <int>9</int>
-    </void>
-   </object>
-  </void>
-  <void property="backPackInventory">
-   <object class="main.java.org.model.BackPackInventory">
-    <void property="items">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <object class="main.java.org.model.Item">
-        <void property="enhance">
-         <int>1</int>
-        </void>
-        <void property="enhancementType">
-         <object class="java.lang.Enum" method="valueOf">
-          <class>main.java.org.model.EnhancementTypes</class>
-          <string>CONSTITUTION</string>
-         </object>
-        </void>
-        <void property="item">
-         <object class="java.lang.Enum" method="valueOf">
-          <class>main.java.org.model.ItemEnum</class>
-          <string>BELT</string>
-         </object>
-        </void>
-       </object>
-      </void>
-     </object>
     </void>
    </object>
   </void>
@@ -53,18 +26,37 @@
     <void method="add">
      <object class="main.java.org.model.Item">
       <void property="enhance">
-       <int>1</int>
+       <int>3</int>
       </void>
       <void property="enhancementType">
        <object class="java.lang.Enum" method="valueOf">
-        <class>main.java.org.model.EnhancementTypes</class>
-        <string>DEXTERITY</string>
+        <class>main.java.org.model.EnhancementTypesEnum</class>
+        <string>ARMORCLASS</string>
        </object>
       </void>
       <void property="item">
        <object class="java.lang.Enum" method="valueOf">
         <class>main.java.org.model.ItemEnum</class>
         <string>BOOTS</string>
+       </object>
+      </void>
+     </object>
+    </void>
+    <void method="add">
+     <object class="main.java.org.model.Item">
+      <void property="enhance">
+       <int>1</int>
+      </void>
+      <void property="enhancementType">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>main.java.org.model.EnhancementTypesEnum</class>
+        <string>CONSTITUTION</string>
+       </object>
+      </void>
+      <void property="item">
+       <object class="java.lang.Enum" method="valueOf">
+        <class>main.java.org.model.ItemEnum</class>
+        <string>BELT</string>
        </object>
       </void>
      </object>

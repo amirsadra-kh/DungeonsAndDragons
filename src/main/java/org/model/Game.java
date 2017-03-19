@@ -4,7 +4,6 @@ package main.java.org.model;
 import main.java.org.Service.GameGenerator;
 import main.java.org.Service.ObjectLoader;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 

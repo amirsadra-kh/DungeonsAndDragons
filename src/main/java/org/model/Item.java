@@ -123,6 +123,13 @@ public class Item {
     }
 
     /**
+     * A method to get the name of an item
+     * @return the name of the item
+     */
+    public String getName() { return this.name; }
+
+
+    /**
      * A method for creating an item
      * @param name of the item to be created
      * @param itemEnum itemEnum of the item to be created
@@ -211,10 +218,9 @@ public class Item {
 
     /**
      * This method is for setting the enhance amount of items on a map depending on the level of the character.
-     * @param enhance the enhancement amount
      * @param level the level of the character
      */
-    public void setItemOnMapEnhancement(int enhance, int level) {
+    public void setItemOnMapEnhancement(int level) {
         // Check if the level is a valid number
         if(level < 1) {
             System.out.println("ERROR!! The level of the Character is less than 1!!");
