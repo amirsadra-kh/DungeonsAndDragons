@@ -131,10 +131,27 @@ public class ItemScreen {
         }
         String item = readLine().toUpperCase();
 
+        // Check if the input of the enum is valid
+        while(!itemsArray.contains(item)) {
+            System.out.println("The Entered Item is not valid! \nPlease enter your item Type from the provided list below:");
+            for (ItemEnum e : ItemEnum.values()) {
+                System.out.println(e.ordinal() + ". " + e.name());
+            }
+
+            item = readLine();
+            for (ItemEnum e : ItemEnum.values()) {
+                itemsArray.add(e.ordinal(), e.name());
+            }
+
+            // Exist while loop is a correct enum is chosen
+            if (itemsArray.contains(item))
+                break;
+        }
+
         while (!itemsArray.contains(item)) {
             System.out.println("The Entered Item is not valid! \nPlease enter your item Type ");
-            item = readLine().toUpperCase();
         }
+        item = readLine().toUpperCase();
 
         System.out.println("ITEM RECEIVED SUCCESSFULLY!");
         return item;
