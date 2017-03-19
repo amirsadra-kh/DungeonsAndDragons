@@ -175,7 +175,12 @@ public class Character {
      */
     @XmlElement
     public List<Item> getBackPackInventory() {
-        return backPackInventory.getItems();
+        if(backPackInventory!=null){
+            return backPackInventory.getItems();
+        }
+        List<Item> items=new ArrayList<>();
+         items.add(new Item());
+        return items;
     }
 
     /**
@@ -299,5 +304,23 @@ public class Character {
         for (Observer observer : this.observers) {
             observer.update();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "Character{" +
+                "backPackInventory=" + backPackInventory +
+                ", currentPosition=" + currentPosition +
+                ", ability=" + ability +
+                ", isPlayerCharacter=" + isPlayerCharacter +
+                ", charName='" + charName + '\'' +
+                ", itemsWearing=" + itemsWearing +
+                ", level=" + level +
+                ", dice10=" + dice10 +
+                ", dice=" + dice +
+                ", hitPoints=" + hitPoints +
+                ", observers=" + observers +
+                ", state=" + state +
+                '}';
     }
 }
