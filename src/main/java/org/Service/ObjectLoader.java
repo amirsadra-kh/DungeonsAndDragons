@@ -64,7 +64,7 @@ public class ObjectLoader extends FileProcessor {
 
     /**
      * Method for loading maps for testing
-     * 
+     *
      * @param mapName the name of the map to test
      * @return a test map object
      * @throws Exception

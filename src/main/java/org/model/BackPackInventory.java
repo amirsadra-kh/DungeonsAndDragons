@@ -13,7 +13,7 @@ import java.util.List;
  * @since 02.08.2017
  */
 public class BackPackInventory {
-    protected List<Item> items=new ArrayList<>();
+    protected List<Item> items = new ArrayList<>();
     // The maximum number of items allowed in the backpack
     private final int MAX_ITEMS = 10;
 
