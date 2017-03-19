@@ -154,30 +154,35 @@ public class Campaign implements Serializable {
         // Check if there are any levels left to play
         if(levelsPlayed <= numLevels) {
             //get the name of the next level to play
-            String nextMap = this.mapNames.get(levelsPlayed);
-            // Set the current map to the next map to play
-            Map currentMap = getMap(nextMap);
+            if(this.mapNames.size()<levelsPlayed) {
+                String nextMap = this.mapNames.get(levelsPlayed);
 
-            // Add character player to the map
-            currentMap.addPlayer(character);
+                // Set the current map to the next map to play
+                Map currentMap = getMap(nextMap);
 
-            // Modify the level of the characters on the map according to the player
-            List<Character> mapChars = currentMap.getNonPLayerCharacters();
-            for (Character mapChar : mapChars) {
-                mapChar.setLevel(character.getLevel());
+                // Add character player to the map
+                currentMap.addPlayer(character);
+
+                // Modify the level of the characters on the map according to the player
+                List<Character> mapChars = currentMap.getNonPLayerCharacters();
+                for (Character mapChar : mapChars) {
+                    mapChar.setLevel(character.getLevel());
+                }
+                currentMap.setNonPlayerCharacters(mapChars);
+
+                // Set the enhance of the items on a map according to the level
+                BackPackInventory chest = currentMap.getChest();
+                if (chest != null) {
+                    List<Item> chestItems = chest.getItems();
+                    for (Item item : chestItems) {
+                        item.setItemOnMapEnhancement(character.getLevel());
+                    }
+                    chest.setItems(chestItems);
+                    currentMap.setChest(chest);
+                }
+                return currentMap;
             }
-            currentMap.setNonPlayerCharacters(mapChars);
-
-            // Set the enhance of the items on a map according to the level
-            BackPackInventory chest = currentMap.getChest();
-            List<Item> chestItems = chest.getItems();
-            for(Item item : chestItems) {
-                item.setItemOnMapEnhancement(character.getLevel());
-            }
-            chest.setItems(chestItems);
-            currentMap.setChest(chest);
-
-            return currentMap;
+            return null;
         }
         // The game is finished! Go back to main menu
         else {
