@@ -18,7 +18,7 @@ public class MapDirectionValidator {
      * @param campaign the campaign that we are playing
      * @return it returns true if player can move
      */
-    static boolean validateDirectionIsValidBoundriesAndMovePlayer(Map map, String direction, Campaign campaign) {
+    public static boolean validateDirectionIsValidBoundriesAndMovePlayer(Map map, String direction, Campaign campaign) {
         Point point =getPlayerCoordinate(map);
         if ("L".equalsIgnoreCase(direction)) {
             return validateAndCheckIfPlayerGoesToNextLevel(map, point.x,point.y-1,campaign);
