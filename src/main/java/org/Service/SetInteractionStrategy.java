@@ -6,7 +6,6 @@ import main.java.org.model.Character;
 import java.awt.*;
 import java.util.List;
 import java.util.Random;
-import java.util.Scanner;
 
 /**
  * this method is to dispatch different behaviour based on the interactions with Monster, ....
@@ -57,11 +56,11 @@ public class SetInteractionStrategy {
             e.printStackTrace();
         }
         //TODO interactWithFriendlyCharacter here
-        Character character = null;
+        Character player = map.getPlayer();
 
         List<Item> friendlyCharacterBackpack, playerBackPack;
         friendlyCharacterBackpack = friendlyCharacter.getBackPackInventory();
-        playerBackPack = character.getBackPackInventory();
+        playerBackPack = player.getBackPackInventory();
 
         System.out.println("Choose an item to exchange with an item from friendly monster: \n"+playerBackPack.toString());
         int itemToGive = Integer.parseInt(readInput.readLine());
@@ -91,11 +90,11 @@ public class SetInteractionStrategy {
      */
     private static void interactWithChest(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
         //TODO interactWithChest here
-        Character character = null;
-        BackPackInventory chest = null;
+        Character player = map.getPlayer();
+        BackPackInventory chest = map.getChest();
         List<Item> loot;
         loot = chest.getItems();
-        character.setBackPackInventory((BackPackInventory) loot);
+        player.setBackPackInventory((BackPackInventory) loot);
     }
 
     /**
@@ -107,7 +106,7 @@ public class SetInteractionStrategy {
      * @param campaign the campaign we are playing
      */
     private static void interactWithMonster(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
-        Character character = null;
+        Character character = map.getPlayer();
 
         Character monster=null;
         try {
@@ -118,7 +117,6 @@ public class SetInteractionStrategy {
         //TODO interactWithMonster here
         Ability ability = character.getAbility();
         monster.decreaseHitPoint(ability.getAttackBonus());
-
     }
     /**
      * This method will have the logic of going to next level
