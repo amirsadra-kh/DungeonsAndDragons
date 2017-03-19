@@ -191,10 +191,7 @@ public class ItemScreen {
         }
 
         String enhancement = readLine().toUpperCase();
-        EnhancementArray = new ArrayList<>();
-        for (EnhancementTypesEnum e : EnhancementTypesEnum.values()) {
-            EnhancementArray.add(e.ordinal(), e.name());
-        }
+
         while (!EnhancementArray.contains(enhancement)) {
             System.out.println("The Entered Enhancement is not valid! \nPlease enter your Enhancement from the provided list below:");
             for (int i = 0; i < EnhancementArray.size(); i++) {
@@ -206,7 +203,6 @@ public class ItemScreen {
             if(EnhancementArray.contains(enhancement)){
                 break;
             }
-            enhancement = readLine().toUpperCase();
         }
         System.out.println("ENHANCEMENT RECEIVED SUCCESSFULLY");
         return enhancement;
