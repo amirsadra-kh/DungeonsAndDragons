@@ -38,12 +38,4 @@ public class AbilityTest {
         System.out.println("Dexterity is " + score);
         System.out.println("Dexterity isxxxx " + ability.getDexterity());
     }
-
-    @Test
-    public void HitPointTest(){
-        int type = ability.getHitPoints();
-        assert ((1 <= type) && (type <= 22));
-    }
-
-
 }

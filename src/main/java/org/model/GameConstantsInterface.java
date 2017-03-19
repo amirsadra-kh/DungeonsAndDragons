@@ -4,13 +4,13 @@ package main.java.org.model;
  * An interface for the game constants used in the main menu as well as in the different object screens
  *
  * @author Maysam Mokarian
+ * @version 2.0
  * @since 02.04.2017
- * @version 1.0
  */
 public interface GameConstantsInterface {
     String CAMPAIGN = "Campaign";
     String CHARACTER = "Character";
-    String MAP ="Map";
+    String MAP = "Map";
     String ITEM = "Item";
     String START = "Start";
     String END = "End";
@@ -24,6 +24,7 @@ public interface GameConstantsInterface {
             "2) Create/Modify Map:\n" +
             "3) Create/Modify Campaign:\n" +
             "4) Create/Modify Items:\n" +
-            "5) Start the Game:\n"+
+            "5) Start the Game:\n" +
             "6) End the Game:\n";
+    String MAP_SOURCE_PATH = "src/main/java/org/resources/characters/";
 }

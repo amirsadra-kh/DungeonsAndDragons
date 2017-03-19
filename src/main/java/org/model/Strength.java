@@ -1,6 +1,5 @@
 package main.java.org.model;
 
-
 import main.java.org.Service.Calculation;
 
 /**
