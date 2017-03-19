@@ -98,7 +98,7 @@ public class Character {
             this.hitPoints = this.hitPoints - newHitPoint;
         }
         else
-            System.out.println("Character is died!");
+            System.out.println("Character has died!");
 
 
     }
