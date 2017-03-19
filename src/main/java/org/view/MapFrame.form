@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="MapPanel" layout-manager="GridLayoutManager" row-count="7" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="5" left="5" bottom="5" right="5"/>
     <constraints>
-      <xy x="20" y="20" width="503" height="642"/>
+      <xy x="20" y="20" width="643" height="702"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -146,7 +146,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Use the following guid to edit/Create your map:&#10;W: add wall(s)&#10;E: entery point to the map&#10;Q: quit point of the map&#10;M: add  monster(s)&#10;B: add  bounus &#10;Name of Characters from left side&#10;Name of Items from left side"/>
+          <text value="Use the following guid to edit/Create your map:&#10;W: add wall(s)&#10;E: entery point to the map&#10;Q: quit point of the map&#10;M: add  monster(s)&#10;MF: add friendly monster(s)&#10;B: add  bounus &#10;Drag &amp; Drop : Name of Characters from left side&#10;Drag &amp; Drop : Name of Items from left side&#10;"/>
         </properties>
       </component>
       <component id="74a96" class="javax.swing.JLabel" binding="characterLabel">
@@ -180,6 +180,22 @@
         <properties>
           <text value="List"/>
         </properties>
+      </component>
+      <component id="83401" class="javax.swing.JList" binding="characterJList">
+        <constraints>
+          <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="5755c" class="javax.swing.JList" binding="itemJList">
+        <constraints>
+          <grid row="5" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties/>
       </component>
     </children>
   </grid>

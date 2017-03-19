@@ -8,6 +8,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
+
 /**
  * This class is is to Load/save the files. it encapsulates the load and save files.
  *
@@ -80,7 +82,15 @@ abstract class FileProcessor {
      * @param prefix that can be added to the file name
      * @return filenames the filenames at the path given with the prefix
      */
-    public String returnItemNames(String path, String prefixName) {
+    /**
+     * This class is is to return  the file names. You may add prefix as well.
+     + *
+     + * @author Mehran Ishanian
+     + * @version 1.0
+     + * @since 2017-03-16
+     */
+    public ArrayList returnItemNames(String path, String prefixName) {
+        ArrayList<String> fileArray = new ArrayList();;
         String fileNames="<html>",fileName;
         int Counter=0;
         File folder = new File(path);
@@ -89,10 +99,12 @@ abstract class FileProcessor {
             Counter++;
             fileName=file.toString().split("\\\\")[file.toString().split("\\\\").length-1];
             fileNames += prefixName+Counter+" - "+fileName+"<br>";
+            fileArray.add(fileName);
         }
         fileNames += "</html>";
-        return fileNames;
+        return fileArray;
     }
+
 
 
 
