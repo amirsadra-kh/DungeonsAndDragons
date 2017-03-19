@@ -123,13 +123,6 @@ public class PlayScreen {
         }
     }
 
-
-    private void makeAHorizontalLine(int length) {
-        for (int i = 0; i < length; i++) {
-            System.out.print("-");
-        }
-    }
-
     /**
      * This method is to chose the character to play the game
      *

@@ -6,6 +6,11 @@ import main.java.org.model.Map;
 
 import java.util.List;
 
+/**
+ * This class represents the Map Screen logic, it shows the elements on the map
+ * @author Maysam MOkarian
+ * @version 1.0
+ */
 public class MapScreen {
     /**
      * Thsi method is to show the map
@@ -19,7 +24,7 @@ public class MapScreen {
      *
      * @param map
      */
-    static void showMap(final Map map) {
+    protected static void showMap(final Map map) {
         printMapHeader(map);
         for (int i = 0; i < map.getScreen().length; i++) {
             System.out.print("|");
@@ -90,7 +95,7 @@ public class MapScreen {
      * @param map the current map
      */
 
-    static void printMapHeader(Map map) {
+    protected static void printMapHeader(Map map) {
         for (int i = 0; i < map.getCols() * 3; i++) {
 
             if (i == (map.getCols() * 3) / 2) {
@@ -106,7 +111,7 @@ public class MapScreen {
      * This method is to print a footer for a map
      * @param map
      */
-    static void printMapFooter(Map map) {
+    protected static void printMapFooter(Map map) {
         for (int i = 0; i < map.getCols() * 4; i++) {
             System.out.print("-");
         }
@@ -118,7 +123,7 @@ public class MapScreen {
      * @param maps
      * @return
      */
-    static void showMaps(final List<Map> maps) {
+    protected static void showMaps(final List<Map> maps) {
         for (Map map : maps) {
             showMap(map);
         }
