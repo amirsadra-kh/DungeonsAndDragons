@@ -1,8 +1,10 @@
 package main.java.org.model;
 
+import main.java.org.Service.ObjectLoader;
 import main.java.org.Service.ObjectSaver;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -165,7 +167,26 @@ public class Map implements Serializable {
      * @return a list of non-player characters on the map
      */
     public List<Character> getNonPLayerCharacters() {
-        return this.mapChars;
+        List<Character> characters=new ArrayList();
+        for (int i = 0; i < this.getScreen().length; i++) {
+            System.out.print("|");
+            for (int j = 0; j < this.getScreen()[i].length; j++) {
+                if("".equals(this.getScreen()[i][j])){
+                    this.getScreen()[i][j]=" ";
+                }
+                if('f'==this.getScreen()[i][j].charAt(0)
+                        ||'m'==this.getScreen()[i][j].charAt(0) ){
+                    try {
+                        //System.out.println(this.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
+                        characters.add((Character) ObjectLoader.loadCharacterFromXML(this.getScreen()[i][j].toString()));
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+        }
+        return characters;
     }
 
     /**

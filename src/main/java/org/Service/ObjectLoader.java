@@ -17,6 +17,7 @@ import java.util.List;
 public class ObjectLoader extends FileProcessor {
     private final static String CAMPAIGN_PATH = "src/main/java/org/resources/campaigns/";
     private final static String MAP_PATH = "src/main/java/org/resources/maps/";
+    private final static String MAP_PATH_TEST = "src/test/resources/files/maps/";
     private final static String CHARACTER_PATH = "src/main/java/org/resources/characters/";
 
     /**
@@ -59,6 +60,10 @@ public class ObjectLoader extends FileProcessor {
      */
     public static Map loadMapFromXML(String mapName) throws Exception {
         return (Map) loadFile(MAP_PATH +mapName);
+    }
+
+    public static Map loadMapTest(String mapName) throws Exception {
+        return (Map) loadFile(MAP_PATH_TEST +mapName);
     }
 
     public static Campaign loadCampaignFromXML(String campName) throws Exception {

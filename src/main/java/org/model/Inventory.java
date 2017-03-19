@@ -15,8 +15,8 @@ import main.java.org.Service.Observer;
  */
 public class Inventory {
     private List<Observer> observers = new ArrayList<>();
-    protected List<Item> items;
-    private List<Item> state;
+    protected List<Item> items=new ArrayList<>();
+    private List<Item> state=new ArrayList<>();
 
     /**
      * A Constructor for Inventory
