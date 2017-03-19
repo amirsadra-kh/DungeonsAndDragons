@@ -61,6 +61,10 @@ public class MapScreen {
         printMapFooter(map);
     }
 
+    /**
+     * This method is print elements in the MAP
+     * @param map
+     */
     protected static void printElementsInTheMap(Map map) {
         System.out.println("------------Elements in the Map------------------");
         for (int i = 0; i < map.getScreen().length; i++) {
@@ -81,6 +85,11 @@ public class MapScreen {
         }
     }
 
+    /**
+     * This methos is to print a header for the MAP
+     * @param map the current map
+     */
+
     static void printMapHeader(Map map) {
         for (int i = 0; i < map.getCols() * 3; i++) {
 
@@ -93,6 +102,10 @@ public class MapScreen {
         System.out.print("-\n");
     }
 
+    /**
+     * This method is to print a footer for a map
+     * @param map
+     */
     static void printMapFooter(Map map) {
         for (int i = 0; i < map.getCols() * 4; i++) {
             System.out.print("-");
@@ -100,10 +113,14 @@ public class MapScreen {
         System.out.print("-\n");
     }
 
-    static Map showMaps(final List<Map> maps) {
+    /**
+     * This method is to show the map from a list of Maps
+     * @param maps
+     * @return
+     */
+    static void showMaps(final List<Map> maps) {
         for (Map map : maps) {
             showMap(map);
         }
-        return null;
     }
 }

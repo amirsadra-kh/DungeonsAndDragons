@@ -5,8 +5,19 @@ import main.java.org.model.Map;
 
 import java.awt.*;
 
+/**
+ * This Class is to validate the directions on the MAP
+ * @author Maysam
+ * @version 1.0
+ */
 public class MapDirectionValidator {
-
+    /**
+     * This method is to move the player on the map based on the provided direction
+     * @param map  The map we are playing
+     * @param direction the direction to ove
+     * @param campaign the campaign that we are playing
+     * @return it returns true if player can move
+     */
     static boolean validateDirectionIsValidBoundriesAndMovePlayer(Map map, String direction, Campaign campaign) {
         Point point =getPlayerCoordinate(map);
         if ("L".equalsIgnoreCase(direction)) {
@@ -25,7 +36,7 @@ public class MapDirectionValidator {
      * This method validates the new coordinate and set the player Character to new Coordinate
      * if we are interacting with empty space, we will move
      * if the target object is wall we should try again
-     * otherwise we should intarct with other objects using SetInteractionStrategy
+     * otherwise we should interact with other objects using SetInteractionStrategy
      * @param map
      * @param i new I coordinate
      * @param j new J Coordinate
@@ -69,6 +80,11 @@ public class MapDirectionValidator {
         return false;
     }
 
+    /**
+     * This method is to return the current coordinate of the player
+     * @param map the current map
+     * @return it returns the Point corresponding the player's coordinate
+     */
      static Point getPlayerCoordinate(Map map) {
         for (int i = 0; i < map.getScreen().length; i++) {
             for (int j = 0; j < map.getScreen()[i].length; j++) {

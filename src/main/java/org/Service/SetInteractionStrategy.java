@@ -17,6 +17,14 @@ import java.awt.*;
  * @objectCoordinate the coordinate of the object we are interacting with
  */
 public class SetInteractionStrategy {
+    /**
+     * This method represents the interaction of the player with the elements in the map
+     * @param map the current map
+     * @param targetObject the object we are interacting with
+     * @param playerCoordinate the current coordinate of the player
+     * @param objectCoordinate the coordinate of the object we are interacting with
+     * @param campaign the campaign we are playing
+     */
     public static void interact(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
 
         if ("Q".equalsIgnoreCase(targetObject)) {
@@ -31,6 +39,14 @@ public class SetInteractionStrategy {
 
     }
 
+    /**
+     * This method represents the intecat with friendly character
+     * @param map the current map
+     * @param targetObject the object we are interacting with
+     * @param playerCoordinate the current coordinate of the player
+     * @param objectCoordinate the coordinate of the object we are interacting with
+     * @param campaign the campaign we are playing
+     */
     private static void interactWithFriendlyCharacter(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
         Character character=null;
         try {
@@ -41,10 +57,26 @@ public class SetInteractionStrategy {
         //TODO interactWithFriendlyCharacter here
     }
 
+    /**
+     * This method represents the interaction with Chest
+     * @param map the current map
+     * @param targetObject the object we are interacting with
+     * @param playerCoordinate the current coordinate of the player
+     * @param objectCoordinate the coordinate of the object we are interacting with
+     * @param campaign the campaign we are playing
+     */
     private static void interactWithChest(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
         //TODO interactWithChest here
     }
 
+    /**
+     * This method represents the interaction with monsters
+     * @param map the current map
+     * @param targetObject the object we are interacting with
+     * @param playerCoordinate the current coordinate of the player
+     * @param objectCoordinate the coordinate of the object we are interacting with
+     * @param campaign the campaign we are playing
+     */
     private static void interactWithMonster(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
         Character character=null;
         try {
@@ -54,7 +86,14 @@ public class SetInteractionStrategy {
         }
         //TODO interactWithMonster here
     }
-
+    /**
+     * This method will have the logic of going to next level
+     * @param map the current map
+     * @param targetObject the object we are interacting with
+     * @param playerCoordinate the current coordinate of the player
+     * @param objectCoordinate the coordinate of the object we are interacting with
+     * @param campaign the campaign we are playing
+     */
     private static void goToNextLevel(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
         //TODO go to next level logic here + adjust the Campaign
     }

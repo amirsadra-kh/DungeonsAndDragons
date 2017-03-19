@@ -35,6 +35,10 @@ public class PlayScreen {
 
     }
 
+    /**
+     * This method is the base of playing the game
+     * @param map the current map that the game is playing in
+     */
     private void playGame(Map map) {
         setPlayerAtEntryPoint(map);
         MapScreen.showMap(map);
@@ -43,14 +47,24 @@ public class PlayScreen {
 
     }
 
+    /**
+     * This method is to move the player in the Map
+     * It reads the direction , validate the direction and show the map again
+     * @param map
+     */
     private void movePlayer(Map map) {
-        String direction =readLine();
+        String direction =readInput.readLine();
         while(!MapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer(map,direction,this.campaign)){
-            direction =readLine();
+            direction =readInput.readLine();
             MapScreen.showMap(map);
         }
     }
 
+    /**
+     *This method sets the player at the entry point of the map
+     * it searches for E in the Map and set the payer position there
+     * @param map
+     */
     private void setPlayerAtEntryPoint(Map map) {
         for(int i=0;i<map.getScreen().length;i++){
             for(int j=0;j<map.getScreen()[i].length;j++){
@@ -61,17 +75,25 @@ public class PlayScreen {
         }
     }
 
+    /**
+     * This method is to print and ask user to enter the directions
+     */
     private void enterDirection(){
         System.out.println("Enter the direction you wish to move: \n Left:L\n Right:R \n Down:D\n Up:U\n");
     }
 
+    /**
+     * This method is to chose a map from Campaign to play
+     * @return it returns the selected map
+     * @throws Exception
+     */
     private Map choseMapForPlayingGame() throws Exception {
         List<Map> maps = getMapsInTheCampaign();
         System.out.println("Please chose from the following maps by entering the desired map name:");
         MapScreen.showMaps(maps);
         String name = "";
         while (name == "") {
-            name = readLine();
+            name = readInput.readLine();
             for (Map map : maps) {
                 if (map.getName().equalsIgnoreCase(name)) {
                     return map;
@@ -93,11 +115,11 @@ public class PlayScreen {
         System.out.println("Please enter the name of the campaign you would like to play from the list below: ");
         this.campaign = new Campaign();
         ol.showItemNames("src/main/java/org/resources/campaigns/");
-        this.campaign = campaign.getCampaign(readLine());
+        this.campaign = campaign.getCampaign(readInput.readLine());
 
         while (this.campaign == null) {
             System.out.println("This campaign does not exist! Please try again: ");
-            this.campaign = campaign.getCampaign(readLine());
+            this.campaign = campaign.getCampaign(readInput.readLine());
         }
     }
 
@@ -225,8 +247,4 @@ public class PlayScreen {
         return maps;
     }
 
-    public String readLine() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
 }
