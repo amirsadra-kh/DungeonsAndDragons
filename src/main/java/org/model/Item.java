@@ -121,7 +121,7 @@ public class Item {
     public void setEnhance(int enhance) {
         this.enhance = enhance;
     }
-    
+
     /**
      * A method to get the name of an item
      * @return the name of the item

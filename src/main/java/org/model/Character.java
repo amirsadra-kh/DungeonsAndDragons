@@ -1,9 +1,9 @@
 package main.java.org.model;
 
-import java.awt.*;
-import java.util.*;
 import main.java.org.Service.Observer;
 
+import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -91,6 +91,20 @@ public class Character {
         int integerStrength  = this.ability.getStrength();
         strength.set(integerStrength);
         this.hitPoints = strength.modifier() + dice;
+    }
+
+    public void decreaseHitPoint(int newHitPoint){
+        if (this.hitPoints > 0){
+            this.hitPoints = this.hitPoints - newHitPoint;
+        }
+        else
+            System.out.println("Character is died!");
+
+
+    }
+
+    public void increaseHitPoint(int newHitPoint){
+        this.hitPoints = this.hitPoints + newHitPoint;
     }
 
     /**

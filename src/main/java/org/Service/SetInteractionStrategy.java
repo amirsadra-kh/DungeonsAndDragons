@@ -1,10 +1,12 @@
 package main.java.org.Service;
 
-import main.java.org.model.Campaign;
+import main.java.org.model.*;
 import main.java.org.model.Character;
-import main.java.org.model.Map;
 
 import java.awt.*;
+import java.util.List;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * this method is to dispatch different behaviour based on the interactions with Monster, ....
@@ -17,6 +19,7 @@ import java.awt.*;
  * @objectCoordinate the coordinate of the object we are interacting with
  */
 public class SetInteractionStrategy {
+    static ReadInput readInput = new ReadInput();
     /**
      * This method represents the interaction of the player with the elements in the map
      * @param map the current map
@@ -26,7 +29,6 @@ public class SetInteractionStrategy {
      * @param campaign the campaign we are playing
      */
     public static void interact(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
-
         if ("Q".equalsIgnoreCase(targetObject)) {
             goToNextLevel(map, targetObject, playerCoordinate, objectCoordinate, campaign);
         } else if ('m'==targetObject.charAt(0)||'M'==targetObject.charAt(0)) {
@@ -48,13 +50,35 @@ public class SetInteractionStrategy {
      * @param campaign the campaign we are playing
      */
     private static void interactWithFriendlyCharacter(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
-        Character character=null;
+        Character friendlyCharacter=null;
         try {
-            character = ObjectLoader.loadCharacterFromXML(targetObject);
+            friendlyCharacter = ObjectLoader.loadCharacterFromXML(targetObject);
         } catch (Exception e) {
             e.printStackTrace();
         }
         //TODO interactWithFriendlyCharacter here
+        Character character = null;
+
+        List<Item> friendlyCharacterBackpack, playerBackPack;
+        friendlyCharacterBackpack = friendlyCharacter.getBackPackInventory();
+        playerBackPack = character.getBackPackInventory();
+
+        System.out.println("Choose an item to exchange with an item from friendly monster: \n"+playerBackPack.toString());
+        int itemToGive = Integer.parseInt(readInput.readLine());
+
+        Item temp1 = playerBackPack.get(itemToGive);
+        playerBackPack.remove(itemToGive);
+
+        Random randomGenerator;
+        randomGenerator = new Random();
+        int index = randomGenerator.nextInt(friendlyCharacterBackpack.size());
+
+        Item itemToReceive = friendlyCharacterBackpack.get(index);
+
+        playerBackPack.add(itemToReceive);
+        friendlyCharacterBackpack.remove(itemToReceive);
+
+        friendlyCharacterBackpack.add(temp1);
     }
 
     /**
@@ -67,6 +91,11 @@ public class SetInteractionStrategy {
      */
     private static void interactWithChest(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
         //TODO interactWithChest here
+        Character character = null;
+        BackPackInventory chest = null;
+        List<Item> loot;
+        loot = chest.getItems();
+        character.setBackPackInventory((BackPackInventory) loot);
     }
 
     /**
@@ -78,13 +107,18 @@ public class SetInteractionStrategy {
      * @param campaign the campaign we are playing
      */
     private static void interactWithMonster(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
-        Character character=null;
+        Character character = null;
+
+        Character monster=null;
         try {
-            character = ObjectLoader.loadCharacterFromXML(targetObject);
+            monster = ObjectLoader.loadCharacterFromXML(targetObject);
         } catch (Exception e) {
             e.printStackTrace();
         }
         //TODO interactWithMonster here
+        Ability ability = character.getAbility();
+        monster.decreaseHitPoint(ability.getAttackBonus());
+
     }
     /**
      * This method will have the logic of going to next level
