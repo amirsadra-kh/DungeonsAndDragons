@@ -155,7 +155,7 @@ public class MapGrid extends JFrame {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                JTextField NewTextField = new JTextField(i + "" + j); //Integer.toString(i + 1)
+                JTextField NewTextField = new JTextField(); //i + "" + j
                 pane.add(NewTextField);
             }
         }
