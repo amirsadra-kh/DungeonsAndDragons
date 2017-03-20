@@ -20,6 +20,8 @@ public class PlayScreen {
     private Character character;
     private Campaign campaign;
     private ReadInput readInput = new ReadInput();
+    // The first level to be played, should be increased after a map has been finished.
+    private int level = 0;
 
     /**
      * A basic interaction screen after the user chooses Play
@@ -27,7 +29,8 @@ public class PlayScreen {
     public void PlayScreen() throws Exception {
         choseCharacterForPlayingGame();
         choseCampaignForPlayingGame();
-        Map currentMap = getMapsInTheCampaign().get(0);
+        Map currentMap = getMapsInTheCampaign().get(level);
+        currentMap.setPlayer(this.character);
         playGame(currentMap);
     }
 
@@ -46,11 +49,10 @@ public class PlayScreen {
             choice = readInput.readStringHandling(choice);
         }
         if(choice.equals("Y") || choice.equals("y")) {
-            userObserverChoice();
+            userObserverChoice(map);
         }
         enterDirection();
         movePlayer(map);
-
     }
 
     /**
@@ -155,14 +157,19 @@ public class PlayScreen {
      * A method to give the user the choice to observe a character
      * The inventory, Ability or both of that character
      */
-    public void userObserverChoice() {
+    public void userObserverChoice(Map currentMap) {
         ObjectLoader ol = new ObjectLoader();
         // Testing the Character Observer
         Character observeChar;
+        // Get the characters that are in the map
+        List<Character> mapCharacters = currentMap.getMapChars();
 
         System.out.println("Please enter the name of the character you would like to observe from the list below: ");
         this.character = new Character();
-        ol.showItemNames("src/main/java/org/resources/characters/");
+        // Print the name of each character that is on the map
+        for(Character character : mapCharacters)
+            System.out.println(character.getCharName());
+        // load the character chosen by user
         observeChar = character.loadCharacter(readInput.readLine());
 
         while(this.character == null) {
