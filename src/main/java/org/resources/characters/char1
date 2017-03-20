@@ -1,23 +1,44 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <character>
+    <dice>9</dice>
     <ability>
         <level>1</level>
         <attackBonus>0</attackBonus>
-        <constitution>8</constitution>
-        <damageBonus>0</damageBonus>
-        <dexterity>15</dexterity>
-        <strength>10</strength>
+        <constitution>14</constitution>
+        <damageBonus>1</damageBonus>
+        <dexterity>19</dexterity>
+        <strength>12</strength>
     </ability>
+    <backPackInventory>
+        <enhance>3</enhance>
+        <enhancementType>STRENGTH</enhancementType>
+        <item>BELT</item>
+        <name>belt1</name>
+    </backPackInventory>
     <backPackInventory>
         <enhance>1</enhance>
         <enhancementType>CONSTITUTION</enhancementType>
         <item>BELT</item>
+        <name>belt2</name>
+    </backPackInventory>
+    <backPackInventory>
+        <enhance>5</enhance>
+        <enhancementType>DEXTERITY</enhancementType>
+        <item>BOOTS</item>
+        <name>boots1</name>
     </backPackInventory>
     <charName>char1</charName>
     <itemsWearing>
-        <enhance>3</enhance>
-        <enhancementType>ARMORCLASS</enhancementType>
+        <enhance>1</enhance>
+        <enhancementType>CONSTITUTION</enhancementType>
+        <item>BELT</item>
+        <name>belt2</name>
+    </itemsWearing>
+    <itemsWearing>
+        <enhance>5</enhance>
+        <enhancementType>DEXTERITY</enhancementType>
         <item>BOOTS</item>
+        <name>boots1</name>
     </itemsWearing>
     <level>1</level>
     <playerCharacter>false</playerCharacter>
