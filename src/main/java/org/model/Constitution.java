@@ -13,23 +13,38 @@ public class Constitution implements AbilityInterface {
     protected int constitution;
 
     /**
-     * Constructor
+     * Constitution constructor
      */
     public Constitution() {
         Calculation score = new Calculation();
         this.constitution = score.getCalculation();
     }
 
+    /**
+     * A method to get the constitution
+     *
+     * @return the constitution as an integer.
+     */
     @Override
     public int get() {
         return this.constitution;
     }
 
+    /**
+     * A method to set the constitution
+     *
+     * @param value the constitution as an integer to be set.
+     */
     @Override
     public void set(int value) {
         this.constitution = value;
     }
 
+    /**
+     * A method to get the constitution modifier
+     *
+     * @return an integer constitution modifier
+     */
     @Override
     public int modifier(){
         Modifier modifier = new Modifier(this.constitution);

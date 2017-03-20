@@ -92,6 +92,30 @@ public class Map implements Serializable {
     }
 
     /**
+     * A method to set the player character on the map
+     * @return the player character
+     */
+    public Character getPlayer() { return this.player; }
+
+    /**
+     * A method to get the player character of the map
+     * @param player chosen by user
+     */
+    public void setPlayer(Character player) { this.player = player; }
+
+    /**
+     * A method to get the characters on the map
+     * @return a list of Characters on the map
+     */
+    public List<Character> getMapChars() { return this.mapChars; }
+
+    /**
+     * A method to set the characters on the map
+     * @param mapChars characters added to the map
+     */
+    public void setMapChars(List<Character> mapChars) { this.mapChars = mapChars; }
+
+    /**
      * A method to get the name of a map
      *
      * @return the name of the map

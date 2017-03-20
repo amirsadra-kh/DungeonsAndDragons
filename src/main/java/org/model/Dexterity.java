@@ -13,23 +13,38 @@ import main.java.org.Service.Calculation;
         protected int dexterity;
 
         /**
-         * Constructor
+         * Dexterity constructor
          */
         public Dexterity() {
             Calculation score = new Calculation();
             this.dexterity = score.getCalculation();
         }
 
+        /**
+         * A method to get the dexterity
+         *
+         * @return the dexterity as an integer.
+         */
         @Override
         public int get() {
             return this.dexterity;
         }
 
+        /**
+         * A method to set the dexterity
+         *
+         * @param value the dexterity as an integer to be set.
+         */
         @Override
         public void set(int value) {
             this.dexterity = value;
         }
 
+        /**
+         * A method to get the dexterity modifier
+         *
+         * @return an integer dexterity modifier
+         */
         @Override
         public int modifier(){
             Modifier modifier = new Modifier(this.dexterity);
