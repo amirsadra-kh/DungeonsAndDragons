@@ -12,7 +12,7 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
-import java.util.Set;
+import java.util.HashSet;
 
 /**
  * This class is the character object
@@ -28,12 +28,12 @@ public class Character {
     private Ability ability;
     private boolean isPlayerCharacter;
     private String charName;
-    private Set<Item> itemsWearing;
+    private HashSet<Item> itemsWearing = new HashSet<>();
     private int level;
 
     // A base line for the hit points
     RollDice dice10 = new RollDice(10);
-    private int dice = dice10.roll();
+    public int dice = dice10.roll();
     private int hitPoints = dice;
 
     // For the observer
@@ -134,7 +134,7 @@ public class Character {
      *
      * @param items a set of items the user has chosen
      */
-    public void setItemsWearing(Set<Item> items) {
+    public void setItemsWearing(HashSet<Item> items) {
         this.itemsWearing = items;
         setHitPoints();
     }
@@ -145,7 +145,7 @@ public class Character {
      * @return the items the character is wearing.
      */
     @XmlElement
-    public Set<Item> getItemsWearing() {
+    public HashSet<Item> getItemsWearing() {
         return this.itemsWearing;
     }
 

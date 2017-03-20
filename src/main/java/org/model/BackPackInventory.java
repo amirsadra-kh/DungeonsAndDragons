@@ -55,26 +55,4 @@ public class BackPackInventory {
 
         return lastElement;
     }
-
-    /**
-     * A method to remove an item from the backpack
-     * @param item to be removed
-     */
-    public void removeItem(Item item) {
-        this.items.remove(item);
-    }
-
-    /**
-     * A method for adding item to backpack
-     * @param item to be added to the backpack
-     */
-    public void addItem(Item item) {
-        // The backpack only allows for 10 items add a time
-        if(items.size() >= MAX_ITEMS)
-            System.out.println("Sorry the backpack is full!");
-        else {
-            this.items.add(item);
-            System.out.println("The item has been added to the backpack!");
-        }
-    }
 }
