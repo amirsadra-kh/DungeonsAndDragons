@@ -147,9 +147,7 @@ public class Map implements Serializable {
      *
      * @param screen to be set
      */
-    public void setScreen(String[][] screen) {
-        this.screen = screen;
-    }
+    public void setScreen(String[][] screen) { this.screen = screen; }
 
     /**
      * A method to get the turn of a map
@@ -174,7 +172,10 @@ public class Map implements Serializable {
      *
      * @param character player
      */
-    public void addPlayer(Character character) { this.player = character; }
+    public void addPlayer(Character character) {
+        this.player = character;
+        this.mapChars.add(character);
+    }
 
     /**
      * A method for setting the non-player characters of a map

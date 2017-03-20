@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_74" class="java.beans.XMLDecoder">
+<java version="1.8.0_101" class="java.beans.XMLDecoder">
  <object class="main.java.org.model.Map">
   <void property="cols">
    <int>3</int>
@@ -21,7 +21,7 @@
        <string>W</string>
       </void>
       <void index="2">
-       <string></string>
+       <string>Q</string>
       </void>
      </array>
     </void>
@@ -31,10 +31,10 @@
        <string>W</string>
       </void>
       <void index="1">
-       <string></string>
+       <string>E</string>
       </void>
       <void index="2">
-       <string></string>
+       <string>M</string>
       </void>
      </array>
     </void>
