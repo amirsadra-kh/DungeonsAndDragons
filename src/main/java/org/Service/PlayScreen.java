@@ -29,9 +29,11 @@ public class PlayScreen {
     public void PlayScreen() throws Exception {
         choseCharacterForPlayingGame();
         choseCampaignForPlayingGame();
-        Map currentMap = getMapsInTheCampaign().get(level);
-        currentMap.setPlayer(this.character);
-        playGame(currentMap);
+        if(getMapsInTheCampaign().size() > 0) {
+            Map currentMap = getMapsInTheCampaign().get(level);
+            currentMap.setPlayer(this.character);
+            playGame(currentMap);
+        }
     }
 
     /**
