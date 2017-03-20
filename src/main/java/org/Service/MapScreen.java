@@ -3,6 +3,7 @@ package main.java.org.Service;
 import main.java.org.model.Character;
 import main.java.org.model.ColorConstants;
 import main.java.org.model.Map;
+import main.java.org.model.ReadInput;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @version 1.0
  */
 public class MapScreen {
+    private static ReadInput readInput = new ReadInput();
     /**
      * Thsi method is to show the map
      * W:Wall
@@ -64,6 +66,17 @@ public class MapScreen {
             System.out.println("");
         }
         printMapFooter(map);
+        // Allow the user to observe a character.
+        PlayScreen ps = new PlayScreen();
+        String choice = "";
+        System.out.println("Would you like to observe a character from the map? Y/N");
+        while(!choice.equals("Y") && !choice.equals("N") && !choice.equals("y") && !choice.equals("n")) {
+            System.out.println("Invalid input! Please try again: ");
+            choice = readInput.readStringHandling(choice);
+        }
+        if(choice == "Y" || choice == "y") {
+            ps.userObserverChoice();
+        }
     }
 
     /**

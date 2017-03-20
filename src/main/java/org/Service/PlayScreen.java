@@ -25,13 +25,10 @@ public class PlayScreen {
      * A basic interaction screen after the user chooses Play
      */
     public void PlayScreen() throws Exception {
-
         choseCharacterForPlayingGame();
         choseCampaignForPlayingGame();
-        Map map =choseMapForPlayingGame();
-        List<Map> maps = getMapsInTheCampaign();
-       // MapScreen.showMaps(maps);
-        playGame(map);
+        Map currentMap = getMapsInTheCampaign().get(0);
+        playGame(currentMap);
 
     }
 
@@ -143,47 +140,14 @@ public class PlayScreen {
 
         // Set the character chosen to player character
         character.setPlayerCharacter(true);
+    }
 
-        // Get the user to choose an existing map from a list to play
-        System.out.println("Please enter the name of the campaign you would like to play from the list below: ");
-        this.campaign = new Campaign();
-        ol.showItemNames("src/main/java/org/resources/campaigns/");
-        this.campaign = campaign.getCampaign(readInput.readLine());
-
-        while(this.campaign == null) {
-            System.out.println("This campaign does not exist! Please try again: ");
-            this.campaign = campaign.getCampaign(readInput.readLine());
-        }
-
-        // The number of levels played
-        int levelsPlayed = 0;
-        // Indicator if the user has finished a map or not
-        boolean playing = true;
-
-        while(levelsPlayed <= this.campaign.getNumLevels()) {
-            if(playing == true) {
-                // Get the current map being played according to the level
-                // This currentMap has the player character and the level adjusted
-                Map currentMap = this.campaign.nextLevel(levelsPlayed, this.character);
-
-                // TODO load an existing map from campaign
-                //currentMap = new MapFrame().makeFrame("Map");
-
-                // TODO When player reaches Exit point, set playing = false
-                playing = false;
-            }
-
-            if(playing == false) {
-                // Get the next level to play
-                levelsPlayed += 1;
-                // The player character goes up a level since it finished a map
-                this.character.setLevel(this.character.getLevel() + 1);
-                playing = true;
-            }
-        }
-
-        // TODO change this is done as the user clicks on a character on a map
-        // TODO when campaign and map are working as they should
+    /**
+     * A method to give the user the choice to observe a character
+     * The inventory, Ability or both of that character
+     */
+    public void userObserverChoice() {
+        ObjectLoader ol = new ObjectLoader();
         // Testing the Character Observer
         Character observeChar;
 
@@ -197,15 +161,35 @@ public class PlayScreen {
             observeChar = character.loadCharacter(readInput.readLine());
         }
 
+        String choice = "";
         // This gets the character's abilities - Observer
-        new CharacterObserver(observeChar);
-        observeChar.setState(observeChar.getAbility());
+        System.out.println("Would you like to observe the ability of " +observeChar.getCharName() +"? Y/N");
+        choice = readInput.readStringHandling(choice);
+        while(!choice.equals("Y") && !choice.equals("N") && !choice.equals("y") && !choice.equals("n")) {
+            System.out.println("Invalid input! Please try again: ");
+            choice = readInput.readStringHandling(choice);
+        }
 
-        // This gets the character's inventory - Observer
-        Inventory observeInventory = new Inventory();
-        observeInventory.setItems(observeChar);
-        new InventoryObserver(observeInventory);
-        observeInventory.setState(observeInventory.getItems());
+        if(choice == "Y" || choice == "y") {
+            new CharacterObserver(observeChar);
+            observeChar.setState(observeChar.getAbility());
+        }
+
+        choice = "";
+        System.out.println("Would you like to observe the inventory of " +observeChar.getCharName() +"? Y/N");
+        choice = readInput.readStringHandling(choice);
+        while(!choice.equals("Y") && !choice.equals("N") && !choice.equals("y") && !choice.equals("n")) {
+            System.out.println("Invalid input! Please try again: ");
+            choice = readInput.readStringHandling(choice);
+        }
+
+        if(choice == "Y" || choice == "y") {
+            // This gets the character's inventory - Observer
+            Inventory observeInventory = new Inventory();
+            observeInventory.setItems(observeChar);
+            new InventoryObserver(observeInventory);
+            observeInventory.setState(observeInventory.getItems());
+        }
     }
 
     /**
