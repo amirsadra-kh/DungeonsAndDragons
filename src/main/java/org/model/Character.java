@@ -215,6 +215,7 @@ public class Character {
      *
      * @param name of the character
      */
+    @XmlElement
     public void setCharName(String name) {
         this.charName = name;
     }
@@ -256,13 +257,13 @@ public class Character {
      * @param name of the character
      * @return an existing character object
      */
-    public Campaign loadCharacter(String name){
+    public Character loadCharacter(String name){
         try {
             JAXBContext jc = JAXBContext.newInstance(Character.class);
             Unmarshaller u = null;
             u = jc.createUnmarshaller();
-            File f = new File("src/main/java/org/resources/character/"+name);
-            return (Campaign) u.unmarshal(f);
+            File f = new File("src/main/java/org/resources/characters/"+name);
+            return (Character) u.unmarshal(f);
         } catch (Exception e) {
             //e.printStackTrace();
             return null;

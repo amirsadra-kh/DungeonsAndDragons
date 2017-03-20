@@ -73,7 +73,7 @@ public class CharacterScreen {
             charName = readInput.readStringHandling(charName);
 
             // Check if a campaign with the name chose already exists
-            if(ol.loadCharacterFromXML(charName) == null) {
+            if(character.loadCharacter(charName) == null) {
                 charExist = false;
             }
             else {
@@ -147,8 +147,13 @@ public class CharacterScreen {
         System.out.println("Please enter the name of the character you would like to edit");
         charName = readInput.readStringHandling(charName);
 
+        while(character.loadCharacter(charName) == null) {
+            System.out.println("No such character exists, try again: ");
+            charName = readInput.readStringHandling(charName);
+        }
+
         // Load the character for editing
-        character.loadCharacter(charName);
+        character = character.loadCharacter(charName);
 
         // What does the user want to edit about the character?
         System.out.println("Which of these would you like to edit?");
@@ -237,20 +242,12 @@ public class CharacterScreen {
 
         // Get the user to choose items for the character to wear
         List<Item> listWearingItems = new ArrayList<>(wearingItem);
-        listWearingItems = addToItems(listWearingItems, ability, character, wearing);
-        wearingItem = new HashSet<>(listWearingItems);
-
-        // Set the new wearing items after adding items
-        character.setItemsWearing(wearingItem);
+        addToItems(listWearingItems, ability, character, wearing);
         wearingItem = character.getItemsWearing();
 
         // Get the user to choose items for the character to wear
         listWearingItems = new ArrayList<>(wearingItem);
-        listWearingItems = removeFromItems(listWearingItems, character, wearing);
-        wearingItem = new HashSet<>(listWearingItems);
-
-        // Set the new wearing items after removing items
-        character.setItemsWearing(wearingItem);
+        removeFromItems(listWearingItems, character, wearing);;
 
         // Save changes?
         chooseToSave(character.getCharName(), character);
@@ -267,19 +264,10 @@ public class CharacterScreen {
         Ability ability = character.getAbility();
 
         // Get the user to choose items for the character's backpack
-        backpackItems = addToItems(backpackItems, ability, character, wearing);
-
-        // Set the new backpack of the character after adding items
-        BackPackInventory backpack = new BackPackInventory();
-        backpack.setItems(backpackItems);
-        character.setBackPackInventory(backpack);
+        addToItems(backpackItems, ability, character, wearing);
 
         // Get the user to choose items to remove from the backpack
-        backpackItems = removeFromItems(backpackItems, character, wearing);
-
-        // Set the new backpack of a character after removing items.
-        backpack.setItems(backpackItems);
-        character.setBackPackInventory(backpack);
+        removeFromItems(backpackItems, character, wearing);
 
         // Save changes?
         chooseToSave(character.getCharName(), character);
@@ -319,7 +307,7 @@ public class CharacterScreen {
      * @param wearing a boolean to indicate if it is a wearingItem list or a backpackItem list
      * @return the new list of wearing items or the backpack items.
      */
-    private List<Item> addToItems(List<Item> items, Ability ability, Character character, boolean wearing) {
+    private void addToItems(List<Item> items, Ability ability, Character character, boolean wearing) {
         String wearingOrBackpack = "";
         if(wearing == true)
             wearingOrBackpack = "wearing";
@@ -332,11 +320,20 @@ public class CharacterScreen {
             String answer = readInput.readLine().trim().toLowerCase();
             if (answer.equals("y")) {
                 System.out.println("The character's item " +wearingOrBackpack +" choices: ");
-                // TODO fix items the user can choose - only one of each type!
                 userChooseItems(items, ability, wearing, character);
-                return items;
             } else if (answer.equals("n")) {
-                return items;
+                if(wearing) {
+                    HashSet<Item> wearingItem = new HashSet<>(items);
+                    // Set the new wearing items after adding items
+                    character.setItemsWearing(wearingItem);
+                }
+                else if(!wearing) {
+                    // Set the new backpack of the character after adding items
+                    BackPackInventory backpack = new BackPackInventory();
+                    backpack.setItems(items);
+                    character.setBackPackInventory(backpack);
+                }
+                return;
             } else {
                 System.out.println("Sorry, I didn't catch that. Please answer y/n");
             }
@@ -349,7 +346,7 @@ public class CharacterScreen {
      * @param wearing a boolean to indicate if it is a wearingItem list or a backpackItem list
      * @return a new wearingItem or backpackItem list with items removed
      */
-    private List<Item> removeFromItems(List<Item> items, Character character, boolean wearing) {
+    private void removeFromItems(List<Item> items, Character character, boolean wearing) {
         String wearingOrBackpack = "";
         if(wearing == true)
             wearingOrBackpack = "wearing";
@@ -364,16 +361,25 @@ public class CharacterScreen {
             String answer = readInput.readLine().trim().toLowerCase();
             if (answer.equals("y")) {
                 System.out.println("Choose an item from the list below of the " +wearingOrBackpack +" items: ");
-                // TODO fix feching items - all null now
                 for(Item item : items)
                     System.out.println(item.getName());
                 String itemName = readInput.readLine();
                 Item item = new Item();
                 item = item.loadItem(itemName);
                 items.remove(item);
-                return items;
             } else if (answer.equals("n")) {
-                return items;
+                if(wearing) {
+                    HashSet<Item> wearingItem = new HashSet<>(items);
+                    // Set the new wearing items after removing items
+                    character.setItemsWearing(wearingItem);
+                }
+                else if(!wearing) {
+                    BackPackInventory backpack = new BackPackInventory();
+                    // Set the new backpack of a character after removing items.
+                    backpack.setItems(items);
+                    character.setBackPackInventory(backpack);
+                }
+                return;
             } else {
                 System.out.println("Sorry, I didn't catch that. Please answer y/n");
             }
