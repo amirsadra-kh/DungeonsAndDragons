@@ -143,7 +143,7 @@ public class CharacterTest {
         this.character.setBackPackInventory(backPackInventory);
         // Backpack allows many items of same type and the same item multiple times therefore there should be 4 items
         int size = 4;
-        Assert.assertEquals(size, this.character.getBackPackInventory().size());
+        Assert.assertEquals(size, this.character.getBackPackInventoryItems().size());
     }
 
     /**

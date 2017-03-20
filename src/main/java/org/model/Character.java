@@ -174,13 +174,27 @@ public class Character {
      * @return a list of items that are in the backpack
      */
     @XmlElement
-    public List<Item> getBackPackInventory() {
-        if(backPackInventory!=null){
-            return backPackInventory.getItems();
+    public BackPackInventory getBackPackInventory() {
+        if(this.backPackInventory.getItems().size() != 0){
+            return this.backPackInventory;
         }
-        List<Item> items=new ArrayList<>();
-         items.add(new Item());
-        return items;
+        BackPackInventory backpack = new BackPackInventory();
+        List<Item> items = new ArrayList<>();
+        items.add(new Item());
+        backpack.setItems(items);
+        return backpack;
+    }
+
+    /**
+     * A method for getting the items in the backpack inventory
+     * @return a list of items
+     */
+    public List<Item> getBackPackInventoryItems() {
+        if(this.backPackInventory!=null){
+            return this.backPackInventory.getItems();
+        }
+        else
+            return null;
     }
 
     /**

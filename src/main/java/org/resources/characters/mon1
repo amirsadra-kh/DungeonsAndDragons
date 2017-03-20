@@ -3,12 +3,15 @@
     <dice>3</dice>
     <ability>
         <level>1</level>
-        <attackBonus>0</attackBonus>
+        <attackBonus>1</attackBonus>
         <constitution>16</constitution>
         <damageBonus>1</damageBonus>
         <dexterity>21</dexterity>
         <strength>12</strength>
     </ability>
+    <backPackInventory>
+        <enhance>0</enhance>
+    </backPackInventory>
     <backPackInventory>
         <enhance>3</enhance>
         <enhancementType>STRENGTH</enhancementType>
@@ -26,12 +29,6 @@
         <enhancementType>DEXTERITY</enhancementType>
         <item>BOOTS</item>
         <name>boots1</name>
-    </backPackInventory>
-    <backPackInventory>
-        <enhance>3</enhance>
-        <enhancementType>STRENGTH</enhancementType>
-        <item>BELT</item>
-        <name>belt1</name>
     </backPackInventory>
     <charName>mon1</charName>
     <itemsWearing>

@@ -40,7 +40,7 @@ public class CharacterEditor {
      * @param item
      */
     private void addItem(Character character, Item item){
-        character.getBackPackInventory().add(item);
+        character.getBackPackInventoryItems().add(item);
     }
 
 }

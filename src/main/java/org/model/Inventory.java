@@ -37,7 +37,7 @@ public class Inventory {
      * @param character that has items
      */
     public void setItems(Character character) {
-        List<Item> backpack = character.getBackPackInventory();
+        List<Item> backpack = character.getBackPackInventoryItems();
         Set<Item> itemsWearing = character.getItemsWearing();
         items = backpack;
         items.addAll(itemsWearing);

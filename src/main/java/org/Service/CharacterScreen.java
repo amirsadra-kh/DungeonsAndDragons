@@ -260,7 +260,10 @@ public class CharacterScreen {
      */
     private void editBackPack(Character character) {
         boolean wearing = false;
-        List<Item> backpackItems = character.getBackPackInventory();
+        List<Item> backpackItems = character.getBackPackInventoryItems();
+        // TODO fix backpack item loading
+        for(Item item : backpackItems)
+            System.out.println(item.getName());
         Ability ability = character.getAbility();
 
         // Get the user to choose items for the character's backpack
@@ -321,6 +324,18 @@ public class CharacterScreen {
             if (answer.equals("y")) {
                 System.out.println("The character's item " +wearingOrBackpack +" choices: ");
                 userChooseItems(items, ability, wearing, character);
+                if(wearing) {
+                    HashSet<Item> wearingItem = new HashSet<>(items);
+                    // Set the new wearing items after adding items
+                    character.setItemsWearing(wearingItem);
+                }
+                else if(!wearing) {
+                    // Set the new backpack of the character after adding items
+                    BackPackInventory backpack = new BackPackInventory();
+                    backpack.setItems(items);
+                    character.setBackPackInventory(backpack);
+                }
+                return;
             } else if (answer.equals("n")) {
                 if(wearing) {
                     HashSet<Item> wearingItem = new HashSet<>(items);
@@ -363,10 +378,26 @@ public class CharacterScreen {
                 System.out.println("Choose an item from the list below of the " +wearingOrBackpack +" items: ");
                 for(Item item : items)
                     System.out.println(item.getName());
+                if(items.size() == 0) {
+                    System.out.println("No items to remove!");
+                    return;
+                }
                 String itemName = readInput.readLine();
                 Item item = new Item();
                 item = item.loadItem(itemName);
                 items.remove(item);
+                if(wearing) {
+                    HashSet<Item> wearingItem = new HashSet<>(items);
+                    // Set the new wearing items after removing items
+                    character.setItemsWearing(wearingItem);
+                }
+                else if(!wearing) {
+                    BackPackInventory backpack = new BackPackInventory();
+                    // Set the new backpack of a character after removing items.
+                    backpack.setItems(items);
+                    character.setBackPackInventory(backpack);
+                }
+                return;
             } else if (answer.equals("n")) {
                 if(wearing) {
                     HashSet<Item> wearingItem = new HashSet<>(items);
