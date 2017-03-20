@@ -46,11 +46,11 @@ public class PlayScreen {
         // Allow the user to observe a character.
         String choice = "";
         System.out.println("Would you like to observe a character from the map? Y/N");
-        while(!choice.equals("Y") && !choice.equals("N") && !choice.equals("y") && !choice.equals("n")) {
+        while(!"Y".equals(choice) && !"N".equals(choice) && !"y".equals(choice) && !"n".equals(choice)) {
             System.out.println("Invalid input! Please try again: ");
             choice = readInput.readStringHandling(choice);
         }
-        if(choice.equals("Y") || choice.equals("y")) {
+        if("Y".equals(choice) || "y".equals(choice)) {
             userObserverChoice(map);
         }
         enterDirection();
@@ -183,12 +183,12 @@ public class PlayScreen {
         // This gets the character's abilities - Observer
         System.out.println("Would you like to observe the ability of " +observeChar.getCharName() +"? Y/N");
         choice = readInput.readStringHandling(choice);
-        while(!choice.equals("Y") && !choice.equals("N") && !choice.equals("y") && !choice.equals("n")) {
+        while(!"Y".equals(choice) && !"N".equals(choice) && !"y".equals(choice) && !"n".equals(choice)) {
             System.out.println("Invalid input! Please try again: ");
             choice = readInput.readStringHandling(choice);
         }
 
-        if(choice.equals("Y") || choice.equals("y")) {
+        if("Y".equals(choice) || "y".equals(choice)) {
             new CharacterObserver(observeChar);
             observeChar.setState(observeChar.getAbility());
         }
@@ -196,12 +196,12 @@ public class PlayScreen {
         choice = "";
         System.out.println("Would you like to observe the inventory of " +observeChar.getCharName() +"? Y/N");
         choice = readInput.readStringHandling(choice);
-        while(!choice.equals("Y") && !choice.equals("N") && !choice.equals("y") && !choice.equals("n")) {
+        while(!"Y".equals(choice) && !"N".equals(choice) && !"y".equals(choice) && !"n".equals(choice)) {
             System.out.println("Invalid input! Please try again: ");
             choice = readInput.readStringHandling(choice);
         }
 
-        if(choice.equals("Y") || choice.equals("y")) {
+        if("Y".equals(choice) || "y".equals(choice)) {
             // This gets the character's inventory - Observer
             Inventory observeInventory = new Inventory();
             observeInventory.setItems(observeChar);
