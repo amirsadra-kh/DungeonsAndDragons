@@ -29,7 +29,6 @@ public class PlayScreen {
         choseCampaignForPlayingGame();
         Map currentMap = getMapsInTheCampaign().get(0);
         playGame(currentMap);
-
     }
 
     /**
@@ -39,6 +38,16 @@ public class PlayScreen {
     private void playGame(Map map) {
         setPlayerAtEntryPoint(map);
         MapScreen.showMap(map);
+        // Allow the user to observe a character.
+        String choice = "";
+        System.out.println("Would you like to observe a character from the map? Y/N");
+        while(!choice.equals("Y") && !choice.equals("N") && !choice.equals("y") && !choice.equals("n")) {
+            System.out.println("Invalid input! Please try again: ");
+            choice = readInput.readStringHandling(choice);
+        }
+        if(choice.equals("Y") || choice.equals("y")) {
+            userObserverChoice();
+        }
         enterDirection();
         movePlayer(map);
 
@@ -170,7 +179,7 @@ public class PlayScreen {
             choice = readInput.readStringHandling(choice);
         }
 
-        if(choice == "Y" || choice == "y") {
+        if(choice.equals("Y") || choice.equals("y")) {
             new CharacterObserver(observeChar);
             observeChar.setState(observeChar.getAbility());
         }
@@ -183,7 +192,7 @@ public class PlayScreen {
             choice = readInput.readStringHandling(choice);
         }
 
-        if(choice == "Y" || choice == "y") {
+        if(choice.equals("Y") || choice.equals("y")) {
             // This gets the character's inventory - Observer
             Inventory observeInventory = new Inventory();
             observeInventory.setItems(observeChar);
