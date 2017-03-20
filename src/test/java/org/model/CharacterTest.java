@@ -1,6 +1,5 @@
 package test.java.org.model;
 
-import main.java.org.Service.ObjectLoader;
 import main.java.org.model.*;
 import main.java.org.model.Character;
 import org.junit.Assert;
@@ -9,9 +8,8 @@ import org.junit.After;
 import org.junit.Test;
 
 import java.awt.*;
-import java.util.HashSet;
-import java.util.Set;
-
+import java.util.*;
+import java.util.List;
 
 /**
  * Class to test the Character class which allows user to create and edit a Character
@@ -122,14 +120,41 @@ public class CharacterTest {
         Assert.assertEquals(size, this.character.getItemsWearing().size());
     }
 
+    /**
+     * A test method to test the backpack inventory of a character.
+     * @throws Exception
+     */
     @Test
     public void testGetBackPackInventory() throws Exception {
+        Item item = new Item();
+        BackPackInventory backPackInventory = new BackPackInventory();
+        List<Item> backpack = new ArrayList<>();
+        backpack.add(item.loadItem("belt1"));
+        backpack.add(item.loadItem("boots1"));
+        // Check if items are added to the backpack
+        backPackInventory.setItems(backpack);
+        this.character.setBackPackInventory(backPackInventory);
+        Assert.assertEquals(backpack, character.getBackPackInventory());
 
+        // Check if multiple items of the same type can be added
+        backpack.add(item.loadItem("belt2"));
+        backpack.add(item.loadItem("boots1"));
+        backPackInventory.setItems(backpack);
+        this.character.setBackPackInventory(backPackInventory);
+        // Backpack allows many items of same type and the same item multiple times therefore there should be 4 items
+        int size = 4;
+        Assert.assertEquals(size, this.character.getBackPackInventory().size());
     }
 
+    /**
+     * A test method to test character name setting and getting
+     * @throws Exception
+     */
     @Test
     public void testGetCharName() throws Exception {
-
+        String name = "char1";
+        character.setCharName(name);
+        Assert.assertEquals(name, character.getCharName());
     }
 
 }
