@@ -134,11 +134,11 @@ public class PlayScreen {
         System.out.println("Please enter the name of the character you would like to play from the list below: ");
         this.character = new Character();
         ol.showItemNames("src/main/java/org/resources/characters/");
-        this.character = ol.loadCharacterFromXML(readInput.readLine());
+        this.character = character.loadCharacter(readInput.readLine());
 
         while (this.character == null) {
             System.out.println("This character does not exist! Please try again: ");
-            this.character = ol.loadCharacterFromXML(readInput.readLine());
+            this.character = character.loadCharacter(readInput.readLine());
         }
 
         // Set the character chosen to player character
@@ -190,11 +190,11 @@ public class PlayScreen {
         System.out.println("Please enter the name of the character you would like to observe from the list below: ");
         this.character = new Character();
         ol.showItemNames("src/main/java/org/resources/characters/");
-        observeChar = ol.loadCharacterFromXML(readInput.readLine());
+        observeChar = character.loadCharacter(readInput.readLine());
 
         while(this.character == null) {
             System.out.println("This character does not exist! Please try again: ");
-            observeChar = ol.loadCharacterFromXML(readInput.readLine());
+            observeChar = character.loadCharacter(readInput.readLine());
         }
 
         // This gets the character's abilities - Observer

@@ -15,8 +15,8 @@ import main.java.org.Service.Observer;
  */
 public class Inventory {
     private List<Observer> observers = new ArrayList<>();
-    protected List<Item> items=new ArrayList<>();
-    private List<Item> state=new ArrayList<>();
+    protected List<Item> items = new ArrayList<>();
+    private List<Item> state = new ArrayList<>();
 
     /**
      * A Constructor for Inventory
@@ -30,6 +30,18 @@ public class Inventory {
      */
     public List<Item> getItems() {
         return this.items;
+    }
+
+    /**
+     * A method for getting the name of the items in the inventory.
+     * @return a list of names of the items
+     */
+    public List<String> getItemNames() {
+        List<String> itemNames = new ArrayList<>();
+        for(Item item : this.items)
+            itemNames.add(item.getName());
+
+        return itemNames;
     }
 
     /**
