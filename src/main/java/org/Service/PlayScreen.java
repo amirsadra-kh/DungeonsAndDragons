@@ -160,6 +160,22 @@ public class PlayScreen {
      * The inventory, Ability or both of that character
      */
     public void userObserverChoice(Map currentMap) {
+        // Get the character the user wants to observe
+        Character observeChar = getObserverCharacter(currentMap);
+
+        // Ask user if they want to observe the ability of the character
+        askUserAbilityObserver(observeChar);
+
+        // Ask the user if they want to observe the inventory of the character
+        askUserInventoryObserver(observeChar);
+    }
+
+    /**
+     * Get the character the user want to observe
+     * @param currentMap being played
+     * @return observeChar the character the user wants to observe
+     */
+    public Character getObserverCharacter(Map currentMap) {
         ObjectLoader ol = new ObjectLoader();
         // Testing the Character Observer
         Character observeChar;
@@ -178,7 +194,14 @@ public class PlayScreen {
             System.out.println("This character does not exist! Please try again: ");
             observeChar = character.loadCharacter(readInput.readLine());
         }
+        return observeChar;
+    }
 
+    /**
+     * A method to interact with user about the ability observer
+     * @param observeChar the character being observed.
+     */
+    public void askUserAbilityObserver(Character observeChar) {
         String choice = "";
         // This gets the character's abilities - Observer
         System.out.println("Would you like to observe the ability of " +observeChar.getCharName() +"? Y/N");
@@ -192,8 +215,14 @@ public class PlayScreen {
             new CharacterObserver(observeChar);
             observeChar.setState(observeChar.getAbility());
         }
+    }
 
-        choice = "";
+    /**
+     * A method to interact with the user about the inventory observer
+     * @param observeChar the character being observed
+     */
+    public void askUserInventoryObserver(Character observeChar) {
+        String choice = "";
         System.out.println("Would you like to observe the inventory of " +observeChar.getCharName() +"? Y/N");
         choice = readInput.readStringHandling(choice);
         while(!"Y".equals(choice) && !"N".equals(choice) && !"y".equals(choice) && !"n".equals(choice)) {
