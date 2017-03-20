@@ -109,12 +109,17 @@ public class CharacterTest {
         wearingItems.add(item.loadItem("belt1"));
         wearingItems.add(item.loadItem("boots1"));
         this.character.setItemsWearing(wearingItems);
+
         // Test if adding wearing items is successful
         Assert.assertEquals(wearingItems, this.character.getItemsWearing());
+        
         // Test if two items of the same type can be added
         wearingItems.add(item.loadItem("boots1"));
+        wearingItems.add(item.loadItem("belt2"));
         this.character.setItemsWearing(wearingItems);
-        Assert.assertEquals(wearingItems, this.character.getItemsWearing());
+        // Since boots1 == boots1 and belt1 has the same itemEnum as belt2, there should be only two items
+        int size = 2;
+        Assert.assertEquals(size, this.character.getItemsWearing().size());
     }
 
     @Test

@@ -264,10 +264,37 @@ public class Item {
         if (object instanceof Item) {
             Item ob = (Item) object;
 
-            return ob.itemEnum == this.itemEnum && ob.enhancementType == this.enhancementType && ob.coordinate == this.coordinate
-                    && ob.enhance == this.enhance;
+            return ob.itemEnum == this.itemEnum;
+                    //&& ob.enhancementType == this.enhancementType && ob.coordinate == this.coordinate
+                    //&& ob.enhance == this.enhance;
         }
         return false;
+    }
+
+    /**
+     * Hashcode method to deal with itemEnums for when a character wears an item
+     * No more than one item of each itemEnum should be worn.
+     * @return the hashcode of the item
+     */
+    @Override
+    public int hashCode(){
+        int hashcode = 0;
+        if (this.itemEnum == ItemEnum.HELMET) {
+            hashcode = 1;
+        } else if (itemEnum == ItemEnum.RING) {
+            hashcode = 2;
+        } else if (itemEnum == ItemEnum.BELT) {
+            hashcode = 3;
+        } else if (itemEnum == ItemEnum.BOOTS) {
+            hashcode = 4;
+        } else if (this.itemEnum == ItemEnum.WEAPON) {
+            hashcode = 5;
+        } else if (itemEnum == ItemEnum.ARMOR) {
+            hashcode = 6;
+        } else {
+            hashcode = 7;
+        }
+        return hashcode;
     }
 
     /**
@@ -298,7 +325,7 @@ public class Item {
             File f = new File("src/main/java/org/resources/items/"+name);
             return (Item) u.unmarshal(f);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             return null;
         }
     }
