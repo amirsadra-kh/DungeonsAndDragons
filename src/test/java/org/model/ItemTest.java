@@ -1,4 +1,4 @@
-package test.java.com;
+package test.java.org.model;
 
 import main.java.org.model.EnhancementTypesEnum;
 import main.java.org.model.Item;

@@ -112,7 +112,7 @@ public class CharacterTest {
 
         // Test if adding wearing items is successful
         Assert.assertEquals(wearingItems, this.character.getItemsWearing());
-        
+
         // Test if two items of the same type can be added
         wearingItems.add(item.loadItem("boots1"));
         wearingItems.add(item.loadItem("belt2"));
