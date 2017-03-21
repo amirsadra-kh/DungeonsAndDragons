@@ -147,16 +147,23 @@ public class InventoryScreen {
      * @return an item to be moved
      */
     private Item moveItemFromWearing() {
-        String input = "";
+        String itemName = "";
         Item item = new Item();
         HashSet<Item> wearingItems = this.observerChar.getItemsWearing();
 
         System.out.println("Choose an item from the list below of items wearing to move: ");
         for (Item i : wearingItems)
             System.out.println(i.getName());
-        input = readInput.readLine();
+        itemName = readInput.readLine();
 
-        // TODO Check if item exists and load it
+        // Check if an item with this name exists
+        while(item.loadItem(itemName) == null) {
+            System.out.println("No such character exists, try again: ");
+            itemName = readInput.readStringHandling(itemName);
+        }
+
+        // Load the character for editing
+        item = item.loadItem(itemName);
 
         return item;
     }
@@ -187,16 +194,23 @@ public class InventoryScreen {
      * @return an item to move
      */
     private Item moveItemFromBackPack() {
-        String input = "";
+        String itemName = "";
         Item item = new Item();
         List<Item> backpack = this.observerChar.getBackPackInventoryItems();
 
         System.out.println("Choose an item from the list below of items in backpack to move: ");
         for (Item i : backpack)
             System.out.println(i.getName());
-        input = readInput.readLine();
+        itemName = readInput.readLine();
 
-        // TODO Check if item exists and load it
+        // Check if an item with this name exists
+        while(item.loadItem(itemName) == null) {
+            System.out.println("No such character exists, try again: ");
+            itemName = readInput.readStringHandling(itemName);
+        }
+
+        // Load the character for editing
+        item = item.loadItem(itemName);
 
         return item;
     }
