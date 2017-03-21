@@ -3,6 +3,7 @@ package main.java.org.model;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.awt.*;
 import java.io.File;
@@ -17,7 +18,7 @@ import java.io.FileOutputStream;
  */
 @XmlRootElement
 public class Item {
-    private ItemEnum item;
+    private ItemEnum itemEnum;
     private EnhancementTypesEnum enhancementType;
     private int enhance;
     private Point coordinate;
@@ -40,7 +41,7 @@ public class Item {
     public Item(String name, ItemEnum item, EnhancementTypesEnum enhancementType, Point coordinate, int enhance) {
         createItem(name, item, enhancementType, enhance);
         this.coordinate = coordinate;
-        this.item = item;
+        this.itemEnum = item;
         this.name = name;
     }
 
@@ -53,7 +54,7 @@ public class Item {
      */
     public Item(String name, ItemEnum item, EnhancementTypesEnum enhancementType, int enhance) {
         createItem(name, item, enhancementType, enhance);
-        this.item = item;
+        this.itemEnum = item;
         this.name = name;
 
     }
@@ -79,7 +80,7 @@ public class Item {
      * @return an Item Enum
      */
     public ItemEnum getItem() {
-        return this.item;
+        return this.itemEnum;
     }
 
     /**
@@ -87,7 +88,7 @@ public class Item {
      * @param item the itemEnum to set this items itemEnum to
      */
     public void setItem(ItemEnum item) {
-        this.item = item;
+        this.itemEnum = item;
     }
 
     /**
@@ -126,8 +127,15 @@ public class Item {
      * A method to get the name of an item
      * @return the name of the item
      */
+    @XmlElement
     public String getName() { return this.name; }
-    
+
+    /**
+     * A method to set the name of an item
+     * @param name of the item
+     */
+    public void setName(String name) { this.name = name;}
+
     /**
      * A method for creating an item
      * @param name of the item to be created
@@ -139,7 +147,7 @@ public class Item {
         // Set the values of the item
         for (ItemEnum e : ItemEnum.values()) {
             if (e == itemEnum) {
-                this.item = itemEnum;
+                this.itemEnum = itemEnum;
                 this.enhancementType = enhancementType;
                 this.enhance = enhance;
                 this.name = name;
@@ -150,14 +158,14 @@ public class Item {
         if (itemEnum == ItemEnum.HELMET) {
             if (enhancementType == EnhancementTypesEnum.ARMORCLASS) {
                 //Create Helmet
-                this.item = itemEnum;
+                this.itemEnum = itemEnum;
                 this.enhancementType = enhancementType;
                 this.enhance = enhance;
                 this.name = name;
             } else if (itemEnum == ItemEnum.ARMOR) {
                 if (enhancementType == EnhancementTypesEnum.ARMORCLASS) {
                     //Create ArmorClass
-                    this.item = itemEnum;
+                    this.itemEnum = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
@@ -167,7 +175,7 @@ public class Item {
                         enhancementType == EnhancementTypesEnum.STRENGTH ||
                         enhancementType == EnhancementTypesEnum.CONSTITUTION) {
                     //Create Shield
-                    this.item = itemEnum;
+                    this.itemEnum = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
@@ -178,7 +186,7 @@ public class Item {
                         enhancementType == EnhancementTypesEnum.STRENGTH ||
                         enhancementType == EnhancementTypesEnum.CONSTITUTION) {
                     //Create Ring
-                    this.item = itemEnum;
+                    this.itemEnum = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                 }
@@ -186,7 +194,7 @@ public class Item {
                 if (enhancementType == EnhancementTypesEnum.STRENGTH ||
                         enhancementType == EnhancementTypesEnum.CONSTITUTION) {
                     //Create Belt
-                    this.item = itemEnum;
+                    this.itemEnum = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
@@ -195,7 +203,7 @@ public class Item {
                 if (enhancementType == EnhancementTypesEnum.ARMORCLASS ||
                         enhancementType == EnhancementTypesEnum.DEXTERITY) {
                     //Create Boots
-                    this.item = itemEnum;
+                    this.itemEnum = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
@@ -204,7 +212,7 @@ public class Item {
                 if (enhancementType == EnhancementTypesEnum.ATTACKBONUS ||
                         enhancementType == EnhancementTypesEnum.DAMAGEBONUS) {
                     //Crete weapon
-                    this.item = itemEnum;
+                    this.itemEnum = itemEnum;
                     this.enhancementType = enhancementType;
                     this.enhance = enhance;
                     this.name = name;
@@ -256,24 +264,49 @@ public class Item {
         if (object instanceof Item) {
             Item ob = (Item) object;
 
-            return ob.item == this.item && ob.enhancementType == this.enhancementType && ob.coordinate == this.coordinate
-                    && ob.enhance == this.enhance;
+            return ob.itemEnum == this.itemEnum;
+                    //&& ob.enhancementType == this.enhancementType && ob.coordinate == this.coordinate
+                    //&& ob.enhance == this.enhance;
         }
         return false;
+    }
+
+    /**
+     * Hashcode method to deal with itemEnums for when a character wears an item
+     * No more than one item of each itemEnum should be worn.
+     * @return the hashcode of the item
+     */
+    @Override
+    public int hashCode(){
+        int hashcode = 0;
+        if (this.itemEnum == ItemEnum.HELMET) {
+            hashcode = 1;
+        } else if (itemEnum == ItemEnum.RING) {
+            hashcode = 2;
+        } else if (itemEnum == ItemEnum.BELT) {
+            hashcode = 3;
+        } else if (itemEnum == ItemEnum.BOOTS) {
+            hashcode = 4;
+        } else if (this.itemEnum == ItemEnum.WEAPON) {
+            hashcode = 5;
+        } else if (itemEnum == ItemEnum.ARMOR) {
+            hashcode = 6;
+        } else {
+            hashcode = 7;
+        }
+        return hashcode;
     }
 
     /**
      * A method for saving an Item object using JAXB
      */
     public void saveItem()  {
-
         JAXBContext context = null;
         try {
             context = JAXBContext.newInstance(Item.class);
-
-        Marshaller m = context.createMarshaller();
-        m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-        m.marshal(this,new FileOutputStream("src/main/java/org/resources/items/"+this.name));
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            m.marshal(this,new FileOutputStream("src/main/java/org/resources/items/"+this.name));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -286,16 +319,15 @@ public class Item {
      */
     public Item loadItem(String name){
         try {
-        JAXBContext jc = JAXBContext.newInstance(Item.class);
-        Unmarshaller u = null;
-        u = jc.createUnmarshaller();
-        File f = new File("src/main/java/org/resources/items/"+name);
-        return (Item) u.unmarshal(f);
+            JAXBContext jc = JAXBContext.newInstance(Item.class);
+            Unmarshaller u = null;
+            u = jc.createUnmarshaller();
+            File f = new File("src/main/java/org/resources/items/"+name);
+            return (Item) u.unmarshal(f);
         } catch (Exception e) {
             //e.printStackTrace();
-            System.out.println("No such item exists!");
+            return null;
         }
-        return null;
     }
 
     /**
@@ -305,10 +337,10 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "item=" + item +
-                ", enhancementType=" + enhancementType +
-                ", enhance=" + enhance +
-                ", coordinate=" + coordinate +
+                "item=" + this.itemEnum +
+                ", enhancementType=" + this.enhancementType +
+                ", enhance=" + this.enhance +
+                ", coordinate=" + this.coordinate +
                 '}';
     }
 }

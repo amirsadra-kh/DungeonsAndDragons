@@ -13,7 +13,11 @@ import java.util.Arrays;
 public class Calculation {
     int [] diceResult = new int [4];
 
-
+    /**
+     * A method for getting the highest 3 dice 6 rolls and adding them together.
+     *
+     * @return an integer of the sum of three highest dice6 rolls
+     */
     public int getCalculation(){
         RollDice dice6 = new RollDice(6);
 
