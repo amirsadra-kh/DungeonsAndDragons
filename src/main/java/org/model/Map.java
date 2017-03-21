@@ -176,27 +176,6 @@ public class Map implements Serializable {
      */
     public void addPlayer(Character character) { this.player = character; }
 
-//    public Character getPlayer(){
-//        Character player =new Character();
-//        for (int i = 0; i < this.getScreen().length; i++) {
-//            System.out.print("|");
-//            for (int j = 0; j < this.getScreen()[i].length; j++) {
-//                if("".equals(this.getScreen()[i][j])){
-//                    this.getScreen()[i][j]=" ";
-//                }
-//                if('P'==this.getScreen()[i][j].charAt(0)){
-//                    try {
-//                        player = ObjectLoader.loadCharacterFromXML(this.getScreen()[i][j].toString());
-//                    } catch (Exception e) {
-//                        e.printStackTrace();
-//                    }
-//                }
-//            }
-//
-//        }
-//        return player;
-//    }
-
     /**
      * A method for setting the non-player characters of a map
      *
