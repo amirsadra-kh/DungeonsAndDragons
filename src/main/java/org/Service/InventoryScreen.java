@@ -24,7 +24,7 @@ public class InventoryScreen {
      */
     public void InventoryScreen() {
         String choice = "";
-        System.out.println("Would you like to move items in inventory?");
+        System.out.println("Would you like to move items in inventory? Y/N");
         choice = readInput.readStringHandling(choice);
         while (!"Y".equals(choice) && !"N".equals(choice) && !"y".equals(choice) && !"n".equals(choice)) {
             System.out.println("Invalid input! Please try again: ");
@@ -113,6 +113,8 @@ public class InventoryScreen {
                 setNewBackpack(backpackItems);
                 break;
         }
+
+        this.observerChar.saveCharacter();
     }
 
     /**
