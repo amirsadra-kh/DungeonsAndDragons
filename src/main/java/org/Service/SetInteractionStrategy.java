@@ -58,26 +58,28 @@ public class SetInteractionStrategy {
         //TODO interactWithFriendlyCharacter here
         Character player = map.getPlayer();
 
-        List<Item> friendlyCharacterBackpack, playerBackPack;
+        BackPackInventory friendlyCharacterBackpack, playerBackPack;
         friendlyCharacterBackpack = friendlyCharacter.getBackPackInventory();
         playerBackPack = player.getBackPackInventory();
+        List<Item> playerItems = playerBackPack.getItems();
+        List<Item> friendlyCharacterItems = friendlyCharacterBackpack.getItems();
 
-        System.out.println("Choose an item to exchange with an item from friendly monster: \n"+playerBackPack.toString());
+        System.out.println("Choose an item to exchange with an item from friendly monster: \n"+playerItems.toString());
         int itemToGive = Integer.parseInt(readInput.readLine());
 
-        Item temp1 = playerBackPack.get(itemToGive);
-        playerBackPack.remove(itemToGive);
+        Item temp1 = playerItems.get(itemToGive);
+        playerItems.remove(itemToGive);
 
-        Random randomGenerator;
-        randomGenerator = new Random();
-        int index = randomGenerator.nextInt(friendlyCharacterBackpack.size());
+        int index = new Random().nextInt(friendlyCharacterItems.size());
+        Item itemToReceive = friendlyCharacterItems.get(index);
 
-        Item itemToReceive = friendlyCharacterBackpack.get(index);
+        playerItems.add(itemToReceive);
+        playerBackPack.setItems(playerItems);
 
-        playerBackPack.add(itemToReceive);
-        friendlyCharacterBackpack.remove(itemToReceive);
+        friendlyCharacterItems.remove(index);
+        friendlyCharacterItems.add(temp1);
 
-        friendlyCharacterBackpack.add(temp1);
+        friendlyCharacterBackpack.setItems(friendlyCharacterItems);
     }
 
     /**
