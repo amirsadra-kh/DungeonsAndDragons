@@ -1,11 +1,18 @@
 package main.java.org.model;
 
+import java.awt.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.*;
 import main.java.org.Service.Observer;
 
-import java.awt.*;
-import java.util.ArrayList;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
-import java.util.Set;
+import java.util.HashSet;
 
 /**
  * This class is the character object
@@ -14,18 +21,19 @@ import java.util.Set;
  * @version 1.0
  * @since 2017-02-23
  */
+@XmlRootElement
 public class Character {
     private BackPackInventory backPackInventory;
-    private Point currentPosition = new Point(0,0);
+    private Point currentPosition;
     private Ability ability;
     private boolean isPlayerCharacter;
     private String charName;
-    private Set<Item> itemsWearing;
+    private HashSet<Item> itemsWearing = new HashSet<>();
     private int level;
 
     // A base line for the hit points
     RollDice dice10 = new RollDice(10);
-    private int dice = dice10.roll();
+    public int dice = dice10.roll();
     private int hitPoints = dice;
 
     // For the observer
@@ -36,6 +44,11 @@ public class Character {
      * Empty Character Constructor
      */
     public Character() {
+    }
+
+    public void newCharacter() {
+        this.isPlayerCharacter = false;
+        this.level = 1;
     }
 
     /**
@@ -93,20 +106,6 @@ public class Character {
         this.hitPoints = strength.modifier() + dice;
     }
 
-    public void decreaseHitPoint(int newHitPoint){
-        if (this.hitPoints > 0){
-            this.hitPoints = this.hitPoints - newHitPoint;
-        }
-        else
-            System.out.println("Character has died!");
-
-
-    }
-
-    public void increaseHitPoint(int newHitPoint){
-        this.hitPoints = this.hitPoints + newHitPoint;
-    }
-
     /**
      * This method is for getting the HitPoints of a character
      *
@@ -135,7 +134,7 @@ public class Character {
      *
      * @param items a set of items the user has chosen
      */
-    public void setItemsWearing(Set<Item> items) {
+    public void setItemsWearing(HashSet<Item> items) {
         this.itemsWearing = items;
         setHitPoints();
     }
@@ -145,7 +144,8 @@ public class Character {
      *
      * @return the items the character is wearing.
      */
-    public Set<Item> getItemsWearing() {
+    @XmlElement
+    public HashSet<Item> getItemsWearing() {
         return this.itemsWearing;
     }
 
@@ -173,13 +173,28 @@ public class Character {
      *
      * @return a list of items that are in the backpack
      */
-    public List<Item> getBackPackInventory() {
-        if(backPackInventory!=null){
-            return backPackInventory.getItems();
+    @XmlElement
+    public BackPackInventory getBackPackInventory() {
+        if(this.backPackInventory.getItems().size() != 0){
+            return this.backPackInventory;
         }
-        List<Item> items=new ArrayList<>();
-         items.add(new Item());
-        return items;
+        BackPackInventory backpack = new BackPackInventory();
+        List<Item> items = new ArrayList<>();
+        items.add(new Item());
+        backpack.setItems(items);
+        return backpack;
+    }
+
+    /**
+     * A method for getting the items in the backpack inventory
+     * @return a list of items
+     */
+    public List<Item> getBackPackInventoryItems() {
+        if(this.backPackInventory!=null){
+            return this.backPackInventory.getItems();
+        }
+        else
+            return null;
     }
 
     /**
@@ -214,6 +229,7 @@ public class Character {
      *
      * @param name of the character
      */
+    @XmlElement
     public void setCharName(String name) {
         this.charName = name;
     }
@@ -232,6 +248,40 @@ public class Character {
      */
     public String charString() {
         return "Name: " +this.charName +"\nAbility: " +this.ability.toString() +"\nHit points: " +this.hitPoints;
+    }
+
+    /**
+     * A method for saving a character
+     */
+    public void saveCharacter()  {
+        JAXBContext context = null;
+        try {
+            context = JAXBContext.newInstance(Character.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            m.marshal(this,new FileOutputStream("src/main/java/org/resources/characters/"+this.charName));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * A method for loading an existing character
+     *
+     * @param name of the character
+     * @return an existing character object
+     */
+    public Character loadCharacter(String name){
+        try {
+            JAXBContext jc = JAXBContext.newInstance(Character.class);
+            Unmarshaller u = null;
+            u = jc.createUnmarshaller();
+            File f = new File("src/main/java/org/resources/characters/"+name);
+            return (Character) u.unmarshal(f);
+        } catch (Exception e) {
+            //e.printStackTrace();
+            return null;
+        }
     }
 
     /**

@@ -3,6 +3,7 @@ package main.java.org.Service;
 import main.java.org.model.Character;
 import main.java.org.model.ColorConstants;
 import main.java.org.model.Map;
+import main.java.org.model.ReadInput;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ import java.util.List;
  * @version 1.0
  */
 public class MapScreen {
+    private static ReadInput readInput = new ReadInput();
     /**
      * Thsi method is to show the map
      * W:Wall
@@ -78,15 +80,15 @@ public class MapScreen {
                 if('f'==map.getScreen()[i][j].charAt(0)
                         ||'m'==map.getScreen()[i][j].charAt(0) ){
                     try {
+                        Character character = new Character();
                         System.out.println(map.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
-                        System.out.print((Character)ObjectLoader.loadCharacterFromXML(map.getScreen()[i][j].toString()));
+                        System.out.print((Character)character.loadCharacter(map.getScreen()[i][j].toString()));
                         System.out.println("-----------------------------------------------------");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
-
         }
     }
 

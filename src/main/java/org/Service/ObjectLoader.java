@@ -62,10 +62,25 @@ public class ObjectLoader extends FileProcessor {
         return (Map) loadFile(MAP_PATH +mapName);
     }
 
+    /**
+     * Method for loading maps for testing
+     *
+     * @param mapName the name of the map to test
+     * @return a test map object
+     * @throws Exception
+     */
     public static Map loadMapTest(String mapName) throws Exception {
         return (Map) loadFile(MAP_PATH_TEST +mapName);
     }
 
+    /**
+     * A method to load a campaign object
+     * TODO remove this method? It is not being used
+     *
+     * @param campName the name of the campaign to load
+     * @return a campaign object with the name given
+     * @throws Exception in case the campaign does not exist
+     */
     public static Campaign loadCampaignFromXML(String campName) throws Exception {
         Campaign camp;
         try {
@@ -76,6 +91,13 @@ public class ObjectLoader extends FileProcessor {
         return camp;
     }
 
+    /**
+     * A method to load a character object
+     *
+     * @param charName the name of the character to be loaded
+     * @return the character object with the name given
+     * @throws Exception in case the character with that name does not exist
+     */
     public static Character loadCharacterFromXML(String charName) throws Exception {
         return (Character) loadFile(CHARACTER_PATH +charName);
     }

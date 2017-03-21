@@ -108,6 +108,12 @@ public class CampaignScreen {
             campName = readInput.readStringHandling(campName);
         }
 
+        while(camp.getCampaign(campName) == null) {
+            System.out.println("No such campaign exists, try again: ");
+            campName = readInput.readStringHandling(campName);
+        }
+
+        // Load the campaign for editing
         camp = camp.getCampaign(campName);
 
         while(choice == 0) {
