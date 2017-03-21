@@ -96,7 +96,14 @@ public class SetInteractionStrategy {
         BackPackInventory chest = map.getChest();
         List<Item> loot;
         loot = chest.getItems();
-        player.setBackPackInventory((BackPackInventory) loot);
+        List<Item> playerBackpack = player.getBackPackInventoryItems();
+        int i = playerBackpack.size()+loot.size();
+        int j = 0;
+        while (i <= 10){
+            playerBackpack.add(loot.get(j));
+            i++;
+            j++;
+        }
     }
 
     /**
