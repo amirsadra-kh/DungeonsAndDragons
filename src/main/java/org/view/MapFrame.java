@@ -1,9 +1,8 @@
 package main.java.org.view;
 
 import main.java.org.Service.ObjectLoader;
+import main.java.org.model.*;
 import main.java.org.model.Character;
-import main.java.org.model.GameConstantsInterface;
-import main.java.org.model.Map;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -36,11 +35,10 @@ public class MapFrame implements ActionListener {
     private JCheckBox newCheckBox;
     private JTextPane useTheFollowingGuidTextPane;
     private JLabel characterLabel;
-    private JLabel characterList;
     private JLabel itemLabel;
-    private JLabel itemList;
     private JList characterJList;
     private JList itemJList;
+    private JList chestJList;
     private final int SIZE = 9;
     private MapGrid grid = null;
     private boolean newMap = false;
@@ -52,6 +50,7 @@ public class MapFrame implements ActionListener {
     private boolean MonsterExist= false;
     private String errorValidMap="";
     private DefaultListModel listModel;
+    private BackPackInventory chest;
     /**
      * A MapFrame object
      */
@@ -96,6 +95,11 @@ public class MapFrame implements ActionListener {
         itemJList.setDragEnabled(true);
         itemJList.setSelectedIndex(0);
 
+        chestJList.setModel(modelI);
+        chestJList.setDragEnabled(true);
+        chestJList.setSelectedIndex(0);
+
+
     }
 
 
@@ -136,6 +140,9 @@ public class MapFrame implements ActionListener {
 
 
         String name = NameInput.getText();
+        List chestList = chestJList.getSelectedValuesList();
+        String chestListString = chestJList.getSelectedValue().toString();
+
 
         if (actionEvent.getSource() == openMapGrid) {
             grid = new MapGrid(rows, cols);
@@ -153,7 +160,9 @@ public class MapFrame implements ActionListener {
             map.setCols(cols);
             map.setRows(rows);
             map.setName(name);
+            map.setChest(chest);
             validMap =false;
+
 
             for (int i=0;i<boardArray.length;i++) {
                 for (int j = 0; j < boardArray[i].length; j++) {
