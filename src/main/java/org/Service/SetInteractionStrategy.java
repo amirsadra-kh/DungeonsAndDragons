@@ -1,9 +1,14 @@
 package main.java.org.Service;
 
-import main.java.org.model.*;
+import main.java.org.model.Campaign;
 import main.java.org.model.Character;
+import main.java.org.model.Map;
+import main.java.org.model.ReadInput;
+import main.java.org.model.BackPackInventory;
+import main.java.org.model.Item;
+import main.java.org.model.Ability;
 
-import java.awt.*;
+import java.awt.Point;
 import java.util.List;
 import java.util.Random;
 
@@ -51,7 +56,7 @@ public class SetInteractionStrategy {
     private static void interactWithFriendlyCharacter(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
         Character friendlyCharacter=null;
         try {
-            friendlyCharacter = ObjectLoader.loadCharacterFromXML(targetObject);
+            friendlyCharacter = friendlyCharacter.loadCharacter(targetObject);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -97,13 +102,8 @@ public class SetInteractionStrategy {
         List<Item> loot;
         loot = chest.getItems();
         List<Item> playerBackpack = player.getBackPackInventoryItems();
-        int i = playerBackpack.size()+loot.size();
-        int j = 0;
-        while (i <= 10){
+        for (int i = playerBackpack.size()+loot.size(), j=0; i < 10; i++,j++)
             playerBackpack.add(loot.get(j));
-            i++;
-            j++;
-        }
     }
 
     /**
@@ -119,7 +119,7 @@ public class SetInteractionStrategy {
 
         Character monster=null;
         try {
-            monster = ObjectLoader.loadCharacterFromXML(targetObject);
+            monster = monster.loadCharacter(targetObject);
         } catch (Exception e) {
             e.printStackTrace();
         }
