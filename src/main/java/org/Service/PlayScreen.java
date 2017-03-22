@@ -1,13 +1,17 @@
 package main.java.org.Service;
 
-import main.java.org.model.*;
+
+import main.java.org.model.Campaign;
 import main.java.org.model.Character;
+import main.java.org.model.Inventory;
 import main.java.org.model.Map;
-import main.java.org.view.MapFrame;
+import main.java.org.model.ReadInput;
+
 
 import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Scanner;
+
 
 /**
  * A class to interact with the user while playing the game
@@ -93,28 +97,6 @@ public class PlayScreen {
     }
 
     /**
-     * This method is to chose a map from Campaign to play
-     * @return it returns the selected map
-     * @throws Exception
-     */
-    private Map choseMapForPlayingGame() throws Exception {
-        List<Map> maps = getMapsInTheCampaign();
-        System.out.println("Please chose from the following maps by entering the desired map name:");
-        MapScreen.showMaps(maps);
-        String name = "";
-        while (name == "") {
-            name = readInput.readLine();
-            for (Map map : maps) {
-                if (map.getName().equalsIgnoreCase(name)) {
-                    return map;
-                }
-            }
-            System.out.println("The selected map is not valid, try again by entering a map name");
-        }
-        return null;
-    }
-
-    /**
      * This method is to chose the campaign to play the game
      *
      * @throws Exception
@@ -146,7 +128,7 @@ public class PlayScreen {
         ol.showItemNames("src/main/java/org/resources/characters/");
         this.character = character.loadCharacter(readInput.readLine());
 
-        while (this.character == null) {
+        while (this.character.equals(null)) {
             System.out.println("This character does not exist! Please try again: ");
             this.character = character.loadCharacter(readInput.readLine());
         }
@@ -166,7 +148,7 @@ public class PlayScreen {
         // Ask user if they want to observe the ability of the character
         askUserAbilityObserver(observeChar);
 
-        // Ask the user if they want to observe the inventory of the character
+        // Ask user if they want to observe the inventory of the character
         askUserInventoryObserver(observeChar);
     }
 
@@ -178,19 +160,20 @@ public class PlayScreen {
     public Character getObserverCharacter(Map currentMap) {
         ObjectLoader ol = new ObjectLoader();
         // Testing the Character Observer
-        Character observeChar;
+        Character observeChar = new Character();
         // Get the characters that are in the map
-        List<Character> mapCharacters = currentMap.getMapChars();
+        List<Character> mapCharacters = currentMap.getNonPLayerCharacters();
+        // Add the player character to the list as well
+        mapCharacters.add(character);
 
         System.out.println("Please enter the name of the character you would like to observe from the list below: ");
-        this.character = new Character();
         // Print the name of each character that is on the map
         for(Character character : mapCharacters)
             System.out.println(character.getCharName());
         // load the character chosen by user
-        observeChar = character.loadCharacter(readInput.readLine());
+        observeChar = observeChar.loadCharacter(readInput.readLine());
 
-        while(this.character == null) {
+        while(observeChar.getCharName().equals(null)) {
             System.out.println("This character does not exist! Please try again: ");
             observeChar = character.loadCharacter(readInput.readLine());
         }
@@ -236,6 +219,18 @@ public class PlayScreen {
             observeInventory.setItems(observeChar);
             new InventoryObserver(observeInventory);
             observeInventory.setState(observeInventory.getItems());
+
+            System.out.println("Name of player: " +this.character.getCharName());
+            // If the character being observed is the player character, ask user if they want to make changes
+            if(this.character.getCharName().equals(observeChar.getCharName())) {
+                // Ask the user if they want to make changes to the player's inventory
+                InventoryScreen inventoryScreen = new InventoryScreen();
+                inventoryScreen.setObserverChar(observeChar);
+                inventoryScreen.InventoryScreen();
+                observeChar = inventoryScreen.getObserverChar();
+                // Update the player according to the new inventory
+                this.character = observeChar;
+            }
         }
     }
 

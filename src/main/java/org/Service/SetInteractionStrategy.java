@@ -32,7 +32,7 @@ public class SetInteractionStrategy {
      * @param objectCoordinate the coordinate of the object we are interacting with
      * @param campaign the campaign we are playing
      */
-    public static void interact(final Map map, final String targetObject, final Point playerCoordinate, final Point objectCoordinate, final Campaign campaign) {
+    public static void interact( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         if ("Q".equalsIgnoreCase(targetObject)) {
             goToNextLevel(map, targetObject, playerCoordinate, objectCoordinate, campaign);
         } else if ('m'==targetObject.charAt(0)||'M'==targetObject.charAt(0)) {
@@ -53,7 +53,7 @@ public class SetInteractionStrategy {
      * @param objectCoordinate the coordinate of the object we are interacting with
      * @param campaign the campaign we are playing
      */
-    private static void interactWithFriendlyCharacter(Map map, final String targetObject, final Point playerCoordinate, final Point objectCoordinate, final Campaign campaign) {
+    private static void interactWithFriendlyCharacter(Map map,  String targetObject, Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         Character friendlyCharacter = new Character();
         try {
             friendlyCharacter = friendlyCharacter.loadCharacter(targetObject);
@@ -89,7 +89,7 @@ public class SetInteractionStrategy {
         swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
     }
 
-    private static void swapPlayerWithObjectSpotsInMap(final Map map, final Point playerCoordinate, final Point objectCoordinate) {
+    private static void swapPlayerWithObjectSpotsInMap( Map map,  Point playerCoordinate,  Point objectCoordinate) {
         final String player = map.getScreen()[playerCoordinate.x][playerCoordinate.y];
         map.getScreen()[playerCoordinate.x][playerCoordinate.y] = map.getScreen()[objectCoordinate.x][objectCoordinate.y];
         map.getScreen()[objectCoordinate.x][objectCoordinate.y] = player;
@@ -103,7 +103,7 @@ public class SetInteractionStrategy {
      * @param objectCoordinate the coordinate of the object we are interacting with
      * @param campaign the campaign we are playing
      */
-    private static void interactWithChest(final Map map, final String targetObject, final Point playerCoordinate, final Point objectCoordinate, final Campaign campaign) {
+    private static void interactWithChest( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         //TODO interactWithChest here
         final Character player = map.getPlayer();
         final BackPackInventory chest = map.getChest();
@@ -124,7 +124,7 @@ public class SetInteractionStrategy {
      * @param objectCoordinate the coordinate of the object we are interacting with
      * @param campaign the campaign we are playing
      */
-    private static void interactWithMonster(final Map map, final String targetObject, final Point playerCoordinate, final Point objectCoordinate, final Campaign campaign) {
+    private static void interactWithMonster( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         final Character character = map.getPlayer();
 
         Character monster=null;
@@ -147,7 +147,7 @@ public class SetInteractionStrategy {
      * @param objectCoordinate the coordinate of the object we are interacting with
      * @param campaign the campaign we are playing
      */
-    private static void goToNextLevel(final Map map, final String targetObject, final Point playerCoordinate, final Point objectCoordinate, final Campaign campaign) {
+    private static void goToNextLevel( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         //TODO go to next level logic here + adjust the Campaign
     }
 }
