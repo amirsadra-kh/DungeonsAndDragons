@@ -7,7 +7,7 @@
     <ability>
         <level>1</level>
         <armorClass>13</armorClass>
-        <attackBonus>2</attackBonus>
+        <attackBonus>1</attackBonus>
         <constitution>10</constitution>
         <damageBonus>3</damageBonus>
         <dexterity>15</dexterity>
@@ -20,9 +20,27 @@
             <item>BELT</item>
             <name>belt1</name>
         </items>
+        <items>
+            <enhance>3</enhance>
+            <enhancementType>STRENGTH</enhancementType>
+            <item>BELT</item>
+            <name>belt1</name>
+        </items>
+        <items>
+            <enhance>3</enhance>
+            <enhancementType>ATTACKBONUS</enhancementType>
+            <item>WEAPON</item>
+            <name>weapon1</name>
+        </items>
+        <items>
+            <enhance>5</enhance>
+            <enhancementType>DEXTERITY</enhancementType>
+            <item>BOOTS</item>
+            <name>boots1</name>
+        </items>
     </backPackInventory>
     <charName>char1</charName>
-    <hitPoints>1</hitPoints>
+    <hitPoints>13</hitPoints>
     <itemsWearing>
         <enhance>3</enhance>
         <enhancementType>STRENGTH</enhancementType>
@@ -43,4 +61,13 @@
     </itemsWearing>
     <level>1</level>
     <playerCharacter>false</playerCharacter>
+    <state>
+        <level>1</level>
+        <armorClass>13</armorClass>
+        <attackBonus>1</attackBonus>
+        <constitution>10</constitution>
+        <damageBonus>3</damageBonus>
+        <dexterity>15</dexterity>
+        <strength>15</strength>
+    </state>
 </character>
