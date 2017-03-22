@@ -44,7 +44,7 @@ public class PlayScreen {
      * This method is the base of playing the game
      * @param map the current map that the game is playing in
      */
-    private void playGame(Map map) {
+    public void playGame(Map map) {
         setPlayerAtEntryPoint(map);
         MapScreen.showMap(map);
         // Allow the user to observe a character.
@@ -68,7 +68,7 @@ public class PlayScreen {
      */
     private void movePlayer(Map map) {
         String direction =readInput.readLine();
-        while(!MapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer(map,direction,this.campaign)){
+        while(!MapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer(map,direction,this.campaign,this.character,this)){
             direction =readInput.readLine();
             MapScreen.showMap(map);
         }
@@ -79,7 +79,7 @@ public class PlayScreen {
      * it searches for E in the Map and set the payer position there
      * @param map
      */
-    private void setPlayerAtEntryPoint(Map map) {
+    public void setPlayerAtEntryPoint(Map map) {
         for(int i=0;i<map.getScreen().length;i++){
             for(int j=0;j<map.getScreen()[i].length;j++){
                 if(map.getScreen()[i][j].equalsIgnoreCase("E")){

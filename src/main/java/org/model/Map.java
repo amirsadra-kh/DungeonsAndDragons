@@ -3,6 +3,7 @@ package main.java.org.model;
 import main.java.org.Service.ObjectLoader;
 import main.java.org.Service.ObjectSaver;
 
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +27,7 @@ public class Map implements Serializable {
     private Character player;
     private List<Character> mapChars;
     private BackPackInventory chest;
+    private boolean canGoNextLevel=false;
 
     /**
      * An empty map constructor
@@ -43,6 +45,22 @@ public class Map implements Serializable {
 
         this.screen = screen;
 
+    }
+
+    /**
+     * This method is to return the current coordinate of the player
+     * @param map the current map
+     * @return it returns the Point corresponding the player's coordinate
+     */
+     public static Point getPlayerCoordinate(Map map) {
+        for (int i = 0; i < map.getScreen().length; i++) {
+            for (int j = 0; j < map.getScreen()[i].length; j++) {
+                if ("P".equalsIgnoreCase(map.getScreen()[i][j])) {
+                    return new Point(i, j);
+                }
+            }
+        }
+        return null;
     }
 
     /**
@@ -253,4 +271,13 @@ public class Map implements Serializable {
                 ", turn=" + turn +
                 '}';
     }
+
+    public boolean isCanGoNextLevel() {
+        return canGoNextLevel;
+    }
+
+    public void setCanGoNextLevel(boolean canGoNextLevel) {
+        this.canGoNextLevel = canGoNextLevel;
+    }
+
 }

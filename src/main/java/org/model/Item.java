@@ -79,6 +79,7 @@ public class Item {
      * a method to get the itemEnum of this item
      * @return an Item Enum
      */
+    @XmlElement
     public ItemEnum getItem() {
         return this.itemEnum;
     }
@@ -95,6 +96,7 @@ public class Item {
      * A method to get the EnhancementType of this item
      * @return
      */
+    @XmlElement
     public EnhancementTypesEnum getEnhancementType() {
         return this.enhancementType;
     }

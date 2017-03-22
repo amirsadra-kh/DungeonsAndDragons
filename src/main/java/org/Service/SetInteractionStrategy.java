@@ -120,6 +120,7 @@ public class SetInteractionStrategy {
             playerBackpack.add(loot.get(j));
 
         swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
+        map.setCanGoNextLevel(true);
     }
 
     /**

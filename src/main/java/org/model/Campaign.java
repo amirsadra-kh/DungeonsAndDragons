@@ -149,7 +149,7 @@ public class Campaign implements Serializable {
         // Check if there are any levels left to play
         if(levelsPlayed <= numLevels) {
             //get the name of the next level to play
-            if(this.mapNames.size()<levelsPlayed) {
+            if(this.mapNames.size()>levelsPlayed) {
                 String nextMap = this.mapNames.get(levelsPlayed);
 
                 // Set the current map to the next map to play
@@ -169,10 +169,18 @@ public class Campaign implements Serializable {
                 BackPackInventory chest = currentMap.getChest();
                 if (chest != null) {
                     List<Item> chestItems = chest.getItems();
-                    for (Item item : chestItems) {
-                        item.setItemOnMapEnhancement(character.getLevel());
+                    List<Item> newItems = new ArrayList<>();
+                    for(int i=0;i<chestItems.size();i++){
+                        String str=String.valueOf(chestItems.get(0));
+                        Item item=new Item();
+                        item = item.loadItem(str);
+                        newItems.add(item);
                     }
-                    chest.setItems(chestItems);
+//
+//                    for (Item item : chestItems) {
+//                        item.setItemOnMapEnhancement(character.getLevel());
+//                    }
+                    chest.setItems(newItems);
                     currentMap.setChest(chest);
                 }
                 return currentMap;
