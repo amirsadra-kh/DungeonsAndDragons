@@ -13,9 +13,9 @@ import java.util.List;
  * @since 02.08.2017
  */
 public class BackPackInventory {
-    protected List<Item> items = new ArrayList<>();
     // The maximum number of items allowed in the backpack
     private final int MAX_ITEMS = 10;
+    protected List<Item> items = new ArrayList<>();
 
     /**
      * A method to get the items in the backpack
@@ -49,10 +49,18 @@ public class BackPackInventory {
         Iterator<Item> itr = this.items.iterator();
         Item lastElement = itr.next();
 
-        while(itr.hasNext()) {
+        while (itr.hasNext()) {
             lastElement = itr.next();
         }
 
         return lastElement;
+    }
+
+    @Override
+    public String toString() {
+        return "BackPackInventory{" +
+                "items=" + items +
+                ", MAX_ITEMS=" + MAX_ITEMS +
+                '}';
     }
 }
