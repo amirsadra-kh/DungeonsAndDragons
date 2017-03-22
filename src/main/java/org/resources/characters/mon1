@@ -5,9 +5,9 @@
         <level>1</level>
         <attackBonus>1</attackBonus>
         <constitution>11</constitution>
-        <damageBonus>2</damageBonus>
+        <damageBonus>5</damageBonus>
         <dexterity>12</dexterity>
-        <strength>13</strength>
+        <strength>16</strength>
     </ability>
     <backPackInventory>
         <items>
@@ -30,7 +30,13 @@
         </items>
     </backPackInventory>
     <charName>mon1</charName>
-    <hitPoints>8</hitPoints>
+    <hitPoints>7</hitPoints>
+    <itemsWearing>
+        <enhance>3</enhance>
+        <enhancementType>STRENGTH</enhancementType>
+        <item>BELT</item>
+        <name>belt1</name>
+    </itemsWearing>
     <level>1</level>
     <playerCharacter>false</playerCharacter>
 </character>

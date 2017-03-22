@@ -33,8 +33,8 @@ public class Character {
 
     // A base line for the hit points
     RollDice dice10 = new RollDice(10);
-    public int dice = dice10.roll();
-    private int hitPoints = dice;
+    public int dice;
+    private int hitPoints;
 
     // For the observer
     private java.util.List<Observer> observers = new ArrayList<>();
@@ -49,6 +49,8 @@ public class Character {
     public void newCharacter() {
         this.isPlayerCharacter = false;
         this.level = 1;
+        this.dice = dice10.roll();
+        this.hitPoints = dice;
     }
 
     /**
