@@ -50,7 +50,7 @@ public class MapFrame implements ActionListener {
     private boolean MonsterExist= false;
     private String errorValidMap="";
     private DefaultListModel listModel;
-    private BackPackInventory chest;
+    private BackPackInventory chest=new BackPackInventory();
     /**
      * A MapFrame object
      */
@@ -117,14 +117,18 @@ public class MapFrame implements ActionListener {
         Map map = new Map();
         JFrame MapFrame = new JFrame(frameTitle);
         MapFrame.setContentPane(this.MapPanel);
-        MapFrame.setSize(800, 500);
+        MapFrame.setSize(600, 500);
         //MapFrame.setLocationRelativeTo(null);
         MapFrame.setVisible(true);
 
         return map;
     }
 
-
+    /**
+     * A method to handle Actions
+     *
+     * @param actionEvent the title of the frame
+     */
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
 
@@ -140,10 +144,7 @@ public class MapFrame implements ActionListener {
 
 
         String name = NameInput.getText();
-        List chestList = chestJList.getSelectedValuesList();
-        String chestListString = chestJList.getSelectedValue().toString();
-//chestList.get(0);
-   //     chest.setItems(chestList);
+
         if (actionEvent.getSource() == openMapGrid) {
             grid = new MapGrid(rows, cols);
             this.grid = this.grid.ShowGrid(rows, cols, this.grid, name, newMap);
@@ -155,12 +156,18 @@ public class MapFrame implements ActionListener {
                 rows=map.getRows();
                 cols=map.getCols();
             }
+
+            List chestList = chestJList.getSelectedValuesList();
+            String chestListString = chestJList.getSelectedValue().toString();
+            chest.setItems(chestList);
+            map.setChest(chest);
+
             String[][] boardArray = grid.createBoard(MapGrid.GetTextFromGrid(this.grid), rows, cols);
             map.setScreen(boardArray);
             map.setCols(cols);
             map.setRows(rows);
             map.setName(name);
-            map.setChest(chest);
+
             validMap =false;
 
 
@@ -180,16 +187,17 @@ public class MapFrame implements ActionListener {
                     }
                 }
             }
-            if(EntryPointExist==false || ExitPointExist == false || MonsterExist == false){
+            if(EntryPointExist==false || ExitPointExist == false ){ //|| MonsterExist == false
 
                 if (EntryPointExist==false){errorValidMap="Please add entry point by E";}
                 if (ExitPointExist==false){errorValidMap="Please add exit point by Q";}
-                if (MonsterExist==false){errorValidMap="Please add Monsters by M";}
+              //  if (MonsterExist==false){errorValidMap="Please add Monsters by M";}
 
                 validMap=false;
                 alert("Not Valid "+errorValidMap);
             }else{
                 map.saveObject();
+                grid.dispose();
                 alert("Your map is saved. you may close the map");
             }
 

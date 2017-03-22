@@ -39,9 +39,12 @@ public class MapGrid extends JFrame {
             editBoard(name);
 
         }
-        grid.setLocationRelativeTo(null);
+       // grid.setLocationRelativeTo(null);
+        grid.setLocationByPlatform(true);
         grid.setSize( 500, 500);
+        grid.setLocation(600,0);
         grid.setVisible(true);
+        grid.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
        return  grid;
 
     }

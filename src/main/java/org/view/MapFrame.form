@@ -3,7 +3,7 @@
   <grid id="27dc6" binding="MapPanel" layout-manager="GridLayoutManager" row-count="8" column-count="7" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="5" left="5" bottom="5" right="5"/>
     <constraints>
-      <xy x="20" y="20" width="740" height="757"/>
+      <xy x="20" y="20" width="740" height="1009"/>
     </constraints>
     <properties/>
     <border type="none"/>
@@ -71,7 +71,7 @@
       <vspacer id="3a58e">
         <constraints>
           <grid row="7" column="4" row-span="1" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false">
-            <minimum-size width="-1" height="450"/>
+            <minimum-size width="-1" height="100"/>
             <preferred-size width="-1" height="450"/>
           </grid>
         </constraints>
@@ -139,16 +139,6 @@
           <text value="new:"/>
         </properties>
       </component>
-      <component id="9b9a3" class="javax.swing.JTextPane" binding="useTheFollowingGuidTextPane" default-binding="true">
-        <constraints>
-          <grid row="7" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
-            <preferred-size width="150" height="50"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="Use the following guid to edit/Create your map:&#10;W: add wall(s)&#10;E: entery point to the map&#10;Q: quit point of the map&#10;B: add  bounus &#10;C: Chest&#10;Character: drag &amp; drop the name of character from left side to map&#10;Items: drag &amp; drop the name of item from left side to map&#10;Monster: drag &amp; drop the name of monster from character list to map and the same for friendly monster"/>
-        </properties>
-      </component>
       <component id="74a96" class="javax.swing.JLabel" binding="characterLabel">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
@@ -195,6 +185,26 @@
         </constraints>
         <properties>
           <text value="Chest"/>
+        </properties>
+      </component>
+      <component id="9b9a3" class="javax.swing.JTextPane" binding="useTheFollowingGuidTextPane" default-binding="true">
+        <constraints>
+          <grid row="4" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Use the following guid to edit/Create your map:&#10;W: add wall(s)&#10;E: entery point to the map&#10;Q: quit point of the map&#10;B: add  bounus &#10;C: Chest&#10;"/>
+        </properties>
+      </component>
+      <component id="62c7b" class="javax.swing.JTextPane" default-binding="true">
+        <constraints>
+          <grid row="5" column="6" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Character: drag &amp; drop the name of character from left side to map&#10;Items: drag &amp; drop the name of item from left side to map&#10;Monster: drag &amp; drop the name of monster from character list to map and the same for friendly monster"/>
         </properties>
       </component>
     </children>
