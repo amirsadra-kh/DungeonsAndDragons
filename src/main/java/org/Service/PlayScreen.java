@@ -47,6 +47,7 @@ public class PlayScreen {
         // Allow the user to observe a character.
         String choice = "";
         System.out.println("Would you like to observe a character from the map? Y/N");
+        choice = readInput.readStringHandling(choice);
         while(!"Y".equals(choice) && !"N".equals(choice) && !"y".equals(choice) && !"n".equals(choice)) {
             System.out.println("Invalid input! Please try again: ");
             choice = readInput.readStringHandling(choice);

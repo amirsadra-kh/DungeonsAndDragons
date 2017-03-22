@@ -60,7 +60,6 @@ public class SetInteractionStrategy {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //TODO interactWithFriendlyCharacter here
         Character player = map.getPlayer();
 
         BackPackInventory friendlyCharacterBackpack, playerBackPack;
