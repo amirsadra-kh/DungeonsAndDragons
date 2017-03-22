@@ -120,10 +120,31 @@ public class CharacterTest {
         Assert.assertEquals(size, this.character.getItemsWearing().size());
     }
 
+    @Test
+    public void testItemInfluence() {
+        int strength = ability.getStrength();
+        System.out.println("Current strength: " +strength);
+        HashSet<Item> wearingItems = character.getItemsWearing();
+        Item strengthItem = new Item();
+        strengthItem = strengthItem.loadItem("belt1");
+
+        wearingItems.add(strengthItem);
+        strength += strengthItem.getEnhance();
+        System.out.println("Current strength: " +ability.getStrength());
+
+        character.setItemsWearing(wearingItems);
+        ability = character.getAbility();
+        System.out.println("New strength: " +ability.getStrength());
+
+        Assert.assertEquals(strength, ability.getStrength());
+
+    }
+
     /**
      * A test method to test the backpack inventory of a character.
      * @throws Exception
      */
+    /*
     @Test
     public void testGetBackPackInventory() throws Exception {
         Item item = new Item();
@@ -145,6 +166,7 @@ public class CharacterTest {
         int size = 4;
         Assert.assertEquals(size, this.character.getBackPackInventoryItems().size());
     }
+    */
 
     /**
      * A test method to test character name setting and getting
