@@ -1,15 +1,21 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <character>
-    <dice>9</dice>
+    <dice>5</dice>
     <ability>
         <level>1</level>
-        <attackBonus>1</attackBonus>
-        <constitution>14</constitution>
+        <attackBonus>4</attackBonus>
+        <constitution>16</constitution>
         <damageBonus>5</damageBonus>
-        <dexterity>19</dexterity>
-        <strength>15</strength>
+        <dexterity>21</dexterity>
+        <strength>16</strength>
     </ability>
     <backPackInventory>
+        <items>
+            <enhance>3</enhance>
+            <enhancementType>STRENGTH</enhancementType>
+            <item>BELT</item>
+            <name>belt1</name>
+        </items>
         <items>
             <enhance>1</enhance>
             <enhancementType>CONSTITUTION</enhancementType>
@@ -23,13 +29,14 @@
             <name>boots1</name>
         </items>
         <items>
-            <enhance>5</enhance>
-            <enhancementType>DEXTERITY</enhancementType>
-            <item>BOOTS</item>
-            <name>boots1</name>
+            <enhance>3</enhance>
+            <enhancementType>ATTACKBONUS</enhancementType>
+            <item>WEAPON</item>
+            <name>weapon1</name>
         </items>
     </backPackInventory>
     <charName>char1</charName>
+    <hitPoints>8</hitPoints>
     <itemsWearing>
         <enhance>3</enhance>
         <enhancementType>STRENGTH</enhancementType>
@@ -42,14 +49,12 @@
         <item>BOOTS</item>
         <name>boots1</name>
     </itemsWearing>
+    <itemsWearing>
+        <enhance>3</enhance>
+        <enhancementType>ATTACKBONUS</enhancementType>
+        <item>WEAPON</item>
+        <name>weapon1</name>
+    </itemsWearing>
     <level>1</level>
     <playerCharacter>false</playerCharacter>
-    <state>
-        <level>1</level>
-        <attackBonus>4</attackBonus>
-        <constitution>14</constitution>
-        <damageBonus>8</damageBonus>
-        <dexterity>19</dexterity>
-        <strength>12</strength>
-    </state>
 </character>

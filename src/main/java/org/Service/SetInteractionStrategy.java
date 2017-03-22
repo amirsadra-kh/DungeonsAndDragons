@@ -61,6 +61,7 @@ public class SetInteractionStrategy {
             e.printStackTrace();
         }
         Character player = map.getPlayer();
+        System.out.println("Friendly character: " +friendlyCharacter.getCharName());
 
         BackPackInventory friendlyCharacterBackpack, playerBackPack;
         friendlyCharacterBackpack = friendlyCharacter.getBackPackInventory();
@@ -118,7 +119,7 @@ public class SetInteractionStrategy {
     private static void interactWithMonster(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
         Character character = map.getPlayer();
 
-        Character monster=null;
+        Character monster = new Character();
         try {
             monster = monster.loadCharacter(targetObject);
         } catch (Exception e) {
@@ -127,6 +128,8 @@ public class SetInteractionStrategy {
         //TODO interactWithMonster here
         Ability ability = character.getAbility();
         monster.decreaseHitPoint(ability.getAttackBonus());
+        System.out.println("Monster's Hit Point: " +monster.getHitPoints());
+        monster.saveCharacter();
     }
     /**
      * This method will have the logic of going to next level

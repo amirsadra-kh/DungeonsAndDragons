@@ -111,6 +111,7 @@ public class Character {
      *
      * @return the hitPoints of a character
      */
+    @XmlElement
     public int getHitPoints() {
         return this.hitPoints;
     }
@@ -137,7 +138,7 @@ public class Character {
     public void setAbility(Ability ability) {
         ability.getArmorClass(0);
         ability.setDamageBonus(0);
-        ability.setAttackBonus(0);
+        ability.setAttackBonus(this.level);
         ability.level = 1;
         this.level = 1;
         this.ability = ability;
