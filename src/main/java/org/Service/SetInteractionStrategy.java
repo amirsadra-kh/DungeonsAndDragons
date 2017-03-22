@@ -54,7 +54,7 @@ public class SetInteractionStrategy {
      * @param campaign the campaign we are playing
      */
     private static void interactWithFriendlyCharacter(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
-        Character friendlyCharacter=null;
+        Character friendlyCharacter = new Character();
         try {
             friendlyCharacter = friendlyCharacter.loadCharacter(targetObject);
         } catch (Exception e) {
@@ -69,7 +69,9 @@ public class SetInteractionStrategy {
         List<Item> playerItems = playerBackPack.getItems();
         List<Item> friendlyCharacterItems = friendlyCharacterBackpack.getItems();
 
-        System.out.println("Choose an item to exchange with an item from friendly monster: \n"+playerItems.toString());
+        System.out.println("Choose an item to exchange with an item from friendly monster: ");
+        for (Item i : playerItems)
+            System.out.println(i.getName());
         int itemToGive = Integer.parseInt(readInput.readLine());
 
         Item temp1 = playerItems.get(itemToGive);
