@@ -102,7 +102,13 @@ public class MapFrame implements ActionListener {
 
     }
 
-
+    /**
+     * This method is to show an input message box
+     + *
+     + * @author Mehran Ishanian
+     + * @version 1.2
+     + * @since 2017-03-16
+     */
     public String input(String message) {
         return JOptionPane.showInputDialog(message);
     }
