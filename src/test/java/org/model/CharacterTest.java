@@ -155,7 +155,7 @@ public class CharacterTest {
         // Check if items are added to the backpack
         backPackInventory.setItems(backpack);
         this.character.setBackPackInventory(backPackInventory);
-        Assert.assertEquals(backpack, character.getBackPackInventory());
+        Assert.assertEquals(backpack, character.getBackPackInventoryItems());
 
         // Check if multiple items of the same type can be added
         backpack.add(item.loadItem("belt2"));

@@ -26,6 +26,8 @@ public class PlayScreen {
     private ReadInput readInput = new ReadInput();
     // The first level to be played, should be increased after a map has been finished.
     private int level = 0;
+    private CharacterObserver characterObserver;
+    private InventoryObserver inventoryObserver;
 
     /**
      * A basic interaction screen after the user chooses Play
@@ -50,6 +52,7 @@ public class PlayScreen {
         // Allow the user to observe a character.
         String choice = "";
         System.out.println("Would you like to observe a character from the map? Y/N");
+        choice = readInput.readStringHandling(choice);
         while(!"Y".equals(choice) && !"N".equals(choice) && !"y".equals(choice) && !"n".equals(choice)) {
             System.out.println("Invalid input! Please try again: ");
             choice = readInput.readStringHandling(choice);
@@ -150,6 +153,8 @@ public class PlayScreen {
 
         // Ask user if they want to observe the inventory of the character
         askUserInventoryObserver(observeChar);
+
+        MapScreen.setObservers(this.characterObserver, this.inventoryObserver);
     }
 
     /**
@@ -195,8 +200,10 @@ public class PlayScreen {
         }
 
         if("Y".equals(choice) || "y".equals(choice)) {
-            new CharacterObserver(observeChar);
+            this.characterObserver = new CharacterObserver(observeChar);
             observeChar.setState(observeChar.getAbility());
+            observeChar.attach(this.characterObserver);
+            this.characterObserver = new CharacterObserver(observeChar);
         }
     }
 
@@ -217,10 +224,11 @@ public class PlayScreen {
             // This gets the character's inventory - Observer
             Inventory observeInventory = new Inventory();
             observeInventory.setItems(observeChar);
-            new InventoryObserver(observeInventory);
+            this.inventoryObserver = new InventoryObserver(observeInventory);
             observeInventory.setState(observeInventory.getItems());
+            observeChar.attach(this.inventoryObserver);
+            this.inventoryObserver = new InventoryObserver(observeInventory);
 
-            System.out.println("Name of player: " +this.character.getCharName());
             // If the character being observed is the player character, ask user if they want to make changes
             if(this.character.getCharName().equals(observeChar.getCharName())) {
                 // Ask the user if they want to make changes to the player's inventory
@@ -265,5 +273,4 @@ public class PlayScreen {
         }
         return maps;
     }
-
 }

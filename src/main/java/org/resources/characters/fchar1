@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <character>
-    <dice>3</dice>
+    <bully>true</bully>
+    <nimble>false</nimble>
+    <tank>false</tank>
+    <dice>1</dice>
     <ability>
         <level>1</level>
-        <attackBonus>0</attackBonus>
-        <constitution>13</constitution>
-        <damageBonus>7</damageBonus>
-        <dexterity>18</dexterity>
+        <armorClass>13</armorClass>
+        <attackBonus>2</attackBonus>
+        <constitution>10</constitution>
+        <damageBonus>5</damageBonus>
+        <dexterity>15</dexterity>
         <strength>19</strength>
     </ability>
     <backPackInventory>
-        <enhance>3</enhance>
-        <enhancementType>STRENGTH</enhancementType>
-        <item>BELT</item>
-        <name>belt1</name>
-    </backPackInventory>
-    <backPackInventory>
-        <enhance>1</enhance>
-        <enhancementType>CONSTITUTION</enhancementType>
-        <item>BELT</item>
-        <name>belt2</name>
-    </backPackInventory>
-    <backPackInventory>
-        <enhance>5</enhance>
-        <enhancementType>DEXTERITY</enhancementType>
-        <item>BOOTS</item>
-        <name>boots1</name>
+        <items>
+            <enhance>1</enhance>
+            <enhancementType>CONSTITUTION</enhancementType>
+            <item>BELT</item>
+            <name>belt2</name>
+        </items>
+        <items>
+            <enhance>5</enhance>
+            <enhancementType>DEXTERITY</enhancementType>
+            <item>BOOTS</item>
+            <name>boots1</name>
+        </items>
+        <items>
+            <enhance>3</enhance>
+            <enhancementType>ATTACKBONUS</enhancementType>
+            <item>WEAPON</item>
+            <name>weapon1</name>
+        </items>
     </backPackInventory>
     <charName>fchar1</charName>
+    <hitPoints>8</hitPoints>
     <itemsWearing>
         <enhance>3</enhance>
         <enhancementType>STRENGTH</enhancementType>
@@ -39,6 +46,12 @@
         <enhancementType>DEXTERITY</enhancementType>
         <item>BOOTS</item>
         <name>boots1</name>
+    </itemsWearing>
+    <itemsWearing>
+        <enhance>3</enhance>
+        <enhancementType>ATTACKBONUS</enhancementType>
+        <item>WEAPON</item>
+        <name>weapon1</name>
     </itemsWearing>
     <level>1</level>
     <playerCharacter>false</playerCharacter>

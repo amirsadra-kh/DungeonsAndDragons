@@ -31,6 +31,13 @@ public class Character {
     private HashSet<Item> itemsWearing = new HashSet<>();
     private int level;
 
+    @XmlElement
+    private boolean bully;
+    @XmlElement
+    private boolean nimble;
+    @XmlElement
+    private boolean tank;
+
     // A base line for the hit points
     RollDice dice10 = new RollDice(10);
     public int dice = dice10.roll();
@@ -41,14 +48,126 @@ public class Character {
     private Ability state;
 
     /**
-     * Empty Character Constructor
+     * An empty constructor
      */
-    public Character() {
+    public Character() {}
+
+    /**
+     * Build Character
+     *
+     * @param builder the Character Builder
+     */
+    private Character(Builder builder) {
+        backPackInventory = builder.backPackInventory;
+        currentPosition = builder.currentPosition;
+        ability = builder.ability;
+        isPlayerCharacter = builder.isPlayerCharacter;
+        charName = builder.charName;
+        itemsWearing = builder.itemsWearing;
+        level = builder.level;
+        hitPoints = builder.hitPoints;
+
+        bully = builder.bully;
+        nimble = builder.nimble;
+        tank = builder.tank;
     }
 
+    /**
+     * A method to create a new character.
+     */
     public void newCharacter() {
         this.isPlayerCharacter = false;
         this.level = 1;
+    }
+
+    /**
+     * A Builder class
+     */
+    public static class Builder {
+        // Needed variables
+        private final BackPackInventory backPackInventory;
+        private final Point currentPosition;
+        private final Ability ability;
+        private final boolean isPlayerCharacter;
+        private final String charName;
+        private final HashSet<Item> itemsWearing;
+        private final int level;
+
+        // Choice of type
+        private boolean bully;
+        private boolean nimble;
+        private boolean tank;
+
+        // A base line for the hit points
+        RollDice dice10 = new RollDice(10);
+        public int dice = dice10.roll();
+        private int hitPoints = dice;
+
+        // For the observer
+        private java.util.List<Observer> observers = new ArrayList<>();
+        private Ability state;
+
+        /**
+         * A Character builder
+         *
+         * @param backPackInventory
+         * @param currentPosition
+         * @param ability
+         * @param isPlayerCharacter
+         * @param charName
+         * @param itemsWearing
+         * @param level
+         * @param hitPoints
+         */
+        public Builder(BackPackInventory backPackInventory, Point currentPosition, Ability ability,
+                       boolean isPlayerCharacter, String charName, HashSet<Item> itemsWearing, int level, int hitPoints) {
+            this.backPackInventory = backPackInventory;
+            this.currentPosition = currentPosition;
+            this.ability = ability;
+            this.isPlayerCharacter = isPlayerCharacter;
+            this.charName = charName;
+            this.itemsWearing = itemsWearing;
+            this.level = level;
+            this.hitPoints = hitPoints;
+        }
+
+        /**
+         * A Bully builder
+         * @param value a boolean value determined by ability
+         * @return return this type
+         */
+        public Builder Bully(boolean value) {
+            this.bully = value;
+            return this;
+        }
+
+        /**
+         * A Nimble builder
+         * @param value a boolean value determined by ability
+         * @return return this type
+         */
+        public Builder Nimble(boolean value) {
+            this.nimble = value;
+            return this;
+        }
+
+        /**
+         * A Tank builder
+         * @param value a boolean value determined by ability
+         * @return return this type
+         */
+        public Builder Tank(boolean value) {
+            this.tank = value;
+            return this;
+        }
+
+        /**
+         * A method for returning this character in builder
+         * @return
+         */
+        public Character build() {
+            return new Character(this);
+        }
     }
 
     /**
@@ -111,6 +230,7 @@ public class Character {
      *
      * @return the hitPoints of a character
      */
+    @XmlElement
     public int getHitPoints() {
         return this.hitPoints;
     }
@@ -137,7 +257,7 @@ public class Character {
     public void setAbility(Ability ability) {
         ability.getArmorClass(0);
         ability.setDamageBonus(0);
-        ability.setAttackBonus(0);
+        ability.setAttackBonus(this.level);
         ability.level = 1;
         this.level = 1;
         this.ability = ability;
