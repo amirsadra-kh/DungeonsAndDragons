@@ -1,31 +1,28 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <character>
-    <dice>8</dice>
+    <bully>false</bully>
+    <nimble>true</nimble>
+    <tank>false</tank>
+    <dice>3</dice>
     <ability>
         <level>1</level>
-        <armorClass>10</armorClass>
+        <armorClass>12</armorClass>
         <attackBonus>5</attackBonus>
-        <constitution>12</constitution>
-        <damageBonus>3</damageBonus>
-        <dexterity>10</dexterity>
-        <strength>15</strength>
+        <constitution>9</constitution>
+        <damageBonus>0</damageBonus>
+        <dexterity>13</dexterity>
+        <strength>7</strength>
     </ability>
     <backPackInventory>
         <items>
-            <enhance>1</enhance>
-            <enhancementType>CONSTITUTION</enhancementType>
-            <item>BELT</item>
-            <name>belt2</name>
-        </items>
-        <items>
             <enhance>3</enhance>
-            <enhancementType>ATTACKBONUS</enhancementType>
-            <item>WEAPON</item>
-            <name>weapon1</name>
+            <enhancementType>STRENGTH</enhancementType>
+            <item>BELT</item>
+            <name>belt1</name>
         </items>
     </backPackInventory>
-    <charName>mon1</charName>
-    <hitPoints>11</hitPoints>
+    <charName>char2</charName>
+    <hitPoints>2</hitPoints>
     <itemsWearing>
         <enhance>1</enhance>
         <enhancementType>CONSTITUTION</enhancementType>

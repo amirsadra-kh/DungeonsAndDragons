@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <character>
-    <dice>5</dice>
+    <dice>6</dice>
     <ability>
         <level>1</level>
-        <attackBonus>4</attackBonus>
-        <constitution>16</constitution>
+        <armorClass>11</armorClass>
+        <attackBonus>5</attackBonus>
+        <constitution>10</constitution>
         <damageBonus>5</damageBonus>
-        <dexterity>21</dexterity>
-        <strength>16</strength>
+        <dexterity>15</dexterity>
+        <strength>15</strength>
     </ability>
     <backPackInventory>
         <items>
@@ -16,27 +17,9 @@
             <item>BELT</item>
             <name>belt1</name>
         </items>
-        <items>
-            <enhance>1</enhance>
-            <enhancementType>CONSTITUTION</enhancementType>
-            <item>BELT</item>
-            <name>belt2</name>
-        </items>
-        <items>
-            <enhance>5</enhance>
-            <enhancementType>DEXTERITY</enhancementType>
-            <item>BOOTS</item>
-            <name>boots1</name>
-        </items>
-        <items>
-            <enhance>3</enhance>
-            <enhancementType>ATTACKBONUS</enhancementType>
-            <item>WEAPON</item>
-            <name>weapon1</name>
-        </items>
     </backPackInventory>
     <charName>char1</charName>
-    <hitPoints>8</hitPoints>
+    <hitPoints>9</hitPoints>
     <itemsWearing>
         <enhance>3</enhance>
         <enhancementType>STRENGTH</enhancementType>
