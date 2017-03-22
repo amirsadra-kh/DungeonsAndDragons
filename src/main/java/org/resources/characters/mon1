@@ -28,7 +28,7 @@
         </items>
     </backPackInventory>
     <charName>mon1</charName>
-    <hitPoints>8</hitPoints>
+    <hitPoints>9</hitPoints>
     <itemsWearing>
         <enhance>1</enhance>
         <enhancementType>CONSTITUTION</enhancementType>
