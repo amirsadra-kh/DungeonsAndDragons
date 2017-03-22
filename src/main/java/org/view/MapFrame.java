@@ -222,9 +222,6 @@ public class MapFrame implements ActionListener {
         }
     }
 
-    private void editMap(int rows, int cols, String name) {
-
-    }
 
 
 }
