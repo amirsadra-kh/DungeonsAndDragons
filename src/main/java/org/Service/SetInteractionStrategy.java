@@ -89,6 +89,12 @@ public class SetInteractionStrategy {
         swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
     }
 
+    /**
+     * This method is to swap the positions of the player and the target object on the map
+     * @param map the current map
+     * @param playerCoordinate
+     * @param objectCoordinate
+     */
     private static void swapPlayerWithObjectSpotsInMap( Map map,  Point playerCoordinate,  Point objectCoordinate) {
         final String player = map.getScreen()[playerCoordinate.x][playerCoordinate.y];
         map.getScreen()[playerCoordinate.x][playerCoordinate.y] = map.getScreen()[objectCoordinate.x][objectCoordinate.y];
