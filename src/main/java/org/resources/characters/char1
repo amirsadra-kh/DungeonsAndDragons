@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <character>
-    <dice>6</dice>
+    <bully>true</bully>
+    <nimble>false</nimble>
+    <tank>false</tank>
+    <dice>10</dice>
     <ability>
         <level>1</level>
-        <armorClass>11</armorClass>
-        <attackBonus>5</attackBonus>
+        <armorClass>13</armorClass>
+        <attackBonus>2</attackBonus>
         <constitution>10</constitution>
-        <damageBonus>5</damageBonus>
+        <damageBonus>3</damageBonus>
         <dexterity>15</dexterity>
         <strength>15</strength>
     </ability>
@@ -19,7 +22,7 @@
         </items>
     </backPackInventory>
     <charName>char1</charName>
-    <hitPoints>9</hitPoints>
+    <hitPoints>1</hitPoints>
     <itemsWearing>
         <enhance>3</enhance>
         <enhancementType>STRENGTH</enhancementType>
