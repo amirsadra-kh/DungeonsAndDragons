@@ -53,7 +53,7 @@ public class SetInteractionStrategy {
      * @param objectCoordinate the coordinate of the object we are interacting with
      * @param campaign the campaign we are playing
      */
-    private static void interactWithFriendlyCharacter(final Map map, final String targetObject, final Point playerCoordinate, final Point objectCoordinate, final Campaign campaign) {
+    private static void interactWithFriendlyCharacter(Map map, final String targetObject, final Point playerCoordinate, final Point objectCoordinate, final Campaign campaign) {
         Character friendlyCharacter = new Character();
         try {
             friendlyCharacter = friendlyCharacter.loadCharacter(targetObject);
@@ -86,6 +86,13 @@ public class SetInteractionStrategy {
         friendlyCharacterItems.add(temp1);
 
         friendlyCharacterBackpack.setItems(friendlyCharacterItems);
+        swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
+    }
+
+    private static void swapPlayerWithObjectSpotsInMap(final Map map, final Point playerCoordinate, final Point objectCoordinate) {
+        final String player = map.getScreen()[playerCoordinate.x][playerCoordinate.y];
+        map.getScreen()[playerCoordinate.x][playerCoordinate.y] = map.getScreen()[objectCoordinate.x][objectCoordinate.y];
+        map.getScreen()[objectCoordinate.x][objectCoordinate.y] = player;
     }
 
     /**
@@ -105,6 +112,8 @@ public class SetInteractionStrategy {
         final List<Item> playerBackpack = player.getBackPackInventoryItems();
         for (int i = playerBackpack.size()+loot.size(), j=0; i < 10; i++,j++)
             playerBackpack.add(loot.get(j));
+
+        swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
     }
 
     /**
@@ -127,6 +136,8 @@ public class SetInteractionStrategy {
         //TODO interactWithMonster here
         final Ability ability = character.getAbility();
         monster.decreaseHitPoint(ability.getAttackBonus());
+        swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
+
     }
     /**
      * This method will have the logic of going to next level
