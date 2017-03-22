@@ -61,13 +61,21 @@ public class MapFrame implements ActionListener {
         newCheckBox.addActionListener(this);
         loadObjectsNames();
     }
+
+    /**
+     * This method is to show alert message
+     + *
+     + * @author Mehran Ishanian
+     + * @version 1.0
+     + * @since 2017-03-16
+     */
     public static void alert(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
 
 
     /**
-     * This class is is to load Character & Items to the Map and assign to according Labels.
+     * This method is is to load Character & Items to the Map and assign to according Labels.
      + *
      + * @author Mehran Ishanian
      + * @version 1.2
@@ -102,7 +110,13 @@ public class MapFrame implements ActionListener {
 
     }
 
-
+    /**
+     * This method is to show an input message box
+     + *
+     + * @author Mehran Ishanian
+     + * @version 1.2
+     + * @since 2017-03-16
+     */
     public String input(String message) {
         return JOptionPane.showInputDialog(message);
     }
