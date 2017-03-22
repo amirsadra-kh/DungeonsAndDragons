@@ -1,9 +1,5 @@
 package main.java.org.model;
 
-import java.awt.*;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.util.*;
 import main.java.org.Service.Observer;
 
 import javax.xml.bind.JAXBContext;
@@ -11,8 +7,12 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
+import java.awt.*;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 
 /**
  * This class is the character object
@@ -115,6 +115,20 @@ public class Character {
         return this.hitPoints;
     }
 
+    public void decreaseHitPoint(int newHitPoint){
+        if (this.hitPoints > 0){
+            this.hitPoints = this.hitPoints - newHitPoint;
+        }
+        else
+            System.out.println("Character has died!");
+
+
+    }
+
+    public void increaseHitPoint(int newHitPoint){
+        this.hitPoints = this.hitPoints + newHitPoint;
+    }
+
     /**
      * A method for initializing the ability for the character
      *
@@ -193,8 +207,10 @@ public class Character {
         if(this.backPackInventory!=null){
             return this.backPackInventory.getItems();
         }
-        else
+        else {
+            System.out.println("The backpack is empty!!");
             return null;
+        }
     }
 
     /**

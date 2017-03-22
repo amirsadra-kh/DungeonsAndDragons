@@ -3,8 +3,14 @@ package main.java.org.Service;
 import main.java.org.model.Campaign;
 import main.java.org.model.Character;
 import main.java.org.model.Map;
+import main.java.org.model.ReadInput;
+import main.java.org.model.BackPackInventory;
+import main.java.org.model.Item;
+import main.java.org.model.Ability;
 
-import java.awt.*;
+import java.awt.Point;
+import java.util.List;
+import java.util.Random;
 
 /**
  * this method is to dispatch different behaviour based on the interactions with Monster, ....
@@ -17,6 +23,7 @@ import java.awt.*;
  * @objectCoordinate the coordinate of the object we are interacting with
  */
 public class SetInteractionStrategy {
+    static ReadInput readInput = new ReadInput();
     /**
      * This method represents the interaction of the player with the elements in the map
      * @param map the current map
@@ -26,7 +33,6 @@ public class SetInteractionStrategy {
      * @param campaign the campaign we are playing
      */
     public static void interact(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
-
         if ("Q".equalsIgnoreCase(targetObject)) {
             goToNextLevel(map, targetObject, playerCoordinate, objectCoordinate, campaign);
         } else if ('m'==targetObject.charAt(0)||'M'==targetObject.charAt(0)) {
@@ -48,13 +54,39 @@ public class SetInteractionStrategy {
      * @param campaign the campaign we are playing
      */
     private static void interactWithFriendlyCharacter(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
-        Character character=null;
+        Character friendlyCharacter = new Character();
         try {
-            character = ObjectLoader.loadCharacterFromXML(targetObject);
+            friendlyCharacter = friendlyCharacter.loadCharacter(targetObject);
         } catch (Exception e) {
             e.printStackTrace();
         }
         //TODO interactWithFriendlyCharacter here
+        Character player = map.getPlayer();
+
+        BackPackInventory friendlyCharacterBackpack, playerBackPack;
+        friendlyCharacterBackpack = friendlyCharacter.getBackPackInventory();
+        playerBackPack = player.getBackPackInventory();
+        List<Item> playerItems = playerBackPack.getItems();
+        List<Item> friendlyCharacterItems = friendlyCharacterBackpack.getItems();
+
+        System.out.println("Choose an item to exchange with an item from friendly monster: ");
+        for (Item i : playerItems)
+            System.out.println(i.getName());
+        int itemToGive = Integer.parseInt(readInput.readLine());
+
+        Item temp1 = playerItems.get(itemToGive);
+        playerItems.remove(itemToGive);
+
+        int index = new Random().nextInt(friendlyCharacterItems.size());
+        Item itemToReceive = friendlyCharacterItems.get(index);
+
+        playerItems.add(itemToReceive);
+        playerBackPack.setItems(playerItems);
+
+        friendlyCharacterItems.remove(index);
+        friendlyCharacterItems.add(temp1);
+
+        friendlyCharacterBackpack.setItems(friendlyCharacterItems);
     }
 
     /**
@@ -67,6 +99,13 @@ public class SetInteractionStrategy {
      */
     private static void interactWithChest(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
         //TODO interactWithChest here
+        Character player = map.getPlayer();
+        BackPackInventory chest = map.getChest();
+        List<Item> loot;
+        loot = chest.getItems();
+        List<Item> playerBackpack = player.getBackPackInventoryItems();
+        for (int i = playerBackpack.size()+loot.size(), j=0; i < 10; i++,j++)
+            playerBackpack.add(loot.get(j));
     }
 
     /**
@@ -78,13 +117,17 @@ public class SetInteractionStrategy {
      * @param campaign the campaign we are playing
      */
     private static void interactWithMonster(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
-        Character character=null;
+        Character character = map.getPlayer();
+
+        Character monster=null;
         try {
-            character = ObjectLoader.loadCharacterFromXML(targetObject);
+            monster = monster.loadCharacter(targetObject);
         } catch (Exception e) {
             e.printStackTrace();
         }
         //TODO interactWithMonster here
+        Ability ability = character.getAbility();
+        monster.decreaseHitPoint(ability.getAttackBonus());
     }
     /**
      * This method will have the logic of going to next level

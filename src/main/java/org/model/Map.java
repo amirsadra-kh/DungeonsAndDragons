@@ -104,18 +104,6 @@ public class Map implements Serializable {
     public void setPlayer(Character player) { this.player = player; }
 
     /**
-     * A method to get the characters on the map
-     * @return a list of Characters on the map
-     */
-    public List<Character> getMapChars() { return this.mapChars; }
-
-    /**
-     * A method to set the characters on the map
-     * @param mapChars characters added to the map
-     */
-    public void setMapChars(List<Character> mapChars) { this.mapChars = mapChars; }
-
-    /**
      * A method to get the name of a map
      *
      * @return the name of the map
@@ -192,17 +180,28 @@ public class Map implements Serializable {
      */
     public List<Character> getNonPLayerCharacters() {
         List<Character> characters=new ArrayList();
+        Character temp = new Character();
+        int monsterNum = 1;
+        int friendlyNum = 1;
         for (int i = 0; i < this.getScreen().length; i++) {
-            System.out.print("|");
             for (int j = 0; j < this.getScreen()[i].length; j++) {
-                if("".equals(this.getScreen()[i][j])){
-                    this.getScreen()[i][j]=" ";
+                if ("".equals(this.getScreen()[i][j])) {
+                    this.getScreen()[i][j] = " ";
                 }
-                if('f'==this.getScreen()[i][j].charAt(0)
-                        ||'m'==this.getScreen()[i][j].charAt(0) ){
+                if ('f' == this.getScreen()[i][j].charAt(0) || 'F' == this.getScreen()[i][j].charAt(0)) {
                     try {
                         //System.out.println(this.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
-                        characters.add((Character) ObjectLoader.loadCharacterFromXML(this.getScreen()[i][j].toString()));
+                        characters.add(temp.loadCharacter("fchar" +friendlyNum));
+                        friendlyNum++;
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if('m' == this.getScreen()[i][j].charAt(0) || 'M' == this.getScreen()[i][j].charAt(0)){
+                    try {
+                        //System.out.println(this.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
+                        characters.add(temp.loadCharacter("mon" + monsterNum));
+                        monsterNum++;
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -229,6 +228,7 @@ public class Map implements Serializable {
         this.chest = chest;
     }
 
+    //TODO if we are meant to have multiple chests, this method should return a definite chest object.
     public BackPackInventory getChest() {
         return this.chest;
     }
