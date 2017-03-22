@@ -119,12 +119,14 @@ public class ItemScreen {
      * @return a string with the item type
      */
     public String getItemEnum() {
-        ArrayList<String> itemsArray = new ArrayList<>();
-
         // Get input from user
         System.out.println("Please enter your item Type from the provided list below:");
         for (ItemEnum e : ItemEnum.values()) {
             System.out.println(e.ordinal() + ". " + e.name());
+        }
+
+        ArrayList<String> itemsArray = new ArrayList<>();
+        for (ItemEnum e : ItemEnum.values()) {
             itemsArray.add(e.ordinal(), e.name());
         }
         String item = readLine().toUpperCase();
@@ -135,16 +137,21 @@ public class ItemScreen {
             for (ItemEnum e : ItemEnum.values()) {
                 System.out.println(e.ordinal() + ". " + e.name());
             }
-            item = readLine();
 
+            item = readLine();
             for (ItemEnum e : ItemEnum.values()) {
                 itemsArray.add(e.ordinal(), e.name());
             }
 
             // Exist while loop is a correct enum is chosen
-            if(itemsArray.contains(item))
+            if (itemsArray.contains(item))
                 break;
         }
+
+        while (!itemsArray.contains(item)) {
+            System.out.println("The Entered Item is not valid! \nPlease enter your item Type ");
+        }
+        item = readLine().toUpperCase();
 
         System.out.println("ITEM RECEIVED SUCCESSFULLY!");
         return item;
@@ -182,6 +189,7 @@ public class ItemScreen {
             EnhancementArray.add("ATTACKBONUS");
             EnhancementArray.add("DAMAGEBONUS");
         }
+
         String enhancement = readLine().toUpperCase();
 
         while (!EnhancementArray.contains(enhancement)) {
