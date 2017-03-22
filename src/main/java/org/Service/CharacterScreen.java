@@ -7,8 +7,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.io.IOException;
-import java.util.Scanner;
-
 /**
  * This class is to interact with user to create the character, save it and edit it.
  *
