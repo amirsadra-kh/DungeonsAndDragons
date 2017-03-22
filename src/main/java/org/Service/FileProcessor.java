@@ -84,17 +84,18 @@ abstract class FileProcessor {
      */
     public ArrayList returnItemNames(String path, String prefixName) {
         ArrayList<String> fileArray = new ArrayList();;
-        String fileNames="<html>",fileName;
+    //    String fileNames="<html>",
+        String fileName;
         int Counter=0;
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();
         for(File file:listOfFiles){
             Counter++;
             fileName=file.toString().split("\\\\")[file.toString().split("\\\\").length-1];
-            fileNames += prefixName+Counter+" - "+fileName+"<br>";
+       //     fileNames += prefixName+Counter+" - "+fileName+"<br>";
             fileArray.add(fileName);
         }
-        fileNames += "</html>";
+     //   fileNames += "</html>";
         return fileArray;
     }
 
