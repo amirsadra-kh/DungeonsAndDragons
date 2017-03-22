@@ -1,14 +1,17 @@
 package main.java.org.Service;
 
-import main.java.org.model.*;
+
+import main.java.org.model.Campaign;
 import main.java.org.model.Character;
+import main.java.org.model.Inventory;
 import main.java.org.model.Map;
-import main.java.org.view.MapFrame;
+import main.java.org.model.ReadInput;
+
 
 import java.util.ArrayList;
-import java.util.HashSet;
+
 import java.util.List;
-import java.util.Scanner;
+
 
 /**
  * A class to interact with the user while playing the game

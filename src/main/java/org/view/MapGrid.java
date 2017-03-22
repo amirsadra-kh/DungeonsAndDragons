@@ -39,9 +39,12 @@ public class MapGrid extends JFrame {
             editBoard(name);
 
         }
-        grid.setLocationRelativeTo(null);
+       // grid.setLocationRelativeTo(null);
+        grid.setLocationByPlatform(true);
         grid.setSize( 500, 500);
+        grid.setLocation(600,0);
         grid.setVisible(true);
+        grid.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
        return  grid;
 
     }
@@ -155,7 +158,7 @@ public class MapGrid extends JFrame {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                JTextField NewTextField = new JTextField(i + "" + j); //Integer.toString(i + 1)
+                JTextField NewTextField = new JTextField(); //i + "" + j
                 pane.add(NewTextField);
             }
         }

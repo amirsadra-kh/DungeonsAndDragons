@@ -32,7 +32,7 @@ public class SetInteractionStrategy {
      * @param objectCoordinate the coordinate of the object we are interacting with
      * @param campaign the campaign we are playing
      */
-    public static void interact(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
+    public static void interact( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         if ("Q".equalsIgnoreCase(targetObject)) {
             goToNextLevel(map, targetObject, playerCoordinate, objectCoordinate, campaign);
         } else if ('m'==targetObject.charAt(0)||'M'==targetObject.charAt(0)) {
@@ -53,32 +53,31 @@ public class SetInteractionStrategy {
      * @param objectCoordinate the coordinate of the object we are interacting with
      * @param campaign the campaign we are playing
      */
-    private static void interactWithFriendlyCharacter(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
+    private static void interactWithFriendlyCharacter(Map map,  String targetObject, Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         Character friendlyCharacter = new Character();
         try {
             friendlyCharacter = friendlyCharacter.loadCharacter(targetObject);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
-        Character player = map.getPlayer();
-        System.out.println("Friendly character: " +friendlyCharacter.getCharName());
+        //TODO interactWithFriendlyCharacter here
+        final Character player = map.getPlayer();
 
-        BackPackInventory friendlyCharacterBackpack, playerBackPack;
+        final BackPackInventory friendlyCharacterBackpack;
+        final BackPackInventory playerBackPack;
         friendlyCharacterBackpack = friendlyCharacter.getBackPackInventory();
         playerBackPack = player.getBackPackInventory();
-        List<Item> playerItems = playerBackPack.getItems();
-        List<Item> friendlyCharacterItems = friendlyCharacterBackpack.getItems();
+        final List<Item> playerItems = playerBackPack.getItems();
+        final List<Item> friendlyCharacterItems = friendlyCharacterBackpack.getItems();
 
-        System.out.println("Choose an item to exchange with an item from friendly monster: ");
-        for (Item i : playerItems)
-            System.out.println(i.getName());
-        int itemToGive = Integer.parseInt(readInput.readLine());
+        System.out.println("Choose an item to exchange with an item from friendly monster: \n"+playerItems.toString());
+        final int itemToGive = Integer.parseInt(readInput.readLine());
 
-        Item temp1 = playerItems.get(itemToGive);
+        final Item temp1 = playerItems.get(itemToGive);
         playerItems.remove(itemToGive);
 
-        int index = new Random().nextInt(friendlyCharacterItems.size());
-        Item itemToReceive = friendlyCharacterItems.get(index);
+        final int index = new Random().nextInt(friendlyCharacterItems.size());
+        final Item itemToReceive = friendlyCharacterItems.get(index);
 
         playerItems.add(itemToReceive);
         playerBackPack.setItems(playerItems);
@@ -87,6 +86,19 @@ public class SetInteractionStrategy {
         friendlyCharacterItems.add(temp1);
 
         friendlyCharacterBackpack.setItems(friendlyCharacterItems);
+        swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
+    }
+
+    /**
+     * This method is to swap the positions of the player and the target object on the map
+     * @param map the current map
+     * @param playerCoordinate
+     * @param objectCoordinate
+     */
+    private static void swapPlayerWithObjectSpotsInMap( Map map,  Point playerCoordinate,  Point objectCoordinate) {
+        final String player = map.getScreen()[playerCoordinate.x][playerCoordinate.y];
+        map.getScreen()[playerCoordinate.x][playerCoordinate.y] = map.getScreen()[objectCoordinate.x][objectCoordinate.y];
+        map.getScreen()[objectCoordinate.x][objectCoordinate.y] = player;
     }
 
     /**
@@ -97,15 +109,17 @@ public class SetInteractionStrategy {
      * @param objectCoordinate the coordinate of the object we are interacting with
      * @param campaign the campaign we are playing
      */
-    private static void interactWithChest(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
+    private static void interactWithChest( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         //TODO interactWithChest here
-        Character player = map.getPlayer();
-        BackPackInventory chest = map.getChest();
-        List<Item> loot;
+        final Character player = map.getPlayer();
+        final BackPackInventory chest = map.getChest();
+        final List<Item> loot;
         loot = chest.getItems();
-        List<Item> playerBackpack = player.getBackPackInventoryItems();
+        final List<Item> playerBackpack = player.getBackPackInventoryItems();
         for (int i = playerBackpack.size()+loot.size(), j=0; i < 10; i++,j++)
             playerBackpack.add(loot.get(j));
+
+        swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
     }
 
     /**
@@ -116,18 +130,19 @@ public class SetInteractionStrategy {
      * @param objectCoordinate the coordinate of the object we are interacting with
      * @param campaign the campaign we are playing
      */
-    private static void interactWithMonster(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
-        Character character = map.getPlayer();
+    private static void interactWithMonster( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
+        final Character character = map.getPlayer();
 
         Character monster = new Character();
         try {
             monster = monster.loadCharacter(targetObject);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
         //TODO interactWithMonster here
-        Ability ability = character.getAbility();
+        final Ability ability = character.getAbility();
         monster.decreaseHitPoint(ability.getAttackBonus());
+        swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
         System.out.println("Monster's Hit Point: " +monster.getHitPoints());
         monster.saveCharacter();
     }
@@ -139,7 +154,7 @@ public class SetInteractionStrategy {
      * @param objectCoordinate the coordinate of the object we are interacting with
      * @param campaign the campaign we are playing
      */
-    private static void goToNextLevel(Map map, String targetObject, Point playerCoordinate, Point objectCoordinate, Campaign campaign) {
+    private static void goToNextLevel( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         //TODO go to next level logic here + adjust the Campaign
     }
 }

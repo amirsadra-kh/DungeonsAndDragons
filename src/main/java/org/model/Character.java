@@ -210,10 +210,8 @@ public class Character {
         if(this.backPackInventory!=null){
             return this.backPackInventory.getItems();
         }
-        else {
-            System.out.println("The backpack is empty!!");
+        else
             return null;
-        }
     }
 
     /**
