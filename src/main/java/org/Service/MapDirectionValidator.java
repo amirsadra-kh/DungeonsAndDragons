@@ -53,7 +53,7 @@ public class MapDirectionValidator {
                 return false;
             }
             else if("Q".equalsIgnoreCase(str)) {
-                System.out.println("Great tou moved to next level");
+                System.out.println("Great you moved to next level");
                 SetInteractionStrategy.interact(map, str, getPlayerCoordinate(map), new Point(i, j),campaign);
                 MapScreen.printElementsInTheMap(map);
                 MapScreen.showMap(map);

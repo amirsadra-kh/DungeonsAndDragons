@@ -133,7 +133,7 @@ public class SetInteractionStrategy {
     private static void interactWithMonster( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         final Character character = map.getPlayer();
 
-        Character monster=null;
+        Character monster=new Character();
         try {
             monster = monster.loadCharacter(targetObject);
         } catch (final Exception e) {
