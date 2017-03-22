@@ -229,6 +229,7 @@ public class Map implements Serializable {
         this.chest = chest;
     }
 
+    //TODO if we are meant to have multiple chests, this method should return a definite chest object.
     public BackPackInventory getChest() {
         return this.chest;
     }
