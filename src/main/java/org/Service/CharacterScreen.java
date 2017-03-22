@@ -272,6 +272,9 @@ public class CharacterScreen {
     private void editBackPack(Character character) {
         boolean wearing = false;
         List<Item> backpackItems = character.getBackPackInventoryItems();
+        // TODO fix backpack item loading
+        for(Item item : backpackItems)
+            System.out.println(item.getName());
         Ability ability = character.getAbility();
 
         // Get the user to choose items for the character's backpack
