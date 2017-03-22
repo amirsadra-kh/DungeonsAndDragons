@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<item>
+    <enhance>3</enhance>
+    <enhancementType>ATTACKBONUS</enhancementType>
+    <item>WEAPON</item>
+    <name>weapon1</name>
+</item>

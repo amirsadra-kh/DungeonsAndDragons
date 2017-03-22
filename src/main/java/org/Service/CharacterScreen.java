@@ -55,7 +55,6 @@ public class CharacterScreen {
      * The interaction screen with user to create a new character
      */
     public void createCharacterScreen() throws Exception {
-        ObjectLoader ol = new ObjectLoader();
         String charName = "";
         HashSet<Item> wearingItem = new HashSet<>();
 
@@ -63,6 +62,7 @@ public class CharacterScreen {
         character.newCharacter();
         Ability ability = new Ability();
         character.setAbility(ability);
+
         boolean wearing = false;
         boolean charExist = true;
 
@@ -127,9 +127,9 @@ public class CharacterScreen {
         System.out.println("The character wear " + wearingItem);
 
         System.out.println(ability.toString());
-        System.out.println(character.charString());
 
         // Save the character
+        character = buildCharacter(character);
         character.saveCharacter();
     }
 
@@ -223,6 +223,19 @@ public class CharacterScreen {
 
         System.out.println("The other ability points depend on what the character has on item!\n");
 
+        // Set the Fighter type with Builder
+        Character.Builder builder = new Character.Builder(character.getBackPackInventory(), character.getCurrentPosition(),
+                character.getAbility(), character.isPlayerCharacter(), character.getCharName(), character.getItemsWearing(),
+                character.getLevel(), character.getHitPoints());
+        if(ability.getStrength() > 11)
+            builder.Bully(true);
+        else if(ability.getDexterity() > 11 && ability.getArmorClass() > 11)
+            builder.Nimble(true);
+        else if(character.getHitPoints() >  5 && ability.getConstitution() > 11)
+            builder.Tank(true);
+
+        character = builder.build();
+
         // Save changes?
         chooseToSave(charName, character);
     }
@@ -289,8 +302,10 @@ public class CharacterScreen {
             System.out.println("Invalid input! Please try again: ");
             save = readInput.readStringHandling(save);
         }
-        if(save.equals("Y") || save.equals("y"))
+        if(save.equals("Y") || save.equals("y")) {
+            character = buildCharacter(character);
             character.saveCharacter();
+        }
     }
 
     /**
@@ -526,5 +541,28 @@ public class CharacterScreen {
                 }
             }
         }
+    }
+
+    /**
+     * A method to set the fighter type using a builder
+     * @param character
+     * @return new character
+     */
+    public Character buildCharacter(Character character) {
+        Ability ability = character.getAbility();
+        int highAbility = 11;
+        int highHitPoints = 4;
+        // Set the Fighter type with Builder
+        Character.Builder builder = new Character.Builder(character.getBackPackInventory(), character.getCurrentPosition(),
+                character.getAbility(), character.isPlayerCharacter(), character.getCharName(), character.getItemsWearing(),
+                character.getLevel(), character.getHitPoints());
+        if(ability.getStrength() > highAbility)
+            builder.Bully(true);
+        else if(ability.getDexterity() > highAbility && ability.getArmorClass() > highAbility)
+            builder.Nimble(true);
+        else if(character.getHitPoints() >  highHitPoints && ability.getConstitution() > highAbility)
+            builder.Tank(true);
+
+        return character = builder.build();
     }
 }
