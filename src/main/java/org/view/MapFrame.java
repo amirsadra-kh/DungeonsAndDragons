@@ -118,7 +118,7 @@ public class MapFrame implements ActionListener {
         JFrame MapFrame = new JFrame(frameTitle);
         MapFrame.setContentPane(this.MapPanel);
         MapFrame.setSize(800, 500);
-        MapFrame.setLocationRelativeTo(null);
+        //MapFrame.setLocationRelativeTo(null);
         MapFrame.setVisible(true);
 
         return map;
@@ -142,8 +142,8 @@ public class MapFrame implements ActionListener {
         String name = NameInput.getText();
         List chestList = chestJList.getSelectedValuesList();
         String chestListString = chestJList.getSelectedValue().toString();
-
-
+//chestList.get(0);
+   //     chest.setItems(chestList);
         if (actionEvent.getSource() == openMapGrid) {
             grid = new MapGrid(rows, cols);
             this.grid = this.grid.ShowGrid(rows, cols, this.grid, name, newMap);

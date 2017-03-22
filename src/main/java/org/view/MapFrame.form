@@ -146,7 +146,7 @@
           </grid>
         </constraints>
         <properties>
-          <text value="Use the following guid to edit/Create your map:&#10;W: add wall(s)&#10;E: entery point to the map&#10;Q: quit point of the map&#10;M: add  monster(s)&#10;MF: add friendly monster(s)&#10;B: add  bounus &#10;C: Chest&#10;Drag &amp; Drop : Name of Characters from left side&#10;Drag &amp; Drop : Name of Items from left side&#10;"/>
+          <text value="Use the following guid to edit/Create your map:&#10;W: add wall(s)&#10;E: entery point to the map&#10;Q: quit point of the map&#10;B: add  bounus &#10;C: Chest&#10;Character: drag &amp; drop the name of character from left side to map&#10;Items: drag &amp; drop the name of item from left side to map&#10;Monster: drag &amp; drop the name of monster from character list to map and the same for friendly monster"/>
         </properties>
       </component>
       <component id="74a96" class="javax.swing.JLabel" binding="characterLabel">
