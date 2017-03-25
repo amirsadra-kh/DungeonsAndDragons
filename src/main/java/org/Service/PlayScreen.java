@@ -1,16 +1,12 @@
 package main.java.org.Service;
 
 
-import main.java.org.model.Campaign;
+import main.java.org.model.*;
 import main.java.org.model.Character;
-import main.java.org.model.Inventory;
 import main.java.org.model.Map;
-import main.java.org.model.ReadInput;
 
 
-import java.util.ArrayList;
-
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -28,6 +24,8 @@ public class PlayScreen {
     private int level = 0;
     private CharacterObserver characterObserver;
     private InventoryObserver inventoryObserver;
+    private List<Item> inventory = new ArrayList<>();
+    private Ability ability;
 
     /**
      * A basic interaction screen after the user chooses Play
@@ -170,19 +168,23 @@ public class PlayScreen {
         List<Character> mapCharacters = currentMap.getNonPLayerCharacters();
         // Add the player character to the list as well
         mapCharacters.add(character);
+        int choice = 0;
 
         System.out.println("Please enter the name of the character you would like to observe from the list below: ");
         // Print the name of each character that is on the map
-        for(Character character : mapCharacters)
-            System.out.println(character.getCharName());
+        int i = 1;
+        for(Character character : mapCharacters) {
+            System.out.println(i + ". " + character.getCharName());
+            i++;
+        }
+        choice = readInput.readIntHandling(choice);
         // load the character chosen by user
-        observeChar = observeChar.loadCharacter(readInput.readLine());
 
-        while(observeChar.getCharName().equals(null)) {
+        while(mapCharacters.get(choice-1).getCharName().equals(null)) {
             System.out.println("This character does not exist! Please try again: ");
             observeChar = character.loadCharacter(readInput.readLine());
         }
-        return observeChar;
+        return mapCharacters.get(choice-1);
     }
 
     /**

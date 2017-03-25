@@ -1,7 +1,9 @@
 package main.java.org.model;
 
-import main.java.org.Service.Observer;
+import main.java.org.Service.ObserverObject;
+import main.java.org.Service.PlayScreen;
 
+import java.util.Observer;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
@@ -13,6 +15,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * This class is the character object
@@ -22,7 +25,7 @@ import java.util.List;
  * @since 2017-02-23
  */
 @XmlRootElement
-public class Character {
+public class Character extends Observable {
     private BackPackInventory backPackInventory;
     private Point currentPosition;
     private Ability ability;
@@ -44,7 +47,7 @@ public class Character {
     private int hitPoints = dice;
 
     // For the observer
-    private java.util.List<Observer> observers = new ArrayList<>();
+    private List<ObserverObject> observers = new ArrayList<>();
     private Ability state;
 
     /**
@@ -261,6 +264,7 @@ public class Character {
         ability.level = 1;
         this.level = 1;
         this.ability = ability;
+        this.setState(ability);
     }
 
     /**
@@ -271,6 +275,10 @@ public class Character {
     public void setItemsWearing(HashSet<Item> items) {
         this.itemsWearing = items;
         setHitPoints();
+        Inventory inventory = new Inventory();
+        inventory.setItems(this);
+        List<Item> inventoryItems = inventory.getItems();
+        inventory.setState(inventoryItems);
     }
 
     /**
@@ -338,6 +346,10 @@ public class Character {
      */
     public void setBackPackInventory(BackPackInventory backPackInventory) {
         this.backPackInventory = backPackInventory;
+        Inventory inventory = new Inventory();
+        inventory.setItems(this);
+        List<Item> inventoryItems = inventory.getItems();
+        inventory.setState(inventoryItems);
     }
 
     /**
@@ -442,15 +454,21 @@ public class Character {
      *
      * @param observer
      */
-    public void attach(Observer observer){
+    public void attach(ObserverObject observer){
         this.observers.add(observer);
     }
+
+    /**
+     * A method fot detaching the observer to the inventory
+     * @param observer
+     */
+    public void detach(ObserverObject observer) { this.observers.remove(observer); }
 
     /**
      * A method to notify all the observers.
      */
     public void notifyAllObservers(){
-        for (Observer observer : this.observers) {
+        for (ObserverObject observer : this.observers) {
             observer.update();
         }
     }

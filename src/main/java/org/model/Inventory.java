@@ -1,10 +1,15 @@
 package main.java.org.model;
 
+import main.java.org.Service.InventoryObserver;
+import main.java.org.Service.ObserverObject;
+import main.java.org.Service.PlayScreen;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 import java.util.Set;
 
-import main.java.org.Service.Observer;
+import java.util.Observer;
 
 /**
  * A inventory subject of the observer
@@ -13,8 +18,8 @@ import main.java.org.Service.Observer;
  * @version 1.0
  * @since 2017-03-10
  */
-public class Inventory {
-    private List<Observer> observers = new ArrayList<>();
+public class Inventory extends Observable {
+    private List<ObserverObject> observers = new ArrayList<>();
     protected List<Item> items = new ArrayList<>();
     private List<Item> state = new ArrayList<>();
 
@@ -83,15 +88,23 @@ public class Inventory {
      * A method to attach the observer to the inventory
      * @param observer
      */
-    public void attach(Observer observer){
+    public void attach(ObserverObject observer){
         this.observers.add(observer);
+    }
+
+    /**
+     * A method fot detaching the observer to the inventory
+     * @param observer
+     */
+    public void detach(ObserverObject observer) {
+        this.observers.remove(observer);
     }
 
     /**
      * A method to notify all the observers.
      */
     public void notifyAllObservers(){
-        for (Observer observer : this.observers) {
+        for (ObserverObject observer : this.observers) {
             observer.update();
         }
     }

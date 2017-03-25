@@ -3,7 +3,7 @@
     <bully>true</bully>
     <nimble>false</nimble>
     <tank>false</tank>
-    <dice>10</dice>
+    <dice>5</dice>
     <ability>
         <level>1</level>
         <armorClass>13</armorClass>
@@ -21,10 +21,10 @@
             <name>belt1</name>
         </items>
         <items>
-            <enhance>3</enhance>
-            <enhancementType>STRENGTH</enhancementType>
-            <item>BELT</item>
-            <name>belt1</name>
+            <enhance>5</enhance>
+            <enhancementType>DEXTERITY</enhancementType>
+            <item>BOOTS</item>
+            <name>boots1</name>
         </items>
         <items>
             <enhance>3</enhance>
@@ -38,9 +38,39 @@
             <item>BOOTS</item>
             <name>boots1</name>
         </items>
+        <items>
+            <enhance>3</enhance>
+            <enhancementType>ATTACKBONUS</enhancementType>
+            <item>WEAPON</item>
+            <name>weapon1</name>
+        </items>
+        <items>
+            <enhance>5</enhance>
+            <enhancementType>DEXTERITY</enhancementType>
+            <item>BOOTS</item>
+            <name>boots1</name>
+        </items>
+        <items>
+            <enhance>3</enhance>
+            <enhancementType>STRENGTH</enhancementType>
+            <item>BELT</item>
+            <name>belt1</name>
+        </items>
+        <items>
+            <enhance>5</enhance>
+            <enhancementType>DEXTERITY</enhancementType>
+            <item>BOOTS</item>
+            <name>boots1</name>
+        </items>
+        <items>
+            <enhance>3</enhance>
+            <enhancementType>ATTACKBONUS</enhancementType>
+            <item>WEAPON</item>
+            <name>weapon1</name>
+        </items>
     </backPackInventory>
     <charName>char1</charName>
-    <hitPoints>13</hitPoints>
+    <hitPoints>1</hitPoints>
     <itemsWearing>
         <enhance>3</enhance>
         <enhancementType>STRENGTH</enhancementType>
@@ -60,7 +90,7 @@
         <name>weapon1</name>
     </itemsWearing>
     <level>1</level>
-    <playerCharacter>false</playerCharacter>
+    <playerCharacter>true</playerCharacter>
     <state>
         <level>1</level>
         <armorClass>13</armorClass>

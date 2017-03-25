@@ -339,7 +339,8 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "item=" + this.itemEnum +
+                "Name: " +this.name +
+                ", item=" + this.itemEnum +
                 ", enhancementType=" + this.enhancementType +
                 ", enhance=" + this.enhance +
                 ", coordinate=" + this.coordinate +

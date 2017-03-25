@@ -272,7 +272,6 @@ public class CharacterScreen {
     private void editBackPack(Character character) {
         boolean wearing = false;
         List<Item> backpackItems = character.getBackPackInventoryItems();
-        // TODO fix backpack item loading
         for(Item item : backpackItems)
             System.out.println(item.getName());
         Ability ability = character.getAbility();
@@ -350,14 +349,13 @@ public class CharacterScreen {
      */
     private void addToBackpack(List<Item> backpackItems, Ability ability, Character character, boolean wearing) {
         // Get the user to choose items for the character to wear
-        System.out.println("Would you like to add to the backpack items of the character? Y/N");
         while (true) {
+            System.out.println("Would you like to add to the backpack items of the character? Y/N");
             String answer = readInput.readLine().trim().toLowerCase();
             if (answer.equals("y")) {
                 System.out.println("The character's backpack item choices: ");
                 userChooseItems(backpackItems, ability, wearing, character);
                 setNewBackpack(backpackItems, character);
-                return;
             } else if (answer.equals("n")) {
                 setNewBackpack(backpackItems, character);
                 return;
@@ -409,8 +407,8 @@ public class CharacterScreen {
         List<String> itemNames = new ArrayList<>();
 
         // Get the user to choose items for the character to wear
-        System.out.println("Would you like to remove from the items the character has in the backpack? Y/N");
         while (true) {
+            System.out.println("Would you like to remove from the items the character has in the backpack? Y/N");
             String answer = readInput.readLine().trim().toLowerCase();
             if (answer.equals("y")) {
                 System.out.println("Choose an item from the list below of the backpack items: ");
@@ -425,7 +423,6 @@ public class CharacterScreen {
                 item = item.loadItem(itemName);
                 backpackItems.remove(item);
                 setNewBackpack(backpackItems, character);
-                return;
             } else if (answer.equals("n")) {
                 setNewBackpack(backpackItems, character);
                 return;
