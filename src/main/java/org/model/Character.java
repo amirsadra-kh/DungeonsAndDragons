@@ -345,6 +345,8 @@ public class Character extends Observable {
      * @param backPackInventory the backpack inventory to set the backpack to
      */
     public void setBackPackInventory(BackPackInventory backPackInventory) {
+        this.backPackInventory = null;
+        this.backPackInventory = new BackPackInventory();
         this.backPackInventory = backPackInventory;
         Inventory inventory = new Inventory();
         inventory.setItems(this);
