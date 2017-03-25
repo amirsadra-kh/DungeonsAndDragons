@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <character>
-    <dice>5</dice>
+    <bully>true</bully>
+    <nimble>false</nimble>
+    <tank>false</tank>
+    <dice>10</dice>
     <ability>
         <level>1</level>
-        <attackBonus>4</attackBonus>
-        <constitution>16</constitution>
-        <damageBonus>5</damageBonus>
-        <dexterity>21</dexterity>
-        <strength>16</strength>
+        <armorClass>13</armorClass>
+        <attackBonus>1</attackBonus>
+        <constitution>10</constitution>
+        <damageBonus>3</damageBonus>
+        <dexterity>15</dexterity>
+        <strength>15</strength>
     </ability>
     <backPackInventory>
         <items>
@@ -17,16 +21,10 @@
             <name>belt1</name>
         </items>
         <items>
-            <enhance>1</enhance>
-            <enhancementType>CONSTITUTION</enhancementType>
+            <enhance>3</enhance>
+            <enhancementType>STRENGTH</enhancementType>
             <item>BELT</item>
-            <name>belt2</name>
-        </items>
-        <items>
-            <enhance>5</enhance>
-            <enhancementType>DEXTERITY</enhancementType>
-            <item>BOOTS</item>
-            <name>boots1</name>
+            <name>belt1</name>
         </items>
         <items>
             <enhance>3</enhance>
@@ -34,9 +32,15 @@
             <item>WEAPON</item>
             <name>weapon1</name>
         </items>
+        <items>
+            <enhance>5</enhance>
+            <enhancementType>DEXTERITY</enhancementType>
+            <item>BOOTS</item>
+            <name>boots1</name>
+        </items>
     </backPackInventory>
     <charName>char1</charName>
-    <hitPoints>8</hitPoints>
+    <hitPoints>13</hitPoints>
     <itemsWearing>
         <enhance>3</enhance>
         <enhancementType>STRENGTH</enhancementType>
@@ -57,4 +61,13 @@
     </itemsWearing>
     <level>1</level>
     <playerCharacter>false</playerCharacter>
+    <state>
+        <level>1</level>
+        <armorClass>13</armorClass>
+        <attackBonus>1</attackBonus>
+        <constitution>10</constitution>
+        <damageBonus>3</damageBonus>
+        <dexterity>15</dexterity>
+        <strength>15</strength>
+    </state>
 </character>
