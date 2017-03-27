@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<campaign>
+    <mapNames>map3</mapNames>
+    <mapNames>map4</mapNames>
+    <mapNames>map5</mapNames>
+    <name>camp4</name>
+    <numLevels>3</numLevels>
+</campaign>
