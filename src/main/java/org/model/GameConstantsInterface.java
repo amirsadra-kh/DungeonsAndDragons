@@ -27,4 +27,5 @@ public interface GameConstantsInterface {
             "5) Start the Game:\n" +
             "6) End the Game:\n";
     String MAP_SOURCE_PATH = "src/main/java/org/resources/characters/";
+    String ENTER_DIRECTION = "Enter the direction you wish to move: \n Left:L\n Right:R \n Down:D\n Up:U\n";
 }

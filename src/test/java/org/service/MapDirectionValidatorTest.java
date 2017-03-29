@@ -26,35 +26,36 @@ public class MapDirectionValidatorTest {
 
     @Before
     public void setup() throws Exception {
-        mapDirectionValidator = new MapDirectionValidator();
+
         campaign = new Campaign();
         character = new Character();
         map = new ObjectLoader().loadMapTest("map2");
+        mapDirectionValidator = new MapDirectionValidator(campaign,map);
         playScreen=new PlayScreen();
 
     }
 
     @Test
     public void testValidateDirectionToLeftOutOfBound() throws Exception {
-        boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer(map, "l", campaign, character, playScreen);
+        boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer("l");
         assertFalse(result);
     }
 
     @Test
     public void testValidateDirectionToRightOutOfBound() throws Exception {
-        boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer(map, "r", campaign, character, playScreen);
+        boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer("r");
         assertFalse(result);
     }
 
     @Test
     public void testValidateDirectionToTopOutOfBound() throws Exception {
-        boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer(map, "u", campaign, character, playScreen);
+        boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer("u");
         assertFalse(result);
     }
 
     @Test
     public void testValidateDirectionToDownOutOfBound() throws Exception {
-        boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer(map, "d", campaign, character, playScreen);
+        boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer("d");
         assertFalse(result);
     }
 

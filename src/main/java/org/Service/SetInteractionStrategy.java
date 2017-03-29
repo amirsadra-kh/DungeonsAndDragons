@@ -34,7 +34,7 @@ public class SetInteractionStrategy {
      */
     public static void interact( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         if ("Q".equalsIgnoreCase(targetObject)) {
-            goToNextLevel(map, targetObject, playerCoordinate, objectCoordinate, campaign);
+          //  goToNextLevel(map, targetObject, playerCoordinate, objectCoordinate, campaign);
         } else if ('m'==targetObject.charAt(0)||'M'==targetObject.charAt(0)) {
             interactWithMonster(map, targetObject, playerCoordinate, objectCoordinate, campaign);
         } else if ('c'==targetObject.charAt(0)||'C'==targetObject.charAt(0)) {

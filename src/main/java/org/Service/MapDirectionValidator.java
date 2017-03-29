@@ -2,9 +2,12 @@ package main.java.org.Service;
 
 import main.java.org.model.Campaign;
 import main.java.org.model.Character;
+import main.java.org.model.GameConstantsInterface;
 import main.java.org.model.Map;
 
 import java.awt.*;
+
+import static main.java.org.Service.SetInteractionStrategy.readInput;
 
 /**
  * This Class is to validate the directions on the MAP
@@ -14,27 +17,31 @@ import java.awt.*;
  */
 public class MapDirectionValidator {
     private static int levelsPlayed = 0;
+    private Campaign campaign;
+    private Map map;
+
+    public MapDirectionValidator(Campaign campaign, Map map) {
+        this.campaign = campaign;
+        this.map = map;
+    }
 
     /**
      * This method is to move the player on the map based on the provided direction
      *
-     * @param map        The map we are playing
-     * @param direction  the direction to ove
-     * @param campaign   the campaign that we are playing
-     * @param character
-     * @param playScreen
      * @return it returns true if player can move
      */
-    public static boolean validateDirectionIsValidBoundriesAndMovePlayer(Map map, String direction, Campaign campaign, Character character, PlayScreen playScreen) {
+    public boolean validateDirectionIsValidBoundriesAndMovePlayer(String direction) {
+        //String direction =readInput.readLine();
         Point point = Map.getPlayerCoordinate(map);
+        MapScreen.showMap(map);
         if ("L".equalsIgnoreCase(direction)) {
-            return validateAndCheckIfPlayerGoesToNextLevel(map, point.x, point.y - 1, campaign, character, playScreen);
+            return validateAndCheckIfPlayerGoesToNextLevel(point.x, point.y - 1);
         } else if ("R".equalsIgnoreCase(direction)) {
-            return validateAndCheckIfPlayerGoesToNextLevel(map, point.x, point.y + 1, campaign, character, playScreen);
+            return validateAndCheckIfPlayerGoesToNextLevel(point.x, point.y + 1);
         } else if ("D".equalsIgnoreCase(direction)) {
-            return validateAndCheckIfPlayerGoesToNextLevel(map, point.x + 1, point.y, campaign, character, playScreen);
+            return validateAndCheckIfPlayerGoesToNextLevel(point.x + 1, point.y);
         } else if ("U".equalsIgnoreCase(direction)) {
-            return validateAndCheckIfPlayerGoesToNextLevel(map, point.x - 1, point.y, campaign, character, playScreen);
+            return validateAndCheckIfPlayerGoesToNextLevel(point.x - 1, point.y);
         }
         return false;
     }
@@ -45,15 +52,11 @@ public class MapDirectionValidator {
      * if the target object is wall we should try again
      * otherwise we should interact with other objects using SetInteractionStrategy
      *
-     * @param map
      * @param i          new I coordinate
      * @param j          new J Coordinate
-     * @param campaign
-     * @param character
-     * @param playScreen
      * @return the return condition is true only when player goes to next level
      */
-    static boolean validateAndCheckIfPlayerGoesToNextLevel(Map map, int i, int j, Campaign campaign, Character character, PlayScreen playScreen) {
+    protected boolean validateAndCheckIfPlayerGoesToNextLevel( int i, int j) {
         try {
             String str = map.getScreen()[i][j];
             if ("W".equalsIgnoreCase(str)) {
@@ -62,33 +65,9 @@ public class MapDirectionValidator {
                 MapScreen.showMap(map);
                 return false;
             } else if ("Q".equalsIgnoreCase(str)) {
-                if (map.isCanGoNextLevel()) {
-                    System.out.println("Great you moved to next level");
-                    try {
-                        map = campaign.nextLevel(++levelsPlayed, character);
-                    } catch (Exception e) {
-                        System.out.println("Could not go to the next level");
-                    }
-                    if (map == null) {
-                        System.out.println("You finished all the levels in the Campaign!");
-                        return true;
-                    }
-                    playScreen.setPlayerAtEntryPoint(map);
-                    SetInteractionStrategy.interact(map, str, Map.getPlayerCoordinate(map), new Point(i, j), campaign);
-                    try {
-                        playScreen.playGame(map);
-                    }
-                    catch (Exception e){
-                        System.out.println("Could not go to the next level");
-                    }
-
-                    return false;
-                } else {
-                    System.out.println("You have not found a chest in the map yet\n" +
-                            " Please find the chest in the map and then you can go to next level");
-                    return false;
-                }
-            } else if (!" ".equalsIgnoreCase(str)) {
+                return validateQuiteLevel(map, i, j, campaign, str);
+            }
+            else if (!" ".equalsIgnoreCase(str)) {
                 SetInteractionStrategy.interact(map, str, Map.getPlayerCoordinate(map), new Point(i, j), campaign);
                 MapScreen.printElementsInTheMap(map);
                 MapScreen.showMap(map);
@@ -105,6 +84,39 @@ public class MapDirectionValidator {
             System.out.print("the selected coordinate is out of bound , please try another coordinate");
         }
         return false;
+    }
+
+    private  boolean validateQuiteLevel(Map map, int i, int j, Campaign campaign, String str) {
+        if (this.map.isCanGoNextLevel()) {
+
+            try {
+                this.map = campaign.getNextLevel(map);
+            } catch (Exception e) {
+                System.out.println("You finished all the levels in the Campaign!");
+                return true;
+            }
+            PlayScreen.setPlayerAtEntryPoint(this.map);
+            System.out.println("Great you moved to next level");
+            MapScreen.showMap(this.map);
+            System.out.println(GameConstantsInterface.ENTER_DIRECTION);
+            SetInteractionStrategy.interact(this.map, str, Map.getPlayerCoordinate(this.map), new Point(i, j), campaign);
+
+            return false;
+        } else {
+            System.out.println("You have not found a chest in the map yet\n" +
+                    " Please find the chest in the map and then you can go to next level");
+            return false;
+        }
+    }
+
+    public void setPlayerAtEntryPoint(Map map) {
+        for(int i=0;i<map.getScreen().length;i++){
+            for(int j=0;j<map.getScreen()[i].length;j++){
+                if(map.getScreen()[i][j].equalsIgnoreCase("E")){
+                    map.getScreen()[i][j]="P";
+                }
+            }
+        }
     }
 
 

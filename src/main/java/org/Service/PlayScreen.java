@@ -3,6 +3,7 @@ package main.java.org.Service;
 
 import main.java.org.model.Campaign;
 import main.java.org.model.Character;
+import main.java.org.model.GameConstantsInterface;
 import main.java.org.model.Inventory;
 import main.java.org.model.Map;
 import main.java.org.model.ReadInput;
@@ -68,9 +69,9 @@ public class PlayScreen {
      */
     private void movePlayer(Map map) {
         String direction =readInput.readLine();
-        while(!MapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer(map,direction,this.campaign,this.character,this)){
+        MapDirectionValidator mapValidator= new MapDirectionValidator(this.campaign,map);
+        while(!mapValidator.validateDirectionIsValidBoundriesAndMovePlayer(direction)){
             direction =readInput.readLine();
-            MapScreen.showMap(map);
         }
     }
 
@@ -79,7 +80,7 @@ public class PlayScreen {
      * it searches for E in the Map and set the payer position there
      * @param map
      */
-    public void setPlayerAtEntryPoint(Map map) {
+    public static void setPlayerAtEntryPoint(Map map) {
         for(int i=0;i<map.getScreen().length;i++){
             for(int j=0;j<map.getScreen()[i].length;j++){
                 if(map.getScreen()[i][j].equalsIgnoreCase("E")){
@@ -93,13 +94,14 @@ public class PlayScreen {
      * This method is to print and ask user to enter the directions
      */
     private void enterDirection(){
-        System.out.println("Enter the direction you wish to move: \n Left:L\n Right:R \n Down:D\n Up:U\n");
+        System.out.println(GameConstantsInterface.ENTER_DIRECTION);
     }
 
     /**
      * This method is to chose the campaign to play the game
      *
      * @throws Exception
+     * @param character
      */
     private void choseCampaignForPlayingGame() throws Exception {
         // Get the user to choose an existing map from a list to play
@@ -108,7 +110,7 @@ public class PlayScreen {
         this.campaign = new Campaign();
         ol.showItemNames("src/main/java/org/resources/campaigns/");
         this.campaign = campaign.getCampaign(readInput.readLine());
-
+        this.campaign.setMaps(this.campaign.getMapsFromCampaign(this.character));
         while (this.campaign == null) {
             System.out.println("This campaign does not exist! Please try again: ");
             this.campaign = campaign.getCampaign(readInput.readLine());
@@ -266,4 +268,11 @@ public class PlayScreen {
         return maps;
     }
 
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
 }

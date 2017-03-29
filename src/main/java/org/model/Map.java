@@ -28,6 +28,15 @@ public class Map implements Serializable {
     private List<Character> mapChars;
     private BackPackInventory chest;
     private boolean canGoNextLevel=false;
+    private boolean isLevelCompleted;
+
+    public boolean isLevelCompleted() {
+        return isLevelCompleted;
+    }
+
+    public void setLevelCompleted(boolean levelCompleted) {
+        isLevelCompleted = levelCompleted;
+    }
 
     /**
      * An empty map constructor
