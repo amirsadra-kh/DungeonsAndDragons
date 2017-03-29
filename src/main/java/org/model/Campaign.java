@@ -179,61 +179,10 @@ public class Campaign implements Serializable {
     }
 
     /**
-     * A method to get the map to play and that goes back to main menu if the campaign is finished.
-     *
-     * @param levelsPlayed the number of levels already played in this campaign
-     * @param character    the player character to be added to the map
-     * @return the map to play or go back to main menu
+     * This method get the map in the current level, sets the level completed flag and returns the next level
+     * @param completedMap the current map which is completed
+     * @return the new level
      */
-    public Map nextLevel(int levelsPlayed, Character character) throws Exception {
-        // Check if there are any levels left to play
-        if (levelsPlayed <= numLevels) {
-            //get the name of the next level to play
-            if (this.mapNames.size() > levelsPlayed) {
-                String nextMap = this.mapNames.get(levelsPlayed);
-
-                // Set the current map to the next map to play
-                Map currentMap = getMap(nextMap);
-
-                // Add character player to the map
-                currentMap.addPlayer(character);
-
-                // Modify the level of the characters on the map according to the player
-                List<Character> mapChars = currentMap.getNonPLayerCharacters();
-                for (Character mapChar : mapChars) {
-                    mapChar.setLevel(character.getLevel());
-                }
-                currentMap.setNonPlayerCharacters(mapChars);
-
-                // Set the enhance of the items on a map according to the level
-                BackPackInventory chest = currentMap.getChest();
-                if (chest != null) {
-                    List<Item> chestItems = chest.getItems();
-                    List<Item> newItems = new ArrayList<>();
-                    for (int i = 0; i < chestItems.size(); i++) {
-                        String str = String.valueOf(chestItems.get(0));
-                        Item item = new Item();
-                        item = item.loadItem(str);
-                        newItems.add(item);
-                    }
-
-                    chest.setItems(newItems);
-                    currentMap.setChest(chest);
-                }
-                return currentMap;
-            }
-            return null;
-        }
-        // The game is finished! Go back to main menu
-        else {
-            System.out.println("CONGRATULATIONS YOU WON!!");
-            GameGenerator game = new GameGenerator();
-            game.showMenuToStartTheGame();
-        }
-        return null;
-    }
-
-
     public Map getNextLevel(Map completedMap) {
         maps.stream().
                 filter(map -> map.getName().equals(completedMap.getName())).

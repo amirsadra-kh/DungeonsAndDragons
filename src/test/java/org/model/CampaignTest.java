@@ -93,7 +93,6 @@ public class CampaignTest {
         try {
             Character character = ol.loadCharacterFromXML("char1");
             camp = camp.loadCampaign("camp1");
-            Map current = camp.nextLevel(levelsPlayed, character);
             Map correct = camp.getMap("map2");
             // TODO Check if the name is correct
             //Assert.assertEquals(correct.getName(), current.getName());
