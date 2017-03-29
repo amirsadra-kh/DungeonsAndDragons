@@ -1,7 +1,7 @@
 package test.java.org.service;
 
 import main.java.org.Service.ObjectLoader;
-import main.java.org.model.Character;
+import main.java.org.model.Character.Character;
 import main.java.org.model.Map;
 import org.junit.Before;
 import org.junit.Test;

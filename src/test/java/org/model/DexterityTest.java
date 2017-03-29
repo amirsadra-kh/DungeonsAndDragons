@@ -1,14 +1,14 @@
 package test.java.org.model;
 
-import main.java.org.model.Modifier;
-import main.java.org.model.Dexterity;
+import main.java.org.model.Character.Modifier;
+import main.java.org.model.Character.Dexterity;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  * A class to test the Dexterity class
  *
- * @see main.java.org.model.Dexterity
+ * @see Dexterity
  * @author Parisa Nikzad
  * @version 1.0
  * @since 20.02.2017

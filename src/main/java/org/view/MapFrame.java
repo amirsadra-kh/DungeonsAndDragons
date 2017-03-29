@@ -2,13 +2,12 @@ package main.java.org.view;
 
 import main.java.org.Service.ObjectLoader;
 import main.java.org.model.*;
-import main.java.org.model.Character;
+import main.java.org.model.Character.BackPackInventory;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;

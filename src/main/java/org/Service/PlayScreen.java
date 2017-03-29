@@ -2,7 +2,9 @@ package main.java.org.Service;
 
 
 import main.java.org.model.*;
-import main.java.org.model.Character;
+import main.java.org.model.Character.Ability;
+import main.java.org.model.Character.Character;
+import main.java.org.model.Character.Inventory;
 import main.java.org.model.Map;
 
 
@@ -225,7 +227,8 @@ public class PlayScreen {
         if("Y".equals(choice) || "y".equals(choice)) {
             // This gets the character's inventory - Observer
             Inventory observeInventory = new Inventory();
-            observeInventory.setItems(observeChar);
+            observeInventory.setBackpackItems(observeChar.getBackPackInventoryItems());
+            observeInventory.setWearingItems(observeChar.getItemsWearing());
             this.inventoryObserver = new InventoryObserver(observeInventory);
             observeInventory.setState(observeInventory.getItems());
             observeChar.attach(this.inventoryObserver);

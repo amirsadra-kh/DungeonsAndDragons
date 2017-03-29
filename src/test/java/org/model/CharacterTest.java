@@ -1,7 +1,10 @@
 package test.java.org.model;
 
 import main.java.org.model.*;
-import main.java.org.model.Character;
+import main.java.org.model.Character.Ability;
+import main.java.org.model.Character.BackPackInventory;
+import main.java.org.model.Character.Character;
+import main.java.org.model.Character.Strength;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.After;

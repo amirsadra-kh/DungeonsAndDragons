@@ -1,9 +1,6 @@
 package main.java.org.Service;
 
-import main.java.org.model.Character;
-import main.java.org.model.Inventory;
-
-import java.util.Observable;
+import main.java.org.model.Character.Character;
 
 /**
  * A concrete Character observer class

@@ -1,10 +1,6 @@
 package main.java.org.Service;
 
-import main.java.org.model.Inventory;
-import main.java.org.model.Item;
-
-import java.util.List;
-import java.util.Observable;
+import main.java.org.model.Character.Inventory;
 
 
 /**

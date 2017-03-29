@@ -1,9 +1,9 @@
 package main.java.org.Service;
 
-import main.java.org.model.Ability;
-import main.java.org.model.BackPackInventory;
+import main.java.org.model.Character.Ability;
+import main.java.org.model.Character.BackPackInventory;
 import main.java.org.model.Campaign;
-import main.java.org.model.Character;
+import main.java.org.model.Character.Character;
 import main.java.org.model.Item;
 import main.java.org.model.Map;
 import main.java.org.model.ReadInput;

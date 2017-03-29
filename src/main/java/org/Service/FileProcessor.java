@@ -67,7 +67,7 @@ abstract class FileProcessor {
      *
      * @param path the path of the objects to be shown
      */
-     void showItemNames(String path) {
+     public void showItemNames(String path) {
         File folder = new File(path);
         File[] listOfFiles = folder.listFiles();
         for(File file:listOfFiles){

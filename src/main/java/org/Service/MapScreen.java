@@ -1,6 +1,5 @@
 package main.java.org.Service;
 
-import main.java.org.model.Character;
 import main.java.org.model.ColorConstants;
 import main.java.org.model.Map;
 import main.java.org.model.ReadInput;

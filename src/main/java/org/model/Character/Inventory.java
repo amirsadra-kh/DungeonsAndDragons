@@ -1,15 +1,11 @@
-package main.java.org.model;
+package main.java.org.model.Character;
 
 import main.java.org.Service.InventoryObserver;
 import main.java.org.Service.ObserverObject;
 import main.java.org.Service.PlayScreen;
+import main.java.org.model.Item;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observable;
-import java.util.Set;
-
-import java.util.Observer;
+import java.util.*;
 
 /**
  * A inventory subject of the observer
@@ -22,9 +18,11 @@ public class Inventory extends Observable {
     private List<ObserverObject> observers = new ArrayList<>();
     protected List<Item> items = new ArrayList<>();
     private List<Item> state = new ArrayList<>();
+    private List<Item> backpack = new ArrayList<>();
+    private HashSet<Item> wearingItems = new HashSet<>();
 
     /**
-     * A Constructor for Inventory
+     * A Constructor for model.Character.Inventory
      */
     public void Inventory() {
     }
@@ -50,14 +48,30 @@ public class Inventory extends Observable {
     }
 
     /**
-     * A method to set the items in the inventory
-     * @param character that has items
+     * A method to set the new wearingItems of the inventory
+     * @param wearingItems of character
      */
-    public void setItems(Character character) {
-        List<Item> backpack = character.getBackPackInventoryItems();
-        Set<Item> itemsWearing = character.getItemsWearing();
-        items = backpack;
-        items.addAll(itemsWearing);
+    public void setWearingItems(HashSet<Item> wearingItems) {
+        this.wearingItems = wearingItems;
+        setItems();
+    }
+
+    /**
+     * A method to set the new backpack items of the inventory
+     * @param backpackItems
+     */
+    public void setBackpackItems(List<Item> backpackItems) {
+        this.backpack = backpackItems;
+        setItems();
+    }
+
+    /**
+     * A method to set the items in the inventory
+     */
+    private void setItems() {
+        this.items = new ArrayList<>();
+        this.items.addAll(this.backpack);
+        this.items.addAll(this.wearingItems);
     }
 
     @Override

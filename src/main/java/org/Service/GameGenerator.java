@@ -1,8 +1,8 @@
 package main.java.org.Service;
 
+import main.java.org.Service.CharacterScreens.CharacterScreen;
 import main.java.org.model.*;
 import main.java.org.view.MapFrame;
-import java.util.Scanner;
 
 /**
  * This class is is to Generate/edit game objects .
@@ -107,7 +107,7 @@ public class GameGenerator {
      */
     private void createOrEditCharacter() throws Exception {
         CharacterScreen cs = new CharacterScreen();
-        cs.CharacterScreen();
+        cs.choiceScreen();
     }
 
     /**

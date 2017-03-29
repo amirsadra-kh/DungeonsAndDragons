@@ -1,7 +1,8 @@
 package main.java.org.model;
 
-import main.java.org.Service.ObjectLoader;
 import main.java.org.Service.ObjectSaver;
+import main.java.org.model.Character.BackPackInventory;
+import main.java.org.model.Character.Character;
 
 import java.io.Serializable;
 import java.util.ArrayList;

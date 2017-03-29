@@ -53,5 +53,24 @@ public class ReadInput {
         return num;
     }
 
+    /**
+     * A method to handle a user's input
+     * @return boolean true repeat or false break loop
+     */
+    public boolean askUserIfAgain() {
+        String answer = "";
+
+        while (true) {
+            answer = readLine().trim().toLowerCase();
+            if (answer.equals("y")) {
+                return true;
+            } else if (answer.equals("n")) {
+                return false;
+            } else {
+                System.out.println("Sorry, I didn't catch that. Please answer y/n");
+            }
+        }
+    }
+
     // TODO figure out a way to close the scanner
 }

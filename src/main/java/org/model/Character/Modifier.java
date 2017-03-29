@@ -1,4 +1,4 @@
-package main.java.org.model;
+package main.java.org.model.Character;
 
 /**
  * This class is to calculate the modifier.

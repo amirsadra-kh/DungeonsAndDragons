@@ -1,6 +1,6 @@
 package test.java.org.model;
 
-import main.java.org.model.Ability;
+import main.java.org.model.Character.Ability;
 import org.junit.Before;
 import org.junit.Test;
 
