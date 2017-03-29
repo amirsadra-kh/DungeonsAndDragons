@@ -108,15 +108,4 @@ public class MapDirectionValidator {
         }
     }
 
-    public void setPlayerAtEntryPoint(Map map) {
-        for(int i=0;i<map.getScreen().length;i++){
-            for(int j=0;j<map.getScreen()[i].length;j++){
-                if(map.getScreen()[i][j].equalsIgnoreCase("E")){
-                    map.getScreen()[i][j]="P";
-                }
-            }
-        }
-    }
-
-
 }
