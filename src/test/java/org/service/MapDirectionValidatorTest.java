@@ -4,7 +4,6 @@ import main.java.org.Service.MapDirectionValidator;
 import main.java.org.Service.ObjectLoader;
 import main.java.org.Service.PlayScreen;
 import main.java.org.model.Campaign;
-import main.java.org.model.Character;
 import main.java.org.model.Map;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +19,6 @@ import static org.junit.Assert.assertFalse;
 public class MapDirectionValidatorTest {
     MapDirectionValidator mapDirectionValidator;
     Campaign campaign;
-    Character character;
     Map map;
     PlayScreen playScreen;
 
@@ -28,7 +26,6 @@ public class MapDirectionValidatorTest {
     public void setup() throws Exception {
 
         campaign = new Campaign();
-        character = new Character();
         map = new ObjectLoader().loadMapTest("map2");
         mapDirectionValidator = new MapDirectionValidator(campaign,map);
         playScreen=new PlayScreen();

@@ -1,4 +1,4 @@
-package main.java.org.model;
+package main.java.org.model.Character;
 
 import main.java.org.Service.Calculation;
 

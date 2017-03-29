@@ -1,11 +1,10 @@
 package main.java.org.Service;
 
-import main.java.org.model.Character;
 import main.java.org.model.ColorConstants;
 import main.java.org.model.Map;
 import main.java.org.model.ReadInput;
 
-import java.util.List;
+import java.util.*;
 
 /**
  * This class represents the Map Screen logic, it shows the elements on the map
@@ -14,6 +13,13 @@ import java.util.List;
  */
 public class MapScreen {
     private static ReadInput readInput = new ReadInput();
+    private static CharacterObserver characterObserver;
+    private static InventoryObserver inventoryObserver;
+
+    protected static void setObservers(final CharacterObserver characterObs, final InventoryObserver inventoryObs) {
+        characterObserver = characterObs;
+        inventoryObserver = inventoryObs;
+    }
     /**
      * Thsi method is to show the map
      * W:Wall
@@ -80,9 +86,9 @@ public class MapScreen {
                 if('f'==map.getScreen()[i][j].charAt(0)
                         ||'m'==map.getScreen()[i][j].charAt(0) ){
                     try {
-                        Character character = new Character();
                         System.out.println(map.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
-                        System.out.print((Character)character.loadCharacter(map.getScreen()[i][j].toString()));
+                        System.out.println("Character being observed: ");
+                        // Show observers here
                         System.out.println("-----------------------------------------------------");
                     } catch (Exception e) {
                         e.printStackTrace();

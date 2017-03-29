@@ -1,14 +1,15 @@
 package main.java.org.Service;
 
-import main.java.org.model.Ability;
-import main.java.org.model.BackPackInventory;
+import main.java.org.model.Character.Ability;
+import main.java.org.model.Character.BackPackInventory;
 import main.java.org.model.Campaign;
-import main.java.org.model.Character;
+import main.java.org.model.Character.Character;
 import main.java.org.model.Item;
 import main.java.org.model.Map;
 import main.java.org.model.ReadInput;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -71,6 +72,7 @@ public class SetInteractionStrategy {
         final List<Item> friendlyCharacterItems = friendlyCharacterBackpack.getItems();
 
         System.out.println("Choose an item to exchange with an item from friendly monster: \n"+playerItems.toString());
+        System.out.println("Choose the number of the item, the first is number 1 and so on");
         final int itemToGive = Integer.parseInt(readInput.readLine());
 
         final Item temp1 = playerItems.get(itemToGive);
@@ -86,6 +88,15 @@ public class SetInteractionStrategy {
         friendlyCharacterItems.add(temp1);
 
         friendlyCharacterBackpack.setItems(friendlyCharacterItems);
+
+        // Set the new backpack inventory
+        player.setBackPackInventory(playerBackPack);
+        friendlyCharacter.setBackPackInventory(friendlyCharacterBackpack);
+
+        // Save the characters
+        player.saveCharacter();
+        friendlyCharacter.saveCharacter();
+
         swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
     }
 
@@ -113,11 +124,13 @@ public class SetInteractionStrategy {
         //TODO interactWithChest here
         final Character player = map.getPlayer();
         final BackPackInventory chest = map.getChest();
-        final List<Item> loot;
-        loot = chest.getItems();
+        List<Item> loot=new ArrayList<>();
+        if(chest!=null) {
+            loot = chest.getItems();
+        }
         final List<Item> playerBackpack = player.getBackPackInventoryItems();
-        for (int i = playerBackpack.size()+loot.size(), j=0; i < 10; i++,j++)
-            playerBackpack.add(loot.get(j));
+        for (int i = 0;i<loot.size();i++)
+            playerBackpack.add(loot.get(i));
 
         swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
         map.setCanGoNextLevel(true);

@@ -1,8 +1,10 @@
 package main.java.org.model;
 
-import main.java.org.Service.ObjectLoader;
 import main.java.org.Service.ObjectSaver;
+import main.java.org.model.Character.BackPackInventory;
+import main.java.org.model.Character.Character;
 
+import javax.xml.bind.annotation.XmlElement;
 import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -256,6 +258,7 @@ public class Map implements Serializable {
     }
 
     //TODO if we are meant to have multiple chests, this method should return a definite chest object.
+    @XmlElement
     public BackPackInventory getChest() {
         return this.chest;
     }

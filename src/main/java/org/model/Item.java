@@ -113,6 +113,7 @@ public class Item {
      * A method to get the enhance amount for this item
      * @return the enhance amount as an integer
      */
+    @XmlElement
     public int getEnhance() {
         return this.enhance;
     }
@@ -308,7 +309,7 @@ public class Item {
             context = JAXBContext.newInstance(Item.class);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            m.marshal(this,new FileOutputStream("src/main/java/org/resources/items/"+this.name));
+            m.marshal(this,new FileOutputStream("src/main/java/org/main/java/org/resources/items/"+this.name));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -339,7 +340,8 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "item=" + this.itemEnum +
+                "Name: " +this.name +
+                ", item=" + this.itemEnum +
                 ", enhancementType=" + this.enhancementType +
                 ", enhance=" + this.enhance +
                 ", coordinate=" + this.coordinate +

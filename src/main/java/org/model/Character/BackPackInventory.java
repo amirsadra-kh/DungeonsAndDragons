@@ -1,4 +1,6 @@
-package main.java.org.model;
+package main.java.org.model.Character;
+
+import main.java.org.model.Item;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,7 +24,7 @@ public class BackPackInventory {
      * @return a set of backpack items
      */
     public List<Item> getItems() {
-        return items;
+        return this.items;
     }
 
     /**
@@ -30,6 +32,7 @@ public class BackPackInventory {
      * @param items the items chosen by user
      */
     public void setItems(List<Item> items) {
+        this.items = new ArrayList<>();
         this.items = items;
         // Remove last items added in case there were more than MAX items added
         while(this.items.size() > MAX_ITEMS){
