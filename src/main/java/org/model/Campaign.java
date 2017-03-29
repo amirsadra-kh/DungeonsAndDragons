@@ -50,6 +50,11 @@ public class Campaign implements Serializable {
         this.maps = new ArrayList<>();
     }
 
+    /**
+     * This method is loading maps in a campaign
+     * @param character
+     * @return
+     */
     public List<Map> getMapsFromCampaign(Character character) {
         List<Map> maps = new ArrayList<>();
 
