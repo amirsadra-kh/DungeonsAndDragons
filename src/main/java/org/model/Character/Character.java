@@ -1,6 +1,7 @@
-package main.java.org.model;
+package main.java.org.model.Character;
 
-import main.java.org.Service.Observer;
+import main.java.org.Service.ObserverObject;
+import main.java.org.model.Item;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -13,6 +14,7 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Observable;
 
 /**
  * This class is the character object
@@ -22,29 +24,25 @@ import java.util.List;
  * @since 2017-02-23
  */
 @XmlRootElement
-public class Character {
+public class Character extends Observable {
     private BackPackInventory backPackInventory;
+    private Inventory inventory = new Inventory();
     private Point currentPosition;
     private Ability ability;
     private boolean isPlayerCharacter;
     private String charName;
     private HashSet<Item> itemsWearing = new HashSet<>();
     private int level;
-
-    @XmlElement
-    private boolean bully;
-    @XmlElement
-    private boolean nimble;
-    @XmlElement
-    private boolean tank;
+    private Builder builder;
+    private String fighterType;
 
     // A base line for the hit points
     RollDice dice10 = new RollDice(10);
-    public int dice = dice10.roll();
-    private int hitPoints = dice;
+    public int dice;
+    private int hitPoints;
 
     // For the observer
-    private java.util.List<Observer> observers = new ArrayList<>();
+    private List<ObserverObject> observers = new ArrayList<>();
     private Ability state;
 
     /**
@@ -53,24 +51,22 @@ public class Character {
     public Character() {}
 
     /**
-     * Build Character
+     * Build model.Character.Character
      *
-     * @param builder the Character Builder
+     * @param builder the model.Character.Character model.BuilderPattern.Builder
      */
-    private Character(Builder builder) {
-        backPackInventory = builder.backPackInventory;
-        currentPosition = builder.currentPosition;
-        ability = builder.ability;
-        isPlayerCharacter = builder.isPlayerCharacter;
-        charName = builder.charName;
-        itemsWearing = builder.itemsWearing;
-        level = builder.level;
-        hitPoints = builder.hitPoints;
-
-        bully = builder.bully;
-        nimble = builder.nimble;
-        tank = builder.tank;
+    public Character(Builder builder) {
+        this.builder = builder;
+        this.charName = this.builder.getName();
+        this.fighterType = this.builder.getFighterType();
     }
+
+    /**
+     * A method to get the fighter type of a character
+     * @return fighterType String
+     */
+    @XmlElement
+    public String getFighterType() { return this.fighterType; }
 
     /**
      * A method to create a new character.
@@ -78,96 +74,8 @@ public class Character {
     public void newCharacter() {
         this.isPlayerCharacter = false;
         this.level = 1;
-    }
-
-    /**
-     * A Builder class
-     */
-    public static class Builder {
-        // Needed variables
-        private final BackPackInventory backPackInventory;
-        private final Point currentPosition;
-        private final Ability ability;
-        private final boolean isPlayerCharacter;
-        private final String charName;
-        private final HashSet<Item> itemsWearing;
-        private final int level;
-
-        // Choice of type
-        private boolean bully;
-        private boolean nimble;
-        private boolean tank;
-
-        // A base line for the hit points
-        RollDice dice10 = new RollDice(10);
-        public int dice = dice10.roll();
-        private int hitPoints = dice;
-
-        // For the observer
-        private java.util.List<Observer> observers = new ArrayList<>();
-        private Ability state;
-
-        /**
-         * A Character builder
-         *
-         * @param backPackInventory
-         * @param currentPosition
-         * @param ability
-         * @param isPlayerCharacter
-         * @param charName
-         * @param itemsWearing
-         * @param level
-         * @param hitPoints
-         */
-        public Builder(BackPackInventory backPackInventory, Point currentPosition, Ability ability,
-                       boolean isPlayerCharacter, String charName, HashSet<Item> itemsWearing, int level, int hitPoints) {
-            this.backPackInventory = backPackInventory;
-            this.currentPosition = currentPosition;
-            this.ability = ability;
-            this.isPlayerCharacter = isPlayerCharacter;
-            this.charName = charName;
-            this.itemsWearing = itemsWearing;
-            this.level = level;
-            this.hitPoints = hitPoints;
-        }
-
-        /**
-         * A Bully builder
-         * @param value a boolean value determined by ability
-         * @return return this type
-         */
-        public Builder Bully(boolean value) {
-            this.bully = value;
-            return this;
-        }
-
-        /**
-         * A Nimble builder
-         * @param value a boolean value determined by ability
-         * @return return this type
-         */
-        public Builder Nimble(boolean value) {
-            this.nimble = value;
-            return this;
-        }
-
-        /**
-         * A Tank builder
-         * @param value a boolean value determined by ability
-         * @return return this type
-         */
-        public Builder Tank(boolean value) {
-            this.tank = value;
-            return this;
-        }
-
-        /**
-         * A method for returning this character in builder
-         * @return
-         */
-        public Character build() {
-            return new Character(this);
-        }
+        this.dice = dice10.roll();
+        this.hitPoints = dice;
     }
 
     /**
@@ -194,11 +102,14 @@ public class Character {
      * @return the ability of a character
      */
     public Ability getAbility() {
-        return ability;
+        if(builder != null)
+            return builder.getAbility();
+        else
+            return this.ability;
     }
 
     /**
-     * set the level of the Character
+     * set the level of the model.Character.Character
      *
      * @param level a level integer to change the level to.
      */
@@ -216,7 +127,7 @@ public class Character {
     }
 
     /**
-     * This method set the HitPoints based on the Strength modifier.
+     * This method set the HitPoints based on the model.Ability.Strength modifier.
      */
     public void setHitPoints() {
         Strength strength = new Strength();
@@ -240,7 +151,7 @@ public class Character {
             this.hitPoints = this.hitPoints - newHitPoint;
         }
         else
-            System.out.println("Character has died!");
+            System.out.println("model.Character.Character has died!");
 
 
     }
@@ -261,6 +172,7 @@ public class Character {
         ability.level = 1;
         this.level = 1;
         this.ability = ability;
+        this.setState(ability);
     }
 
     /**
@@ -270,7 +182,45 @@ public class Character {
      */
     public void setItemsWearing(HashSet<Item> items) {
         this.itemsWearing = items;
-        setHitPoints();
+        for(Item i : items)
+            updateAbility(i);
+
+        this.inventory.setWearingItems(this.itemsWearing);
+        List<Item> inventoryItems = this.inventory.getItems();
+        this.inventory.setState(inventoryItems);
+    }
+
+    /**
+     * A method to update the ability when the user adds or remove items wearing
+     * @param item
+     */
+    private void updateAbility(Item item) {
+        switch (item.getEnhancementType()) {
+            case STRENGTH:
+                this.ability.setStrength(this.ability.getStrength() + item.getEnhance());
+                this.ability.setDamageBonus(item.getEnhance() - 1);
+                setHitPoints();
+                break;
+            case CONSTITUTION:
+                this.ability.setConstitution(this.ability.getConstitution() + item.getEnhance());
+                break;
+            case DEXTERITY:
+                this.ability.setDexterity(this.ability.getConstitution() + item.getEnhance());
+                break;
+            case ARMORCLASS:
+                this.ability.getArmorClass(this.ability.getArmorClass() + item.getEnhance() - 10);
+                break;
+            case ATTACKBONUS:
+                this.ability.setAttackBonus(this.ability.getAttackBonus() + item.getEnhance());
+                break;
+            case DAMAGEBONUS:
+                this.ability.setDamageBonus(item.getEnhance());
+                break;
+            case HITPOINTS:
+                break;
+            case LEVEL:
+                break;
+        }
     }
 
     /**
@@ -338,6 +288,10 @@ public class Character {
      */
     public void setBackPackInventory(BackPackInventory backPackInventory) {
         this.backPackInventory = backPackInventory;
+        List<Item> backpack = this.backPackInventory.getItems();
+        this.inventory.setBackpackItems(backpack);
+        List<Item> inventoryItems = this.inventory.getItems();
+        this.inventory.setState(inventoryItems);
     }
 
     /**
@@ -381,7 +335,7 @@ public class Character {
      * @return a string containing the name, ability and hitPoints of a character
      */
     public String charString() {
-        return "Name: " +this.charName +"\nAbility: " +this.ability.toString() +"\nHit points: " +this.hitPoints;
+        return "Name: " +this.charName +"\nmodel.Ability.Ability: " +this.ability.toString() +"\nHit points: " +this.hitPoints;
     }
 
     /**
@@ -442,22 +396,28 @@ public class Character {
      *
      * @param observer
      */
-    public void attach(Observer observer){
+    public void attach(ObserverObject observer){
         this.observers.add(observer);
     }
+
+    /**
+     * A method fot detaching the observer to the inventory
+     * @param observer
+     */
+    public void detach(ObserverObject observer) { this.observers.remove(observer); }
 
     /**
      * A method to notify all the observers.
      */
     public void notifyAllObservers(){
-        for (Observer observer : this.observers) {
+        for (ObserverObject observer : this.observers) {
             observer.update();
         }
     }
 
     @Override
     public String toString() {
-        return "Character{" +
+        return "model.Character.Character{" +
                 "backPackInventory=" + backPackInventory +
                 ", currentPosition=" + currentPosition +
                 ", ability=" + ability +

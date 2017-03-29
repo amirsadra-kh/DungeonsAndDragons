@@ -1,6 +1,5 @@
 package main.java.org.Service;
 
-import main.java.org.model.Character;
 import main.java.org.model.ColorConstants;
 import main.java.org.model.Map;
 import main.java.org.model.ReadInput;
@@ -89,16 +88,7 @@ public class MapScreen {
                     try {
                         System.out.println(map.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
                         System.out.println("Character being observed: ");
-                        try {
-                            characterObserver.update();
-                        } catch (NullPointerException e) {
-                            System.out.println("non");
-                        }
-                        try {
-                            inventoryObserver.update();
-                        } catch (NullPointerException e) {
-                            System.out.println("non");
-                        }
+                        // Show observers here
                         System.out.println("-----------------------------------------------------");
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -1,5 +1,7 @@
 package main.java.org.model;
 
+import main.java.org.model.Character.Character;
+
 /**
  * A class to be used to choose objects in play mode
  */
