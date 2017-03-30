@@ -3,6 +3,7 @@ package main.java.org.model.CharacterPackage;
 import main.java.org.Service.Calculation;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Observer;
 
 /**
@@ -67,22 +68,7 @@ public abstract class AbilityScoreBuilder {
      * @return a sorted array
      */
     private int[] sortDices() {
-        if (dices[0] > dices[1]) {
-            int temp = dices[0];
-            dices[0] = dices[1];
-            dices[1] = temp;
-        }
-        if (dices[1] > dices[2]) {
-            int temp = dices[1];
-            dices[1] = dices[2];
-            dices[2] = temp;
-        }
-        if (dices[0] > dices[1]) {
-            int temp = dices[0];
-            dices[0] = dices[1];
-            dices[1] = temp;
-        }
-
+        Arrays.sort(dices);
         return dices;
     }
 }

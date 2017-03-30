@@ -18,10 +18,10 @@
             <name>boots1</name>
         </items>
         <items>
-            <enhance>1</enhance>
-            <enhancementType>CONSTITUTION</enhancementType>
-            <item>BELT</item>
-            <name>belt2</name>
+            <enhance>5</enhance>
+            <enhancementType>DEXTERITY</enhancementType>
+            <item>BOOTS</item>
+            <name>boots1</name>
         </items>
     </backPackInventory>
     <charName>fchar1</charName>
@@ -37,9 +37,9 @@
     <state>
         <level>1</level>
         <armorClass>0</armorClass>
-        <attackBonus>1</attackBonus>
+        <attackBonus>2</attackBonus>
         <constitution>13</constitution>
-        <damageBonus>3</damageBonus>
+        <damageBonus>4</damageBonus>
         <dexterity>18</dexterity>
         <strength>12</strength>
     </state>
