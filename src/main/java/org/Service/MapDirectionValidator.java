@@ -19,6 +19,11 @@ public class MapDirectionValidator {
     private Campaign campaign;
     private Map map;
 
+    /**
+     * This is the constructor of the MapDirectionValidator
+     * @param campaign the campaign we are playing with
+     * @param map the map we are currently playing
+     */
     public MapDirectionValidator(Campaign campaign, Map map) {
         this.campaign = campaign;
         this.map = map;
@@ -26,7 +31,7 @@ public class MapDirectionValidator {
 
     /**
      * This method is to move the player on the map based on the provided direction
-     *
+     *@param direction the direction player in moving toward
      * @return it returns true if player can move
      */
     public boolean validateDirectionIsValidBoundriesAndMovePlayer(String direction) {
@@ -85,6 +90,15 @@ public class MapDirectionValidator {
         return false;
     }
 
+    /**
+     * This method is to validate if we can go to next level
+     * @param map the map we are playing
+     * @param i the i coordinate on map
+     * @param j the j coordinate on map
+     * @param campaign the campaign we are playing
+     * @param str  the target object we are interacting with
+     * @return true (if there is no more levels left), false : if goes to next level or remains in this level
+     */
     private  boolean validateQuiteLevel(Map map, int i, int j, Campaign campaign, String str) {
         if (this.map.isCanGoNextLevel()) {
 

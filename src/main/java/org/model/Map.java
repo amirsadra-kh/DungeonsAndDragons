@@ -32,10 +32,18 @@ public class Map implements Serializable {
     private boolean canGoNextLevel=false;
     private boolean isLevelCompleted;
 
+    /**
+     * this method is to check if the level is completed
+     * @return true: if level is completed
+     */
     public boolean isLevelCompleted() {
         return isLevelCompleted;
     }
 
+    /**
+     * This methdo is to set the completed level
+     * @param levelCompleted true : the level is complete , false: the level is incomplete
+     */
     public void setLevelCompleted(boolean levelCompleted) {
         isLevelCompleted = levelCompleted;
     }
@@ -284,10 +292,18 @@ public class Map implements Serializable {
                 '}';
     }
 
+    /**
+     * Thsi method is returning true if we can go to next level and false otherwise
+     * @return
+     */
     public boolean isCanGoNextLevel() {
         return canGoNextLevel;
     }
 
+    /**
+     * This metjod is setting the isCanGoToNextLevel flag
+     * @param canGoNextLevel the flag indicating if we can go to next level
+     */
     public void setCanGoNextLevel(boolean canGoNextLevel) {
         this.canGoNextLevel = canGoNextLevel;
     }

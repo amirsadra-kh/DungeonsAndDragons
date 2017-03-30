@@ -34,9 +34,7 @@ public class SetInteractionStrategy {
      * @param campaign the campaign we are playing
      */
     public static void interact( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
-        if ("Q".equalsIgnoreCase(targetObject)) {
-          //  goToNextLevel(map, targetObject, playerCoordinate, objectCoordinate, campaign);
-        } else if ('m'==targetObject.charAt(0)||'M'==targetObject.charAt(0)) {
+        if ('m'==targetObject.charAt(0)||'M'==targetObject.charAt(0)) {
             interactWithMonster(map, targetObject, playerCoordinate, objectCoordinate, campaign);
         } else if ('c'==targetObject.charAt(0)||'C'==targetObject.charAt(0)) {
             interactWithChest(map, targetObject, playerCoordinate, objectCoordinate, campaign);
@@ -158,16 +156,5 @@ public class SetInteractionStrategy {
         monster.decreaseHitPoint(ability.getAttackBonus());
         swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
 
-    }
-    /**
-     * This method will have the logic of going to next level
-     * @param map the current map
-     * @param targetObject the object we are interacting with
-     * @param playerCoordinate the current coordinate of the player
-     * @param objectCoordinate the coordinate of the object we are interacting with
-     * @param campaign the campaign we are playing
-     */
-    private static void goToNextLevel( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
-        //TODO go to next level logic here + adjust the Campaign
     }
 }

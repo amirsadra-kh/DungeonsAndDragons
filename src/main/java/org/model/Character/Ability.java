@@ -1,5 +1,7 @@
 package main.java.org.model.Character;
 
+import javax.xml.bind.annotation.XmlElement;
+
 /**
  * A class for the ability object
  *
@@ -68,6 +70,7 @@ public class Ability {
         this.dexterity.set(value);
     }
 
+    @XmlElement
     public int getArmorClass() {
         return this.armorClass;
     }
