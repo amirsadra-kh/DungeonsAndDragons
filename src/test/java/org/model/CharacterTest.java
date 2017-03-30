@@ -9,6 +9,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
+import test.Fixtures;
 
 import java.awt.*;
 import java.util.*;
@@ -105,27 +106,12 @@ public class CharacterTest {
      */
     @Test
     public void testGetItemsWearing() throws Exception {
-        EnhancementTypesEnum strength = EnhancementTypesEnum.STRENGTH;
         // Create a belt
-        ItemEnum belt = ItemEnum.BELT;
-        Item item1 = new Item();
-        item1.setName("belt1");
-        item1.setEnhancementType(strength);
-        item1.setEnhance(3);
-        item1.setItem(belt);
+        Item item1 = Fixtures.createBelt();
         // Create boots
-        ItemEnum boots = ItemEnum.BOOTS;
-        Item item2 = new Item();
-        item1.setName("boots1");
-        item1.setEnhancementType(strength);
-        item1.setEnhance(3);
-        item1.setItem(belt);
+        Item item2 = Fixtures.createBoots();
         // Create another belt
-        Item item3 = new Item();
-        item1.setName("belt2");
-        item1.setEnhancementType(strength);
-        item1.setEnhance(1);
-        item1.setItem(belt);
+        Item item3 = Fixtures.createBelt2();
 
         HashSet<Item> wearingItems = new HashSet<>();
         wearingItems.add(item1);
