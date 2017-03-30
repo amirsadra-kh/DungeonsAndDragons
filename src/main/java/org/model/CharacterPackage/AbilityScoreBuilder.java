@@ -67,8 +67,7 @@ public abstract class AbilityScoreBuilder {
      * A method to add the three dices to an array and sort them
      * @return a sorted array
      */
-    private int[] sortDices() {
-        Arrays.sort(dices);
-        return dices;
+    private void sortDices() {
+        Arrays.sort(this.dices);
     }
 }
