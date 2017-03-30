@@ -1,10 +1,10 @@
 package test.java.org.model;
 
 import main.java.org.model.*;
-import main.java.org.model.Character.Ability;
-import main.java.org.model.Character.BackPackInventory;
-import main.java.org.model.Character.Character;
-import main.java.org.model.Character.Strength;
+import main.java.org.model.CharacterPackage.Ability;
+import main.java.org.model.CharacterPackage.BackPackInventory;
+import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.CharacterPackage.Strength;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.After;
@@ -15,7 +15,7 @@ import java.util.*;
 import java.util.List;
 
 /**
- * Class to test the Character class which allows user to create and edit a Character
+ * Class to test the CharacterPackage class which allows user to create and edit a CharacterPackage
  *
  * @author Freyja Jokulsdottir
  * @version 2.0

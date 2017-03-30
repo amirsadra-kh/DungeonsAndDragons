@@ -2,9 +2,9 @@ package main.java.org.Service;
 
 
 import main.java.org.model.*;
-import main.java.org.model.Character.Ability;
-import main.java.org.model.Character.Character;
-import main.java.org.model.Character.Inventory;
+import main.java.org.model.CharacterPackage.Ability;
+import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.CharacterPackage.Inventory;
 import main.java.org.model.Map;
 
 
@@ -165,7 +165,7 @@ public class PlayScreen {
      */
     public Character getObserverCharacter(Map currentMap) {
         ObjectLoader ol = new ObjectLoader();
-        // Testing the Character Observer
+        // Testing the CharacterPackage Observer
         Character observeChar = new Character();
         // Get the characters that are in the map
         List<Character> mapCharacters = currentMap.getNonPLayerCharacters();

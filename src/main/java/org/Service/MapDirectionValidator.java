@@ -51,7 +51,7 @@ public class MapDirectionValidator {
     }
 
     /**
-     * This method validates the new coordinate and set the player Character to new Coordinate
+     * This method validates the new coordinate and set the player CharacterPackage to new Coordinate
      * if we are interacting with empty space, we will move
      * if the target object is wall we should try again
      * otherwise we should interact with other objects using SetInteractionStrategy

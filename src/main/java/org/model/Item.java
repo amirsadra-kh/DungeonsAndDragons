@@ -233,7 +233,7 @@ public class Item {
     public void setItemOnMapEnhancement(int level) {
         // Check if the level is a valid number
         if(level < 1) {
-            System.out.println("ERROR!! The level of the Character is less than 1!!");
+            System.out.println("ERROR!! The level of the CharacterPackage is less than 1!!");
             return;
         }
 

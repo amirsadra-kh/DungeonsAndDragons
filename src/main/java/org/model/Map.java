@@ -1,8 +1,8 @@
 package main.java.org.model;
 
 import main.java.org.Service.ObjectSaver;
-import main.java.org.model.Character.BackPackInventory;
-import main.java.org.model.Character.Character;
+import main.java.org.model.CharacterPackage.BackPackInventory;
+import main.java.org.model.CharacterPackage.Character;
 
 import javax.xml.bind.annotation.XmlElement;
 import java.awt.*;

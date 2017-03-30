@@ -1,6 +1,6 @@
 package main.java.org.Service;
 
-import main.java.org.model.Character.Inventory;
+import main.java.org.model.CharacterPackage.Inventory;
 
 
 /**
@@ -25,6 +25,6 @@ public class InventoryObserver extends ObserverObject {
      */
     @Override
     public void update() {
-        System.out.println("Character is wearing & has in his backpack: " +this.inventory.toString());
+        System.out.println("CharacterPackage is wearing & has in his backpack: " +this.inventory.toString());
     }
 }

@@ -1,9 +1,7 @@
 package main.java.org.model;
 
-import main.java.org.Service.GameGenerator;
 import main.java.org.Service.ObjectLoader;
-import main.java.org.model.Character.BackPackInventory;
-import main.java.org.model.Character.Character;
+import main.java.org.model.CharacterPackage.Character;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;

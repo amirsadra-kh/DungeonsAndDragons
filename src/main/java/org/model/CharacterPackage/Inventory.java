@@ -1,8 +1,6 @@
-package main.java.org.model.Character;
+package main.java.org.model.CharacterPackage;
 
-import main.java.org.Service.InventoryObserver;
 import main.java.org.Service.ObserverObject;
-import main.java.org.Service.PlayScreen;
 import main.java.org.model.Item;
 
 import java.util.*;
@@ -22,7 +20,7 @@ public class Inventory extends Observable {
     private HashSet<Item> wearingItems = new HashSet<>();
 
     /**
-     * A Constructor for model.Character.Inventory
+     * A Constructor for model.CharacterPackage.Inventory
      */
     public void Inventory() {
     }

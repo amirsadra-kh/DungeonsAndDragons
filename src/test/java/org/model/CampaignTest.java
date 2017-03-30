@@ -2,7 +2,7 @@ package test.java.org.model;
 
 import main.java.org.Service.ObjectLoader;
 import main.java.org.model.Campaign;
-import main.java.org.model.Character.Character;
+import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Map;
 import org.junit.Assert;
 import org.junit.Before;

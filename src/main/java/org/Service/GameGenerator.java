@@ -100,7 +100,7 @@ public class GameGenerator {
     }
 
     /**
-     * A method that calls the Character screen to interact with a user after the user has chosen to create or edit
+     * A method that calls the CharacterPackage screen to interact with a user after the user has chosen to create or edit
      * a character
      *
      * @throws Exception

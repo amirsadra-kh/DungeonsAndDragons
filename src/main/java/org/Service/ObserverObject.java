@@ -1,7 +1,7 @@
 package main.java.org.Service;
 
-import main.java.org.model.Character.Character;
-import main.java.org.model.Character.Inventory;
+import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.CharacterPackage.Inventory;
 
 /**
  * A Observer parent class

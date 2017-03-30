@@ -1,6 +1,6 @@
 package main.java.org.Service.CharacterScreens;
 
-import main.java.org.model.Character.Character;
+import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.ReadInput;
 
 /**
@@ -21,9 +21,9 @@ public class CharacterScreen {
     public void choiceScreen() throws Exception {
         int choice = 0;
 
-        // Let user choose an action - Create or Edit a Character
+        // Let user choose an action - Create or Edit a CharacterPackage
         System.out.println("Choose one of the following by entering the number associated with the choice:");
-        System.out.println("1. Create a Character\n2. Edit a Character\n3. Back to Main Menu");
+        System.out.println("1. Create a CharacterPackage\n2. Edit a CharacterPackage\n3. Back to Main Menu");
         while(choice == 0)
             choice = readInput.readIntHandling(choice);
 
