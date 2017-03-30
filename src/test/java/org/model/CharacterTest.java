@@ -102,6 +102,7 @@ public class CharacterTest {
 
     /**
      * A test method to get the items the character is wearing
+     * TODO fix this method
      * @throws Exception
      */
     @Test
