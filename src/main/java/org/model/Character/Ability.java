@@ -73,7 +73,7 @@ public class Ability {
     }
 
     /**
-     * This method set the ArmorClass base on dexteirty modifier and predefined armorClass
+     * This method set the ArmorClass base on dexterity modifier and predefined armorClass
      *
      * @param armorClass
      */
