@@ -1,7 +1,7 @@
 package test.java.org.model;
 
-import main.java.org.model.Character.Modifier;
-import main.java.org.model.Character.Strength;
+import main.java.org.model.CharacterPackage.Modifier;
+import main.java.org.model.CharacterPackage.Strength;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

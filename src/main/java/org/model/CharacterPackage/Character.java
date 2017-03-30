@@ -1,4 +1,4 @@
-package main.java.org.model.Character;
+package main.java.org.model.CharacterPackage;
 
 import main.java.org.model.Item;
 
@@ -30,7 +30,6 @@ public class Character extends Observable {
     private String charName;
     private HashSet<Item> itemsWearing = new HashSet<>();
     private int level;
-    private AbilityScoreBuilder abilityScoreBuilder;
     private String fighterType;
 
     // A base line for the hit points
@@ -46,17 +45,6 @@ public class Character extends Observable {
      * An empty constructor
      */
     public Character() {}
-
-    /**
-     * Build model.Character.Character
-     *
-     * @param abilityScoreBuilder the model.Character.Character model.BuilderPattern.AbilityScoreBuilder
-     */
-    public Character(AbilityScoreBuilder abilityScoreBuilder) {
-        this.abilityScoreBuilder = abilityScoreBuilder;
-        this.charName = this.abilityScoreBuilder.getName();
-        this.fighterType = this.abilityScoreBuilder.getFighterType();
-    }
 
     /**
      * A method to get the fighter type of a character
@@ -99,14 +87,11 @@ public class Character extends Observable {
      * @return the ability of a character
      */
     public Ability getAbility() {
-        if(abilityScoreBuilder != null)
-            return abilityScoreBuilder.getAbility();
-        else
-            return this.ability;
+        return this.ability;
     }
 
     /**
-     * set the level of the model.Character.Character
+     * set the level of the model.CharacterPackage.CharacterPackage
      *
      * @param level a level integer to change the level to.
      */
@@ -148,7 +133,7 @@ public class Character extends Observable {
             this.hitPoints = this.hitPoints - newHitPoint;
         }
         else
-            System.out.println("model.Character.Character has died!");
+            System.out.println("model.CharacterPackage.CharacterPackage has died!");
 
 
     }
@@ -399,7 +384,7 @@ public class Character extends Observable {
 
     @Override
     public String toString() {
-        return "model.Character.Character{" +
+        return "model.CharacterPackage.CharacterPackage{" +
                 "backPackInventory=" + backPackInventory +
                 ", currentPosition=" + currentPosition +
                 ", ability=" + ability +

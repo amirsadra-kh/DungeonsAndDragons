@@ -1,12 +1,10 @@
 package main.java.org.Service;
 
-import main.java.org.model.Character.Character;
-
 import java.util.Observable;
 import java.util.Observer;
 
 /**
- * A concrete Character observer class
+ * A concrete CharacterPackage observer class
  *
  * @author Freyja Jokulsdottir
  * @version 1.0
@@ -21,7 +19,6 @@ public class CharacterObserver implements Observer{
      */
     @Override
     public void update(Observable o, Object arg) {
-        System.out.println("Character's ability: " +arg.toString());
-
+        System.out.println("Character's ability: " + arg.toString());
     }
 }

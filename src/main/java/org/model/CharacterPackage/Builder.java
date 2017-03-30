@@ -1,20 +1,18 @@
-package main.java.org.model.Character;
+package main.java.org.model.CharacterPackage;
 
 import main.java.org.Service.Calculation;
-import main.java.org.model.CharacterPackage.Ability;
-import main.java.org.model.CharacterPackage.RollDice;
 
 import java.util.ArrayList;
 import java.util.Observer;
 
 /**
- * A AbilityScoreBuilder class for Character Type
+ * A Builder class for CharacterPackage Type
  *
  * @author Freyja Jokulsdottir
  * @version 1.0
  * @since 2017-03-21
  */
-public abstract class AbilityScoreBuilder {
+public class Builder {
     // Needed variables
     private String fighterType;
     private String charName;
@@ -37,11 +35,11 @@ public abstract class AbilityScoreBuilder {
     private Ability state;
 
     /**
-     * A Character builder
+     * A CharacterPackage builder
      *
      * @param name
      */
-    public AbilityScoreBuilder(String fighterType, String name) {
+    public Builder(String fighterType, String name) {
         this.fighterType = fighterType.toLowerCase();
         this.charName = name;
         this.ability = new Ability();
@@ -62,7 +60,7 @@ public abstract class AbilityScoreBuilder {
      * Strength, Dexterity, Constitution
      * @return return this type
      */
-    public AbilityScoreBuilder Bully() {
+    public Builder Bully() {
         int[] sortedDices = sortDices();
         this.ability.setConstitution(sortedDices[0]);
         this.ability.setDexterity(sortedDices[1]);
@@ -76,7 +74,7 @@ public abstract class AbilityScoreBuilder {
      * Dexterity, Constitution, Strength
      * @return return this type
      */
-    public AbilityScoreBuilder Nimble() {
+    public Builder Nimble() {
         int[] sortedDices = sortDices();
         this.ability.setConstitution(sortedDices[1]);
         this.ability.setDexterity(sortedDices[2]);
@@ -90,7 +88,7 @@ public abstract class AbilityScoreBuilder {
      * Constitution, Dexterity, Strength
      * @return return this type
      */
-    public AbilityScoreBuilder Tank() {
+    public Builder Tank() {
         int[] sortedDices = sortDices();
         this.ability.setConstitution(sortedDices[2]);
         this.ability.setDexterity(sortedDices[1]);

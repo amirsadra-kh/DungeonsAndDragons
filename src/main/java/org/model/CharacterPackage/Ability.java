@@ -1,4 +1,4 @@
-package main.java.org.model.Character;
+package main.java.org.model.CharacterPackage;
 
 import javax.xml.bind.annotation.XmlElement;
 

@@ -2,9 +2,9 @@ package main.java.org.Service;
 
 
 import main.java.org.model.*;
-import main.java.org.model.Character.Ability;
-import main.java.org.model.Character.Character;
-import main.java.org.model.Character.Inventory;
+import main.java.org.model.CharacterPackage.Ability;
+import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.CharacterPackage.Inventory;
 import main.java.org.model.Map;
 
 
@@ -71,7 +71,8 @@ public class PlayScreen {
      */
     private void movePlayer(Map map) {
         String direction =readInput.readLine();
-        while(!MapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer(map,direction,this.campaign)){
+        MapDirectionValidator mapValidator= new MapDirectionValidator(this.campaign,map);
+        while(!mapValidator.validateDirectionIsValidBoundriesAndMovePlayer(direction)){
             direction =readInput.readLine();
             MapScreen.showMap(map);
         }
@@ -82,7 +83,7 @@ public class PlayScreen {
      * it searches for E in the Map and set the payer position there
      * @param map
      */
-    private void setPlayerAtEntryPoint(Map map) {
+    public static void setPlayerAtEntryPoint(Map map) {
         for(int i=0;i<map.getScreen().length;i++){
             for(int j=0;j<map.getScreen()[i].length;j++){
                 if(map.getScreen()[i][j].equalsIgnoreCase("E")){
@@ -96,7 +97,7 @@ public class PlayScreen {
      * This method is to print and ask user to enter the directions
      */
     private void enterDirection(){
-        System.out.println("Enter the direction you wish to move: \n Left:L\n Right:R \n Down:D\n Up:U\n");
+        System.out.println(GameConstantsInterface.ENTER_DIRECTION);
     }
 
     /**
@@ -111,7 +112,7 @@ public class PlayScreen {
         this.campaign = new Campaign();
         ol.showItemNames("src/main/java/org/resources/campaigns/");
         this.campaign = campaign.getCampaign(readInput.readLine());
-
+        this.campaign.setMaps(this.campaign.getMapsFromCampaign(this.character));
         while (this.campaign == null) {
             System.out.println("This campaign does not exist! Please try again: ");
             this.campaign = campaign.getCampaign(readInput.readLine());
@@ -164,7 +165,7 @@ public class PlayScreen {
      */
     public Character getObserverCharacter(Map currentMap) {
         ObjectLoader ol = new ObjectLoader();
-        // Testing the Character Observer
+        // Testing the CharacterPackage Observer
         Character observeChar = new Character();
         // Get the characters that are in the map
         List<Character> mapCharacters = currentMap.getNonPLayerCharacters();

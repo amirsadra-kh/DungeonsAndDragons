@@ -2,7 +2,7 @@ package main.java.org.view;
 
 import main.java.org.Service.ObjectLoader;
 import main.java.org.model.*;
-import main.java.org.model.Character.BackPackInventory;
+import main.java.org.model.CharacterPackage.BackPackInventory;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -66,7 +66,7 @@ public class MapFrame implements ActionListener {
 
 
     /**
-     * This class is is to load Character & Items to the Map and assign to according Labels.
+     * This class is is to load CharacterPackage & Items to the Map and assign to according Labels.
      + *
      + * @author Mehran Ishanian
      + * @version 1.2
