@@ -1,4 +1,4 @@
-package main.java.org.model.Character;
+package main.java.org.model.CharacterPackage;
 
 import main.java.org.Service.ObserverObject;
 import main.java.org.model.Item;
@@ -51,9 +51,9 @@ public class Character extends Observable {
     public Character() {}
 
     /**
-     * Build model.Character.Character
+     * Build model.CharacterPackage.CharacterPackage
      *
-     * @param builder the model.Character.Character model.BuilderPattern.Builder
+     * @param builder the model.CharacterPackage.CharacterPackage model.BuilderPattern.Builder
      */
     public Character(Builder builder) {
         this.builder = builder;
@@ -109,7 +109,7 @@ public class Character extends Observable {
     }
 
     /**
-     * set the level of the model.Character.Character
+     * set the level of the model.CharacterPackage.CharacterPackage
      *
      * @param level a level integer to change the level to.
      */
@@ -151,7 +151,7 @@ public class Character extends Observable {
             this.hitPoints = this.hitPoints - newHitPoint;
         }
         else
-            System.out.println("model.Character.Character has died!");
+            System.out.println("model.CharacterPackage.CharacterPackage has died!");
 
 
     }
@@ -417,7 +417,7 @@ public class Character extends Observable {
 
     @Override
     public String toString() {
-        return "model.Character.Character{" +
+        return "model.CharacterPackage.CharacterPackage{" +
                 "backPackInventory=" + backPackInventory +
                 ", currentPosition=" + currentPosition +
                 ", ability=" + ability +

@@ -2,7 +2,7 @@ package main.java.org.Service.CharacterScreens;
 
 import main.java.org.Service.ObjectLoader;
 import main.java.org.model.Item;
-import main.java.org.model.Character.Character;
+import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.ReadInput;
 
 import java.util.HashSet;

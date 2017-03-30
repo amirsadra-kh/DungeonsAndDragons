@@ -1,4 +1,4 @@
-package main.java.org.model.Character;
+package main.java.org.model.CharacterPackage;
 
 import main.java.org.Service.Calculation;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Observer;
 
 /**
- * A Builder class for Character Type
+ * A Builder class for CharacterPackage Type
  *
  * @author Freyja Jokulsdottir
  * @version 1.0
@@ -35,7 +35,7 @@ public class Builder {
     private Ability state;
 
     /**
-     * A Character builder
+     * A CharacterPackage builder
      *
      * @param name
      */

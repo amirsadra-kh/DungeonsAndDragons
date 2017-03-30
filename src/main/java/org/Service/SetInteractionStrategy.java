@@ -1,14 +1,15 @@
 package main.java.org.Service;
 
-import main.java.org.model.Character.Ability;
-import main.java.org.model.Character.BackPackInventory;
+import main.java.org.model.CharacterPackage.Ability;
+import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.Campaign;
-import main.java.org.model.Character.Character;
+import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Item;
 import main.java.org.model.Map;
 import main.java.org.model.ReadInput;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -33,9 +34,7 @@ public class SetInteractionStrategy {
      * @param campaign the campaign we are playing
      */
     public static void interact( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
-        if ("Q".equalsIgnoreCase(targetObject)) {
-            goToNextLevel(map, targetObject, playerCoordinate, objectCoordinate, campaign);
-        } else if ('m'==targetObject.charAt(0)||'M'==targetObject.charAt(0)) {
+        if ('m'==targetObject.charAt(0)||'M'==targetObject.charAt(0)) {
             interactWithMonster(map, targetObject, playerCoordinate, objectCoordinate, campaign);
         } else if ('c'==targetObject.charAt(0)||'C'==targetObject.charAt(0)) {
             interactWithChest(map, targetObject, playerCoordinate, objectCoordinate, campaign);
@@ -60,7 +59,6 @@ public class SetInteractionStrategy {
         } catch (final Exception e) {
             e.printStackTrace();
         }
-
         //TODO interactWithFriendlyCharacter here
         final Character player = map.getPlayer();
 
@@ -124,13 +122,16 @@ public class SetInteractionStrategy {
         //TODO interactWithChest here
         final Character player = map.getPlayer();
         final BackPackInventory chest = map.getChest();
-        final List<Item> loot;
-        loot = chest.getItems();
+        List<Item> loot=new ArrayList<>();
+        if(chest!=null) {
+            loot = chest.getItems();
+        }
         final List<Item> playerBackpack = player.getBackPackInventoryItems();
-        for (int i = playerBackpack.size()+loot.size(), j=0; i < 10; i++,j++)
-            playerBackpack.add(loot.get(j));
+        for (int i = 0;i<loot.size();i++)
+            playerBackpack.add(loot.get(i));
 
         swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
+        map.setCanGoNextLevel(true);
     }
 
     /**
@@ -144,7 +145,7 @@ public class SetInteractionStrategy {
     private static void interactWithMonster( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         final Character character = map.getPlayer();
 
-        Character monster = new Character();
+        Character monster=new Character();
         try {
             monster = monster.loadCharacter(targetObject);
         } catch (final Exception e) {
@@ -153,20 +154,7 @@ public class SetInteractionStrategy {
         //TODO interactWithMonster here
         final Ability ability = character.getAbility();
         monster.decreaseHitPoint(ability.getAttackBonus());
-
-        System.out.println("Monster's Hit Point: " +monster.getHitPoints());
-        monster.saveCharacter();
         swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
-    }
-    /**
-     * This method will have the logic of going to next level
-     * @param map the current map
-     * @param targetObject the object we are interacting with
-     * @param playerCoordinate the current coordinate of the player
-     * @param objectCoordinate the coordinate of the object we are interacting with
-     * @param campaign the campaign we are playing
-     */
-    private static void goToNextLevel( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
-        //TODO go to next level logic here + adjust the Campaign
+
     }
 }

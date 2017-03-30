@@ -1,7 +1,7 @@
 package main.java.org.Service.CharacterScreens;
 
-import main.java.org.model.Character.Ability;
-import main.java.org.model.Character.Character;
+import main.java.org.model.CharacterPackage.Ability;
+import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.ReadInput;
 
 /**
@@ -78,7 +78,7 @@ public class EditCharacterScreen {
     }
 
     /**
-     * A method for editing the Character's characteristics - ability and level
+     * A method for editing the CharacterPackage's characteristics - ability and level
      */
     private void editAbility(){
         int level = 0;

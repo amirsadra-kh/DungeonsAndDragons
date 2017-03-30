@@ -1,7 +1,7 @@
 package test.java.org.model;
 
-import main.java.org.model.Character.Modifier;
-import main.java.org.model.Character.Dexterity;
+import main.java.org.model.CharacterPackage.Modifier;
+import main.java.org.model.CharacterPackage.Dexterity;
 import org.junit.Test;
 import static org.junit.Assert.*;
 

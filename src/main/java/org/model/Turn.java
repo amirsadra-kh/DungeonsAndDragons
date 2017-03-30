@@ -1,13 +1,13 @@
 package main.java.org.model;
 
-import main.java.org.model.Character.Character;
+import main.java.org.model.CharacterPackage.Character;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * This class is taking care of the turns in a map
- * Please Note : the the NEXT Character is always located at last index
+ * Please Note : the the NEXT CharacterPackage is always located at last index
  *
  * @author Maysam Mokarian
  * @version 1.0

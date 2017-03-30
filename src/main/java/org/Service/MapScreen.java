@@ -25,10 +25,10 @@ public class MapScreen {
      * W:Wall
      * Q:Quit
      * M:Monster
-     * F:friendly Character
+     * F:friendly CharacterPackage
      * C:Chest
      * E:Entry point
-     * p:Player Character
+     * p:Player CharacterPackage
      *
      * @param map
      */
@@ -87,7 +87,7 @@ public class MapScreen {
                         ||'m'==map.getScreen()[i][j].charAt(0) ){
                     try {
                         System.out.println(map.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
-                        System.out.println("Character being observed: ");
+                        System.out.println("CharacterPackage being observed: ");
                         // Show observers here
                         System.out.println("-----------------------------------------------------");
                     } catch (Exception e) {
