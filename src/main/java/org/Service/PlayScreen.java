@@ -204,10 +204,7 @@ public class PlayScreen {
         }
 
         if("Y".equals(choice) || "y".equals(choice)) {
-            this.characterObserver = new CharacterObserver(observeChar);
-            observeChar.setState(observeChar.getAbility());
-            observeChar.attach(this.characterObserver);
-            this.characterObserver = new CharacterObserver(observeChar);
+            observeChar.setState(observeChar.getAbility());;
         }
     }
 
@@ -229,10 +226,7 @@ public class PlayScreen {
             Inventory observeInventory = new Inventory();
             observeInventory.setBackpackItems(observeChar.getBackPackInventoryItems());
             observeInventory.setWearingItems(observeChar.getItemsWearing());
-            this.inventoryObserver = new InventoryObserver(observeInventory);
             observeInventory.setState(observeInventory.getItems());
-            observeChar.attach(this.inventoryObserver);
-            this.inventoryObserver = new InventoryObserver(observeInventory);
 
             // If the character being observed is the player character, ask user if they want to make changes
             if(this.character.getCharName().equals(observeChar.getCharName())) {

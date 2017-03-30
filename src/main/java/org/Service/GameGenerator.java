@@ -116,7 +116,7 @@ public class GameGenerator {
      */
     private void createOrChoseMaps() {
 
-        Map map = new MapFrame().makeFrame("Map Builder");
+        Map map = new MapFrame().makeFrame("Map AbilityScoreBuilder");
         //  MapFrame.Main();
     }
 

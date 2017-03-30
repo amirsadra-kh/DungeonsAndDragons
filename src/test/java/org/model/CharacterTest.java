@@ -105,18 +105,39 @@ public class CharacterTest {
      */
     @Test
     public void testGetItemsWearing() throws Exception {
-        Item item = new Item();
+        EnhancementTypesEnum strength = EnhancementTypesEnum.STRENGTH;
+        // Create a belt
+        ItemEnum belt = ItemEnum.BELT;
+        Item item1 = new Item();
+        item1.setName("belt1");
+        item1.setEnhancementType(strength);
+        item1.setEnhance(3);
+        item1.setItem(belt);
+        // Create boots
+        ItemEnum boots = ItemEnum.BOOTS;
+        Item item2 = new Item();
+        item1.setName("boots1");
+        item1.setEnhancementType(strength);
+        item1.setEnhance(3);
+        item1.setItem(belt);
+        // Create another belt
+        Item item3 = new Item();
+        item1.setName("belt2");
+        item1.setEnhancementType(strength);
+        item1.setEnhance(1);
+        item1.setItem(belt);
+
         HashSet<Item> wearingItems = new HashSet<>();
-        wearingItems.add(item.loadItem("belt1"));
-        wearingItems.add(item.loadItem("boots1"));
+        wearingItems.add(item1);
+        wearingItems.add(item2);
         this.character.setItemsWearing(wearingItems);
 
         // Test if adding wearing items is successful
         Assert.assertEquals(wearingItems, this.character.getItemsWearing());
 
         // Test if two items of the same type can be added
-        wearingItems.add(item.loadItem("boots1"));
-        wearingItems.add(item.loadItem("belt2"));
+        wearingItems.add(item2);
+        wearingItems.add(item3);
         this.character.setItemsWearing(wearingItems);
         // Since boots1 == boots1 and belt1 has the same itemEnum as belt2, there should be only two items
         int size = 2;

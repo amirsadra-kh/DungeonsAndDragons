@@ -2,7 +2,7 @@ package main.java.org.Service.CharacterScreens;
 
 import main.java.org.model.*;
 import main.java.org.model.Character.Ability;
-import main.java.org.model.Character.Builder;
+import main.java.org.model.Character.AbilityScoreBuilder;
 import main.java.org.model.Character.Character;
 
 /**
@@ -30,8 +30,8 @@ public class CreateCharacterScreen {
         String fighterType = setFighterType();
 
         // Use the fighterType to set the ability of the character
-        Builder builder = new Builder(fighterType, charName);
-        character = builder.build();
+        AbilityScoreBuilder abilityScoreBuilder = new AbilityScoreBuilder(fighterType, charName);
+        character = abilityScoreBuilder.build();
         Ability ability = character.getAbility();
         character.setAbility(ability);
 

@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import java.util.Observer;
 
 /**
- * A Builder class for Character Type
+ * A AbilityScoreBuilder class for Character Type
  *
  * @author Freyja Jokulsdottir
  * @version 1.0
  * @since 2017-03-21
  */
-public class Builder {
+public abstract class AbilityScoreBuilder {
     // Needed variables
     private String fighterType;
     private String charName;
@@ -39,7 +39,7 @@ public class Builder {
      *
      * @param name
      */
-    public Builder(String fighterType, String name) {
+    public AbilityScoreBuilder(String fighterType, String name) {
         this.fighterType = fighterType.toLowerCase();
         this.charName = name;
         this.ability = new Ability();
@@ -60,7 +60,7 @@ public class Builder {
      * Strength, Dexterity, Constitution
      * @return return this type
      */
-    public Builder Bully() {
+    public AbilityScoreBuilder Bully() {
         int[] sortedDices = sortDices();
         this.ability.setConstitution(sortedDices[0]);
         this.ability.setDexterity(sortedDices[1]);
@@ -74,7 +74,7 @@ public class Builder {
      * Dexterity, Constitution, Strength
      * @return return this type
      */
-    public Builder Nimble() {
+    public AbilityScoreBuilder Nimble() {
         int[] sortedDices = sortDices();
         this.ability.setConstitution(sortedDices[1]);
         this.ability.setDexterity(sortedDices[2]);
@@ -88,7 +88,7 @@ public class Builder {
      * Constitution, Dexterity, Strength
      * @return return this type
      */
-    public Builder Tank() {
+    public AbilityScoreBuilder Tank() {
         int[] sortedDices = sortDices();
         this.ability.setConstitution(sortedDices[2]);
         this.ability.setDexterity(sortedDices[1]);

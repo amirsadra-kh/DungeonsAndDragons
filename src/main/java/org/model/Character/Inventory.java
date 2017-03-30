@@ -1,8 +1,5 @@
 package main.java.org.model.Character;
 
-import main.java.org.Service.InventoryObserver;
-import main.java.org.Service.ObserverObject;
-import main.java.org.Service.PlayScreen;
 import main.java.org.model.Item;
 
 import java.util.*;
@@ -15,7 +12,7 @@ import java.util.*;
  * @since 2017-03-10
  */
 public class Inventory extends Observable {
-    private List<ObserverObject> observers = new ArrayList<>();
+    private List<Observer> observers = new ArrayList<>();
     protected List<Item> items = new ArrayList<>();
     private List<Item> state = new ArrayList<>();
     private List<Item> backpack = new ArrayList<>();
@@ -99,27 +96,11 @@ public class Inventory extends Observable {
     }
 
     /**
-     * A method to attach the observer to the inventory
-     * @param observer
-     */
-    public void attach(ObserverObject observer){
-        this.observers.add(observer);
-    }
-
-    /**
-     * A method fot detaching the observer to the inventory
-     * @param observer
-     */
-    public void detach(ObserverObject observer) {
-        this.observers.remove(observer);
-    }
-
-    /**
      * A method to notify all the observers.
      */
     public void notifyAllObservers(){
-        for (ObserverObject observer : this.observers) {
-            observer.update();
+        for (Observer observer : this.observers) {
+            observer.update(this, this);
         }
     }
 }
