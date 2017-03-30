@@ -21,7 +21,7 @@ public class MapScreen {
         inventoryObserver = inventoryObs;
     }
     /**
-     * Thsi method is to show the map
+     * This method is to show the map
      * W:Wall
      * Q:Quit
      * M:Monster
