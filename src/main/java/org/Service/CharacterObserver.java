@@ -1,6 +1,7 @@
 package main.java.org.Service;
 
-import main.java.org.model.CharacterPackage.Character;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * A concrete CharacterPackage observer class
@@ -9,22 +10,15 @@ import main.java.org.model.CharacterPackage.Character;
  * @version 1.0
  * @since 2017-03-10
  */
-public class CharacterObserver extends ObserverObject{
+public class CharacterObserver implements Observer{
     /**
-     * A method to initialize the CharacterPackage observer
-     * @param character
-     */
-    public CharacterObserver(Character character){
-        this.character = character;
-        this.character.attach(this);
-    }
-
-    /**
-     * A method to update the CharacterPackage Observer
+     * A method to update the Character Observer
+     *
+     * @param o observable
+     * @param arg Object being observed - Ability of a character
      */
     @Override
-    public void update() {
-        System.out.println("CharacterPackage's ability: " +this.character.getState());
-
+    public void update(Observable o, Object arg) {
+        System.out.println("Character's ability: " + arg.toString());
     }
 }

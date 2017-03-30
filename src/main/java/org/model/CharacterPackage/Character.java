@@ -1,6 +1,5 @@
 package main.java.org.model.CharacterPackage;
 
-import main.java.org.Service.ObserverObject;
 import main.java.org.model.Item;
 
 import javax.xml.bind.JAXBContext;
@@ -11,10 +10,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.*;
 import java.util.List;
-import java.util.Observable;
 
 /**
  * This class is the character object
@@ -33,7 +30,6 @@ public class Character extends Observable {
     private String charName;
     private HashSet<Item> itemsWearing = new HashSet<>();
     private int level;
-    private Builder builder;
     private String fighterType;
 
     // A base line for the hit points
@@ -42,24 +38,13 @@ public class Character extends Observable {
     private int hitPoints;
 
     // For the observer
-    private List<ObserverObject> observers = new ArrayList<>();
+    private List<Observer> observers = new ArrayList<>();
     private Ability state;
 
     /**
      * An empty constructor
      */
     public Character() {}
-
-    /**
-     * Build model.CharacterPackage.CharacterPackage
-     *
-     * @param builder the model.CharacterPackage.CharacterPackage model.BuilderPattern.Builder
-     */
-    public Character(Builder builder) {
-        this.builder = builder;
-        this.charName = this.builder.getName();
-        this.fighterType = this.builder.getFighterType();
-    }
 
     /**
      * A method to get the fighter type of a character
@@ -102,10 +87,7 @@ public class Character extends Observable {
      * @return the ability of a character
      */
     public Ability getAbility() {
-        if(builder != null)
-            return builder.getAbility();
-        else
-            return this.ability;
+        return this.ability;
     }
 
     /**
@@ -392,26 +374,11 @@ public class Character extends Observable {
     }
 
     /**
-     * A method to attach the observer to the character's ability
-     *
-     * @param observer
-     */
-    public void attach(ObserverObject observer){
-        this.observers.add(observer);
-    }
-
-    /**
-     * A method fot detaching the observer to the inventory
-     * @param observer
-     */
-    public void detach(ObserverObject observer) { this.observers.remove(observer); }
-
-    /**
      * A method to notify all the observers.
      */
     public void notifyAllObservers(){
-        for (ObserverObject observer : this.observers) {
-            observer.update();
+        for (Observer observer : this.observers) {
+            observer.update(this, this.ability);
         }
     }
 

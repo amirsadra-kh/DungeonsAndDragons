@@ -18,10 +18,10 @@
             <name>boots1</name>
         </items>
         <items>
-            <enhance>5</enhance>
-            <enhancementType>DEXTERITY</enhancementType>
-            <item>BOOTS</item>
-            <name>boots1</name>
+            <enhance>1</enhance>
+            <enhancementType>CONSTITUTION</enhancementType>
+            <item>BELT</item>
+            <name>belt2</name>
         </items>
     </backPackInventory>
     <charName>char1</charName>

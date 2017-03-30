@@ -3,6 +3,9 @@ package test;
 import main.java.org.model.CharacterPackage.Ability;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.EnhancementTypesEnum;
+import main.java.org.model.Item;
+import main.java.org.model.ItemEnum;
 import main.java.org.model.Map;
 
 import java.awt.*;
@@ -45,5 +48,47 @@ public class Fixtures {
         character.setCurrentPosition(new Point(1,2));
 
         return character;
+    }
+
+    /**
+     * A method to create a belt for test units
+     * @return a belt item
+     */
+    public static Item createBelt(){
+        ItemEnum belt = ItemEnum.BELT;
+        Item item = new Item();
+        item.setName("belt1");
+        item.setEnhancementType(EnhancementTypesEnum.STRENGTH);
+        item.setEnhance(3);
+        item.setItem(belt);
+        return item;
+    }
+
+    /**
+     * A method to create boots for test units
+     * @return a boots item
+     */
+    public static Item createBoots() {
+        ItemEnum boots = ItemEnum.BOOTS;
+        Item item = new Item();
+        item.setName("boots1");
+        item.setEnhancementType(EnhancementTypesEnum.STRENGTH);
+        item.setEnhance(3);
+        item.setItem(boots);
+        return item;
+    }
+
+    /**
+     * A method to create a second belt for test units
+     * @return a belt item
+     */
+    public static Item createBelt2() {
+        ItemEnum belt = ItemEnum.BELT;
+        Item item = new Item();
+        item.setName("belt2");
+        item.setEnhancementType(EnhancementTypesEnum.STRENGTH);
+        item.setEnhance(1);
+        item.setItem(belt);
+        return item;
     }
 }
