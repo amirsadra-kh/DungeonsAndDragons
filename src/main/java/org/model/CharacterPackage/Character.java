@@ -113,7 +113,7 @@ public class Character extends Observable {
      */
     public void setHitPoints() {
         int strengthModifier  = this.ability.getStrengthModifier();
-        this.hitPoints = strengthModifier + dice;
+        this.hitPoints = strengthModifier + this.dice;
     }
 
     /**
@@ -126,14 +126,16 @@ public class Character extends Observable {
         return this.hitPoints;
     }
 
+    /**
+     * A method for decreasing the hitPoints in a fight
+     * @param newHitPoint
+     */
     public void decreaseHitPoint(int newHitPoint){
         if (this.hitPoints > 0){
-            this.hitPoints = this.hitPoints - newHitPoint;
+            this.hitPoints -= newHitPoint;
         }
         else
-            System.out.println("model.CharacterPackage.CharacterPackage has died!");
-
-
+            System.out.println(this.charName +" has died!");
     }
 
     public void increaseHitPoint(int newHitPoint){
