@@ -15,8 +15,14 @@ public class BullyBuilder extends AbilityScoreBuilder {
      */
     @Override
     void buildAbilityScores() {
-        this.ability.setConstitution(this.dices[0]);
-        this.ability.setDexterity(this.dices[1]);
+        // Set the abilities
+        this.ability.setConstitution(this.dices[1]);
+        this.ability.setDexterity(this.dices[0]);
         this.ability.setStrength(this.dices[2]);
+
+        // Set the modifiers of those abilities
+        this.ability.setConstitutionModifier();
+        this.ability.setDexterityModifier();
+        this.ability.setStrengthModifier();
     }
 }
