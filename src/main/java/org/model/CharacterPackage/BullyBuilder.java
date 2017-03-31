@@ -11,7 +11,7 @@ public class BullyBuilder extends AbilityScoreBuilder {
     /**
      * A Bully builder
      * Ability Scores in decreasing order of importance:
-     * Strength, Dexterity, Constitution
+     * strength, dexterity, constitution
      */
     @Override
     void buildAbilityScores() {

@@ -11,7 +11,7 @@ public class TankBuilder extends AbilityScoreBuilder {
     /**
      * A Tank builder
      * Ability Scores in decreasing order of importance:
-     * Constitution, Dexterity, Strength
+     * constitution, dexterity, strength
      */
     @Override
     void buildAbilityScores() {

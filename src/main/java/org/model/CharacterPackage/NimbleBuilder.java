@@ -11,7 +11,7 @@ public class NimbleBuilder extends AbilityScoreBuilder {
     /**
      * A Nimble builder
      * Ability Scores in decreasing order of importance:
-     * Dexterity, Constitution, Strength
+     * dexterity, constitution, strength
      */
     @Override
     void buildAbilityScores() {
