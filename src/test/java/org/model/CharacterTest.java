@@ -1,18 +1,22 @@
 package test.java.org.model;
 
 import main.java.org.model.*;
-import main.java.org.model.Character;
+import main.java.org.model.CharacterPackage.Ability;
+import main.java.org.model.CharacterPackage.BackPackInventory;
+import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.CharacterPackage.Strength;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.After;
 import org.junit.Test;
+import test.Fixtures;
 
 import java.awt.*;
 import java.util.*;
 import java.util.List;
 
 /**
- * Class to test the Character class which allows user to create and edit a Character
+ * Class to test the CharacterPackage class which allows user to create and edit a CharacterPackage
  *
  * @author Freyja Jokulsdottir
  * @version 2.0
@@ -98,22 +102,29 @@ public class CharacterTest {
 
     /**
      * A test method to get the items the character is wearing
+     * TODO fix this method
      * @throws Exception
      */
     @Test
     public void testGetItemsWearing() throws Exception {
-        Item item = new Item();
+        // Create a belt
+        Item item1 = Fixtures.createBelt();
+        // Create boots
+        Item item2 = Fixtures.createBoots();
+        // Create another belt
+        Item item3 = Fixtures.createBelt2();
+
         HashSet<Item> wearingItems = new HashSet<>();
-        wearingItems.add(item.loadItem("belt1"));
-        wearingItems.add(item.loadItem("boots1"));
+        wearingItems.add(item1);
+        wearingItems.add(item2);
         this.character.setItemsWearing(wearingItems);
 
         // Test if adding wearing items is successful
         Assert.assertEquals(wearingItems, this.character.getItemsWearing());
 
         // Test if two items of the same type can be added
-        wearingItems.add(item.loadItem("boots1"));
-        wearingItems.add(item.loadItem("belt2"));
+        wearingItems.add(item2);
+        wearingItems.add(item3);
         this.character.setItemsWearing(wearingItems);
         // Since boots1 == boots1 and belt1 has the same itemEnum as belt2, there should be only two items
         int size = 2;
@@ -155,7 +166,7 @@ public class CharacterTest {
         // Check if items are added to the backpack
         backPackInventory.setItems(backpack);
         this.character.setBackPackInventory(backPackInventory);
-        Assert.assertEquals(backpack, character.getBackPackInventoryItems());
+        Assert.assertEquals(backpack, character.getBackPackInventory());
 
         // Check if multiple items of the same type can be added
         backpack.add(item.loadItem("belt2"));

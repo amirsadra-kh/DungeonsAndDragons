@@ -1,7 +1,7 @@
 package main.java.org.Service;
 
-import main.java.org.model.BackPackInventory;
-import main.java.org.model.Character;
+import main.java.org.model.CharacterPackage.BackPackInventory;
+import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Item;
 import main.java.org.model.ReadInput;
 

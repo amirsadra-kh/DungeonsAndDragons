@@ -1,14 +1,14 @@
 package test.java.org.model;
 
-import main.java.org.model.Modifier;
-import main.java.org.model.Strength;
+import main.java.org.model.CharacterPackage.Modifier;
+import main.java.org.model.CharacterPackage.Strength;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
  * A class to test the Strength class
  *
- * @see main.java.org.model.Strength
+ * @see Strength
  * @author Parisa Nikzad
  * @version 1.0
  * @since 20.02.2017

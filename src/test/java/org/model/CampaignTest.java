@@ -2,7 +2,7 @@ package test.java.org.model;
 
 import main.java.org.Service.ObjectLoader;
 import main.java.org.model.Campaign;
-import main.java.org.model.Character;
+import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Map;
 import org.junit.Assert;
 import org.junit.Before;
@@ -93,7 +93,6 @@ public class CampaignTest {
         try {
             Character character = ol.loadCharacterFromXML("char1");
             camp = camp.loadCampaign("camp1");
-            Map current = camp.nextLevel(levelsPlayed, character);
             Map correct = camp.getMap("map2");
             // TODO Check if the name is correct
             //Assert.assertEquals(correct.getName(), current.getName());

@@ -1,4 +1,4 @@
-package main.java.org.model;
+package main.java.org.model.CharacterPackage;
 
 /**
  * This is an interface for certain abilities

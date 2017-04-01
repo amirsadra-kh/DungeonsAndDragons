@@ -1,6 +1,5 @@
 package main.java.org.Service;
 
-import main.java.org.model.Character;
 import main.java.org.model.ColorConstants;
 import main.java.org.model.Map;
 import main.java.org.model.ReadInput;
@@ -26,10 +25,10 @@ public class MapScreen {
      * W:Wall
      * Q:Quit
      * M:Monster
-     * F:friendly Character
+     * F:friendly CharacterPackage
      * C:Chest
      * E:Entry point
-     * p:Player Character
+     * p:Player CharacterPackage
      *
      * @param map
      */
@@ -88,17 +87,8 @@ public class MapScreen {
                         ||'m'==map.getScreen()[i][j].charAt(0) ){
                     try {
                         System.out.println(map.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
-                        System.out.println("Character being observed: ");
-                        try {
-                            characterObserver.update();
-                        } catch (NullPointerException e) {
-                            System.out.println("non");
-                        }
-                        try {
-                            inventoryObserver.update();
-                        } catch (NullPointerException e) {
-                            System.out.println("non");
-                        }
+                        System.out.println("CharacterPackage being observed: ");
+                        // Show observers here
                         System.out.println("-----------------------------------------------------");
                     } catch (Exception e) {
                         e.printStackTrace();

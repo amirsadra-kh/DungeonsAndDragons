@@ -1,5 +1,7 @@
 package main.java.org.model;
 
+import main.java.org.model.CharacterPackage.Character;
+
 import java.util.List;
 
 /**

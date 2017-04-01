@@ -1,6 +1,6 @@
 package main.java.org.Service;
 
-import main.java.org.model.RollDice;
+import main.java.org.model.CharacterPackage.RollDice;
 
 import java.util.Arrays;
 
@@ -27,6 +27,16 @@ public class Calculation {
 
         Arrays.sort(this.diceResult);
         return this.diceResult[1] + this.diceResult[2] + this.diceResult[3];
+    }
+
+    /**
+     * A method to get d20
+     * @return an integer between 1 and 20
+     */
+    public int getDice20() {
+        RollDice dice20 = new RollDice(20);
+        int dice20rolled = dice20.roll();
+        return dice20rolled;
     }
 
 }

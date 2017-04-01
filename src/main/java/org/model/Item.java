@@ -79,6 +79,7 @@ public class Item {
      * a method to get the itemEnum of this item
      * @return an Item Enum
      */
+    @XmlElement
     public ItemEnum getItem() {
         return this.itemEnum;
     }
@@ -95,6 +96,7 @@ public class Item {
      * A method to get the EnhancementType of this item
      * @return
      */
+    @XmlElement
     public EnhancementTypesEnum getEnhancementType() {
         return this.enhancementType;
     }
@@ -111,6 +113,7 @@ public class Item {
      * A method to get the enhance amount for this item
      * @return the enhance amount as an integer
      */
+    @XmlElement
     public int getEnhance() {
         return this.enhance;
     }
@@ -230,7 +233,7 @@ public class Item {
     public void setItemOnMapEnhancement(int level) {
         // Check if the level is a valid number
         if(level < 1) {
-            System.out.println("ERROR!! The level of the Character is less than 1!!");
+            System.out.println("ERROR!! The level of the CharacterPackage is less than 1!!");
             return;
         }
 
@@ -306,7 +309,7 @@ public class Item {
             context = JAXBContext.newInstance(Item.class);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            m.marshal(this,new FileOutputStream("src/main/java/org/resources/items/"+this.name));
+            m.marshal(this,new FileOutputStream("src/main/java/org/main/java/org/resources/items/"+this.name));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -337,7 +340,8 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "item=" + this.itemEnum +
+                "Name: " +this.name +
+                ", item=" + this.itemEnum +
                 ", enhancementType=" + this.enhancementType +
                 ", enhance=" + this.enhance +
                 ", coordinate=" + this.coordinate +

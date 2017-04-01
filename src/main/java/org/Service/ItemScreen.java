@@ -138,7 +138,7 @@ public class ItemScreen {
                 System.out.println(e.ordinal() + ". " + e.name());
             }
 
-            item = readLine();
+            item = readLine().toUpperCase();
             for (ItemEnum e : ItemEnum.values()) {
                 itemsArray.add(e.ordinal(), e.name());
             }
@@ -147,11 +147,6 @@ public class ItemScreen {
             if (itemsArray.contains(item))
                 break;
         }
-
-        while (!itemsArray.contains(item)) {
-            System.out.println("The Entered Item is not valid! \nPlease enter your item Type ");
-        }
-        item = readLine().toUpperCase();
 
         System.out.println("ITEM RECEIVED SUCCESSFULLY!");
         return item;

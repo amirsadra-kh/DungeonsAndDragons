@@ -1,7 +1,6 @@
 package test.java.org.model;
 
-import main.java.org.Service.ObjectLoader;
-import main.java.org.model.Character;
+import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Turn;
 import org.junit.Before;
 import org.junit.Test;

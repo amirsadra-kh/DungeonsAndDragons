@@ -1,16 +1,14 @@
 package main.java.org.Service;
 
 
-import main.java.org.model.Campaign;
-import main.java.org.model.Character;
-import main.java.org.model.Inventory;
+import main.java.org.model.*;
+import main.java.org.model.CharacterPackage.Ability;
+import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.CharacterPackage.Inventory;
 import main.java.org.model.Map;
-import main.java.org.model.ReadInput;
 
 
-import java.util.ArrayList;
-
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -28,6 +26,8 @@ public class PlayScreen {
     private int level = 0;
     private CharacterObserver characterObserver;
     private InventoryObserver inventoryObserver;
+    private List<Item> inventory = new ArrayList<>();
+    private Ability ability;
 
     /**
      * A basic interaction screen after the user chooses Play
@@ -71,7 +71,8 @@ public class PlayScreen {
      */
     private void movePlayer(Map map) {
         String direction =readInput.readLine();
-        while(!MapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer(map,direction,this.campaign)){
+        MapDirectionValidator mapValidator= new MapDirectionValidator(this.campaign,map);
+        while(!mapValidator.validateDirectionIsValidBoundriesAndMovePlayer(direction)){
             direction =readInput.readLine();
             MapScreen.showMap(map);
         }
@@ -82,7 +83,7 @@ public class PlayScreen {
      * it searches for E in the Map and set the payer position there
      * @param map
      */
-    private void setPlayerAtEntryPoint(Map map) {
+    public static void setPlayerAtEntryPoint(Map map) {
         for(int i=0;i<map.getScreen().length;i++){
             for(int j=0;j<map.getScreen()[i].length;j++){
                 if(map.getScreen()[i][j].equalsIgnoreCase("E")){
@@ -96,7 +97,7 @@ public class PlayScreen {
      * This method is to print and ask user to enter the directions
      */
     private void enterDirection(){
-        System.out.println("Enter the direction you wish to move: \n Left:L\n Right:R \n Down:D\n Up:U\n");
+        System.out.println(GameConstantsInterface.ENTER_DIRECTION);
     }
 
     /**
@@ -111,7 +112,7 @@ public class PlayScreen {
         this.campaign = new Campaign();
         ol.showItemNames("src/main/java/org/resources/campaigns/");
         this.campaign = campaign.getCampaign(readInput.readLine());
-
+        this.campaign.setMaps(this.campaign.getMapsFromCampaign(this.character));
         while (this.campaign == null) {
             System.out.println("This campaign does not exist! Please try again: ");
             this.campaign = campaign.getCampaign(readInput.readLine());
@@ -164,25 +165,29 @@ public class PlayScreen {
      */
     public Character getObserverCharacter(Map currentMap) {
         ObjectLoader ol = new ObjectLoader();
-        // Testing the Character Observer
+        // Testing the CharacterPackage Observer
         Character observeChar = new Character();
         // Get the characters that are in the map
         List<Character> mapCharacters = currentMap.getNonPLayerCharacters();
         // Add the player character to the list as well
         mapCharacters.add(character);
+        int choice = 0;
 
         System.out.println("Please enter the name of the character you would like to observe from the list below: ");
         // Print the name of each character that is on the map
-        for(Character character : mapCharacters)
-            System.out.println(character.getCharName());
+        int i = 1;
+        for(Character character : mapCharacters) {
+            System.out.println(i + ". " + character.getCharName());
+            i++;
+        }
+        choice = readInput.readIntHandling(choice);
         // load the character chosen by user
-        observeChar = observeChar.loadCharacter(readInput.readLine());
 
-        while(observeChar.getCharName().equals(null)) {
+        while(mapCharacters.get(choice-1).getCharName().equals(null)) {
             System.out.println("This character does not exist! Please try again: ");
             observeChar = character.loadCharacter(readInput.readLine());
         }
-        return observeChar;
+        return mapCharacters.get(choice-1);
     }
 
     /**
@@ -200,10 +205,7 @@ public class PlayScreen {
         }
 
         if("Y".equals(choice) || "y".equals(choice)) {
-            this.characterObserver = new CharacterObserver(observeChar);
-            observeChar.setState(observeChar.getAbility());
-            observeChar.attach(this.characterObserver);
-            this.characterObserver = new CharacterObserver(observeChar);
+            observeChar.setState(observeChar.getAbility());;
         }
     }
 
@@ -223,11 +225,9 @@ public class PlayScreen {
         if("Y".equals(choice) || "y".equals(choice)) {
             // This gets the character's inventory - Observer
             Inventory observeInventory = new Inventory();
-            observeInventory.setItems(observeChar);
-            this.inventoryObserver = new InventoryObserver(observeInventory);
+            observeInventory.setBackpackItems(observeChar.getBackPackInventoryItems());
+            observeInventory.setWearingItems(observeChar.getItemsWearing());
             observeInventory.setState(observeInventory.getItems());
-            observeChar.attach(this.inventoryObserver);
-            this.inventoryObserver = new InventoryObserver(observeInventory);
 
             // If the character being observed is the player character, ask user if they want to make changes
             if(this.character.getCharName().equals(observeChar.getCharName())) {

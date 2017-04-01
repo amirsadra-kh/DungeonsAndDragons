@@ -1,8 +1,11 @@
 package main.java.org.model;
 
-import main.java.org.Service.ObjectLoader;
 import main.java.org.Service.ObjectSaver;
+import main.java.org.model.CharacterPackage.BackPackInventory;
+import main.java.org.model.CharacterPackage.Character;
 
+import javax.xml.bind.annotation.XmlElement;
+import java.awt.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,6 +29,24 @@ public class Map implements Serializable {
     private Character player;
     private List<Character> mapChars;
     private BackPackInventory chest;
+    private boolean canGoNextLevel=false;
+    private boolean isLevelCompleted;
+
+    /**
+     * this method is to check if the level is completed
+     * @return true: if level is completed
+     */
+    public boolean isLevelCompleted() {
+        return isLevelCompleted;
+    }
+
+    /**
+     * This methdo is to set the completed level
+     * @param levelCompleted true : the level is complete , false: the level is incomplete
+     */
+    public void setLevelCompleted(boolean levelCompleted) {
+        isLevelCompleted = levelCompleted;
+    }
 
     /**
      * An empty map constructor
@@ -43,6 +64,22 @@ public class Map implements Serializable {
 
         this.screen = screen;
 
+    }
+
+    /**
+     * This method is to return the current coordinate of the player
+     * @param map the current map
+     * @return it returns the Point corresponding the player's coordinate
+     */
+     public static Point getPlayerCoordinate(Map map) {
+        for (int i = 0; i < map.getScreen().length; i++) {
+            for (int j = 0; j < map.getScreen()[i].length; j++) {
+                if ("P".equalsIgnoreCase(map.getScreen()[i][j])) {
+                    return new Point(i, j);
+                }
+            }
+        }
+        return null;
     }
 
     /**
@@ -229,6 +266,7 @@ public class Map implements Serializable {
     }
 
     //TODO if we are meant to have multiple chests, this method should return a definite chest object.
+    @XmlElement
     public BackPackInventory getChest() {
         return this.chest;
     }
@@ -253,4 +291,21 @@ public class Map implements Serializable {
                 ", turn=" + turn +
                 '}';
     }
+
+    /**
+     * Thsi method is returning true if we can go to next level and false otherwise
+     * @return
+     */
+    public boolean isCanGoNextLevel() {
+        return canGoNextLevel;
+    }
+
+    /**
+     * This metjod is setting the isCanGoToNextLevel flag
+     * @param canGoNextLevel the flag indicating if we can go to next level
+     */
+    public void setCanGoNextLevel(boolean canGoNextLevel) {
+        this.canGoNextLevel = canGoNextLevel;
+    }
+
 }

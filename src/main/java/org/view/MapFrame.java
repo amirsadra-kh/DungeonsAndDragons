@@ -2,13 +2,12 @@ package main.java.org.view;
 
 import main.java.org.Service.ObjectLoader;
 import main.java.org.model.*;
-import main.java.org.model.Character;
+import main.java.org.model.CharacterPackage.BackPackInventory;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
@@ -61,21 +60,13 @@ public class MapFrame implements ActionListener {
         newCheckBox.addActionListener(this);
         loadObjectsNames();
     }
-
-    /**
-     * This method is to show alert message
-     + *
-     + * @author Mehran Ishanian
-     + * @version 1.0
-     + * @since 2017-03-16
-     */
     public static void alert(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
 
 
     /**
-     * This method is is to load Character & Items to the Map and assign to according Labels.
+     * This class is is to load CharacterPackage & Items to the Map and assign to according Labels.
      + *
      + * @author Mehran Ishanian
      + * @version 1.2
@@ -222,6 +213,9 @@ public class MapFrame implements ActionListener {
         }
     }
 
+    private void editMap(int rows, int cols, String name) {
+
+    }
 
 
 }

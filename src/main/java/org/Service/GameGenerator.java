@@ -1,8 +1,8 @@
 package main.java.org.Service;
 
+import main.java.org.Service.CharacterScreens.CharacterScreen;
 import main.java.org.model.*;
 import main.java.org.view.MapFrame;
-import java.util.Scanner;
 
 /**
  * This class is is to Generate/edit game objects .
@@ -100,14 +100,14 @@ public class GameGenerator {
     }
 
     /**
-     * A method that calls the Character screen to interact with a user after the user has chosen to create or edit
+     * A method that calls the CharacterPackage screen to interact with a user after the user has chosen to create or edit
      * a character
      *
      * @throws Exception
      */
     private void createOrEditCharacter() throws Exception {
         CharacterScreen cs = new CharacterScreen();
-        cs.CharacterScreen();
+        cs.choiceScreen();
     }
 
     /**
@@ -116,7 +116,7 @@ public class GameGenerator {
      */
     private void createOrChoseMaps() {
 
-        Map map = new MapFrame().makeFrame("Map Builder");
+        Map map = new MapFrame().makeFrame("Map AbilityScoreBuilder");
         //  MapFrame.Main();
     }
 
