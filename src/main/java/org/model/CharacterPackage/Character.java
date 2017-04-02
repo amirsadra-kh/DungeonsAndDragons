@@ -35,6 +35,7 @@ public class Character extends Observable {
     private String fighterType;
     private BehaviourStrategy behaviourStrategy;
     private CharacterStrategy characterStrategy;
+    private boolean turn;
 
     // A base line for the hit points
     RollDice dice10 = new RollDice(10);
@@ -240,6 +241,22 @@ public class Character extends Observable {
      */
     public void executeCharacterStrategy(int enhancement) {
         this.characterStrategy.execute(this, enhancement);
+    }
+
+    /**
+     * A setter for the turn to tell if it's the character's turn or not
+     * @param turn
+     */
+    public void setTurn(boolean turn) {
+        this.turn = turn;
+    }
+
+    /**
+     * A getter for turn to tell if it is the character's turn or not
+     * @return turn a boolean value
+     */
+    public boolean getTurn() {
+        return this.turn;
     }
 
     /**
