@@ -68,7 +68,7 @@ public class CreateCharacterScreen {
 
         // Check if a character with the name chosen already exists and prompt for a new name if it does
         while("".equalsIgnoreCase(charName) || GameConstantsInterface.CHOSEN_ITEM_NOT_VALID.equalsIgnoreCase(charName) || charExist) {
-            System.out.println("Enter the name of the new CharacterPackage (No spaces): ");
+            System.out.println("Enter the name of the new Character (No spaces): ");
             charName = readInput.readStringHandling(charName);
 
             // Check if a campaign with the name chose already exists
@@ -76,7 +76,7 @@ public class CreateCharacterScreen {
                 charExist = false;
             }
             else {
-                System.out.println("A CharacterPackage with this name already exists!");
+                System.out.println("A Character with this name already exists!");
             }
         }
 

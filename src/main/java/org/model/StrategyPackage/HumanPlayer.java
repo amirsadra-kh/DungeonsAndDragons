@@ -10,4 +10,8 @@ package main.java.org.model.StrategyPackage;
  * @since
  */
 public class HumanPlayer implements BehaviourStrategy {
+    @Override
+    public void execute() {
+
+    }
 }

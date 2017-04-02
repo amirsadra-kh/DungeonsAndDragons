@@ -11,4 +11,8 @@ package main.java.org.model.StrategyPackage;
  * @since
  */
 public class FriendlyNPC implements BehaviourStrategy {
+    @Override
+    public void execute() {
+
+    }
 }

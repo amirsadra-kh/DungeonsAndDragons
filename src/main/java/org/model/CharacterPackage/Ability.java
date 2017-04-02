@@ -71,6 +71,7 @@ public class Ability {
      * A getter for the strength modifier
      * @return the strength modifier
      */
+    @XmlElement
     public int getStrengthModifier() {
         return this.strengthModifier;
     }
@@ -102,6 +103,7 @@ public class Ability {
      * A getter for the constitution modifier
      * @return the constitution modifier
      */
+    @XmlElement
     public int getConstitutionModifier() {
         return this.constitutionModifier;
     }
@@ -133,6 +135,7 @@ public class Ability {
      * A getter for the dexterity modifier
      * @return the dexterity modifier int value
      */
+    @XmlElement
     public int getDexterityModifier() {
         return this.dexterityModifier;
     }

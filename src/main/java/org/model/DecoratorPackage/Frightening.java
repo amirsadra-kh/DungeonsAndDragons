@@ -4,11 +4,19 @@ package main.java.org.model.DecoratorPackage;
  * A Frightening Decorator
  * Target runs away from character for a number of turns
  * equal to the enchantment bonus of the weapon.
- * TODO add a Frightening strategy
  *
- * @author
- * @version
- * @since
+ * @author Freyja Jokulsdottir
+ * @version 1.0
+ * @since 02.04.2017
  */
 public class Frightening  extends WeaponEnhanceDecorator {
+    /**
+     * Wraps a Weapon object inside an object of
+     * WeaponEnhancementDecorator's subclasses
+     *
+     * @param decoratedWeapon
+     */
+    public Frightening(Weapon decoratedWeapon) {
+        super(decoratedWeapon);
+    }
 }

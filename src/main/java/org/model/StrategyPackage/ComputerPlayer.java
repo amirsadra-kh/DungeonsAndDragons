@@ -10,4 +10,8 @@ package main.java.org.model.StrategyPackage;
  * @since
  */
 public class ComputerPlayer implements BehaviourStrategy {
+    @Override
+    public void execute() {
+
+    }
 }
