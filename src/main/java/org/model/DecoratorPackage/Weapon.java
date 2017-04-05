@@ -14,10 +14,11 @@ import java.util.List;
  * @since 02.04.2017
  */
 public class Weapon extends Item {
-    String specialEnhancement = "";
+    String specialEnhancement = "Weapon";
 
     /**
      * A method to get the special enhancement of the weapon
+     * TODO get this string to save with the weapon item
      * @return WeaponEnhanceDecorator
      */
     public String getSpecialEnhance() {

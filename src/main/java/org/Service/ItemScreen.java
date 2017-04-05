@@ -283,9 +283,6 @@ public class ItemScreen {
         int choice = 0;
         // Create the weapon based on the item
         Weapon weapon = new Weapon();
-        weapon.setName(item.getName());
-        weapon.setEnhance(item.getEnhance());
-        weapon.setItem(item.getItem());
 
         // Ask the user if they would like to add a special enhancement.
         System.out.println("Would you like to add special enhancements to your weapon? Y/N");
@@ -308,6 +305,10 @@ public class ItemScreen {
             System.out.println("do you  want to add another special enhancement ? Y/N");
             yes = readInput.askUserIfAgain();
         }
+        System.out.println("Special Enhancement: " +weapon.getSpecialEnhance());
+        weapon.setName(item.getName());
+        weapon.setEnhance(item.getEnhance());
+        weapon.setItem(item.getItem());
 
         return weapon;
     }
