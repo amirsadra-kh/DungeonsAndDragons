@@ -263,13 +263,10 @@ public class Item {
      */
     @Override
     public boolean equals(Object object) {
-
         if (object instanceof Item) {
             Item ob = (Item) object;
 
             return ob.itemEnum == this.itemEnum;
-                    //&& ob.enhancementType == this.enhancementType && ob.coordinate == this.coordinate
-                    //&& ob.enhance == this.enhance;
         }
         return false;
     }

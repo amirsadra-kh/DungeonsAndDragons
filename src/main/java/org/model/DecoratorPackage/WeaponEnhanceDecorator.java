@@ -21,6 +21,6 @@ public abstract class WeaponEnhanceDecorator extends Weapon {
 
 
     public void getEnhancement() {
-        decoratedWeapon.getEnhancement();
+        decoratedWeapon.getSpecialEnhance();
     }
 }
