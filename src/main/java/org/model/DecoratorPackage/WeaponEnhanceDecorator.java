@@ -19,8 +19,10 @@ public abstract class WeaponEnhanceDecorator extends Weapon {
         this.decoratedWeapon = decoratedWeapon;
     }
 
-
-    public void getEnhancement() {
-        decoratedWeapon.getSpecialEnhance();
+    /**
+     * This method should return the new enhancement
+     */
+    public String getSpecialEnhance() {
+        return decoratedWeapon.getSpecialEnhance();
     }
 }

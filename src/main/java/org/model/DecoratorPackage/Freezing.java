@@ -19,4 +19,12 @@ public class Freezing  extends WeaponEnhanceDecorator {
     public Freezing(Weapon decoratedWeapon) {
         super(decoratedWeapon);
     }
+
+    /**
+     * A method that adds the special enhancements to a string.
+     * @return a string with special enhancements
+     */
+    public String getSpecialEnhance() {
+        return super.getSpecialEnhance() + ", Freezing";
+    }
 }

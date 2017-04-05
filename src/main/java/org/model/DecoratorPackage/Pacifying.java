@@ -18,4 +18,12 @@ public class Pacifying extends WeaponEnhanceDecorator {
     public Pacifying(Weapon decoratedWeapon) {
         super(decoratedWeapon);
     }
+
+    /**
+     * A method that adds the special enhancements to a string.
+     * @return a string with special enhancements
+     */
+    public String getSpecialEnhance() {
+        return super.getSpecialEnhance() + ", Pacifying";
+    }
 }

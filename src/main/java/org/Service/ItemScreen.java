@@ -319,36 +319,30 @@ public class ItemScreen {
      * @return weapon with enhancement
      */
     private Weapon setSpecialEnhancement(Weapon weapon, int choice) {
-        WeaponEnhanceDecorator specialEnhancement;
         switch (choice) {
             // Freezing
             case 1:
-                specialEnhancement = new Freezing(weapon);
-                weapon.setSpecialEnhance(specialEnhancement);
+                weapon = new Freezing(weapon);
                 System.out.println("FREEZING ADDED SUCCESSFULLY!");
                 break;
             // Burning
             case 2:
-                specialEnhancement = new Burning(weapon);
-                weapon.setSpecialEnhance(specialEnhancement);
+                weapon = new Burning(weapon);
                 System.out.println("BURNING ADDED SUCCESSFULLY!");
                 break;
             // Slaying
             case 3:
-                specialEnhancement = new Slaying(weapon);
-                weapon.setSpecialEnhance(specialEnhancement);
+                weapon = new Slaying(weapon);
                 System.out.println("SLAYING ADDED SUCCESSFULLY!");
                 break;
             // Frightening
             case 4:
-                specialEnhancement = new Frightening(weapon);
-                weapon.setSpecialEnhance(specialEnhancement);
+                weapon = new Frightening(weapon);
                 System.out.println("FRIGHTENING ADDED SUCCESSFULLY!");
                 break;
             // Pacifying
             case 5:
-                specialEnhancement = new Pacifying(weapon);
-                weapon.setSpecialEnhance(specialEnhancement);
+                weapon = new Pacifying(weapon);
                 System.out.println("PACIFYING ADDED SUCCESSFULLY!");
                 break;
         }

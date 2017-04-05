@@ -14,21 +14,13 @@ import java.util.List;
  * @since 02.04.2017
  */
 public class Weapon extends Item {
-    List<WeaponEnhanceDecorator> specialEnhancement = new ArrayList<>();
-
-    /**
-     * A method to set the special enhancement of the weapon
-     * @param specialEnhance
-     */
-    public void setSpecialEnhance(WeaponEnhanceDecorator specialEnhance) {
-        this.specialEnhancement.add(specialEnhance);
-    }
+    String specialEnhancement = "";
 
     /**
      * A method to get the special enhancement of the weapon
      * @return WeaponEnhanceDecorator
      */
-    public List<WeaponEnhanceDecorator> getSpecialEnhance() {
+    public String getSpecialEnhance() {
         return this.specialEnhancement;
     }
 }

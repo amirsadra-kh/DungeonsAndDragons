@@ -22,10 +22,10 @@ public class Burning  extends WeaponEnhanceDecorator {
     }
 
     /**
-     * Overriding methods defined in the abstract supercalss.
-     * Enables to provide different behavior for decorated Weapon methods.
+     * A method that adds the special enhancements to a string.
+     * @return a string with special enhancements
      */
-    public void getEnhancement() {
-        super.getEnhancement();
+    public String getSpecialEnhance() {
+        return super.getSpecialEnhance() + ", Burning";
     }
 }
