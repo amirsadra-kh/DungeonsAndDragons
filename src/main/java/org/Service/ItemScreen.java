@@ -1,6 +1,7 @@
 package main.java.org.Service;
 
 import main.java.org.model.*;
+import main.java.org.model.DecoratorPackage.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,7 +110,15 @@ public class ItemScreen {
         int enhancementAmount = getEnhancementAmount();
         Item itemToCreate = new Item(itemName, getItemEnumfromString(item), getEnhancementEnumfromString(enhancement), enhancementAmount);
 
-        itemToCreate.saveItem();
+        // If the item is a weapon, allow the user to choose a special enhancement
+        if(item.equals("WEAPON")) {
+            // Do something here for that
+            Weapon weapon = setSpecialEnhanceInteraction(itemToCreate);
+            weapon.saveItem();
+        }
+        else {
+            itemToCreate.saveItem();
+        }
 
         return itemToCreate;
     }
@@ -263,5 +272,87 @@ public class ItemScreen {
         return null;
     }
 
+    /**
+     * A method to interact with the user to set a special enhancement for a weapon
+     * @param item already created
+     * @return weapon based on the item parameter
+     */
+    private Weapon setSpecialEnhanceInteraction(Item item) {
+        String answer = "";
+        boolean yes = true;
+        int choice = 0;
+        // Create the weapon based on the item
+        Weapon weapon = new Weapon();
+        weapon.setName(item.getName());
+        weapon.setEnhance(item.getEnhance());
+        weapon.setItem(item.getItem());
 
+        // Ask the user if they would like to add a special enhancement.
+        System.out.println("Would you like to add special enhancements to your weapon? Y/N");
+        answer = readInput.readLine().trim().toLowerCase();
+        while (yes) {
+            if (answer.equals("y")) {
+                System.out.println("Which special enhancement would you like to add:");
+                System.out.println("1. Freezing\n2. Burning\n3. Slaying\n4. Frightening\n5. Pacifying");
+                while(choice < 1 || choice > 5)
+                    choice = readInput.readIntHandling(choice);
+                // Set the new enhancement
+                weapon = setSpecialEnhancement(weapon, choice);
+                choice = 0;
+            } else if (answer.equals("n")) {
+                yes = false;
+            } else {
+                System.out.println("Sorry, I didn't catch that. Please answer y/n");
+            }
+            // Check if the user wants to add more items.
+            System.out.println("do you  want to add another special enhancement ? Y/N");
+            yes = readInput.askUserIfAgain();
+        }
+
+        return weapon;
+    }
+
+    /**
+     * A method to set the WeaponEnhancmentDecorator of a weapon item.
+     * @param weapon to be set
+     * @param choice of decorator
+     * @return weapon with enhancement
+     */
+    private Weapon setSpecialEnhancement(Weapon weapon, int choice) {
+        WeaponEnhanceDecorator specialEnhancement;
+        switch (choice) {
+            // Freezing
+            case 1:
+                specialEnhancement = new Freezing(weapon);
+                weapon.setSpecialEnhance(specialEnhancement);
+                System.out.println("FREEZING ADDED SUCCESSFULLY!");
+                break;
+            // Burning
+            case 2:
+                specialEnhancement = new Burning(weapon);
+                weapon.setSpecialEnhance(specialEnhancement);
+                System.out.println("BURNING ADDED SUCCESSFULLY!");
+                break;
+            // Slaying
+            case 3:
+                specialEnhancement = new Slaying(weapon);
+                weapon.setSpecialEnhance(specialEnhancement);
+                System.out.println("SLAYING ADDED SUCCESSFULLY!");
+                break;
+            // Frightening
+            case 4:
+                specialEnhancement = new Frightening(weapon);
+                weapon.setSpecialEnhance(specialEnhancement);
+                System.out.println("FRIGHTENING ADDED SUCCESSFULLY!");
+                break;
+            // Pacifying
+            case 5:
+                specialEnhancement = new Pacifying(weapon);
+                weapon.setSpecialEnhance(specialEnhancement);
+                System.out.println("PACIFYING ADDED SUCCESSFULLY!");
+                break;
+        }
+
+        return weapon;
+    }
 }

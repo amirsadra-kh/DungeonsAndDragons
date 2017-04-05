@@ -10,6 +10,22 @@ import main.java.org.model.Item;
  * @version 1.0
  * @since 02.04.2017
  */
-public abstract class Weapon extends Item {
-    public abstract void getEnhancement();
+public class Weapon extends Item {
+    WeaponEnhanceDecorator specialEnhancement;
+
+    /**
+     * A method to set the special enhancement of the weapon
+     * @param specialEnhance
+     */
+    public void setSpecialEnhance(WeaponEnhanceDecorator specialEnhance) {
+        this.specialEnhancement = specialEnhance;
+    }
+
+    /**
+     * A method to get the special enhancement of the weapon
+     * @return WeaponEnhanceDecorator
+     */
+    public WeaponEnhanceDecorator getSpecialEnhance() {
+        return this.specialEnhancement;
+    }
 }

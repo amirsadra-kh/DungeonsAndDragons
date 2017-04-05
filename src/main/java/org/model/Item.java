@@ -309,7 +309,7 @@ public class Item {
             context = JAXBContext.newInstance(Item.class);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            m.marshal(this,new FileOutputStream("src/main/java/org/main/java/org/resources/items/"+this.name));
+            m.marshal(this,new FileOutputStream("src/main/java/org/resources/items/"+this.name));
         } catch (Exception e) {
             e.printStackTrace();
         }
