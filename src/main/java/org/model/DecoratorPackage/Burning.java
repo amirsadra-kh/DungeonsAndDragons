@@ -1,5 +1,7 @@
 package main.java.org.model.DecoratorPackage;
 
+import main.java.org.model.CharacterPackage.Character;
+
 /**
  * A Burning Decorator
  * Target takes (5x enchantment bonus) damage for the 3 next turns.
@@ -27,5 +29,28 @@ public class Burning  extends WeaponEnhanceDecorator {
      */
     public String getSpecialEnhance() {
         return super.getSpecialEnhance() + ", Burning";
+    }
+
+    /**
+     * A method to get the burning enhancement bonus amount
+     * @return enhancement bonus (weapon enhancement * 5)
+     */
+    public int getEnhancementBonus() {
+        this.enhancementBonus *= super.getEnhance();
+        return this.enhancementBonus;
+    }
+
+    /**
+     * A method to set the burning boolean of a character
+     * @param character
+     */
+    public void setBurning(Character character) {
+        if(this.turns > 0) {
+            character.setBurning(true);
+            turns--;
+        } else {
+            character.setBurning(false);
+            this.turns = 3;
+        }
     }
 }

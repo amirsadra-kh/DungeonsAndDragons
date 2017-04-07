@@ -36,6 +36,7 @@ public class Character extends Observable {
     private BehaviourStrategy behaviourStrategy;
     private CharacterStrategy characterStrategy;
     private boolean turn;
+    private boolean burning;
 
     // A base line for the hit points
     RollDice dice10 = new RollDice(10);
@@ -257,6 +258,22 @@ public class Character extends Observable {
      */
     public boolean getTurn() {
         return this.turn;
+    }
+
+    /**
+     * A method to set the burning boolean
+     * @param b
+     */
+    public void setBurning(boolean b) {
+        this.burning = b;
+    }
+
+    /**
+     * A method to get the burning boolean
+     * @return burning boolean
+     */
+    public boolean getBurning() {
+        return this.burning;
     }
 
     /**
