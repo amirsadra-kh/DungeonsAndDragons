@@ -25,7 +25,7 @@
         </items>
     </backPackInventory>
     <charName>mon1</charName>
-    <hitPoints>0</hitPoints>
+    <hitPoints>5</hitPoints>
     <itemsWearing>
         <enhance>5</enhance>
         <enhancementType>DEXTERITY</enhancementType>

@@ -11,12 +11,18 @@ public class BullyBuilder extends AbilityScoreBuilder {
     /**
      * A Bully builder
      * Ability Scores in decreasing order of importance:
-     * Strength, Dexterity, Constitution
+     * strength, dexterity, constitution
      */
     @Override
     void buildAbilityScores() {
-        this.ability.setConstitution(this.dices[0]);
-        this.ability.setDexterity(this.dices[1]);
+        // Set the abilities
+        this.ability.setConstitution(this.dices[1]);
+        this.ability.setDexterity(this.dices[0]);
         this.ability.setStrength(this.dices[2]);
+
+        // Set the modifiers of those abilities
+        this.ability.setConstitutionModifier();
+        this.ability.setDexterityModifier();
+        this.ability.setStrengthModifier();
     }
 }

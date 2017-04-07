@@ -153,7 +153,9 @@ public class SetInteractionStrategy {
         }
         //TODO interactWithMonster here
         final Ability ability = character.getAbility();
+        System.out.println("Hit Points: " +monster.getHitPoints());
         monster.decreaseHitPoint(ability.getAttackBonus());
+        System.out.println("Hit Points: " +monster.getHitPoints());
         swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
 
     }

@@ -109,13 +109,11 @@ public class Character extends Observable {
     }
 
     /**
-     * This method set the HitPoints based on the model.Ability.Strength modifier.
+     * This method set the HitPoints based on the strengthModifier.
      */
     public void setHitPoints() {
-        Strength strength = new Strength();
-        int integerStrength  = this.ability.getStrength();
-        strength.set(integerStrength);
-        this.hitPoints = strength.modifier() + dice;
+        int strengthModifier  = this.ability.getStrengthModifier();
+        this.hitPoints = strengthModifier + this.dice;
     }
 
     /**
@@ -128,14 +126,16 @@ public class Character extends Observable {
         return this.hitPoints;
     }
 
+    /**
+     * A method for decreasing the hitPoints in a fight
+     * @param newHitPoint
+     */
     public void decreaseHitPoint(int newHitPoint){
         if (this.hitPoints > 0){
-            this.hitPoints = this.hitPoints - newHitPoint;
+            this.hitPoints -= newHitPoint;
         }
         else
-            System.out.println("model.CharacterPackage.CharacterPackage has died!");
-
-
+            System.out.println(this.charName +" has died!");
     }
 
     public void increaseHitPoint(int newHitPoint){
@@ -148,11 +148,9 @@ public class Character extends Observable {
      * @param ability object to be used to set the ability of this character
      */
     public void setAbility(Ability ability) {
-        ability.getArmorClass(0);
+        ability.setArmorClass(0);
         ability.setDamageBonus(0);
-        ability.setAttackBonus(this.level);
-        ability.level = 1;
-        this.level = 1;
+        ability.setAttackBonus(this.level, 0);
         this.ability = ability;
         this.setState(ability);
     }
@@ -190,10 +188,10 @@ public class Character extends Observable {
                 this.ability.setDexterity(this.ability.getConstitution() + item.getEnhance());
                 break;
             case ARMORCLASS:
-                this.ability.getArmorClass(this.ability.getArmorClass() + item.getEnhance() - 10);
+                this.ability.setArmorClass(this.ability.getArmorClass() + item.getEnhance() - 10);
                 break;
             case ATTACKBONUS:
-                this.ability.setAttackBonus(this.ability.getAttackBonus() + item.getEnhance());
+                this.ability.setAttackBonus(this.level, item.getEnhance());
                 break;
             case DAMAGEBONUS:
                 this.ability.setDamageBonus(item.getEnhance());
