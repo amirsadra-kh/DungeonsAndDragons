@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playScreen>
+    <campaign>
+        <mapNames>map3</mapNames>
+        <mapNames>map2</mapNames>
+        <name>camp3</name>
+        <numLevels>2</numLevels>
+    </campaign>
+    <character>
+        <dice>0</dice>
+        <ability>
+            <armorClass>10</armorClass>
+            <constitution>15</constitution>
+            <constitutionModifier>0</constitutionModifier>
+            <damageBonus>0</damageBonus>
+            <dexterity>13</dexterity>
+            <dexterityModifier>0</dexterityModifier>
+            <strength>12</strength>
+            <strengthModifier>0</strengthModifier>
+        </ability>
+        <backPackInventory>
+            <items>
+                <enhance>5</enhance>
+                <enhancementType>DEXTERITY</enhancementType>
+                <item>BOOTS</item>
+                <name>boots1</name>
+            </items>
+            <items>
+                <enhance>5</enhance>
+                <enhancementType>DEXTERITY</enhancementType>
+                <item>BOOTS</item>
+                <name>boots1</name>
+            </items>
+        </backPackInventory>
+        <burning>false</burning>
+        <charName>char1</charName>
+        <hitPoints>0</hitPoints>
+        <itemsWearing>
+            <enhance>3</enhance>
+            <enhancementType>STRENGTH</enhancementType>
+            <item>BELT</item>
+            <name>belt1</name>
+        </itemsWearing>
+        <level>1</level>
+        <playerCharacter>true</playerCharacter>
+        <state>
+            <armorClass>112</armorClass>
+            <constitution>15</constitution>
+            <constitutionModifier>0</constitutionModifier>
+            <damageBonus>1</damageBonus>
+            <dexterity>13</dexterity>
+            <dexterityModifier>0</dexterityModifier>
+            <strength>12</strength>
+            <strengthModifier>0</strengthModifier>
+        </state>
+        <turn>false</turn>
+    </character>
+    <level>0</level>
+    <map>
+        <canGoNextLevel>true</canGoNextLevel>
+        <cols>4</cols>
+        <levelCompleted>false</levelCompleted>
+        <name>map3</name>
+        <player>
+            <dice>0</dice>
+            <ability>
+                <armorClass>10</armorClass>
+                <constitution>15</constitution>
+                <constitutionModifier>0</constitutionModifier>
+                <damageBonus>0</damageBonus>
+                <dexterity>13</dexterity>
+                <dexterityModifier>0</dexterityModifier>
+                <strength>12</strength>
+                <strengthModifier>0</strengthModifier>
+            </ability>
+            <backPackInventory>
+                <items>
+                    <enhance>5</enhance>
+                    <enhancementType>DEXTERITY</enhancementType>
+                    <item>BOOTS</item>
+                    <name>boots1</name>
+                </items>
+                <items>
+                    <enhance>5</enhance>
+                    <enhancementType>DEXTERITY</enhancementType>
+                    <item>BOOTS</item>
+                    <name>boots1</name>
+                </items>
+            </backPackInventory>
+            <burning>false</burning>
+            <charName>char1</charName>
+            <hitPoints>0</hitPoints>
+            <itemsWearing>
+                <enhance>3</enhance>
+                <enhancementType>STRENGTH</enhancementType>
+                <item>BELT</item>
+                <name>belt1</name>
+            </itemsWearing>
+            <level>1</level>
+            <playerCharacter>true</playerCharacter>
+            <state>
+                <armorClass>112</armorClass>
+                <constitution>15</constitution>
+                <constitutionModifier>0</constitutionModifier>
+                <damageBonus>1</damageBonus>
+                <dexterity>13</dexterity>
+                <dexterityModifier>0</dexterityModifier>
+                <strength>12</strength>
+                <strengthModifier>0</strengthModifier>
+            </state>
+            <turn>false</turn>
+        </player>
+        <rows>4</rows>
+        <screen>
+            <item> </item>
+            <item> </item>
+            <item>P</item>
+            <item>Q</item>
+        </screen>
+        <screen>
+            <item> </item>
+            <item> </item>
+            <item>fchar1</item>
+            <item>belt2</item>
+        </screen>
+        <screen>
+            <item>c</item>
+            <item> </item>
+            <item>mon1</item>
+            <item> </item>
+        </screen>
+        <screen>
+            <item> </item>
+            <item> </item>
+            <item> </item>
+            <item> </item>
+        </screen>
+    </map>
+    <readInput/>
+</playScreen>
