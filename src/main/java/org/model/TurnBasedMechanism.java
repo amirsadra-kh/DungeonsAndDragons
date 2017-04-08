@@ -33,22 +33,22 @@ public class TurnBasedMechanism {
      */
     public ArrayList<Character> setTurns(ArrayList<Character> characters) {
         // Print out the order of the characters before sorting - For Log Window
-        System.out.println("Characters before sorting: ");
+        System.out.println(ColorConstants.ANSI_GREEN +"Characters before sorting: " +ColorConstants.ANSI_GREEN);
         for(Character c : characters)
-            System.out.println(c.getCharName());
+            System.out.println(ColorConstants.ANSI_PURPLE +c.getCharName() +ColorConstants.ANSI_PURPLE);
 
 
-        for(int i = 0; i < characters.size(); i++) {
+        for(Character c : characters) {
             int d20 = roll.getDice20();
             // For Log Window
-            System.out.println(characters.get(i).getCharName() +" d20 roll: " +d20);
-            characters.get(i).setTurnRoll(d20);
+            System.out.println(ColorConstants.ANSI_PURPLE +c.getCharName() +" d20 roll: " +d20 +ColorConstants.ANSI_PURPLE);
+            c.setTurnRoll(d20);
             // For Log Window
-            System.out.println(characters.get(i).getCharName() +" dexterity modifier: "
-                    +characters.get(i).getAbility().getDexterityModifier() );
+            System.out.println(ColorConstants.ANSI_PURPLE +c.getCharName() +" dexterity modifier: "
+                    +c.getAbility().getDexterityModifier() +ColorConstants.ANSI_PURPLE);
             // For Log Window
-            System.out.println(characters.get(i).getCharName() +" roll added with the dexterity modifier: "
-                    +characters.get(i).getTurnRoll());
+            System.out.println(ColorConstants.ANSI_PURPLE +c.getCharName() +" roll added with the dexterity modifier: "
+                    +c.getTurnRoll() +ColorConstants.ANSI_PURPLE);
         }
 
         // Sort the characters according to the value of the turnRoll (d20 + dexterityModifier)
@@ -62,9 +62,9 @@ public class TurnBasedMechanism {
         Collections.reverse(characters);
 
         // Print out the characters after sorting - For Log Window
-        System.out.println("Characters after sorting: ");
+        System.out.println(ColorConstants.ANSI_GREEN +"Characters after sorting: " +ColorConstants.ANSI_GREEN);
         for(Character c : characters)
-            System.out.println(c.getCharName());
+            System.out.println(ColorConstants.ANSI_GREEN +c.getCharName() +ColorConstants.ANSI_GREEN);
 
         return characters;
     }
