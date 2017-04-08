@@ -9,6 +9,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 
 /**
  * Tests for the map direction validator
@@ -32,28 +34,29 @@ public class MapDirectionValidatorTest {
 
     }
 
+
     @Test
     public void testValidateDirectionToLeftOutOfBound() throws Exception {
-        boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer("l");
-        assertFalse(result);
+        final boolean result = mapDirectionValidator.isDirectionLeadsToValidCell("l", map);
+        assertTrue(result);
     }
 
     @Test
     public void testValidateDirectionToRightOutOfBound() throws Exception {
-        boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer("r");
+        final boolean result = mapDirectionValidator.isDirectionLeadsToValidCell("r", map);
         assertFalse(result);
     }
 
     @Test
     public void testValidateDirectionToTopOutOfBound() throws Exception {
-        boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer("u");
-        assertFalse(result);
+        final boolean result = mapDirectionValidator.isDirectionLeadsToValidCell("u", map);
+        assertTrue(result);
     }
 
     @Test
     public void testValidateDirectionToDownOutOfBound() throws Exception {
-        boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer("d");
-        assertFalse(result);
+        final boolean result = mapDirectionValidator.isDirectionLeadsToValidCell("d", map);
+        assertTrue(result);
     }
 
 }
