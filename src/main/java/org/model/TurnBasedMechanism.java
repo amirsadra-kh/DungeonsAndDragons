@@ -6,6 +6,7 @@ import main.java.org.model.CharacterPackage.Character;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * The game is implemented using a turn-based mechanism. When the player characters enters a map, all
@@ -31,24 +32,26 @@ public class TurnBasedMechanism {
      * @param characters on the map
      * @return characters in correct order
      */
-    public ArrayList<Character> setTurns(ArrayList<Character> characters) {
+    public List<Character> setTurns(List<Character> characters) {
         // Print out the order of the characters before sorting - For Log Window
-        System.out.println(ColorConstants.ANSI_GREEN +"Characters before sorting: " +ColorConstants.ANSI_GREEN);
+        System.out.println("------------------------Log Window-------------------------");
+        System.out.println(ColorConstants.ANSI_GREEN +"Characters before sorting: " +ColorConstants.ANSI_RESET);
         for(Character c : characters)
-            System.out.println(ColorConstants.ANSI_PURPLE +c.getCharName() +ColorConstants.ANSI_PURPLE);
+            System.out.println(ColorConstants.ANSI_PURPLE +c.getCharName() +ColorConstants.ANSI_RESET);
 
 
+        System.out.println(ColorConstants.ANSI_GREEN +"Characters roll information: " +ColorConstants.ANSI_RESET);
         for(Character c : characters) {
             int d20 = roll.getDice20();
             // For Log Window
-            System.out.println(ColorConstants.ANSI_PURPLE +c.getCharName() +" d20 roll: " +d20 +ColorConstants.ANSI_PURPLE);
+            System.out.println(ColorConstants.ANSI_PURPLE +c.getCharName() +" d20 roll: " +d20 +ColorConstants.ANSI_RESET);
             c.setTurnRoll(d20);
             // For Log Window
             System.out.println(ColorConstants.ANSI_PURPLE +c.getCharName() +" dexterity modifier: "
-                    +c.getAbility().getDexterityModifier() +ColorConstants.ANSI_PURPLE);
+                    +c.getAbility().getDexterityModifier() +ColorConstants.ANSI_RESET);
             // For Log Window
             System.out.println(ColorConstants.ANSI_PURPLE +c.getCharName() +" roll added with the dexterity modifier: "
-                    +c.getTurnRoll() +ColorConstants.ANSI_PURPLE);
+                    +c.getTurnRoll() +ColorConstants.ANSI_RESET);
         }
 
         // Sort the characters according to the value of the turnRoll (d20 + dexterityModifier)
@@ -62,9 +65,10 @@ public class TurnBasedMechanism {
         Collections.reverse(characters);
 
         // Print out the characters after sorting - For Log Window
-        System.out.println(ColorConstants.ANSI_GREEN +"Characters after sorting: " +ColorConstants.ANSI_GREEN);
+        System.out.println(ColorConstants.ANSI_GREEN +"Characters after sorting: " +ColorConstants.ANSI_RESET);
         for(Character c : characters)
-            System.out.println(ColorConstants.ANSI_GREEN +c.getCharName() +ColorConstants.ANSI_GREEN);
+            System.out.println(ColorConstants.ANSI_PURPLE +c.getCharName()+ColorConstants.ANSI_RESET);
+        System.out.println("------------------------------------------------------------");
 
         return characters;
     }

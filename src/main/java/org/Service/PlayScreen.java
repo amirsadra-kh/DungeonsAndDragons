@@ -37,6 +37,12 @@ public class PlayScreen {
         choseCampaignForPlayingGame();
         if(getMapsInTheCampaign().size() > 0) {
             Map currentMap = getMapsInTheCampaign().get(level);
+            // Get the characters that are in the map
+            List<Character> mapCharacters = currentMap.getNonPLayerCharacters();
+            // Add the player character to the list as well
+            mapCharacters.add(character);
+            TurnBasedMechanism turn = new TurnBasedMechanism();
+            mapCharacters = turn.setTurns(mapCharacters);
             currentMap.setPlayer(this.character);
             playGame(currentMap);
         }
