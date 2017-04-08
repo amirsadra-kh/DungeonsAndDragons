@@ -17,7 +17,7 @@ import java.util.*;
  * @since 2017-03-10
  */
 public class PlayScreen {
-    private Character character;
+    static Character character;
     private Campaign campaign;
     private ReadInput readInput = new ReadInput();
     // The first level to be played, should be increased after a map has been finished.
@@ -37,12 +37,6 @@ public class PlayScreen {
         choseCampaignForPlayingGame();
         if(getMapsInTheCampaign().size() > 0) {
             Map currentMap = getMapsInTheCampaign().get(level);
-            // Get the characters that are in the map
-            List<Character> mapCharacters = currentMap.getNonPLayerCharacters();
-            // Add the player character to the list as well
-            mapCharacters.add(character);
-            TurnBasedMechanism turn = new TurnBasedMechanism();
-            mapCharacters = turn.setTurns(mapCharacters);
             currentMap.setPlayer(this.character);
             playGame(currentMap);
         }
@@ -90,6 +84,11 @@ public class PlayScreen {
      * @param map
      */
     public static void setPlayerAtEntryPoint(Map map) {
+        List<Character> mapCharacters = map.getNonPLayerCharacters();
+        // Add the player character to the list as well
+        mapCharacters.add(character);
+        TurnBasedMechanism turn = new TurnBasedMechanism();
+        mapCharacters = turn.setTurns(mapCharacters);
         for(int i=0;i<map.getScreen().length;i++){
             for(int j=0;j<map.getScreen()[i].length;j++){
                 if(map.getScreen()[i][j].equalsIgnoreCase("E")){

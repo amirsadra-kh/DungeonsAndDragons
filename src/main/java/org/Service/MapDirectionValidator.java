@@ -1,10 +1,14 @@
 package main.java.org.Service;
 
 import main.java.org.model.Campaign;
+import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.GameConstantsInterface;
 import main.java.org.model.Map;
+import main.java.org.model.TurnBasedMechanism;
 
 import java.awt.*;
+import java.util.*;
+import java.util.List;
 
 import static main.java.org.Service.SetInteractionStrategy.readInput;
 
