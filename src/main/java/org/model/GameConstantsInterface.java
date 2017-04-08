@@ -30,4 +30,5 @@ public interface GameConstantsInterface {
             "7) End the Game:\n";
     String MAP_SOURCE_PATH = "src/main/java/org/resources/characters/";
     String ENTER_DIRECTION = "Enter the direction you wish to move: \n Left:L\n Right:R \n Down:D\n Up:U\n";
+    String WRONG_DIRECTION_MESSDAGE = "You entered a wrong direction\nValid directions are : L, R, U, D, Exit";
 }

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <playScreen>
     <campaign>
+        <levelsCompleted>1</levelsCompleted>
         <mapNames>map3</mapNames>
-        <mapNames>map2</mapNames>
-        <name>camp3</name>
-        <numLevels>2</numLevels>
+        <mapNames>map4</mapNames>
+        <mapNames>map5</mapNames>
+        <name>camp4</name>
+        <numLevels>3</numLevels>
     </campaign>
     <character>
         <dice>0</dice>
@@ -44,7 +46,7 @@
         <level>1</level>
         <playerCharacter>true</playerCharacter>
         <state>
-            <armorClass>112</armorClass>
+            <armorClass>102</armorClass>
             <constitution>15</constitution>
             <constitutionModifier>0</constitutionModifier>
             <damageBonus>1</damageBonus>
@@ -58,9 +60,9 @@
     <level>0</level>
     <map>
         <canGoNextLevel>true</canGoNextLevel>
-        <cols>4</cols>
+        <cols>3</cols>
         <levelCompleted>false</levelCompleted>
-        <name>map3</name>
+        <name>map4</name>
         <player>
             <dice>0</dice>
             <ability>
@@ -99,7 +101,7 @@
             <level>1</level>
             <playerCharacter>true</playerCharacter>
             <state>
-                <armorClass>112</armorClass>
+                <armorClass>102</armorClass>
                 <constitution>15</constitution>
                 <constitutionModifier>0</constitutionModifier>
                 <damageBonus>1</damageBonus>
@@ -110,29 +112,15 @@
             </state>
             <turn>false</turn>
         </player>
-        <rows>4</rows>
+        <rows>2</rows>
         <screen>
-            <item> </item>
             <item> </item>
             <item>P</item>
             <item>Q</item>
         </screen>
         <screen>
-            <item> </item>
-            <item> </item>
-            <item>fchar1</item>
-            <item>belt2</item>
-        </screen>
-        <screen>
-            <item>c</item>
-            <item> </item>
-            <item>mon1</item>
-            <item> </item>
-        </screen>
-        <screen>
-            <item> </item>
-            <item> </item>
-            <item> </item>
+            <item>C</item>
+            <item>W</item>
             <item> </item>
         </screen>
     </map>

@@ -3,6 +3,9 @@ package main.java.org.model;
 import java.util.IllegalFormatException;
 import java.util.Scanner;
 
+import static main.java.org.model.GameConstantsInterface.NOT_A_STRING;
+import static main.java.org.model.GameConstantsInterface.WRONG_DIRECTION_MESSDAGE;
+
 /**
  * A class for reading user input to prevent copied code in Screen classes
  *
@@ -17,8 +20,33 @@ public class ReadInput {
      * @return a String input from user
      */
     public String readLine() {
-        Scanner scanner = new Scanner(System.in);
+        final Scanner scanner = new Scanner(System.in);
         return scanner.nextLine();
+    }
+
+    /**
+     * This method is to read the coordinate from user with exception handling
+     *
+     * @return
+     */
+    public String readCoordinate() {
+        String coordinate = "";
+        try {
+            coordinate = readLine();
+            while (!"u".equalsIgnoreCase(coordinate) &&
+                    !"d".equalsIgnoreCase(coordinate) &&
+                    !"l".equalsIgnoreCase(coordinate) &&
+                    !"r".equalsIgnoreCase(coordinate) &&
+                    !"exit".equalsIgnoreCase(coordinate)
+                    ) {
+                System.out.println(WRONG_DIRECTION_MESSDAGE);
+                coordinate = readLine();
+            }
+        } catch (final IllegalFormatException Ex) {
+            System.out.println(NOT_A_STRING);
+        }
+        return coordinate;
+
     }
 
     /**
@@ -30,8 +58,8 @@ public class ReadInput {
     public String readStringHandling(String line) {
         try {
             line = readLine();
-        } catch (IllegalFormatException e) {
-            System.out.println(GameConstantsInterface.NOT_A_STRING);
+        } catch (final IllegalFormatException e) {
+            System.out.println(NOT_A_STRING);
             System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
         }
         return line;
@@ -46,7 +74,7 @@ public class ReadInput {
     public int readIntHandling(int num) {
         try {
             num = Integer.parseInt(readLine());
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             System.out.println(GameConstantsInterface.NOT_A_NUMBER);
             System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
         }
