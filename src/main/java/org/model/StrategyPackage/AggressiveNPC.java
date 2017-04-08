@@ -10,4 +10,8 @@ package main.java.org.model.StrategyPackage;
  * @since
  */
 public class AggressiveNPC implements BehaviourStrategy {
+    @Override
+    public void execute() {
+
+    }
 }

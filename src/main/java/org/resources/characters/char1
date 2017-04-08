@@ -2,13 +2,14 @@
 <character>
     <dice>0</dice>
     <ability>
-        <level>1</level>
-        <armorClass>12</armorClass>
-        <attackBonus>1</attackBonus>
+        <armorClass>10</armorClass>
         <constitution>15</constitution>
-        <damageBonus>1</damageBonus>
+        <constitutionModifier>0</constitutionModifier>
+        <damageBonus>0</damageBonus>
         <dexterity>13</dexterity>
+        <dexterityModifier>0</dexterityModifier>
         <strength>12</strength>
+        <strengthModifier>0</strengthModifier>
     </ability>
     <backPackInventory>
         <items>
@@ -35,12 +36,13 @@
     <level>1</level>
     <playerCharacter>true</playerCharacter>
     <state>
-        <level>1</level>
-        <armorClass>12</armorClass>
-        <attackBonus>1</attackBonus>
+        <armorClass>82</armorClass>
         <constitution>15</constitution>
+        <constitutionModifier>0</constitutionModifier>
         <damageBonus>1</damageBonus>
         <dexterity>13</dexterity>
+        <dexterityModifier>0</dexterityModifier>
         <strength>12</strength>
+        <strengthModifier>0</strengthModifier>
     </state>
 </character>

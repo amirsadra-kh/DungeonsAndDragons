@@ -4,7 +4,6 @@ import main.java.org.model.*;
 import main.java.org.model.CharacterPackage.Ability;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
-import main.java.org.model.CharacterPackage.Strength;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.After;
@@ -92,10 +91,8 @@ public class CharacterTest {
      */
     @Test
     public void testGetHitPoints() throws Exception {
-        Strength strength = new Strength();
-        int integerStrength  = this.ability.getStrength();
-        strength.set(integerStrength);
-        int hitPoints = strength.modifier() + this.character.dice;
+        int strengthModifier  = this.ability.getStrengthModifier();
+        int hitPoints = strengthModifier + this.character.dice;
         this.character.setHitPoints();
         Assert.assertEquals(hitPoints, this.character.getHitPoints());
     }

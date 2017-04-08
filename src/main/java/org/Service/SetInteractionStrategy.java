@@ -145,7 +145,7 @@ public class SetInteractionStrategy {
     private static void interactWithMonster( Map map,  String targetObject,  Point playerCoordinate,  Point objectCoordinate,  Campaign campaign) {
         final Character character = map.getPlayer();
 
-        Character monster=new Character();
+        Character monster = new Character();
         try {
             monster = monster.loadCharacter(targetObject);
         } catch (final Exception e) {
@@ -153,7 +153,9 @@ public class SetInteractionStrategy {
         }
         //TODO interactWithMonster here
         final Ability ability = character.getAbility();
+        System.out.println("Hit Points: " +monster.getHitPoints());
         monster.decreaseHitPoint(ability.getAttackBonus());
+        System.out.println("Hit Points: " +monster.getHitPoints());
         swapPlayerWithObjectSpotsInMap(map, playerCoordinate, objectCoordinate);
 
     }

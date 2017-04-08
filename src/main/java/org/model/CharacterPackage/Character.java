@@ -1,6 +1,8 @@
 package main.java.org.model.CharacterPackage;
 
+import main.java.org.model.DecoratorPackage.CharacterStrategy;
 import main.java.org.model.Item;
+import main.java.org.model.StrategyPackage.BehaviourStrategy;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -31,6 +33,10 @@ public class Character extends Observable {
     private HashSet<Item> itemsWearing = new HashSet<>();
     private int level;
     private String fighterType;
+    private BehaviourStrategy behaviourStrategy;
+    private CharacterStrategy characterStrategy;
+    private boolean turn;
+    private boolean burning;
 
     // A base line for the hit points
     RollDice dice10 = new RollDice(10);
@@ -91,7 +97,7 @@ public class Character extends Observable {
     }
 
     /**
-     * set the level of the model.CharacterPackage.CharacterPackage
+     * set the level of the Character
      *
      * @param level a level integer to change the level to.
      */
@@ -109,13 +115,11 @@ public class Character extends Observable {
     }
 
     /**
-     * This method set the HitPoints based on the model.Ability.Strength modifier.
+     * This method set the HitPoints based on the strengthModifier.
      */
     public void setHitPoints() {
-        Strength strength = new Strength();
-        int integerStrength  = this.ability.getStrength();
-        strength.set(integerStrength);
-        this.hitPoints = strength.modifier() + dice;
+        int strengthModifier  = this.ability.getStrengthModifier();
+        this.hitPoints = strengthModifier + this.dice;
     }
 
     /**
@@ -128,14 +132,16 @@ public class Character extends Observable {
         return this.hitPoints;
     }
 
+    /**
+     * A method for decreasing the hitPoints in a fight
+     * @param newHitPoint
+     */
     public void decreaseHitPoint(int newHitPoint){
         if (this.hitPoints > 0){
-            this.hitPoints = this.hitPoints - newHitPoint;
+            this.hitPoints -= newHitPoint;
         }
         else
-            System.out.println("model.CharacterPackage.CharacterPackage has died!");
-
-
+            System.out.println(this.charName +" has died!");
     }
 
     public void increaseHitPoint(int newHitPoint){
@@ -148,11 +154,9 @@ public class Character extends Observable {
      * @param ability object to be used to set the ability of this character
      */
     public void setAbility(Ability ability) {
-        ability.getArmorClass(0);
+        ability.setArmorClass(0);
         ability.setDamageBonus(0);
-        ability.setAttackBonus(this.level);
-        ability.level = 1;
-        this.level = 1;
+        ability.setAttackBonus(this.level, 0);
         this.ability = ability;
         this.setState(ability);
     }
@@ -190,10 +194,10 @@ public class Character extends Observable {
                 this.ability.setDexterity(this.ability.getConstitution() + item.getEnhance());
                 break;
             case ARMORCLASS:
-                this.ability.getArmorClass(this.ability.getArmorClass() + item.getEnhance() - 10);
+                this.ability.setArmorClass(this.ability.getArmorClass() + item.getEnhance() - 10);
                 break;
             case ATTACKBONUS:
-                this.ability.setAttackBonus(this.ability.getAttackBonus() + item.getEnhance());
+                this.ability.setAttackBonus(this.level, item.getEnhance());
                 break;
             case DAMAGEBONUS:
                 this.ability.setDamageBonus(item.getEnhance());
@@ -203,6 +207,73 @@ public class Character extends Observable {
             case LEVEL:
                 break;
         }
+    }
+
+    /**
+     * Plugs in a specific behaviour strategy to be used
+     * @param behaviourStrategy
+     */
+    public void setBehaviourStrategy(BehaviourStrategy behaviourStrategy) {
+        this.behaviourStrategy = behaviourStrategy;
+    }
+
+    /**
+     * A method that executes different behaviour strategy depending on what
+     * behaviour strategy was plugged in upon instantiation.
+     */
+    public void executeBehaviourStrategy() {
+        this.behaviourStrategy.execute();
+    }
+
+    /**
+     * Plugs in a specific character strategy to be used based on the weapon
+     * enhancement
+     *
+     * @param characterStrategy
+     */
+    public void setCharacterStrategy(CharacterStrategy characterStrategy) {
+        this.characterStrategy = characterStrategy;
+    }
+
+    /**
+     * A method that executes different character strategy depending on what
+     * character strategy was plugged in upon weapon enhancement.
+     * @param enhancement the weapon enahancement integer
+     */
+    public void executeCharacterStrategy(int enhancement) {
+        this.characterStrategy.execute(this, enhancement);
+    }
+
+    /**
+     * A setter for the turn to tell if it's the character's turn or not
+     * @param turn
+     */
+    public void setTurn(boolean turn) {
+        this.turn = turn;
+    }
+
+    /**
+     * A getter for turn to tell if it is the character's turn or not
+     * @return turn a boolean value
+     */
+    public boolean getTurn() {
+        return this.turn;
+    }
+
+    /**
+     * A method to set the burning boolean
+     * @param b
+     */
+    public void setBurning(boolean b) {
+        this.burning = b;
+    }
+
+    /**
+     * A method to get the burning boolean
+     * @return burning boolean
+     */
+    public boolean getBurning() {
+        return this.burning;
     }
 
     /**
@@ -384,7 +455,7 @@ public class Character extends Observable {
 
     @Override
     public String toString() {
-        return "model.CharacterPackage.CharacterPackage{" +
+        return "Character {" +
                 "backPackInventory=" + backPackInventory +
                 ", currentPosition=" + currentPosition +
                 ", ability=" + ability +

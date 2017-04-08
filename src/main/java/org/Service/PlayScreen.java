@@ -1,12 +1,10 @@
 package main.java.org.Service;
 
-
 import main.java.org.model.*;
 import main.java.org.model.CharacterPackage.Ability;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.CharacterPackage.Inventory;
 import main.java.org.model.Map;
-
 
 import java.util.*;
 
@@ -24,10 +22,12 @@ public class PlayScreen {
     private ReadInput readInput = new ReadInput();
     // The first level to be played, should be increased after a map has been finished.
     private int level = 0;
+    // Observer variables
     private CharacterObserver characterObserver;
     private InventoryObserver inventoryObserver;
     private List<Item> inventory = new ArrayList<>();
     private Ability ability;
+
 
     /**
      * A basic interaction screen after the user chooses Play

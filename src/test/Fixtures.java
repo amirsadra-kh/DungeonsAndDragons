@@ -38,8 +38,8 @@ public class Fixtures {
     public static Character createCharacter(){
         Character character = new Character();
         Ability ability = new Ability();
-        ability.getArmorClass(0);
-        ability.setAttackBonus(1);
+        ability.setArmorClass(0);
+        ability.setAttackBonus(1, 0);
         ability.setDamageBonus(0);
         character.setAbility(ability);
         BackPackInventory inventory = new BackPackInventory();
