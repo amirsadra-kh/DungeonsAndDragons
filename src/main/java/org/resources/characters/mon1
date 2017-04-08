@@ -1,22 +1,17 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <character>
-    <dice>0</dice>
+    <dice>2</dice>
     <ability>
-        <level>1</level>
-        <armorClass>14</armorClass>
-        <attackBonus>0</attackBonus>
+        <armorClass>10</armorClass>
         <constitution>14</constitution>
-        <damageBonus>0</damageBonus>
-        <dexterity>19</dexterity>
-        <strength>9</strength>
+        <constitutionModifier>2</constitutionModifier>
+        <damageBonus>4</damageBonus>
+        <dexterity>9</dexterity>
+        <dexterityModifier>0</dexterityModifier>
+        <strength>17</strength>
+        <strengthModifier>4</strengthModifier>
     </ability>
     <backPackInventory>
-        <items>
-            <enhance>3</enhance>
-            <enhancementType>STRENGTH</enhancementType>
-            <item>BELT</item>
-            <name>belt1</name>
-        </items>
         <items>
             <enhance>5</enhance>
             <enhancementType>DEXTERITY</enhancementType>
@@ -25,22 +20,23 @@
         </items>
     </backPackInventory>
     <charName>mon1</charName>
-    <hitPoints>5</hitPoints>
+    <hitPoints>2</hitPoints>
     <itemsWearing>
-        <enhance>5</enhance>
-        <enhancementType>DEXTERITY</enhancementType>
-        <item>BOOTS</item>
-        <name>boots1</name>
+        <enhance>3</enhance>
+        <enhancementType>ATTACKBONUS</enhancementType>
+        <item>WEAPON</item>
+        <name>weapon1</name>
     </itemsWearing>
     <level>1</level>
     <playerCharacter>false</playerCharacter>
     <state>
-        <level>1</level>
-        <armorClass>14</armorClass>
-        <attackBonus>0</attackBonus>
+        <armorClass>10</armorClass>
         <constitution>14</constitution>
-        <damageBonus>0</damageBonus>
-        <dexterity>19</dexterity>
-        <strength>9</strength>
+        <constitutionModifier>2</constitutionModifier>
+        <damageBonus>4</damageBonus>
+        <dexterity>9</dexterity>
+        <dexterityModifier>0</dexterityModifier>
+        <strength>17</strength>
+        <strengthModifier>4</strengthModifier>
     </state>
 </character>

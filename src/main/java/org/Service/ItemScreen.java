@@ -1,6 +1,7 @@
 package main.java.org.Service;
 
 import main.java.org.model.*;
+import main.java.org.model.DecoratorPackage.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -109,7 +110,15 @@ public class ItemScreen {
         int enhancementAmount = getEnhancementAmount();
         Item itemToCreate = new Item(itemName, getItemEnumfromString(item), getEnhancementEnumfromString(enhancement), enhancementAmount);
 
-        itemToCreate.saveItem();
+        // If the item is a weapon, allow the user to choose a special enhancement
+        if(item.equals("WEAPON")) {
+            // Do something here for that
+            Weapon weapon = setSpecialEnhanceInteraction(itemToCreate);
+            weapon.saveItem();
+        }
+        else {
+            itemToCreate.saveItem();
+        }
 
         return itemToCreate;
     }
@@ -263,5 +272,44 @@ public class ItemScreen {
         return null;
     }
 
+    /**
+     * A method to interact with the user to set a special enhancement for a weapon
+     * @param item already created
+     * @return weapon based on the item parameter
+     */
+    private Weapon setSpecialEnhanceInteraction(Item item) {
+        String answer = "";
+        boolean yes = true;
+        int choice = 0;
+        // Create the weapon based on the item
+        Weapon weapon = new Weapon();
 
+        // Ask the user if they would like to add a special enhancement.
+        System.out.println("Would you like to add special enhancements to your weapon? Y/N");
+        answer = readInput.readLine().trim().toLowerCase();
+        while (yes) {
+            if (answer.equals("y")) {
+                System.out.println("Which special enhancement would you like to add:");
+                System.out.println("1. Freezing\n2. Burning\n3. Slaying\n4. Frightening\n5. Pacifying");
+                while(choice < 1 || choice > 5)
+                    choice = readInput.readIntHandling(choice);
+                // Set the new enhancement
+                weapon = WeaponFactory.setSpecialEnhancement(weapon, choice);
+                choice = 0;
+            } else if (answer.equals("n")) {
+                yes = false;
+            } else {
+                System.out.println("Sorry, I didn't catch that. Please answer y/n");
+            }
+            // Check if the user wants to add more items.
+            System.out.println("do you  want to add another special enhancement ? Y/N");
+            yes = readInput.askUserIfAgain();
+        }
+        System.out.println("Special Enhancement: " +weapon.getSpecialEnhance());
+        weapon.setName(item.getName());
+        weapon.setEnhance(item.getEnhance());
+        weapon.setItem(item.getItem());
+
+        return weapon;
+    }
 }

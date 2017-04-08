@@ -263,13 +263,10 @@ public class Item {
      */
     @Override
     public boolean equals(Object object) {
-
         if (object instanceof Item) {
             Item ob = (Item) object;
 
             return ob.itemEnum == this.itemEnum;
-                    //&& ob.enhancementType == this.enhancementType && ob.coordinate == this.coordinate
-                    //&& ob.enhance == this.enhance;
         }
         return false;
     }
@@ -309,7 +306,7 @@ public class Item {
             context = JAXBContext.newInstance(Item.class);
             Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-            m.marshal(this,new FileOutputStream("src/main/java/org/main/java/org/resources/items/"+this.name));
+            m.marshal(this,new FileOutputStream("src/main/java/org/resources/items/"+this.name));
         } catch (Exception e) {
             e.printStackTrace();
         }
