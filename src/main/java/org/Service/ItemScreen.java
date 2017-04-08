@@ -294,7 +294,7 @@ public class ItemScreen {
                 while(choice < 1 || choice > 5)
                     choice = readInput.readIntHandling(choice);
                 // Set the new enhancement
-                weapon = setSpecialEnhancement(weapon, choice);
+                weapon = WeaponFactory.setSpecialEnhancement(weapon, choice);
                 choice = 0;
             } else if (answer.equals("n")) {
                 yes = false;
@@ -309,44 +309,6 @@ public class ItemScreen {
         weapon.setName(item.getName());
         weapon.setEnhance(item.getEnhance());
         weapon.setItem(item.getItem());
-
-        return weapon;
-    }
-
-    /**
-     * A method to set the WeaponEnhancmentDecorator of a weapon item.
-     * @param weapon to be set
-     * @param choice of decorator
-     * @return weapon with enhancement
-     */
-    private Weapon setSpecialEnhancement(Weapon weapon, int choice) {
-        switch (choice) {
-            // Freezing
-            case 1:
-                weapon = new Freezing(weapon);
-                System.out.println("FREEZING ADDED SUCCESSFULLY!");
-                break;
-            // Burning
-            case 2:
-                weapon = new Burning(weapon);
-                System.out.println("BURNING ADDED SUCCESSFULLY!");
-                break;
-            // Slaying
-            case 3:
-                weapon = new Slaying(weapon);
-                System.out.println("SLAYING ADDED SUCCESSFULLY!");
-                break;
-            // Frightening
-            case 4:
-                weapon = new Frightening(weapon);
-                System.out.println("FRIGHTENING ADDED SUCCESSFULLY!");
-                break;
-            // Pacifying
-            case 5:
-                weapon = new Pacifying(weapon);
-                System.out.println("PACIFYING ADDED SUCCESSFULLY!");
-                break;
-        }
 
         return weapon;
     }
