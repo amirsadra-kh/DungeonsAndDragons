@@ -27,7 +27,17 @@ public interface BehaviourStrategy {
      */
     void move(Character character, Character player, Point objective);
 
+    /**
+     * A method for a character attack after they have moved
+     * @param attackingChar
+     * @param attackedChar
+     */
     void attack(Character attackingChar, Character attackedChar);
 
+    /**
+     * A method for a character to interact with a chest or another character's backpack during their turn
+     * @param character
+     * @param chestORbackpack
+     */
     void interact(Character character, BackPackInventory chestORbackpack);
 }

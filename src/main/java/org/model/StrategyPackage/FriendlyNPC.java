@@ -48,13 +48,24 @@ public class FriendlyNPC implements BehaviourStrategy {
         fchar.setCurrentPosition(new Point(x,y));
     }
 
+    /**
+     * The friendly character does not attack!
+     * Do nothing in this method
+     * @param fchar
+     * @param attackedChar
+     */
     @Override
-    public void attack(Character attackingChar, Character attackedChar) {
+    public void attack(Character fchar, Character attackedChar) {
 
     }
 
+    /**
+     * The friendly character can interact with a chest on the map
+     * @param fchar
+     * @param chest
+     */
     @Override
-    public void interact(Character character, BackPackInventory chestORbackpack) {
+    public void interact(Character fchar, BackPackInventory chest) {
 
     }
 }

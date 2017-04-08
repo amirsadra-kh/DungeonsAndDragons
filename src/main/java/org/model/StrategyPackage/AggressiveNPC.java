@@ -31,13 +31,23 @@ public class AggressiveNPC implements BehaviourStrategy {
 
     }
 
+    /**
+     * The aggressive character will attack when possible
+     * @param mon
+     * @param attackedChar
+     */
     @Override
-    public void attack(Character attackingChar, Character attackedChar) {
+    public void attack(Character mon, Character attackedChar) {
 
     }
 
+    /**
+     * The aggressive character can loot a chest
+     * @param mon
+     * @param chest
+     */
     @Override
-    public void interact(Character character, BackPackInventory chestORbackpack) {
+    public void interact(Character mon, BackPackInventory chest) {
 
     }
 }
