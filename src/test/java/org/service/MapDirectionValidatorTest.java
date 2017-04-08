@@ -34,6 +34,7 @@ public class MapDirectionValidatorTest {
 
     @Test
     public void testValidateDirectionToLeftOutOfBound() throws Exception {
+       mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer("d");
         boolean result = mapDirectionValidator.validateDirectionIsValidBoundriesAndMovePlayer("l");
         assertFalse(result);
     }
