@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
@@ -50,6 +51,8 @@ public class MapFrame implements ActionListener {
     private String errorValidMap="";
     private DefaultListModel listModel;
     private BackPackInventory chest=new BackPackInventory();
+    private boolean nonCharacterExist=true;
+    String nonCharacter = null;
     /**
      * A MapFrame object
      */
@@ -185,25 +188,34 @@ public class MapFrame implements ActionListener {
                         case "Q":
                             ExitPointExist = true;
                             break;
-                        case "M":
-                            MonsterExist = true;
+//                        case "M":
+//                            MonsterExist = true;
+//                            break;
+                        case "C":
+                        case "W":
                             break;
                         default:
+           //                    System.out.println(i+" "+j+" = "+boardArray[i][j]);
+             //               if (!charactersArrayList.contains(boardArray[i][j]) && boardArray[i][j]!=""){nonCharacterExist=true; nonCharacter = boardArray[i][j]+" ,";System.out.println(boardArray[i][j]); }
+                            break;
                     }
                 }
             }
-            if(EntryPointExist==false || ExitPointExist == false ){ //|| MonsterExist == false
+
+
+            if(EntryPointExist==false || ExitPointExist == false || nonCharacterExist == true ){ //|| MonsterExist == false
 
                 if (EntryPointExist==false){errorValidMap="Please add entry point by E";}
                 if (ExitPointExist==false){errorValidMap="Please add exit point by Q";}
-              //  if (MonsterExist==false){errorValidMap="Please add Monsters by M";}
+   //             if (nonCharacterExist==true){errorValidMap="Please remove "+nonCharacter+". it is not in defined map input";}
+                //  if (MonsterExist==false){errorValidMap="Please add Monsters by M";}
 
                 validMap=false;
                 alert("Not Valid "+errorValidMap);
             }else{
                 map.saveObject();
                 grid.dispose();
-                alert("Your map is saved. you may close the map");
+                alert("Your map is saved.");
             }
 
 
