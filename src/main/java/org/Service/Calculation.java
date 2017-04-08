@@ -1,6 +1,6 @@
 package main.java.org.Service;
 
-import main.java.org.model.CharacterPackage.RollDice;
+import main.java.org.model.RollDice;
 
 import java.util.Arrays;
 

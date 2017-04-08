@@ -1,7 +1,9 @@
 package main.java.org.model;
 
+import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,5 +67,32 @@ public class Turn {
         this.turns = turns;
     }
 
+    /**
+     * A method for moving a character when it is their turn.
+     * @param character the one who has a turn now
+     * @param player the player character of the map
+     * @param objective the position of the objective of the map - chest or exit
+     */
+    public static void move(Character character, Character player, Point objective) {
+        //TODO add switch case here based on behaviour strategy
+        // Friendly NPC moves randomly
+        MoveMethods.friendlyMove(character);
+        // Player gets a choice
+        MoveMethods.playerMove(character);
+        // Computer player moves towards the objective of the map or exit if objective is done
+        MoveMethods.computerPlayerMove(character, objective);
+        // Aggressive NPC moves towards player
+        MoveMethods.hostileMove(character, player);
+    }
 
+    public static void interact(Character character, BackPackInventory chestORbackpack) {
+
+    }
+
+    public static void attack(Character attackingChar, Character attackedChar) {
+        // if the character is friendly - do nothing
+        // Player gets a choice
+        // Computer player attacks if that is the objective of the map
+        // Aggressive NPC attacks if possible
+    }
 }
