@@ -39,4 +39,13 @@ public class Calculation {
         return dice20rolled;
     }
 
+    /**
+     * A method to get d8
+     * @return an integer between 1 and 8
+     */
+    public int getDice8() {
+        RollDice dice8 = new RollDice(8);
+        int dice8rolled = dice8.roll();
+        return dice8rolled;
+    }
 }
