@@ -27,7 +27,7 @@ public class Longbow extends Weapon {
     public void setDamage(Character character) {
         Calculation roll = new Calculation();
         int d8 = roll.getDice8();
-        int dexterityMod = character.getAbility().getDexterity();
+        int dexterityMod = character.getAbility().getDexterityModifier();
         // Print log window info about damage
         System.out.println("------------------------Log Window-------------------------");
         System.out.println(ColorConstants.ANSI_RED +"Damage roll of Longbow (d8): " +d8 +ColorConstants.ANSI_RESET);
