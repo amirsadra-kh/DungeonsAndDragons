@@ -29,13 +29,23 @@ public class Longbow extends Weapon {
         int d8 = roll.getDice8();
         int dexterityMod = character.getAbility().getDexterityModifier();
         // Print log window info about damage
+        log(character, d8, dexterityMod);
+        // Calculate total damage
+        this.damage = d8 + dexterityMod;
+        System.out.println(ColorConstants.ANSI_RED +"Total: " +this.damage +ColorConstants.ANSI_RESET);
+    }
+
+    /**
+     * A method for the log window for the damage roll and dexterity modifier
+     * @param character
+     * @param d8
+     * @param dexterityMod
+     */
+    private void log(Character character, int d8, int dexterityMod){
         System.out.println("------------------------Log Window-------------------------");
         System.out.println(ColorConstants.ANSI_RED +"Damage roll of Longbow (d8): " +d8 +ColorConstants.ANSI_RESET);
         System.out.println(ColorConstants.ANSI_GREEN +character.getCharName() +" dexterity modifier: "
                 +dexterityMod +ColorConstants.ANSI_RESET);
-        // Calculate total damage
-        this.damage = d8 + dexterityMod;
-        System.out.println(ColorConstants.ANSI_RED +"Total: " +this.damage +ColorConstants.ANSI_RESET);
     }
 
     /**

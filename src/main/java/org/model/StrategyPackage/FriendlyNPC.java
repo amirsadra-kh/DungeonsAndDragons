@@ -17,6 +17,10 @@ import java.util.Random;
  * @since
  */
 public class FriendlyNPC implements BehaviourStrategy {
+    /**
+     * A method for executing FriendlyNPC strategy
+     * TODO add something or get rid of method
+     */
     @Override
     public void execute() {
 

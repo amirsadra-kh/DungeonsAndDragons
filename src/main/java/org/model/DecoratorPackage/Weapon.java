@@ -48,6 +48,13 @@ public class Weapon extends Item {
         }
         this.damage += this.getEnhance();
         // Finish the log window of the bonus
+        log();
+    }
+
+    /**
+     * A method to show the log for enhancement of weapon and total bonus of weapon
+     */
+    private void log(){
         System.out.println(ColorConstants.ANSI_RED +"Enhancement of the weapon: +" +this.getEnhance()
                 +ColorConstants.ANSI_RESET);
         System.out.println(ColorConstants.ANSI_RED +"Total AttackBonus or DamageBonus of the weapon: "
