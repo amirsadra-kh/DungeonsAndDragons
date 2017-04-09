@@ -74,8 +74,16 @@ public class FrighteningStrategyTest {
         Point chest = new Point(0,1);
         this.target.setBehaviourStrategy(frighteningStrategy);
         Point newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
+
         // acceptable moves
         Point idealPoint1 = new Point(2,0);
         Assert.assertEquals(idealPoint1, newPoint);
+
+        // Target gets 2 more turns -> enhance = 2
+        newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
+        newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
+        // target is back to being aggressive and will move towards player
+        Point idealPoint = new Point(0, 2);
+        Assert.assertEquals(idealPoint, newPoint);
     }
 }

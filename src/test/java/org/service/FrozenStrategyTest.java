@@ -75,7 +75,7 @@ public class FrozenStrategyTest {
         Point samePoint = new Point(2, 2);
         Assert.assertEquals(samePoint, newPoint);
 
-        // Target gets 2 more turns - enhance = 2
+        // Target gets 2 more turns -> enhance = 2
         newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
         newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
         // target is back to being aggressive and will move towards player

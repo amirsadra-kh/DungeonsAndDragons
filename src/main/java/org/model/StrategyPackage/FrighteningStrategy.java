@@ -51,18 +51,25 @@ public class FrighteningStrategy implements BehaviourStrategy {
      */
     @Override
     public Point move(Character target, Character player, Point objective, Map map) {
-        Point attackerPoint = this.attacker.getCurrentPosition();
-        Point targetPoint = target.getCurrentPosition();
+        if(turns > 0) {
+            Point attackerPoint = this.attacker.getCurrentPosition();
+            Point targetPoint = target.getCurrentPosition();
 
-        // Add all validated points for target to move to a list of points
-        ArrayList<Point> possiblePoints = addValidatedPoints(map, targetPoint);
+            // Add all validated points for target to move to a list of points
+            ArrayList<Point> possiblePoints = addValidatedPoints(map, targetPoint);
 
 
-        // Find a point furthest away from attacker
-        Point max = getMaxDistance(possiblePoints, attackerPoint);
+            // Find a point furthest away from attacker
+            Point max = getMaxDistance(possiblePoints, attackerPoint);
 
-        // Set the new position
-        return max;
+            turns--;
+            // Set the new position
+            return max;
+        } else {
+            // Set the strategy of the character back to normal because the turns are finished
+            target.setBehaviourStrategy(previousStrategy);
+            return target.getBehaviourStrategy().move(target, player, objective, map);
+        }
     }
 
     /**
