@@ -126,4 +126,20 @@ public class Fixtures {
         item.setType("longsword");
         return item;
     }
+
+    /**
+     * A weapon item - longsword for testing frozen
+     * @return
+     */
+    public static Weapon createFrozenWeapon() {
+        ItemEnum weapon = ItemEnum.WEAPON;
+        Weapon item = new Weapon();
+        item = WeaponFactory.setSpecialEnhancement(item, 1);
+        item.setName("weapon2");
+        item.setEnhancementType(EnhancementTypesEnum.DAMAGEBONUS);
+        item.setEnhance(2);
+        item.setItem(weapon);
+        item.setType("longsword");
+        return item;
+    }
 }
