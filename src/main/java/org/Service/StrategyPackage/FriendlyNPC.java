@@ -67,6 +67,7 @@ public class FriendlyNPC implements BehaviourStrategy {
         for (int i = 0; i < loot.size(); i++) {
             if (player.getBackPackInventoryItems().size() <= 10) {
                 player.getBackPackInventoryItems().add(loot.get(i));
+                map.getChest().getItems().remove(loot.get(i));
             } else {
                 break;
             }
