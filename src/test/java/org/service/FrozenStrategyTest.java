@@ -64,20 +64,40 @@ public class FrozenStrategyTest {
     }
 
     @Test
-    public void move() throws Exception {
+    public void testTargetNotMove() throws Exception {
+        // GIVEN
         target.setCurrentPosition(new Point(2, 2));
         attacker.setCurrentPosition(new Point(0, 3));
         Point chest = new Point(0, 1);
         this.target.setBehaviourStrategy(frozenStrategy);
+
+        // WHEN
         Point newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
 
+        // THEN
         // acceptable moves
         Point samePoint = new Point(2, 2);
         Assert.assertEquals(samePoint, newPoint);
+    }
 
+    /**
+     * A test method to see if character goes back to normal behavior after turns are up
+     */
+    @Test
+    public void testTargetBackToNormal() {
+        // GIVEN
+        target.setCurrentPosition(new Point(2, 2));
+        attacker.setCurrentPosition(new Point(0, 3));
+        Point chest = new Point(0, 1);
+        this.target.setBehaviourStrategy(frozenStrategy);
+
+        // WHEN
         // Target gets 2 more turns -> enhance = 2
+        Point newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
         newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
         newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
+
+        // THEN
         // target is back to being aggressive and will move towards player
         Point idealPoint = new Point(0, 2);
         Assert.assertEquals(idealPoint, newPoint);

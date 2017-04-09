@@ -68,20 +68,40 @@ public class FrighteningStrategyTest {
      * @throws Exception
      */
     @Test
-    public void move() throws Exception {
+    public void testMoveAwayFromAttacker() throws Exception {
+        // GIVEN
         target.setCurrentPosition(new Point(2,2));
         attacker.setCurrentPosition(new Point(0,3));
         Point chest = new Point(0,1);
         this.target.setBehaviourStrategy(frighteningStrategy);
+
+        // WHEN
         Point newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
 
+        // THEN
         // acceptable moves
         Point idealPoint1 = new Point(2,0);
         Assert.assertEquals(idealPoint1, newPoint);
+    }
 
+    /**
+     * A test method to check if the character goes back to normal behaviour after turns are up
+     */
+    @Test
+    public void testBackToNormalStrategy() {
+        // GIVEN
+        target.setCurrentPosition(new Point(2,2));
+        attacker.setCurrentPosition(new Point(0,3));
+        Point chest = new Point(0,1);
+        this.target.setBehaviourStrategy(frighteningStrategy);
+
+        // WHEN
         // Target gets 2 more turns -> enhance = 2
+        Point newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
         newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
         newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
+
+        // THEN
         // target is back to being aggressive and will move towards player
         Point idealPoint = new Point(0, 2);
         Assert.assertEquals(idealPoint, newPoint);

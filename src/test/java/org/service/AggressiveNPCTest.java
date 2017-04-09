@@ -60,20 +60,25 @@ public class AggressiveNPCTest {
      * @throws Exception
      */
     @Test
-    public void move() throws Exception {
+    public void testMoveForReturnsNewPosition() throws Exception {
+        // GIVEN
         monster.setCurrentPosition(new Point(2,2));
         player.setCurrentPosition(new Point(0,3));
         Point chest = new Point(0,1);
+
+        // WHEN
         Point newPoint = monster.getBehaviourStrategy().move(monster, player, chest, this.map);
         // acceptable moves
         Point idealPoint1 = new Point(0,2);
         Point idealPoint2 = new Point(1, 3);
+
+        // THEN
         Assert.assertEquals(idealPoint1, newPoint);
     }
 
     @Test
     public void attack() throws Exception {
-
+        // TODO
     }
 
     /**
@@ -81,21 +86,33 @@ public class AggressiveNPCTest {
      * @throws Exception
      */
     @Test
-    public void interact() throws Exception {
+    public void testMonsterInteractWithChest() throws Exception {
+        // GIVEN
         BackPackInventory backpack = new BackPackInventory();
+        BackPackInventory chest = new BackPackInventory();
         java.util.List<Item> items = new ArrayList<>();
         items.add(Fixtures.createBelt());
         items.add(Fixtures.createBoots());
         backpack.setItems(items);
         monster.setBackPackInventory(backpack);
-        items = new ArrayList<>();
+        java.util.List<Item> chestItems = new ArrayList<>();
+        chestItems.add(Fixtures.createBelt2());
+        chest.setItems(chestItems);
+        BackPackInventory emptyChest = new BackPackInventory();
+
+        // WHEN
+        monster.getBehaviourStrategy().interact(monster, chest);
+
+        // THEN
+        // Check if item has been removed from chest
+        Assert.assertEquals(emptyChest.getItems(), chest.getItems());
+
         items.add(Fixtures.createBelt2());
-        backpack.setItems(items);
-        monster.getBehaviourStrategy().interact(monster, backpack);
-        items.add(Fixtures.createBelt());
-        items.add(Fixtures.createBoots());
-        backpack.setItems(items);
-        Assert.assertEquals(backpack, monster.getBackPackInventory());
+        BackPackInventory expectedBackpack = new BackPackInventory();
+        expectedBackpack.setItems(items);
+
+        // Check if item from chest was added to monster's backpack
+        Assert.assertEquals(expectedBackpack.getItems(), monster.getBackPackInventory().getItems());
     }
 
 }
