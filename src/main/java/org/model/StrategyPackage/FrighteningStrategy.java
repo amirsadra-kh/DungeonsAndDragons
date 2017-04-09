@@ -55,7 +55,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
         Point targetPoint = target.getCurrentPosition();
 
         MapDirectionValidator validate = new MapDirectionValidator();
-        validate.
+        
     }
 
     /**
