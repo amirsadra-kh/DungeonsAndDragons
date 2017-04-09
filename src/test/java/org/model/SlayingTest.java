@@ -50,8 +50,8 @@ public class SlayingTest {
         Weapon weapon = Fixtures.createSlayingWeapon();
 
         // WHEN
-        Slaying pacify = new Slaying(weapon);
-        pacify.slay(this.target);
+        Slaying slay = new Slaying(weapon);
+        slay.slay(this.target);
 
         // THEN
         int hitpoints = 0;
