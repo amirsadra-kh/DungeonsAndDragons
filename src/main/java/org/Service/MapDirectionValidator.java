@@ -115,7 +115,7 @@ public class MapDirectionValidator {
                     || elementInTheMap.equalsIgnoreCase("c"))
                     && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;
         } catch (final IndexOutOfBoundsException e) {
-            System.out.print("the selected coordinate is out of bound , please try another coordinate");
+            System.out.print("the selected coordinate is out of bound");
             return false;
         }
 

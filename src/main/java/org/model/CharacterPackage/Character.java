@@ -1,19 +1,23 @@
 package main.java.org.model.CharacterPackage;
 
+import main.java.org.Service.StrategyPackage.BehaviourStrategy;
 import main.java.org.model.Item;
 import main.java.org.model.RollDice;
-import main.java.org.Service.StrategyPackage.BehaviourStrategy;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlTransient;
 import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 
 /**
  * This class is the character object
@@ -24,11 +28,13 @@ import java.util.List;
  */
 @XmlRootElement
 public class Character extends Observable {
+    private final Inventory inventory = new Inventory();
+    // For the observer
+    private final List<Observer> observers = new ArrayList<>();
     public int dice;
     // A base line for the hit points
     RollDice dice10 = new RollDice(10);
     private BackPackInventory backPackInventory;
-    private Inventory inventory = new Inventory();
     private Point currentPosition;
     private Ability ability;
     private boolean isPlayerCharacter;
@@ -41,9 +47,6 @@ public class Character extends Observable {
     private boolean burning;
     private int turnRoll = 0;
     private int hitPoints;
-
-    // For the observer
-    private List<Observer> observers = new ArrayList<>();
     private Ability state;
 
     /**
@@ -82,7 +85,7 @@ public class Character extends Observable {
      *
      * @param currentPosition an x,y point of the character on a map
      */
-    public void setCurrentPosition(Point currentPosition) {
+    public void setCurrentPosition(final Point currentPosition) {
         this.currentPosition = currentPosition;
     }
 
@@ -100,7 +103,7 @@ public class Character extends Observable {
      *
      * @param ability object to be used to set the ability of this character
      */
-    public void setAbility(Ability ability) {
+    public void setAbility(final Ability ability) {
         ability.setArmorClass(0);
         ability.setDamageBonus(0);
         ability.setAttackBonus(this.level, 0);
@@ -122,7 +125,7 @@ public class Character extends Observable {
      *
      * @param level a level integer to change the level to.
      */
-    public void setLevel(int level) {
+    public void setLevel(final int level) {
         this.level = level;
     }
 
@@ -130,7 +133,7 @@ public class Character extends Observable {
      * This method set the HitPoints based on the strengthModifier.
      */
     public void setHitPoints() {
-        int strengthModifier  = this.ability.getStrengthModifier();
+        final int strengthModifier = this.ability.getStrengthModifier();
         this.hitPoints = strengthModifier + this.dice;
     }
 
@@ -148,7 +151,7 @@ public class Character extends Observable {
      * A method for decreasing the hitPoints in a fight
      * @param newHitPoint
      */
-    public void decreaseHitPoint(int newHitPoint){
+    public void decreaseHitPoint(final int newHitPoint) {
         if (this.hitPoints > 0){
             this.hitPoints -= newHitPoint;
         }
@@ -156,7 +159,7 @@ public class Character extends Observable {
             System.out.println(this.charName +" has died!");
     }
 
-    public void increaseHitPoint(int newHitPoint){
+    public void increaseHitPoint(final int newHitPoint) {
         this.hitPoints = this.hitPoints + newHitPoint;
     }
 
@@ -164,7 +167,7 @@ public class Character extends Observable {
      * A method to update the ability when the user adds or remove items wearing
      * @param item
      */
-    private void updateAbility(Item item) {
+    private void updateAbility(final Item item) {
         switch (item.getEnhancementType()) {
             case STRENGTH:
                 this.ability.setStrength(this.ability.getStrength() + item.getEnhance());
@@ -197,6 +200,7 @@ public class Character extends Observable {
      * A method to get the behaviour strategy of a character
      * @return behaviourStrategy
      */
+    @XmlTransient
     public BehaviourStrategy getBehaviourStrategy() {
         return this.behaviourStrategy;
     }
@@ -205,7 +209,7 @@ public class Character extends Observable {
      * Plugs in a specific behaviour strategy to be used
      * @param behaviourStrategy
      */
-    public void setBehaviourStrategy(BehaviourStrategy behaviourStrategy) {
+    public void setBehaviourStrategy(final BehaviourStrategy behaviourStrategy) {
         this.behaviourStrategy = behaviourStrategy;
     }
 
@@ -229,7 +233,7 @@ public class Character extends Observable {
      * A setter for the turn to tell if it's the character's turn or not
      * @param turn
      */
-    public void setTurn(boolean turn) {
+    public void setTurn(final boolean turn) {
         this.turn = turn;
     }
 
@@ -245,7 +249,7 @@ public class Character extends Observable {
      * A method to set the burning boolean
      * @param b
      */
-    public void setBurning(boolean b) {
+    public void setBurning(final boolean b) {
         this.burning = b;
     }
 
@@ -261,7 +265,7 @@ public class Character extends Observable {
      * A method to set the dice value of this character
      * @param dice
      */
-    public void setTurnRoll(int dice) {
+    public void setTurnRoll(final int dice) {
         this.turnRoll = dice + this.ability.getDexterityModifier();
     }
 
@@ -280,13 +284,13 @@ public class Character extends Observable {
      *
      * @param items a set of items the user has chosen
      */
-    public void setItemsWearing(HashSet<Item> items) {
+    public void setItemsWearing(final HashSet<Item> items) {
         this.itemsWearing = items;
-        for(Item i : items)
+        for (final Item i : items)
             updateAbility(i);
 
         this.inventory.setWearingItems(this.itemsWearing);
-        List<Item> inventoryItems = this.inventory.getItems();
+        final List<Item> inventoryItems = this.inventory.getItems();
         this.inventory.setState(inventoryItems);
     }
 
@@ -297,7 +301,7 @@ public class Character extends Observable {
      * @return the new character
      */
     public Character create(final BackPackInventory backPackInventory) {
-        Character character = new Character();
+        final Character character = new Character();
         character.setBackPackInventory(backPackInventory);
         return character;
     }
@@ -319,8 +323,8 @@ public class Character extends Observable {
         if(this.backPackInventory.getItems().size() != 0){
             return this.backPackInventory;
         }
-        BackPackInventory backpack = new BackPackInventory();
-        List<Item> items = new ArrayList<>();
+        final BackPackInventory backpack = new BackPackInventory();
+        final List<Item> items = new ArrayList<>();
         items.add(new Item());
         backpack.setItems(items);
         return backpack;
@@ -331,11 +335,11 @@ public class Character extends Observable {
      *
      * @param backPackInventory the backpack inventory to set the backpack to
      */
-    public void setBackPackInventory(BackPackInventory backPackInventory) {
+    public void setBackPackInventory(final BackPackInventory backPackInventory) {
         this.backPackInventory = backPackInventory;
-        List<Item> backpack = this.backPackInventory.getItems();
+        final List<Item> backpack = this.backPackInventory.getItems();
         this.inventory.setBackpackItems(backpack);
-        List<Item> inventoryItems = this.inventory.getItems();
+        final List<Item> inventoryItems = this.inventory.getItems();
         this.inventory.setState(inventoryItems);
     }
 
@@ -365,7 +369,7 @@ public class Character extends Observable {
      *
      * @param playerCharacter true or false based on if this is th echaracter being played or not.
      */
-    public void setPlayerCharacter(boolean playerCharacter) {
+    public void setPlayerCharacter(final boolean playerCharacter) {
         isPlayerCharacter = playerCharacter;
     }
 
@@ -382,7 +386,7 @@ public class Character extends Observable {
      * @param name of the character
      */
     @XmlElement
-    public void setCharName(String name) {
+    public void setCharName(final String name) {
         this.charName = name;
     }
 
@@ -402,10 +406,10 @@ public class Character extends Observable {
         JAXBContext context = null;
         try {
             context = JAXBContext.newInstance(Character.class);
-            Marshaller m = context.createMarshaller();
+            final Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             m.marshal(this,new FileOutputStream("src/main/java/org/resources/characters/"+this.charName));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
@@ -416,14 +420,14 @@ public class Character extends Observable {
      * @param name of the character
      * @return an existing character object
      */
-    public Character loadCharacter(String name){
+    public Character loadCharacter(final String name) {
         try {
-            JAXBContext jc = JAXBContext.newInstance(Character.class);
+            final JAXBContext jc = JAXBContext.newInstance(Character.class);
             Unmarshaller u = null;
             u = jc.createUnmarshaller();
-            File f = new File("src/main/java/org/resources/characters/"+name);
+            final File f = new File("src/main/java/org/resources/characters/" + name);
             return (Character) u.unmarshal(f);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             //e.printStackTrace();
             return null;
         }
@@ -443,7 +447,7 @@ public class Character extends Observable {
      *
      * @param state of the inventory
      */
-    public void setState(Ability state) {
+    public void setState(final Ability state) {
         this.state = state;
         notifyAllObservers();
     }
@@ -452,7 +456,7 @@ public class Character extends Observable {
      * A method to notify all the observers.
      */
     public void notifyAllObservers(){
-        for (Observer observer : this.observers) {
+        for (final Observer observer : this.observers) {
             observer.update(this, this.ability);
         }
     }

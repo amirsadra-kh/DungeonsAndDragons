@@ -15,7 +15,8 @@ import java.util.ArrayList;
  * If a character using the friendly strategy is attacked, it will change its
  * strategy and become aggressive.
  *
- * @author
+ * @author Masyam Mokarian
+ * @version 1.0
  */
 public class FriendlyNPC implements BehaviourStrategy {
     /**
@@ -64,7 +65,11 @@ public class FriendlyNPC implements BehaviourStrategy {
             player.setBackPackInventory(new BackPackInventory());
         }
         for (int i = 0; i < loot.size(); i++) {
-            player.getBackPackInventoryItems().add(loot.get(i));
+            if (player.getBackPackInventoryItems().size() <= 10) {
+                player.getBackPackInventoryItems().add(loot.get(i));
+            } else {
+                break;
+            }
         }
 
     }
