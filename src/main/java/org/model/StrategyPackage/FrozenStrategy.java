@@ -42,7 +42,7 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public void move(Character target, Character player, Point objective, Map map) {
+    public Point move(Character target, Character player, Point objective, Map map) {
         // decrease turns everytime it is the character's turn
         if(turns > 0) {
             turns--;
@@ -50,6 +50,7 @@ public class FrozenStrategy implements BehaviourStrategy {
             // Set the strategy of the character back to normal because the turns are finished
             target.setBehaviourStrategy(previousStrategy);
         }
+        return player.getCurrentPosition();
     }
 
     /**

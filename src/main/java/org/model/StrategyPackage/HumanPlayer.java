@@ -29,8 +29,8 @@ public class HumanPlayer implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public void move(Character character, Character player, Point objective, Map map) {
-
+    public Point move(Character character, Character player, Point objective, Map map) {
+        return null;
     }
 
     /**

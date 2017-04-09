@@ -51,8 +51,9 @@ public class BackPackInventory {
      */
     public List<Item> addToBackpack(List<Item> chestOrBackpack) {
         int num = MAX_ITEMS - this.items.size();
+        int size = chestOrBackpack.size();
         if(!chestOrBackpack.isEmpty()) {
-            for (int i = 0; i < num; i++) {
+            for (int i = 0; (i < num) && (i < size); i++) {
                 // Add item
                 this.items.add(chestOrBackpack.get(i));
                 chestOrBackpack.remove(chestOrBackpack.get(i));

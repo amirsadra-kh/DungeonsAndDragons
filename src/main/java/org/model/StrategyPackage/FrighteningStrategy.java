@@ -50,7 +50,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public void move(Character target, Character player, Point objective, Map map) {
+    public Point move(Character target, Character player, Point objective, Map map) {
         Point attackerPoint = this.attacker.getCurrentPosition();
         Point targetPoint = target.getCurrentPosition();
 
@@ -62,7 +62,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
         Point max = getMaxDistance(possiblePoints, attackerPoint);
 
         // Set the new position
-        target.setCurrentPosition(max);
+        return max;
     }
 
     /**
@@ -77,8 +77,8 @@ public class FrighteningStrategy implements BehaviourStrategy {
 
         // Add all valid points for moving to possiblePoints list
         MapDirectionValidator validate = new MapDirectionValidator();
-        for(int row = 0; row < map.getRows(); row++) {
-            for (int col = 0; col < map.getCols(); col++) {
+        for(int row = 0; row < map.getScreen().length; row++) {
+            for (int col = 0; col < map.getScreen()[row].length; col++) {
                 if(validate.coordinateIsValidToMove(row, col, map, targetPoint)) {
                     Point validPoint = new Point(row, col);
                     possiblePoints.add(validPoint);

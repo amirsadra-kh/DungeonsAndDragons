@@ -35,7 +35,7 @@ public class FriendlyNPC implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public void move(Character fchar, Character player, Point objective, Map map) {
+    public Point move(Character fchar, Character player, Point objective, Map map) {
         Random r = new Random();
         // Get the current position
         Point current = fchar.getCurrentPosition();
@@ -52,6 +52,7 @@ public class FriendlyNPC implements BehaviourStrategy {
 
         // Set the new position
         fchar.setCurrentPosition(new Point(x,y));
+        return null;
     }
 
     /**

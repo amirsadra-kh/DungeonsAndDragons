@@ -35,7 +35,7 @@ public class AggressiveNPC implements BehaviourStrategy {
      * @param objective the position of the objective of the map - chest or exit
      * @param map the map the character is on
      */
-    public void move(Character monster, Character player, Point objective, Map map) {
+    public Point move(Character monster, Character player, Point objective, Map map) {
         Point playerPoint = player.getCurrentPosition();
         Point monsterPoint = monster.getCurrentPosition();
 
@@ -48,7 +48,7 @@ public class AggressiveNPC implements BehaviourStrategy {
         Point min = getMinDistance(possiblePoints, playerPoint);
 
         // Set the new position
-        // return min;
+        return min;
     }
 
     /**
