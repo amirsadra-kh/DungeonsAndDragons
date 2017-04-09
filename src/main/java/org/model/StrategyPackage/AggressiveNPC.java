@@ -2,10 +2,12 @@ package main.java.org.model.StrategyPackage;
 
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.Item;
 import main.java.org.model.Map;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * This strategy is for enemy NPCs. An aggressive NPC will always run toward the
@@ -79,6 +81,11 @@ public class AggressiveNPC implements BehaviourStrategy {
      */
     @Override
     public void interact(Character mon, BackPackInventory chest) {
-
+        BackPackInventory monBackpack = mon.getBackPackInventory();
+        // remove items from chest and add to backpack
+        List<Item> changedChestItems = monBackpack.addToBackpack(chest.getItems());
+        chest.setItems(changedChestItems);
+        // set the new backpack inventory
+        mon.setBackPackInventory(monBackpack);
     }
 }
