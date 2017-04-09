@@ -5,15 +5,16 @@ import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Map;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * This strategy is for enemy NPCs. An aggressive NPC will always run toward the
  * player character and attack it. If it comes near a chest or other NPC while doing
  * so, it will loot the chest and attack the NPC.
  *
- * @author
- * @version
- * @since
+ * @author Freyja Jokulsdottir
+ * @version 1.0
+ * @since 09.04.2017
  */
 public class AggressiveNPC implements BehaviourStrategy {
     @Override
@@ -29,8 +30,36 @@ public class AggressiveNPC implements BehaviourStrategy {
      * @param objective the position of the objective of the map - chest or exit
      * @param map the map the character is on
      */
-    public void move(Character character, Character player, Point objective, Map map) {
+    public void move(Character monster, Character player, Point objective, Map map) {
+        Point playerPoint = player.getCurrentPosition();
+        Point monsterPoint = monster.getCurrentPosition();
 
+        // Add all validated points for target to move to a list of points
+        FrighteningStrategy frighten = new FrighteningStrategy();
+        ArrayList<Point> possiblePoints = frighten.addValidatedPoints(map, monsterPoint);
+
+
+        // Find a point furthest away from attacker
+        Point min = getMinDistance(possiblePoints, playerPoint);
+
+        // Set the new position
+        // return min;
+    }
+
+    /**
+     * A method to get the point closest to the player out of the valid points
+     * @param possiblePoints points the monster can move
+     * @param playerPoint the position of the player
+     * @return a point closest to the player
+     */
+    private Point getMinDistance(ArrayList<Point> possiblePoints, Point playerPoint) {
+        Point min = possiblePoints.get(0);
+        for(Point p : possiblePoints) {
+            if((Math.abs(p.x - playerPoint.x)) + Math.abs(p.y - playerPoint.y) <
+                    (Math.abs(min.x - playerPoint.x)) + Math.abs(min.y - playerPoint.y))
+                min = p;
+        }
+        return min;
     }
 
     /**

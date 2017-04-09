@@ -51,7 +51,6 @@ public class FrighteningStrategy implements BehaviourStrategy {
      */
     @Override
     public void move(Character target, Character player, Point objective, Map map) {
-        // TODO Runaway implementation here, use this.attacker position and go in the other direction
         Point attackerPoint = this.attacker.getCurrentPosition();
         Point targetPoint = target.getCurrentPosition();
 
@@ -73,7 +72,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param targetPoint the position of the target
      * @return a list of validated cells for the target ro go to
      */
-    private ArrayList<Point> addValidatedPoints(Map map, Point targetPoint) {
+    public ArrayList<Point> addValidatedPoints(Map map, Point targetPoint) {
         ArrayList<Point> possiblePoints = new ArrayList<>();
 
         // Add all valid points for moving to possiblePoints list
