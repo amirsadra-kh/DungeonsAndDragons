@@ -1,10 +1,18 @@
 package main.java.org.model.DecoratorPackage;
 
-import main.java.org.model.*;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.ColorConstants;
+import main.java.org.model.Item;
+import main.java.org.model.Longbow;
+import main.java.org.model.Longsword;
 
-import java.util.ArrayList;
-import java.util.List;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.io.File;
+import java.io.FileOutputStream;
 
 /**
  * The abstract Weapon class defines the functionality of any Weapon
@@ -14,6 +22,7 @@ import java.util.List;
  * @version 1.0
  * @since 02.04.2017
  */
+@XmlRootElement
 public class Weapon extends Item {
     private String specialEnhancement = "Weapon";
     private int damage = 0;
@@ -66,6 +75,7 @@ public class Weapon extends Item {
      * A setter for the type of the weapon; longsword or longbow
      * @param type
      */
+    @XmlElement
     public void setType(String type)  {
         this.type = type;
     }
@@ -100,5 +110,36 @@ public class Weapon extends Item {
      */
     public int getMaxRange() {
         return this.maxRange;
+    }
+
+    /**
+     * A method for saving an Item object using JAXB
+     */
+    @Override
+    public Item loadItem(String name){
+        try {
+            JAXBContext jc = JAXBContext.newInstance(Weapon.class);
+            Unmarshaller u = null;
+            u = jc.createUnmarshaller();
+            File f = new File("src/main/java/org/resources/items/"+name);
+            return (Item) u.unmarshal(f);
+        } catch (Exception e) {
+            //e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    @Override
+    public void saveItem()  {
+        JAXBContext context = null;
+        try {
+            context = JAXBContext.newInstance(Weapon.class);
+            Marshaller m = context.createMarshaller();
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            m.marshal(this,new FileOutputStream("src/main/java/org/resources/items/"+super.getName()));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
