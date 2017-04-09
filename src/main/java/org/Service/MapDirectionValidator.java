@@ -86,7 +86,7 @@ public class MapDirectionValidator {
      * @param target the target coordinate
      * @return
      */
-    protected boolean coordinateIsValidToMove(final int i, final int j, final Map map, final Point target) {
+    public boolean coordinateIsValidToMove(final int i, final int j, final Map map, final Point target) {
         try {
             final String str = map.getScreen()[i][j];
             return str.equalsIgnoreCase(" ") && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;

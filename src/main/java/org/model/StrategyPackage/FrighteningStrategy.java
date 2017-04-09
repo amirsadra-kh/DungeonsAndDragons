@@ -6,6 +6,7 @@ import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Map;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * A strategy for the Frightening decorator
@@ -53,9 +54,29 @@ public class FrighteningStrategy implements BehaviourStrategy {
         // TODO Runaway implementation here, use this.attacker position and go in the other direction
         Point attackerPoint = this.attacker.getCurrentPosition();
         Point targetPoint = target.getCurrentPosition();
+        ArrayList<Point> possiblePoints = new ArrayList<>();
 
+        // Add all valid points for moving to possiblePoints list
         MapDirectionValidator validate = new MapDirectionValidator();
-        
+        for(int row = 0; row < map.getRows(); row++) {
+            for (int col = 0; col < map.getCols(); col++) {
+                if(validate.coordinateIsValidToMove(row, col, map, targetPoint)) {
+                    Point validPoint = new Point(row, col);
+                    possiblePoints.add(validPoint);
+                }
+            }
+        }
+
+        // Find a point furthest away from attacker
+        Point max = possiblePoints.get(0);
+        for(Point p : possiblePoints) {
+            if((Math.abs(p.x - attackerPoint.x)) + Math.abs(p.y - attackerPoint.y) >
+                    (Math.abs(max.x - attackerPoint.x)) + Math.abs(max.y - attackerPoint.y))
+                max = p;
+        }
+
+        // Set the new position
+        target.setCurrentPosition(max);
     }
 
     /**
