@@ -2,6 +2,7 @@ package main.java.org.Service;
 
 import main.java.org.model.Campaign;
 import main.java.org.model.Map;
+import org.assertj.core.util.Strings;
 
 import java.awt.*;
 
@@ -90,6 +91,29 @@ public class MapDirectionValidator {
         try {
             final String str = map.getScreen()[i][j];
             return str.equalsIgnoreCase(" ") && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;
+        } catch (final IndexOutOfBoundsException e) {
+            System.out.print("the selected coordinate is out of bound , please try another coordinate");
+            return false;
+        }
+
+    }
+
+    /**
+     * This method is to return a valid coordinate with the maximum 3 spots
+     *
+     * @param i      i coordinate
+     * @param j      j coordinate
+     * @param map    the target map
+     * @param target the target coordinate
+     * @return
+     */
+    public boolean coordinateIsValidForFriendlyCharacter(final int i, final int j, final Map map, final Point target) {
+        try {
+            final String elementInTheMap = map.getScreen()[i][j];
+            return (Strings.isNullOrEmpty(elementInTheMap)
+                    || elementInTheMap.equalsIgnoreCase("f")
+                    || elementInTheMap.equalsIgnoreCase("c"))
+                    && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;
         } catch (final IndexOutOfBoundsException e) {
             System.out.print("the selected coordinate is out of bound , please try another coordinate");
             return false;

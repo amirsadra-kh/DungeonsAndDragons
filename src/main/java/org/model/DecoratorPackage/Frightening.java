@@ -1,7 +1,7 @@
 package main.java.org.model.DecoratorPackage;
 
+import main.java.org.Service.StrategyPackage.FrighteningStrategy;
 import main.java.org.model.CharacterPackage.Character;
-import main.java.org.model.StrategyPackage.FrighteningStrategy;
 
 /**
  * A Frightening Decorator
@@ -19,7 +19,7 @@ public class Frightening  extends WeaponEnhanceDecorator {
      *
      * @param decoratedWeapon
      */
-    public Frightening(Weapon decoratedWeapon) {
+    public Frightening(final Weapon decoratedWeapon) {
         super(decoratedWeapon);
     }
 
@@ -36,8 +36,8 @@ public class Frightening  extends WeaponEnhanceDecorator {
      * @param target who has been hit
      * @param attacker character who attacked with frightened strategy
      */
-    public void frighten(Character target, Character attacker) {
-        FrighteningStrategy frighten = new FrighteningStrategy();
+    public void frighten(final Character target, final Character attacker) {
+        final FrighteningStrategy frighten = new FrighteningStrategy();
         frighten.setUp(this.getEnhance(), target.getBehaviourStrategy(), attacker);
         target.setBehaviourStrategy(frighten);
     }

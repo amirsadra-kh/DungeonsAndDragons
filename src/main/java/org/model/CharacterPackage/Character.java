@@ -2,7 +2,7 @@ package main.java.org.model.CharacterPackage;
 
 import main.java.org.model.Item;
 import main.java.org.model.RollDice;
-import main.java.org.model.StrategyPackage.BehaviourStrategy;
+import main.java.org.Service.StrategyPackage.BehaviourStrategy;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -24,6 +24,9 @@ import java.util.List;
  */
 @XmlRootElement
 public class Character extends Observable {
+    public int dice;
+    // A base line for the hit points
+    RollDice dice10 = new RollDice(10);
     private BackPackInventory backPackInventory;
     private Inventory inventory = new Inventory();
     private Point currentPosition;
@@ -37,10 +40,6 @@ public class Character extends Observable {
     private boolean turn;
     private boolean burning;
     private int turnRoll = 0;
-
-    // A base line for the hit points
-    RollDice dice10 = new RollDice(10);
-    public int dice;
     private int hitPoints;
 
     // For the observer
@@ -97,12 +96,16 @@ public class Character extends Observable {
     }
 
     /**
-     * set the level of the Character
+     * A method for initializing the ability for the character
      *
-     * @param level a level integer to change the level to.
+     * @param ability object to be used to set the ability of this character
      */
-    public void setLevel(int level) {
-        this.level = level;
+    public void setAbility(Ability ability) {
+        ability.setArmorClass(0);
+        ability.setDamageBonus(0);
+        ability.setAttackBonus(this.level, 0);
+        this.ability = ability;
+        this.setState(ability);
     }
 
     /**
@@ -112,6 +115,15 @@ public class Character extends Observable {
      */
     public int getLevel() {
         return this.level;
+    }
+
+    /**
+     * set the level of the Character
+     *
+     * @param level a level integer to change the level to.
+     */
+    public void setLevel(int level) {
+        this.level = level;
     }
 
     /**
@@ -149,34 +161,6 @@ public class Character extends Observable {
     }
 
     /**
-     * A method for initializing the ability for the character
-     *
-     * @param ability object to be used to set the ability of this character
-     */
-    public void setAbility(Ability ability) {
-        ability.setArmorClass(0);
-        ability.setDamageBonus(0);
-        ability.setAttackBonus(this.level, 0);
-        this.ability = ability;
-        this.setState(ability);
-    }
-
-    /**
-     * A method for setting the items the character is wearing.
-     *
-     * @param items a set of items the user has chosen
-     */
-    public void setItemsWearing(HashSet<Item> items) {
-        this.itemsWearing = items;
-        for(Item i : items)
-            updateAbility(i);
-
-        this.inventory.setWearingItems(this.itemsWearing);
-        List<Item> inventoryItems = this.inventory.getItems();
-        this.inventory.setState(inventoryItems);
-    }
-
-    /**
      * A method to update the ability when the user adds or remove items wearing
      * @param item
      */
@@ -210,19 +194,19 @@ public class Character extends Observable {
     }
 
     /**
-     * Plugs in a specific behaviour strategy to be used
-     * @param behaviourStrategy
-     */
-    public void setBehaviourStrategy(BehaviourStrategy behaviourStrategy) {
-        this.behaviourStrategy = behaviourStrategy;
-    }
-
-    /**
      * A method to get the behaviour strategy of a character
      * @return behaviourStrategy
      */
     public BehaviourStrategy getBehaviourStrategy() {
         return this.behaviourStrategy;
+    }
+
+    /**
+     * Plugs in a specific behaviour strategy to be used
+     * @param behaviourStrategy
+     */
+    public void setBehaviourStrategy(BehaviourStrategy behaviourStrategy) {
+        this.behaviourStrategy = behaviourStrategy;
     }
 
     /**
@@ -234,14 +218,6 @@ public class Character extends Observable {
     }
 
     /**
-     * A setter for the turn to tell if it's the character's turn or not
-     * @param turn
-     */
-    public void setTurn(boolean turn) {
-        this.turn = turn;
-    }
-
-    /**
      * A getter for turn to tell if it is the character's turn or not
      * @return turn a boolean value
      */
@@ -250,11 +226,11 @@ public class Character extends Observable {
     }
 
     /**
-     * A method to set the burning boolean
-     * @param b
+     * A setter for the turn to tell if it's the character's turn or not
+     * @param turn
      */
-    public void setBurning(boolean b) {
-        this.burning = b;
+    public void setTurn(boolean turn) {
+        this.turn = turn;
     }
 
     /**
@@ -266,11 +242,11 @@ public class Character extends Observable {
     }
 
     /**
-     * A method to set the dice value of this character
-     * @param dice
+     * A method to set the burning boolean
+     * @param b
      */
-    public void setTurnRoll(int dice) {
-        this.turnRoll = dice + this.ability.getDexterityModifier();
+    public void setBurning(boolean b) {
+        this.burning = b;
     }
 
     /**
@@ -282,6 +258,14 @@ public class Character extends Observable {
     }
 
     /**
+     * A method to set the dice value of this character
+     * @param dice
+     */
+    public void setTurnRoll(int dice) {
+        this.turnRoll = dice + this.ability.getDexterityModifier();
+    }
+
+    /**
      * A method for getting the items the character is wearing.
      *
      * @return the items the character is wearing.
@@ -289,6 +273,21 @@ public class Character extends Observable {
     @XmlElement
     public HashSet<Item> getItemsWearing() {
         return this.itemsWearing;
+    }
+
+    /**
+     * A method for setting the items the character is wearing.
+     *
+     * @param items a set of items the user has chosen
+     */
+    public void setItemsWearing(HashSet<Item> items) {
+        this.itemsWearing = items;
+        for(Item i : items)
+            updateAbility(i);
+
+        this.inventory.setWearingItems(this.itemsWearing);
+        List<Item> inventoryItems = this.inventory.getItems();
+        this.inventory.setState(inventoryItems);
     }
 
     /**
@@ -328,18 +327,6 @@ public class Character extends Observable {
     }
 
     /**
-     * A method for getting the items in the backpack inventory
-     * @return a list of items
-     */
-    public List<Item> getBackPackInventoryItems() {
-        if(this.backPackInventory!=null){
-            return this.backPackInventory.getItems();
-        }
-        else
-            return null;
-    }
-
-    /**
      * This method is for setting the backpack inventory of a character
      *
      * @param backPackInventory the backpack inventory to set the backpack to
@@ -350,6 +337,18 @@ public class Character extends Observable {
         this.inventory.setBackpackItems(backpack);
         List<Item> inventoryItems = this.inventory.getItems();
         this.inventory.setState(inventoryItems);
+    }
+
+    /**
+     * A method for getting the items in the backpack inventory
+     * @return a list of items
+     */
+    public List<Item> getBackPackInventoryItems() {
+        if(this.backPackInventory!=null){
+            return this.backPackInventory.getItems();
+        }
+        else
+            return null;
     }
 
     /**
@@ -371,6 +370,13 @@ public class Character extends Observable {
     }
 
     /**
+     * A method for getting the name of a character
+     *
+     * @return the name of the character
+     */
+    public String getCharName() { return this.charName; }
+
+    /**
      * A method for setting the name of the character.
      *
      * @param name of the character
@@ -379,13 +385,6 @@ public class Character extends Observable {
     public void setCharName(String name) {
         this.charName = name;
     }
-
-    /**
-     * A method for getting the name of a character
-     *
-     * @return the name of the character
-     */
-    public String getCharName() { return this.charName; }
 
     /**
      * A method to get the character object as a string
