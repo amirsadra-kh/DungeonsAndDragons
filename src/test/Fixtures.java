@@ -3,6 +3,10 @@ package test;
 import main.java.org.model.CharacterPackage.Ability;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.DecoratorPackage.Frightening;
+import main.java.org.model.DecoratorPackage.Weapon;
+import main.java.org.model.DecoratorPackage.WeaponEnhanceDecorator;
+import main.java.org.model.DecoratorPackage.WeaponFactory;
 import main.java.org.model.EnhancementTypesEnum;
 import main.java.org.model.Item;
 import main.java.org.model.ItemEnum;
@@ -11,8 +15,15 @@ import main.java.org.model.Map;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * A fixture class for testing classes
+ */
 public class Fixtures {
 
+    /**
+     * A method to create a test screen
+     * @return
+     */
     public  static char[][] createATestScreen(){
          char[][] table=new char[3][3];
         table[0][0] = ' ';
@@ -27,6 +38,10 @@ public class Fixtures {
         return table;
     }
 
+    /**
+     * A method to create a null map
+     * @return
+     */
     public static Map createMap(){
         ArrayList<Character> nonPlayerCharacters = new ArrayList<Character>();
         nonPlayerCharacters.add(createCharacter());
@@ -35,6 +50,10 @@ public class Fixtures {
         return map;
     }
 
+    /**
+     * A method to create a character
+     * @return
+     */
     public static Character createCharacter(){
         Character character = new Character();
         Ability ability = new Ability();
@@ -89,6 +108,22 @@ public class Fixtures {
         item.setEnhancementType(EnhancementTypesEnum.STRENGTH);
         item.setEnhance(1);
         item.setItem(belt);
+        return item;
+    }
+
+    /**
+     * A weapon item - longsword for testing frightening
+     * @return
+     */
+    public static Weapon createWeapon() {
+        ItemEnum weapon = ItemEnum.WEAPON;
+        Weapon item = new Weapon();
+        item = WeaponFactory.setSpecialEnhancement(item, 4);
+        item.setName("weapon1");
+        item.setEnhancementType(EnhancementTypesEnum.DAMAGEBONUS);
+        item.setEnhance(2);
+        item.setItem(weapon);
+        item.setType("longsword");
         return item;
     }
 }
