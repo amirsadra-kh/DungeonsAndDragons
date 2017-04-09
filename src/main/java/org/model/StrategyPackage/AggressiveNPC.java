@@ -29,8 +29,8 @@ public class AggressiveNPC implements BehaviourStrategy {
      * @param objective the position of the objective of the map - chest or exit
      * @param map the map the character is on
      */
-    public void move(Character character, Character player, Point objective, Map map) {
-
+    public Point move(final Character character, final Character player, final Point objective, final Map map) {
+        return null;
     }
 
     /**
@@ -39,7 +39,7 @@ public class AggressiveNPC implements BehaviourStrategy {
      * @param attackedChar
      */
     @Override
-    public void attack(Character mon, Character attackedChar) {
+    public void attack(final Character mon, final Character attackedChar) {
 
     }
 
@@ -49,7 +49,7 @@ public class AggressiveNPC implements BehaviourStrategy {
      * @param chest
      */
     @Override
-    public void interact(Character mon, BackPackInventory chest) {
+    public void interact(final Character mon, final BackPackInventory chest) {
 
     }
 }

@@ -29,7 +29,8 @@ public class HumanPlayer implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public void move(Character character, Character player, Point objective, Map map) {
+    public Point move(final Character character, final Character player, final Point objective, final Map map) {
+        return null;
 
     }
 
@@ -39,7 +40,7 @@ public class HumanPlayer implements BehaviourStrategy {
      * @param attackedChar
      */
     @Override
-    public void attack(Character player, Character attackedChar) {
+    public void attack(final Character player, final Character attackedChar) {
 
     }
 
@@ -49,7 +50,7 @@ public class HumanPlayer implements BehaviourStrategy {
      * @param chestORbackpack
      */
     @Override
-    public void interact(Character character, BackPackInventory chestORbackpack) {
+    public void interact(final Character character, final BackPackInventory chestORbackpack) {
 
     }
 }

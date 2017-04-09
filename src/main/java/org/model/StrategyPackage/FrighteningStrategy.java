@@ -29,7 +29,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param previousStrategy of the target
      * @param attacker the character who made the target frightened
      */
-    public void setUp(int enhancement, BehaviourStrategy previousStrategy, Character attacker) {
+    public void setUp(final int enhancement, final BehaviourStrategy previousStrategy, final Character attacker) {
         this.turns = enhancement;
         this.previousStrategy = previousStrategy;
         this.attacker = attacker;
@@ -49,13 +49,14 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public void move(Character target, Character player, Point objective, Map map) {
+    public Point move(final Character target, final Character player, final Point objective, final Map map) {
         // TODO Runaway implementation here, use this.attacker position and go in the other direction
-        Point attackerPoint = this.attacker.getCurrentPosition();
-        Point targetPoint = target.getCurrentPosition();
+        final Point attackerPoint = this.attacker.getCurrentPosition();
+        final Point targetPoint = target.getCurrentPosition();
 
-        MapDirectionValidator validate = new MapDirectionValidator();
-        
+        final MapDirectionValidator validate = new MapDirectionValidator();
+        return null;
+
     }
 
     /**
@@ -64,7 +65,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param attackedChar
      */
     @Override
-    public void attack(Character attackingChar, Character attackedChar) {
+    public void attack(final Character attackingChar, final Character attackedChar) {
 
     }
 
@@ -74,7 +75,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param chestORbackpack
      */
     @Override
-    public void interact(Character character, BackPackInventory chestORbackpack) {
+    public void interact(final Character character, final BackPackInventory chestORbackpack) {
 
     }
 }
