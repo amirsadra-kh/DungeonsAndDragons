@@ -1,13 +1,9 @@
 package main.java.org.Service;
 
-import main.java.org.model.Campaign;
+import main.java.org.model.*;
 import main.java.org.model.CharacterPackage.Ability;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.CharacterPackage.Inventory;
-import main.java.org.model.GameConstantsInterface;
-import main.java.org.model.Item;
-import main.java.org.model.Map;
-import main.java.org.model.ReadInput;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -30,7 +26,7 @@ import java.util.List;
  */
 @XmlRootElement
 public class PlayScreen {
-    private Character character;
+    static Character character;
     private Campaign campaign;
     private ReadInput readInput = new ReadInput();
     private Map map = new Map();
@@ -44,22 +40,6 @@ public class PlayScreen {
 
     public PlayScreen() {
 
-    }
-
-    /**
-     * This method sets the player at the entry point of the map
-     * it searches for E in the Map and set the payer position there
-     *
-     * @param map
-     */
-    public static void setPlayerAtEntryPoint(final Map map) {
-        for (int i = 0; i < map.getScreen().length; i++) {
-            for (int j = 0; j < map.getScreen()[i].length; j++) {
-                if (map.getScreen()[i][j].equalsIgnoreCase("E")) {
-                    map.getScreen()[i][j] = "P";
-                }
-            }
-        }
     }
 
     /**
@@ -123,6 +103,27 @@ public class PlayScreen {
             direction = readInput.readCoordinate();
             if (userWantToSaveTheGameAndExit(direction))
                 return;
+        }
+    }
+
+    /**
+     * This method sets the player at the entry point of the map
+     * it searches for E in the Map and set the payer position there
+     *
+     * @param map
+     */
+    public static void setPlayerAtEntryPoint(Map map) {
+        List<Character> mapCharacters = map.getNonPLayerCharacters();
+        // Add the player character to the list as well
+        mapCharacters.add(character);
+        TurnBasedMechanism turn = new TurnBasedMechanism();
+        mapCharacters = turn.setTurns(mapCharacters);
+        for (int i = 0; i < map.getScreen().length; i++) {
+            for (int j = 0; j < map.getScreen()[i].length; j++) {
+                if (map.getScreen()[i][j].equalsIgnoreCase("E")) {
+                    map.getScreen()[i][j] = "P";
+                }
+            }
         }
     }
 

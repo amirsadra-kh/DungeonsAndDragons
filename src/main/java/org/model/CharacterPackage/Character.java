@@ -1,7 +1,7 @@
 package main.java.org.model.CharacterPackage;
 
-import main.java.org.model.DecoratorPackage.CharacterStrategy;
 import main.java.org.model.Item;
+import main.java.org.model.RollDice;
 import main.java.org.model.StrategyPackage.BehaviourStrategy;
 
 import javax.xml.bind.JAXBContext;
@@ -34,9 +34,9 @@ public class Character extends Observable {
     private int level;
     private String fighterType;
     private BehaviourStrategy behaviourStrategy;
-    private CharacterStrategy characterStrategy;
     private boolean turn;
     private boolean burning;
+    private int turnRoll = 0;
 
     // A base line for the hit points
     RollDice dice10 = new RollDice(10);
@@ -218,30 +218,19 @@ public class Character extends Observable {
     }
 
     /**
+     * A method to get the behaviour strategy of a character
+     * @return behaviourStrategy
+     */
+    public BehaviourStrategy getBehaviourStrategy() {
+        return this.behaviourStrategy;
+    }
+
+    /**
      * A method that executes different behaviour strategy depending on what
      * behaviour strategy was plugged in upon instantiation.
      */
     public void executeBehaviourStrategy() {
         this.behaviourStrategy.execute();
-    }
-
-    /**
-     * Plugs in a specific character strategy to be used based on the weapon
-     * enhancement
-     *
-     * @param characterStrategy
-     */
-    public void setCharacterStrategy(CharacterStrategy characterStrategy) {
-        this.characterStrategy = characterStrategy;
-    }
-
-    /**
-     * A method that executes different character strategy depending on what
-     * character strategy was plugged in upon weapon enhancement.
-     * @param enhancement the weapon enahancement integer
-     */
-    public void executeCharacterStrategy(int enhancement) {
-        this.characterStrategy.execute(this, enhancement);
     }
 
     /**
@@ -274,6 +263,22 @@ public class Character extends Observable {
      */
     public boolean getBurning() {
         return this.burning;
+    }
+
+    /**
+     * A method to set the dice value of this character
+     * @param dice
+     */
+    public void setTurnRoll(int dice) {
+        this.turnRoll = dice + this.ability.getDexterityModifier();
+    }
+
+    /**
+     * A method to get the value of the turnRoll
+     * @return turnRoll
+     */
+    public int getTurnRoll() {
+        return this.turnRoll;
     }
 
     /**

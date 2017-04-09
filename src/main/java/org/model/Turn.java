@@ -1,7 +1,9 @@
 package main.java.org.model;
 
+import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,6 +66,4 @@ public class Turn {
     public void setTurns(List<Character> turns) {
         this.turns = turns;
     }
-
-
 }
