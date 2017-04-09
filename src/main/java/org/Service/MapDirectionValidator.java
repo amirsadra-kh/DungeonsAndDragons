@@ -73,6 +73,25 @@ public class MapDirectionValidator {
 
     }
 
+    /**
+     * This method is to return a valid coordinate with the maximum 3 spots
+     * @param i i coordinate
+     * @param j j coordinate
+     * @param map the target map
+     * @param target the target coordinate
+     * @return
+     */
+    protected boolean coordinateIsValidToMove(final int i, final int j, final Map map, final Point target) {
+        try {
+            final String str = map.getScreen()[i][j];
+            return str.equalsIgnoreCase(" ") && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;
+        } catch (final IndexOutOfBoundsException e) {
+            System.out.print("the selected coordinate is out of bound , please try another coordinate");
+            return false;
+        }
+
+    }
+
 //    /**
 //     * This method is to validate if we can go to next level
 //     * @param map the map we are playing
