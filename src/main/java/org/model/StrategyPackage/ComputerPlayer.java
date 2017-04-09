@@ -16,11 +16,6 @@ import java.awt.*;
  * @since
  */
 public class ComputerPlayer implements BehaviourStrategy {
-    @Override
-    public void execute() {
-
-    }
-
     /**
      * A method for moving a computer player - move towards objective of map or towards exit
      * @param compPlayer the computer player

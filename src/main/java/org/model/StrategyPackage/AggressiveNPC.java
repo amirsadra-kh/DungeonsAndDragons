@@ -23,11 +23,6 @@ import java.util.List;
  */
 public class AggressiveNPC implements BehaviourStrategy {
     @Override
-    public void execute() {
-
-    }
-
-    @Override
     /**
      * A method for moving a hostile character - move towards player
      * @param character the one who has a turn now

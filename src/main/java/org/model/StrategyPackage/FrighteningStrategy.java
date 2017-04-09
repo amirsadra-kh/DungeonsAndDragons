@@ -36,10 +36,6 @@ public class FrighteningStrategy implements BehaviourStrategy {
         this.attacker = attacker;
     }
 
-    @Override
-    public void execute() {
-    }
-
     /**
      * A method for running away from character who attacked with frightening enhancement
      * for as many turns as the enhancement of the weapon has.

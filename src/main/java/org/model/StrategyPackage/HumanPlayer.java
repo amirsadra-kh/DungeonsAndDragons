@@ -16,11 +16,6 @@ import java.awt.*;
  * @since
  */
 public class HumanPlayer implements BehaviourStrategy {
-    @Override
-    public void execute() {
-
-    }
-
     /**
      * A method for moving a player character - by choice
      * @param character the one who has a turn now - the player character

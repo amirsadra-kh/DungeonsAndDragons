@@ -29,10 +29,6 @@ public class FrozenStrategy implements BehaviourStrategy {
         this.previousStrategy = previousStrategy;
     }
 
-    @Override
-    public void execute() {
-    }
-
     /**
      * A method where the character does nothing - frozen
      *
