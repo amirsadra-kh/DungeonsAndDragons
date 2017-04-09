@@ -13,8 +13,8 @@ import java.awt.*;
  */
 public class MapDirectionValidator {
     private static final int levelsPlayed = 0;
-    private final Campaign campaign;
-    private final Map map;
+    private Campaign campaign;
+    private Map map;
 
     /**
      * This is the constructor of the MapDirectionValidator
@@ -25,6 +25,11 @@ public class MapDirectionValidator {
         this.campaign = campaign;
         this.map = map;
     }
+
+    /**
+     * An empty constructor for the move methods in strategy pattern.
+     */
+    public MapDirectionValidator() {}
 
     /**
      * This method is to move the player on the map based on the provided direction
@@ -39,15 +44,15 @@ public class MapDirectionValidator {
     }
 
 
-    public Point getNextCellToMove(final String direction, final Point currentPossition) {
+    public Point getNextCellToMove(final String direction, final Point currentPosition) {
         if ("L".equalsIgnoreCase(direction)) {
-            return new Point(currentPossition.x, currentPossition.y - 1);
+            return new Point(currentPosition.x, currentPosition.y - 1);
         } else if ("R".equalsIgnoreCase(direction)) {
-            return new Point(currentPossition.x, currentPossition.y + 1);
+            return new Point(currentPosition.x, currentPosition.y + 1);
         } else if ("D".equalsIgnoreCase(direction)) {
-            return new Point(currentPossition.x + 1, currentPossition.y);
+            return new Point(currentPosition.x + 1, currentPosition.y);
         } else if ("U".equalsIgnoreCase(direction)) {
-            return new Point(currentPossition.x - 1, currentPossition.y);
+            return new Point(currentPosition.x - 1, currentPosition.y);
         }
         return null;
     }

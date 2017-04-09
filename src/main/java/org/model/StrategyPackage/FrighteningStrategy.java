@@ -1,7 +1,9 @@
 package main.java.org.model.StrategyPackage;
 
+import main.java.org.Service.MapDirectionValidator;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.Map;
 
 import java.awt.*;
 
@@ -44,10 +46,16 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param target
      * @param player
      * @param objective
+     * @param map the map the character is on
      */
     @Override
-    public void move(Character target, Character player, Point objective) {
+    public void move(Character target, Character player, Point objective, Map map) {
         // TODO Runaway implementation here, use this.attacker position and go in the other direction
+        Point attackerPoint = this.attacker.getCurrentPosition();
+        Point targetPoint = target.getCurrentPosition();
+
+        MapDirectionValidator validate = new MapDirectionValidator();
+        
     }
 
     /**
