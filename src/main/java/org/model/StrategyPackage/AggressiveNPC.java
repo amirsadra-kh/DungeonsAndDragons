@@ -1,12 +1,15 @@
 package main.java.org.model.StrategyPackage;
 
+import main.java.org.Service.Calculation;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Item;
+import main.java.org.model.ItemEnum;
 import main.java.org.model.Map;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -71,7 +74,57 @@ public class AggressiveNPC implements BehaviourStrategy {
      */
     @Override
     public void attack(Character mon, Character attackedChar) {
+        // check if attack is valid
+        int armorClass = attackedChar.getAbility().getArmorClass();
+        // if attack is valid, get and apply damage
+        if(checkAttack(armorClass, mon)) {
+            int total = getDamage(mon, attackedChar);
+            attackedChar.decreaseHitPoint(total);
+        }
+    }
 
+    /**
+     * A method to check if an attack is successful
+     * @param armorClass of the target
+     * @param mon the monster character
+     * @return true if attack is successful, else false
+     */
+    private boolean checkAttack(int armorClass, Character mon) {
+        Calculation roll = new Calculation();
+        int d20 = roll.getDice20();
+
+        int attackBonus = mon.getAbility().getAttackBonus();
+        int strengthMod = mon.getAbility().getStrengthModifier();
+        int level = mon.getLevel();
+
+        int total = d20 + attackBonus + strengthMod + level;
+
+        if(total > armorClass)
+            return true;
+        else
+            return false;
+    }
+
+    /**
+     * A method to get the damageBonus + d8 roll of a weapon and add it to the strength modifier.
+     * Also get the special enhancement of the weapon and apply it to the target.
+     * @param mon
+     * @param target
+     * @return total damage to be dealt
+     */
+    private int getDamage(Character mon, Character target) {
+        int damageBonus = 0;
+        HashSet<Item> wearingItems = mon.getItemsWearing();
+        for(Item i : wearingItems) {
+            if(i.getItem().equals(ItemEnum.WEAPON)) {
+                // TODO get the damageBonus of the item here
+                // TODO get the special enhancement here
+                // TODO Apply special enhancement, if any, to character here
+            }
+        }
+        int strengthMod = mon.getAbility().getStrengthModifier();
+
+        return (damageBonus + strengthMod);
     }
 
     /**
