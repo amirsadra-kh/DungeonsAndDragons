@@ -142,4 +142,36 @@ public class Fixtures {
         item.setType("longsword");
         return item;
     }
+
+    /**
+     * A method to create a pacifying weapon for testing pacifying decorator
+     * @return pacifying weapon
+     */
+    public static Weapon createPacifyingWeapon() {
+        ItemEnum weapon = ItemEnum.WEAPON;
+        Weapon item = new Weapon();
+        item = WeaponFactory.setSpecialEnhancement(item, 5);
+        item.setName("weapon3");
+        item.setEnhancementType(EnhancementTypesEnum.DAMAGEBONUS);
+        item.setEnhance(2);
+        item.setItem(weapon);
+        item.setType("longsword");
+        return item;
+    }
+
+    /**
+     * A method to create a slaying weapon for testing slaying decorator
+     * @return slaying weapon
+     */
+    public static Weapon createSlayingWeapon() {
+        ItemEnum weapon = ItemEnum.WEAPON;
+        Weapon item = new Weapon();
+        item = WeaponFactory.setSpecialEnhancement(item, 3);
+        item.setName("weapon4");
+        item.setEnhancementType(EnhancementTypesEnum.DAMAGEBONUS);
+        item.setEnhance(2);
+        item.setItem(weapon);
+        item.setType("longsword");
+        return item;
+    }
 }

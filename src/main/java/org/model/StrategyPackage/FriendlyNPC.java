@@ -75,4 +75,13 @@ public class FriendlyNPC implements BehaviourStrategy {
     public void interact(Character fchar, BackPackInventory chest) {
 
     }
+
+    /**
+     * A method to set the friendly NPC strategy to a string
+     * @return
+     */
+    @Override
+    public String toString() {
+        return "FriendlyNPC";
+    }
 }
