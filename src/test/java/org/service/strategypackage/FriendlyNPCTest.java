@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
@@ -73,8 +74,46 @@ public class FriendlyNPCTest {
         friendlyNPC.interactWithChest(map, fChar);
         //THEN
         assertEquals(fChar.getBackPackInventory().getItems().size(), 2);
+        assertEquals(fChar.getBackPackInventory().getItems().get(0), helmet);
+        assertEquals(fChar.getBackPackInventory().getItems().get(1), belt);
+        assertEquals(map.getChest().getItems().size(), 0);
+
+    }
+
+    @Test
+    public void interactWithChestHavingMoreThanTenItems() throws Exception {
+        //GIVEN
+        final BackPackInventory backPackInventory = new BackPackInventory();
+        final BackPackInventory playerBackPackInventory = new BackPackInventory();
+        final Item belt = new Item();
+        belt.setItem(ItemEnum.BELT);
+        final ArrayList<Item> itemsForChest = new ArrayList<Item>() {{
+            add(belt);
+            add(belt);
+            add(belt);
+            add(belt);
+            add(belt);
+        }};
+        final ArrayList<Item> itemsForPlayer = new ArrayList<Item>() {{
+            add(belt);
+            add(belt);
+            add(belt);
+            add(belt);
+            add(belt);
+            add(belt);
+            add(belt);
+            add(belt);
+        }};
+        backPackInventory.setItems(itemsForChest);
+        playerBackPackInventory.setItems(itemsForPlayer);
+        fChar.setBackPackInventory(playerBackPackInventory);
+        map.setChest(backPackInventory);
+        //WHEN
+        friendlyNPC.interactWithChest(map, fChar);
+        //THEN
+        assertEquals(fChar.getBackPackInventory().getItems().size(), 10);
         assertEquals(fChar.getBackPackInventory().getItems().get(0), belt);
-        assertEquals(fChar.getBackPackInventory().getItems().get(1), helmet);
+        assertEquals(map.getChest().getItems().size(), 3);
 
     }
 

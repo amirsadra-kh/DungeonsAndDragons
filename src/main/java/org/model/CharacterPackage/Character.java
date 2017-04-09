@@ -320,7 +320,7 @@ public class Character extends Observable {
      */
     @XmlElement
     public BackPackInventory getBackPackInventory() {
-        if(this.backPackInventory.getItems().size() != 0){
+        if (this.backPackInventory != null && this.backPackInventory.getItems().size() != 0) {
             return this.backPackInventory;
         }
         final BackPackInventory backpack = new BackPackInventory();

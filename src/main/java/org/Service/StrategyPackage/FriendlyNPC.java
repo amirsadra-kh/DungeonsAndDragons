@@ -37,7 +37,7 @@ public class FriendlyNPC implements BehaviourStrategy {
      * @param map       the map the character is on
      */
     @Override
-    public Point move(final Character fchar, final Character player, final Point objective, final Map map) {
+    public Point move( Character fchar,  Character player,  Point objective,  Map map) {
         final Point nextPosition = getPossiblePoints(map, fchar.getCurrentPosition());
         if (nextPosition != null && map.getScreen()[nextPosition.x][nextPosition.y].equalsIgnoreCase("c")) {
             interactWithChest(map, fchar);
@@ -53,25 +53,25 @@ public class FriendlyNPC implements BehaviourStrategy {
      * @param map    the paying map
      * @param player the freidnly character
      */
-    public void interactWithChest(final Map map, final Character player) {
+    public void interactWithChest (Map map, Character player) {
 
         final BackPackInventory chest = map.getChest();
-        java.util.List<Item> loot = new ArrayList<>();
+        final ArrayList<Item> loot = new ArrayList<>();
         if (chest != null) {
-            loot = chest.getItems();
+            loot.addAll(chest.getItems());
         }
         final java.util.List<Item> playerBackpack = player.getBackPackInventoryItems();
         if (playerBackpack == null) {
             player.setBackPackInventory(new BackPackInventory());
         }
-        for (int i = 0; i < loot.size(); i++) {
-            if (player.getBackPackInventoryItems().size() <= 10) {
-                player.getBackPackInventoryItems().add(loot.get(i));
-                map.getChest().getItems().remove(loot.get(i));
+        while (loot.size() > 0) {
+            if (player.getBackPackInventoryItems().size() < 10) {
+                player.getBackPackInventoryItems().add(loot.remove(loot.size() - 1));
             } else {
                 break;
             }
         }
+        map.getChest().setItems(loot);
 
     }
 
