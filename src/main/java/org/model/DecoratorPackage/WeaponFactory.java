@@ -25,27 +25,27 @@ public class WeaponFactory {
             case 1:
                 weapon = new Freezing(weapon);
                 System.out.println("FREEZING ADDED SUCCESSFULLY!");
-                break;
+                return weapon;
             // Burning
             case 2:
                 weapon = new Burning(weapon);
                 System.out.println("BURNING ADDED SUCCESSFULLY!");
-                break;
+                return weapon;
             // Slaying
             case 3:
                 weapon = new Slaying(weapon);
                 System.out.println("SLAYING ADDED SUCCESSFULLY!");
-                break;
+                return weapon;
             // Frightening
             case 4:
                 weapon = new Frightening(weapon);
                 System.out.println("FRIGHTENING ADDED SUCCESSFULLY!");
-                break;
+                return weapon;
             // Pacifying
             case 5:
                 weapon = new Pacifying(weapon);
                 System.out.println("PACIFYING ADDED SUCCESSFULLY!");
-                break;
+                return weapon;
         }
 
         return weapon;

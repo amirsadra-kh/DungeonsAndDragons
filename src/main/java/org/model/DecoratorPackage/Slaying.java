@@ -1,5 +1,7 @@
 package main.java.org.model.DecoratorPackage;
 
+import main.java.org.model.CharacterPackage.Character;
+
 /**
  * A Slaying Decorator
  * Target dies instantly.
@@ -25,5 +27,14 @@ public class Slaying extends WeaponEnhanceDecorator {
      */
     public String getSpecialEnhance() {
         return super.getSpecialEnhance() + ", Slaying";
+    }
+
+    /**
+     * A method for killing the target instantly
+     *
+     * @param target
+     */
+    public void slay(Character target) {
+        target.decreaseHitPoint(target.getHitPoints());
     }
 }
