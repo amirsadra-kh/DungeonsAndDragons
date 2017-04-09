@@ -6,6 +6,7 @@ import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Map;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * A strategy for the Frightening decorator
@@ -54,8 +55,55 @@ public class FrighteningStrategy implements BehaviourStrategy {
         Point attackerPoint = this.attacker.getCurrentPosition();
         Point targetPoint = target.getCurrentPosition();
 
+        // Add all validated points for target to move to a list of points
+        ArrayList<Point> possiblePoints = addValidatedPoints(map, targetPoint);
+
+
+        // Find a point furthest away from attacker
+        Point max = getMaxDistance(possiblePoints, attackerPoint);
+
+        // Set the new position
+        target.setCurrentPosition(max);
+    }
+
+    /**
+     * A method for checking all the cells in a map and see if the target can move there
+     *
+     * @param map the current map being played
+     * @param targetPoint the position of the target
+     * @return a list of validated cells for the target ro go to
+     */
+    private ArrayList<Point> addValidatedPoints(Map map, Point targetPoint) {
+        ArrayList<Point> possiblePoints = new ArrayList<>();
+
+        // Add all valid points for moving to possiblePoints list
         MapDirectionValidator validate = new MapDirectionValidator();
-        
+        for(int row = 0; row < map.getRows(); row++) {
+            for (int col = 0; col < map.getCols(); col++) {
+                if(validate.coordinateIsValidToMove(row, col, map, targetPoint)) {
+                    Point validPoint = new Point(row, col);
+                    possiblePoints.add(validPoint);
+                }
+            }
+        }
+
+        return possiblePoints;
+    }
+
+    /**
+     * A method to get the point furthest away from the attacker out of the valid points
+     * @param possiblePoints points the target can move
+     * @param attackerPoint the position of the attacker
+     * @return a point furthest away from the attacker
+     */
+    private Point getMaxDistance(ArrayList<Point> possiblePoints, Point attackerPoint) {
+        Point max = possiblePoints.get(0);
+        for(Point p : possiblePoints) {
+            if((Math.abs(p.x - attackerPoint.x)) + Math.abs(p.y - attackerPoint.y) >
+                    (Math.abs(max.x - attackerPoint.x)) + Math.abs(max.y - attackerPoint.y))
+                max = p;
+        }
+        return max;
     }
 
     /**
