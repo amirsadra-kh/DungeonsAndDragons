@@ -21,6 +21,9 @@ public class MapTest {
         this.map = new Map();
     }
 
+    /**
+     * A method to get the name of the map.
+     */
     @Test
     public void testGetName() {
         String name = "map1";
@@ -28,12 +31,18 @@ public class MapTest {
         Assert.assertEquals(name, this.map.getName());
     }
 
+    /**
+     * A method to check if level is completed
+     */
     @Test
-    public void testisLevelCompleted() {
+    public void testIsLevelCompleted() {
         this.map.setLevelCompleted(true);
         Assert.assertEquals(true, this.map.isLevelCompleted());
     }
 
+    /**
+     * A method to get the cols of the map.
+     */
     @Test
     public void testGetCols() {
         int cols=5;
@@ -41,6 +50,9 @@ public class MapTest {
         Assert.assertEquals(cols, this.map.getCols());
     }
 
+    /**
+     * A method to get the rows of the map.
+     */
     @Test
     public void testgetRows() {
         int rows=4;
@@ -48,6 +60,9 @@ public class MapTest {
         Assert.assertEquals(rows, this.map.getRows());
     }
 
+    /**
+     * A method to get the Player in the map.
+     */
     @Test
     public void testgetPlayer() {
         Character player = new Character() ;
@@ -55,7 +70,9 @@ public class MapTest {
         Assert.assertEquals(player, this.map.getPlayer());
     }
 
-
+    /**
+     * A method to tear down after the tests.
+     */
     @After
     public void tearDown() {
         this.map = null;
