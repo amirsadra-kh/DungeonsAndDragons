@@ -16,11 +16,6 @@ import java.awt.*;
  */
 public interface BehaviourStrategy {
     /**
-     * Method whose implementation varies depending on the strategy adopted
-     */
-    void execute();
-
-    /**
      * A method for moving a character when it is their turn.
      * @param character the one who has a turn now
      * @param player the player character of the map

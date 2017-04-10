@@ -3,6 +3,8 @@ package test;
 import main.java.org.model.CharacterPackage.Ability;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.DecoratorPackage.Weapon;
+import main.java.org.model.DecoratorPackage.WeaponFactory;
 import main.java.org.model.EnhancementTypesEnum;
 import main.java.org.model.Item;
 import main.java.org.model.ItemEnum;
@@ -11,8 +13,15 @@ import main.java.org.model.Map;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * A fixture class for testing classes
+ */
 public class Fixtures {
 
+    /**
+     * A method to create a test screen
+     * @return
+     */
     public  static char[][] createATestScreen(){
         final char[][] table = new char[3][3];
         table[0][0] = ' ';
@@ -27,6 +36,10 @@ public class Fixtures {
         return table;
     }
 
+    /**
+     * A method to create a null map
+     * @return
+     */
     public static Map createMap(){
         final ArrayList<Character> nonPlayerCharacters = new ArrayList<>();
         nonPlayerCharacters.add(createCharacter());
@@ -35,6 +48,10 @@ public class Fixtures {
         return map;
     }
 
+    /**
+     * A method to create a character
+     * @return
+     */
     public static Character createCharacter(){
         final Character character = new Character();
         final Ability ability = new Ability();
@@ -109,6 +126,70 @@ public class Fixtures {
     }
 
     /**
+     * A weapon item - longsword for testing frightening
+     * @return
+     */
+    public static Weapon createWeapon() {
+        ItemEnum weapon = ItemEnum.WEAPON;
+        Weapon item = new Weapon();
+        item = WeaponFactory.setSpecialEnhancement(item, 4);
+        item.setName("weapon1");
+        item.setEnhancementType(EnhancementTypesEnum.DAMAGEBONUS);
+        item.setEnhance(2);
+        item.setItem(weapon);
+        item.setType("longsword");
+        return item;
+    }
+
+    /**
+     * A weapon item - longsword for testing frozen
+     * @return
+     */
+    public static Weapon createFrozenWeapon() {
+        ItemEnum weapon = ItemEnum.WEAPON;
+        Weapon item = new Weapon();
+        item = WeaponFactory.setSpecialEnhancement(item, 1);
+        item.setName("weapon2");
+        item.setEnhancementType(EnhancementTypesEnum.DAMAGEBONUS);
+        item.setEnhance(2);
+        item.setItem(weapon);
+        item.setType("longsword");
+        return item;
+    }
+
+    /**
+     * A method to create a pacifying weapon for testing pacifying decorator
+     * @return pacifying weapon
+     */
+    public static Weapon createPacifyingWeapon() {
+        ItemEnum weapon = ItemEnum.WEAPON;
+        Weapon item = new Weapon();
+        item = WeaponFactory.setSpecialEnhancement(item, 5);
+        item.setName("weapon3");
+        item.setEnhancementType(EnhancementTypesEnum.DAMAGEBONUS);
+        item.setEnhance(2);
+        item.setItem(weapon);
+        item.setType("longsword");
+        return item;
+    }
+
+    /**
+     * A method to create a slaying weapon for testing slaying decorator
+     * @return slaying weapon
+     */
+    public static Weapon createSlayingWeapon() {
+        ItemEnum weapon = ItemEnum.WEAPON;
+        Weapon item = new Weapon();
+        item = WeaponFactory.setSpecialEnhancement(item, 3);
+        item.setName("weapon4");
+        item.setEnhancementType(EnhancementTypesEnum.DAMAGEBONUS);
+        item.setEnhance(2);
+        item.setItem(weapon);
+        item.setType("longsword");
+        return item;
+    }
+
+    /**
      * Thsi method is to create a map with no empty spot (all walls)
      *
      * @param map a map with no empty spot
@@ -121,6 +202,5 @@ public class Fixtures {
             }
         }
         return map;
-
     }
 }
