@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +67,21 @@ public class PlayScreen {
             setPlayerAtEntryPoint(map);
         }
         MapScreen.showMap(map);
+        checkForObserve();
+        enterDirection();
+        movePlayer();
+
+    }
+
+    private void setTurns(){
+        TurnBasedMechanism turn=new TurnBasedMechanism();
+        List<Character> characters= map.getNonPLayerCharacters();
+        characters.add(map.getPlayer());
+
+    }
+
+
+    private void checkForObserve() {
         // Allow the user to observe a character.
         String choice = "";
         System.out.println("Would you like to observe a character from the map? Y/N");
@@ -77,8 +93,6 @@ public class PlayScreen {
         if ("Y".equals(choice) || "y".equals(choice)) {
             userObserverChoice(map);
         }
-        enterDirection();
-        movePlayer();
     }
 
     /**
