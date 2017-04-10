@@ -51,14 +51,13 @@ public class AggressiveNPCTest {
     public void testMoveForReturnsNewPosition() throws Exception {
         // GIVEN
         monster.setCurrentPosition(new Point(2,2));
-        player.setCurrentPosition(new Point(0,3));
-        Point chest = new Point(0,1);
+        player.setCurrentPosition(new Point(3,0));
+        Point chest = new Point(1,0);
 
         // WHEN
         Point newPoint = monster.getBehaviourStrategy().move(monster, player, chest, this.map);
         // acceptable moves
-        Point idealPoint1 = new Point(0,2);
-        Point idealPoint2 = new Point(1, 3);
+        Point idealPoint1 = new Point(2,0);
 
         // THEN
         Assert.assertEquals(idealPoint1, newPoint);

@@ -16,9 +16,9 @@ import java.awt.*;
  * interaction for determining where the player moves, what NPC it attacks, and
  * what other interactions it will do during a turn.
  *
- * @author
- * @version
- * @since
+ * @author Freyja Jokulsdottir
+ * @version 1.0
+ * @since 09.04.2017
  */
 public class HumanPlayer implements BehaviourStrategy {
     ReadInput readInput = new ReadInput();
@@ -39,7 +39,7 @@ public class HumanPlayer implements BehaviourStrategy {
         for(int i = 0; i < 3; i ++) {
             //This prints and ask user to enter the directions
             System.out.println(GameConstantsInterface.ENTER_DIRECTION);
-            if(!checkIfMoveIsValid(map)) {
+            if(!checkIfMoveIsValid(map, humanPlayer)) {
                 i--;
                 System.out.println("Invalid Move!");
             }
@@ -54,10 +54,10 @@ public class HumanPlayer implements BehaviourStrategy {
      * @param map
      * @return
      */
-    private boolean checkIfMoveIsValid(Map map) {
+    private boolean checkIfMoveIsValid(Map map, Character humanPlayer) {
         String direction = readInput.readCoordinate();
         MapDirectionValidator validate = new MapDirectionValidator();
-        return validate.isDirectionLeadsToValidCell(direction, map);
+        return validate.directionIsValidToMove(direction, map, humanPlayer.getCurrentPosition());
     }
 
     /**

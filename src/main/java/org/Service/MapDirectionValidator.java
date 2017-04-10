@@ -98,6 +98,19 @@ public class MapDirectionValidator {
     }
 
     /**
+     * This method is to return a valid coordinate based on a direction entered.
+     *
+     * @param direction the string direction (U, R, L, D)
+     * @param map the target map
+     * @param player the humanPLayer coordinate
+     * @return
+     */
+    public boolean directionIsValidToMove(String direction, final Map map, final Point player) {
+        Point nextPoint = getNextCellToMove(direction, player);
+        return coordinateIsValid(nextPoint.x, nextPoint.y, map);
+    }
+
+    /**
      * This method is to return a valid coordinate with the maximum 3 spots
      *
      * @param i      i coordinate

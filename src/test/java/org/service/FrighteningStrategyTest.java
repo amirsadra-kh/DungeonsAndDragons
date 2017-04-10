@@ -69,8 +69,8 @@ public class FrighteningStrategyTest {
     public void testMoveAwayFromAttacker() throws Exception {
         // GIVEN
         target.setCurrentPosition(new Point(2,2));
-        attacker.setCurrentPosition(new Point(0,3));
-        Point chest = new Point(0,1);
+        attacker.setCurrentPosition(new Point(3,0));
+        Point chest = new Point(1,0);
         this.target.setBehaviourStrategy(frighteningStrategy);
 
         // WHEN
@@ -78,7 +78,7 @@ public class FrighteningStrategyTest {
 
         // THEN
         // acceptable moves
-        Point idealPoint1 = new Point(2,0);
+        Point idealPoint1 = new Point(0,2);
         Assert.assertEquals(idealPoint1, newPoint);
     }
 
@@ -89,8 +89,8 @@ public class FrighteningStrategyTest {
     public void testBackToNormalStrategy() {
         // GIVEN
         target.setCurrentPosition(new Point(2,2));
-        attacker.setCurrentPosition(new Point(0,3));
-        Point chest = new Point(0,1);
+        attacker.setCurrentPosition(new Point(3,0));
+        Point chest = new Point(1,0);
         this.target.setBehaviourStrategy(frighteningStrategy);
 
         // WHEN
@@ -101,7 +101,7 @@ public class FrighteningStrategyTest {
 
         // THEN
         // target is back to being aggressive and will move towards player
-        Point idealPoint = new Point(0, 2);
+        Point idealPoint = new Point(2, 0);
         Assert.assertEquals(idealPoint, newPoint);
     }
 }
