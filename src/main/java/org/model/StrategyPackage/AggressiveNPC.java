@@ -31,6 +31,9 @@ public class AggressiveNPC implements BehaviourStrategy {
      * @param map the map the character is on
      */
     public Point move(Character monster, Character player, Point objective, Map map) {
+        if(monster.getBurning()) {
+            // TODO decrease monster's hitpoints here based on getBurningDamage in burning decorator
+        }
         Point playerPoint = player.getCurrentPosition();
         Point monsterPoint = monster.getCurrentPosition();
 

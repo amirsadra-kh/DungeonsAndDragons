@@ -25,6 +25,9 @@ public class ComputerPlayer implements BehaviourStrategy {
      */
     @Override
     public Point move(Character compPlayer, Character player, Point objective, Map map) {
+        if(compPlayer.getBurning()) {
+            // TODO decrease monster's hitpoints here based on getBurningDamage in burning decorator
+        }
         return null;
     }
 
