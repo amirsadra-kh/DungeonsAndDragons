@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.awt.*;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,6 +67,21 @@ public class PlayScreen {
             setPlayerAtEntryPoint(map);
         }
         MapScreen.showMap(map);
+        checkForObserve();
+        enterDirection();
+        movePlayer();
+
+    }
+
+    private void setTurns(){
+        TurnBasedMechanism turn=new TurnBasedMechanism();
+        List<Character> characters= map.getNonPLayerCharacters();
+        characters.add(map.getPlayer());
+
+    }
+
+
+    private void checkForObserve() {
         // Allow the user to observe a character.
         String choice = "";
         System.out.println("Would you like to observe a character from the map? Y/N");
@@ -77,8 +93,6 @@ public class PlayScreen {
         if ("Y".equals(choice) || "y".equals(choice)) {
             userObserverChoice(map);
         }
-        enterDirection();
-        movePlayer();
     }
 
     /**
@@ -242,13 +256,13 @@ public class PlayScreen {
         final ObjectLoader ol = new ObjectLoader();
         // Get the user to choose an existing character from a list to play
         System.out.println("Please enter the name of the character you would like to play from the list below: ");
-        this.character = new Character();
+        character = new Character();
         ol.showItemNames("src/main/java/org/resources/characters/");
-        this.character = character.loadCharacter(readInput.readLine());
+        character = character.loadCharacter(readInput.readLine());
 
-        while (this.character.equals(null)) {
+        while (character.equals(null)) {
             System.out.println("This character does not exist! Please try again: ");
-            this.character = character.loadCharacter(readInput.readLine());
+            character = character.loadCharacter(readInput.readLine());
         }
 
         // Set the character chosen to player character

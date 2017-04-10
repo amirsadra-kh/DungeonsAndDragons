@@ -1,4 +1,4 @@
-package main.java.org.model.StrategyPackage;
+package main.java.org.Service.StrategyPackage;
 
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
@@ -16,18 +16,13 @@ import java.awt.*;
  */
 public interface BehaviourStrategy {
     /**
-     * Method whose implementation varies depending on the strategy adopted
-     */
-    void execute();
-
-    /**
      * A method for moving a character when it is their turn.
      * @param character the one who has a turn now
      * @param player the player character of the map
      * @param objective the position of the objective of the map - chest or exit
      * @param map the map the character is on
      */
-    void move(Character character, Character player, Point objective, Map map);
+    Point move(Character character, Character player, Point objective, Map map);
 
     /**
      * A method for a character attack after they have moved

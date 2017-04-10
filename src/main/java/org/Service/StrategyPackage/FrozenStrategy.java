@@ -1,4 +1,4 @@
-package main.java.org.model.StrategyPackage;
+package main.java.org.Service.StrategyPackage;
 
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
@@ -24,13 +24,9 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param enhancement
      * @param previousStrategy
      */
-    public void setUp(int enhancement, BehaviourStrategy previousStrategy) {
+    public void setUp(final int enhancement, final BehaviourStrategy previousStrategy) {
         this.turns = enhancement;
         this.previousStrategy = previousStrategy;
-    }
-
-    @Override
-    public void execute() {
     }
 
     /**
@@ -42,14 +38,16 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public void move(Character target, Character player, Point objective, Map map) {
+    public Point move(Character target, Character player, Point objective, Map map) {
         // decrease turns everytime it is the character's turn
-        if(turns > 0) {
+        if(turns > 1) {
             turns--;
         } else {
             // Set the strategy of the character back to normal because the turns are finished
             target.setBehaviourStrategy(previousStrategy);
         }
+
+        return target.getCurrentPosition();
     }
 
     /**
@@ -59,7 +57,7 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param attackedChar a possible character to attack
      */
     @Override
-    public void attack(Character target, Character attackedChar) {
+    public void attack(final Character target, final Character attackedChar) {
 
     }
 
@@ -70,7 +68,7 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param chestORbackpack a possible chest or backpack to interact with
      */
     @Override
-    public void interact(Character target, BackPackInventory chestORbackpack) {
+    public void interact(final Character target, final BackPackInventory chestORbackpack) {
 
     }
 }

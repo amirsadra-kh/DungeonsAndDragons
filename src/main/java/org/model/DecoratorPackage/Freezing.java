@@ -1,7 +1,7 @@
 package main.java.org.model.DecoratorPackage;
 
+import main.java.org.Service.StrategyPackage.FrozenStrategy;
 import main.java.org.model.CharacterPackage.Character;
-import main.java.org.model.StrategyPackage.FrozenStrategy;
 
 /**
  * Freezing Decorator.
@@ -19,7 +19,7 @@ public class Freezing  extends WeaponEnhanceDecorator {
      *
      * @param decoratedWeapon
      */
-    public Freezing(Weapon decoratedWeapon) {
+    public Freezing(final Weapon decoratedWeapon) {
         super(decoratedWeapon);
     }
 
@@ -35,8 +35,8 @@ public class Freezing  extends WeaponEnhanceDecorator {
      * A method to set the behaviour strategy of the target to frozen.
      * @param target
      */
-    public void freeze(Character target) {
-        FrozenStrategy frozen = new FrozenStrategy();
+    public void freeze(final Character target) {
+        final FrozenStrategy frozen = new FrozenStrategy();
         frozen.setUp(this.getEnhance(), target.getBehaviourStrategy());
         target.setBehaviourStrategy(frozen);
     }
