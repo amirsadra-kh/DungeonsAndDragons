@@ -2,6 +2,7 @@ package main.java.org.Service.StrategyPackage;
 
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.Map;
 
 import java.awt.*;
 
@@ -15,11 +16,6 @@ import java.awt.*;
  * @since
  */
 public class HumanPlayer implements BehaviourStrategy {
-    @Override
-    public void execute() {
-
-    }
-
     /**
      * A method for moving a player character - by choice
      * @param character the one who has a turn now - the player character
@@ -27,8 +23,8 @@ public class HumanPlayer implements BehaviourStrategy {
      * @param objective the position of the objective of the map - chest or exit
      */
     @Override
-    public void move(Character character, Character player, Point objective) {
-
+    public Point move(Character character, Character player, Point objective, Map map) {
+        return null;
     }
 
     /**

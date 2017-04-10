@@ -45,6 +45,24 @@ public class BackPackInventory {
     }
 
     /**
+     * A method to remove from a list of items and add to this backpackInventory
+     * @param chestOrBackpack to be removed from
+     * @return chestOrBackpack with removed items
+     */
+    public List<Item> addToBackpack(List<Item> chestOrBackpack) {
+        int num = MAX_ITEMS - this.items.size();
+        int size = chestOrBackpack.size();
+        if(!chestOrBackpack.isEmpty()) {
+            for (int i = 0; (i < num) && (i < size); i++) {
+                // Add item
+                this.items.add(chestOrBackpack.get(i));
+                chestOrBackpack.remove(chestOrBackpack.get(i));
+            }
+        }
+        return chestOrBackpack;
+    }
+
+    /**
      * A method to get the last item in the backpack
      * @return the last item in the backpack
      */

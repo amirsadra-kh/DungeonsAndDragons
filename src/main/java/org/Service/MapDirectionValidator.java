@@ -13,8 +13,8 @@ import java.awt.*;
  */
 public class MapDirectionValidator {
     private static final int levelsPlayed = 0;
-    private final Campaign campaign;
-    private final Map map;
+    private Campaign campaign;
+    private Map map;
 
     /**
      * This is the constructor of the MapDirectionValidator
@@ -25,6 +25,11 @@ public class MapDirectionValidator {
         this.campaign = campaign;
         this.map = map;
     }
+
+    /**
+     * An empty constructor for the move methods in strategy pattern.
+     */
+    public MapDirectionValidator() {}
 
     /**
      * This method is to move the player on the map based on the provided direction
@@ -39,15 +44,15 @@ public class MapDirectionValidator {
     }
 
 
-    public Point getNextCellToMove(final String direction, final Point currentPossition) {
+    public Point getNextCellToMove(final String direction, final Point currentPosition) {
         if ("L".equalsIgnoreCase(direction)) {
-            return new Point(currentPossition.x, currentPossition.y - 1);
+            return new Point(currentPosition.x, currentPosition.y - 1);
         } else if ("R".equalsIgnoreCase(direction)) {
-            return new Point(currentPossition.x, currentPossition.y + 1);
+            return new Point(currentPosition.x, currentPosition.y + 1);
         } else if ("D".equalsIgnoreCase(direction)) {
-            return new Point(currentPossition.x + 1, currentPossition.y);
+            return new Point(currentPosition.x + 1, currentPosition.y);
         } else if ("U".equalsIgnoreCase(direction)) {
-            return new Point(currentPossition.x - 1, currentPossition.y);
+            return new Point(currentPosition.x - 1, currentPosition.y);
         }
         return null;
     }
@@ -73,37 +78,58 @@ public class MapDirectionValidator {
 
     }
 
-//    /**
-//     * This method is to validate if we can go to next level
-//     * @param map the map we are playing
-//     * @param i the i coordinate on map
-//     * @param j the j coordinate on map
-//     * @param campaign the campaign we are playing
-//     * @param str  the target object we are interacting with
-//     * @return true (if there is no more levels left), false : if goes to next level or remains in this level
-//     */
-//    private boolean isAllLevelsCompleted(Map map, final int i, final int j, final Campaign campaign, final String str) {
-//        if (this.map.isCanGoNextLevel()) {
-//
-//            try {
-//                this.map = map = campaign.getNextLevel(map);
-//
-//            } catch (final Exception e) {
-//                System.out.println("You finished all the levels in the Campaign!");
-//                return true;
-//            }
-//            PlayScreen.setPlayerAtEntryPoint(this.map);
-//            System.out.println("Great you moved to next level");
-//            MapScreen.showMap(this.map);
-//            System.out.println(GameConstantsInterface.ENTER_DIRECTION);
-//            SetInteractionStrategy.interact(this.map, str, Map.getPlayerCoordinate(this.map), new Point(i, j), campaign);
-//
-//            return false;
-//        } else {
-//            System.out.println("You have not found a chest in the map yet\n" +
-//                    " Please find the chest in the map and then you can go to next level");
-//            return false;
-//        }
-//    }
+    /**
+     * This method is to return a valid coordinate with the maximum 3 spots
+     * @param i i coordinate
+     * @param j j coordinate
+     * @param map the target map
+     * @param target the target coordinate
+     * @return
+     */
+    public boolean coordinateIsValidToMove(final int i, final int j, final Map map, final Point target) {
+        try {
+            final String str = map.getScreen()[i][j];
+            return str.equalsIgnoreCase("") && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;
+        } catch (final IndexOutOfBoundsException e) {
+            System.out.print("the selected coordinate is out of bound , please try another coordinate");
+            return false;
+        }
 
+    }
+
+    /**
+     * This method is to return a valid coordinate based on a direction entered.
+     *
+     * @param direction the string direction (U, R, L, D)
+     * @param map the target map
+     * @param player the humanPLayer coordinate
+     * @return
+     */
+    public boolean directionIsValidToMove(String direction, final Map map, final Point player) {
+        Point nextPoint = getNextCellToMove(direction, player);
+        return coordinateIsValid(nextPoint.x, nextPoint.y, map);
+    }
+
+    /**
+     * This method is to return a valid coordinate with the maximum 3 spots
+     *
+     * @param i      i coordinate
+     * @param j      j coordinate
+     * @param map    the target map
+     * @param target the target coordinate
+     * @return
+     */
+    public boolean coordinateIsValidForFriendlyCharacter(final int i, final int j, final Map map, final Point target) {
+        try {
+            final String elementInTheMap = map.getScreen()[i][j];
+            return ((elementInTheMap != "")
+                    || elementInTheMap.equalsIgnoreCase("f")
+                    || elementInTheMap.equalsIgnoreCase("c"))
+                    && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;
+        } catch (final IndexOutOfBoundsException e) {
+            System.out.print("the selected coordinate is out of bound");
+            return false;
+        }
+
+    }
 }

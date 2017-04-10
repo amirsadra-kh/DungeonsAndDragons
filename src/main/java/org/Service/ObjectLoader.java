@@ -101,5 +101,4 @@ public class ObjectLoader extends FileProcessor {
     public static Character loadCharacterFromXML(String charName) throws Exception {
         return (Character) loadFile(CHARACTER_PATH +charName);
     }
-
 }

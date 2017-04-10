@@ -2,6 +2,7 @@ package main.java.org.Service.StrategyPackage;
 
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.Map;
 
 import java.awt.*;
 
@@ -23,13 +24,9 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param enhancement
      * @param previousStrategy
      */
-    public void setUp(int enhancement, BehaviourStrategy previousStrategy) {
+    public void setUp(final int enhancement, final BehaviourStrategy previousStrategy) {
         this.turns = enhancement;
         this.previousStrategy = previousStrategy;
-    }
-
-    @Override
-    public void execute() {
     }
 
     /**
@@ -38,16 +35,19 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param target the one who has a turn now and has been hit with a frozen enhancement
      * @param player the player character of the map
      * @param objective the position of the objective of the map - chest or exit
+     * @param map the map the character is on
      */
     @Override
-    public void move(Character target, Character player, Point objective) {
+    public Point move(Character target, Character player, Point objective, Map map) {
         // decrease turns everytime it is the character's turn
-        if(turns > 0) {
+        if(turns > 1) {
             turns--;
         } else {
             // Set the strategy of the character back to normal because the turns are finished
             target.setBehaviourStrategy(previousStrategy);
         }
+
+        return target.getCurrentPosition();
     }
 
     /**
@@ -57,7 +57,7 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param attackedChar a possible character to attack
      */
     @Override
-    public void attack(Character target, Character attackedChar) {
+    public void attack(final Character target, final Character attackedChar) {
 
     }
 
@@ -68,7 +68,7 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param chestORbackpack a possible chest or backpack to interact with
      */
     @Override
-    public void interact(Character target, BackPackInventory chestORbackpack) {
+    public void interact(final Character target, final BackPackInventory chestORbackpack) {
 
     }
 }

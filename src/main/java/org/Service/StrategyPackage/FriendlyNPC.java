@@ -2,6 +2,7 @@ package main.java.org.Service.StrategyPackage;
 
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.Map;
 
 import java.awt.*;
 import java.util.Random;
@@ -18,22 +19,13 @@ import java.util.Random;
  */
 public class FriendlyNPC implements BehaviourStrategy {
     /**
-     * A method for executing FriendlyNPC strategy
-     * TODO add something or get rid of method
-     */
-    @Override
-    public void execute() {
-
-    }
-
-    /**
      * A method for moving a friendly NPC randomly
      * @param fchar the one who has a turn now
      * @param player the player character of the map
      * @param objective the position of the objective of the map - chest or exit
      */
     @Override
-    public void move(Character fchar, Character player, Point objective) {
+    public Point move(Character fchar, Character player, Point objective, Map map) {
         Random r = new Random();
         // Get the current position
         Point current = fchar.getCurrentPosition();
@@ -50,6 +42,8 @@ public class FriendlyNPC implements BehaviourStrategy {
 
         // Set the new position
         fchar.setCurrentPosition(new Point(x,y));
+
+        return fchar.getCurrentPosition();
     }
 
     /**
