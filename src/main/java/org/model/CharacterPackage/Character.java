@@ -218,7 +218,7 @@ public class Character extends Observable {
      * behaviour strategy was plugged in upon instantiation.
      */
     public void executeBehaviourStrategy() {
-        this.behaviourStrategy.execute();
+        //this.behaviourStrategy.move();
     }
 
     /**

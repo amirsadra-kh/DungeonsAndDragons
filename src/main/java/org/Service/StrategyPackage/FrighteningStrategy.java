@@ -36,10 +36,6 @@ public class FrighteningStrategy implements BehaviourStrategy {
         this.attacker = attacker;
     }
 
-    @Override
-    public void execute() {
-    }
-
     /**
      * A method for running away from character who attacked with frightening enhancement
      * for as many turns as the enhancement of the weapon has.
@@ -50,20 +46,26 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public Point move(final Character target, final Character player, final Point objective, final Map map) {
-        // TODO Runaway implementation here, use this.attacker position and go in the other direction
-        final Point attackerPoint = this.attacker.getCurrentPosition();
-        final Point targetPoint = target.getCurrentPosition();
+    public Point move(Character target, Character player, Point objective, Map map) {
+        if(turns > 0) {
+            Point attackerPoint = this.attacker.getCurrentPosition();
+            Point targetPoint = target.getCurrentPosition();
 
-        // Add all validated points for target to move to a list of points
-        final ArrayList<Point> possiblePoints = addValidatedPoints(map, targetPoint);
+            // Add all validated points for target to move to a list of points
+            ArrayList<Point> possiblePoints = addValidatedPoints(map, targetPoint);
 
-        // Find a point furthest away from attacker
-        final Point max = getMaxDistance(possiblePoints, attackerPoint);
 
-        // Set the new position
-        target.setCurrentPosition(max);
-        return max;
+            // Find a point furthest away from attacker
+            Point max = getMaxDistance(possiblePoints, attackerPoint);
+
+            turns--;
+            // Set the new position
+            return max;
+        } else {
+            // Set the strategy of the character back to normal because the turns are finished
+            target.setBehaviourStrategy(previousStrategy);
+            return target.getBehaviourStrategy().move(target, player, objective, map);
+        }
     }
 
     /**
@@ -73,15 +75,15 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param targetPoint the position of the target
      * @return a list of validated cells for the target ro go to
      */
-    private ArrayList<Point> addValidatedPoints(final Map map, final Point targetPoint) {
-        final ArrayList<Point> possiblePoints = new ArrayList<>();
+    public ArrayList<Point> addValidatedPoints(Map map, Point targetPoint) {
+        ArrayList<Point> possiblePoints = new ArrayList<>();
 
         // Add all valid points for moving to possiblePoints list
-        final MapDirectionValidator validate = new MapDirectionValidator();
-        for (int row = 0; row < map.getScreen().length; row++) {
+        MapDirectionValidator validate = new MapDirectionValidator();
+        for(int row = 0; row < map.getScreen().length; row++) {
             for (int col = 0; col < map.getScreen()[row].length; col++) {
-                if (validate.coordinateIsValidToMove(row, col, map, targetPoint)) {
-                    final Point validPoint = new Point(row, col);
+                if(validate.coordinateIsValidToMove(row, col, map, targetPoint)) {
+                    Point validPoint = new Point(row, col);
                     possiblePoints.add(validPoint);
                 }
             }

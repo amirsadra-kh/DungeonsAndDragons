@@ -20,15 +20,6 @@ import java.util.ArrayList;
  */
 public class FriendlyNPC implements BehaviourStrategy {
     /**
-     * A method for executing FriendlyNPC strategy
-     * TODO add something or get rid of method
-     */
-    @Override
-    public void execute() {
-
-    }
-
-    /**
      * A method for moving a friendly NPC randomly
      *
      * @param fchar     the one who has a turn now

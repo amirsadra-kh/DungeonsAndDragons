@@ -16,11 +16,6 @@ import java.awt.*;
  * @since
  */
 public class ComputerPlayer implements BehaviourStrategy {
-    @Override
-    public void execute() {
-
-    }
-
     /**
      * A method for moving a computer player - move towards objective of map or towards exit
      * @param compPlayer the computer player
@@ -29,9 +24,11 @@ public class ComputerPlayer implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public Point move(final Character compPlayer, final Character player, final Point objective, final Map map) {
+    public Point move(Character compPlayer, Character player, Point objective, Map map) {
+        if(compPlayer.getBurning()) {
+            // TODO decrease monster's hitpoints here based on getBurningDamage in burning decorator
+        }
         return null;
-
     }
 
     /**

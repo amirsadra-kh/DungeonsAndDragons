@@ -242,13 +242,13 @@ public class PlayScreen {
         final ObjectLoader ol = new ObjectLoader();
         // Get the user to choose an existing character from a list to play
         System.out.println("Please enter the name of the character you would like to play from the list below: ");
-        this.character = new Character();
+        character = new Character();
         ol.showItemNames("src/main/java/org/resources/characters/");
-        this.character = character.loadCharacter(readInput.readLine());
+        character = character.loadCharacter(readInput.readLine());
 
-        while (this.character.equals(null)) {
+        while (character.equals(null)) {
             System.out.println("This character does not exist! Please try again: ");
-            this.character = character.loadCharacter(readInput.readLine());
+            character = character.loadCharacter(readInput.readLine());
         }
 
         // Set the character chosen to player character
