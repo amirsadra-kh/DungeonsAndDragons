@@ -1,9 +1,18 @@
 package main.java.org.Service;
 
-import main.java.org.model.*;
+import main.java.org.Service.StrategyPackage.AggressiveNPC;
+import main.java.org.Service.StrategyPackage.ComputerPlayer;
+import main.java.org.Service.StrategyPackage.FriendlyNPC;
+import main.java.org.Service.StrategyPackage.HumanPlayer;
+import main.java.org.model.Campaign;
 import main.java.org.model.CharacterPackage.Ability;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.CharacterPackage.Inventory;
+import main.java.org.model.GameConstantsInterface;
+import main.java.org.model.Item;
+import main.java.org.model.Map;
+import main.java.org.model.ReadInput;
+import main.java.org.model.TurnBasedMechanism;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
@@ -35,6 +44,7 @@ public class PlayScreen {
     // Observer variables
     private CharacterObserver characterObserver;
     private InventoryObserver inventoryObserver;
+    private List<Character> mapCharacters = new ArrayList<>();
     private List<Item> inventory = new ArrayList<>();
     private Ability ability;
 
@@ -63,9 +73,64 @@ public class PlayScreen {
      */
     protected void playGame(final boolean gameLoaded) {
         if (!gameLoaded) {
-            setPlayerAtEntryPoint(map);
+            this.mapCharacters = setPlayerAtEntryPoint(map);
         }
         MapScreen.showMap(map);
+        checkForObserve();
+        //enterDirection();
+        askUserToChoseHumanOrComputer(readInput);
+        setStrategy();
+        playGameInTurns(character, map);
+
+        // movePlayer();
+
+    }
+
+    private void playGameInTurns(Character player, Map map) {
+        int i = 0;
+//        while (i<3) {
+            if (mapCharacters.size() != 0) {
+                Character currentCharacter = mapCharacters.get(i % (mapCharacters.size()-1));
+                player.setCurrentPosition(currentCharacter.getBehaviourStrategy().move(currentCharacter, player, map.getChestCoordinate(), map));
+                i++;
+            }
+      //  }
+    }
+
+    private static void askUserToChoseHumanOrComputer(ReadInput readInput) {
+        System.out.println("Do you want to play or you want the computer to play?\n 1) Computer \n 2) Human");
+        int choice = readInput.readIntHandling(0);
+        while (choice < 1 || choice > 2) {
+            System.out.println("Your input is invalid, please try again");
+            choice = readInput.readIntHandling(choice);
+        }
+        if (choice == 1) {
+            character.setBehaviourStrategy(new ComputerPlayer());
+        } else {
+            character.setBehaviourStrategy(new HumanPlayer());
+        }
+    }
+
+    /**
+     * This method is to set the strategy to non-player character
+     */
+    private void setStrategy() {
+
+        for (Character character : map.getNonPLayerCharacters()) {
+            if (character.getCharName() != null &&
+                    (character.getCharName().charAt(0) == 'm' || character.getCharName().charAt(0) == 'M')) {
+                character.setBehaviourStrategy(new AggressiveNPC());
+            } else {
+                character.setBehaviourStrategy(new FriendlyNPC());
+            }
+        }
+
+    }
+
+    /**
+     * this method is to ask user if they want to observe characters
+     */
+    private void checkForObserve() {
         // Allow the user to observe a character.
         String choice = "";
         System.out.println("Would you like to observe a character from the map? Y/N");
@@ -77,8 +142,6 @@ public class PlayScreen {
         if ("Y".equals(choice) || "y".equals(choice)) {
             userObserverChoice(map);
         }
-        enterDirection();
-        movePlayer();
     }
 
     /**
@@ -112,7 +175,7 @@ public class PlayScreen {
      *
      * @param map
      */
-    public static void setPlayerAtEntryPoint(Map map) {
+    public static List<Character> setPlayerAtEntryPoint(Map map) {
         List<Character> mapCharacters = map.getNonPLayerCharacters();
         // Add the player character to the list as well
         mapCharacters.add(character);
@@ -125,6 +188,7 @@ public class PlayScreen {
                 }
             }
         }
+        return mapCharacters;
     }
 
     /**

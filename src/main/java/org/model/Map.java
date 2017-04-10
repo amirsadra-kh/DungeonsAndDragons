@@ -83,6 +83,21 @@ public class Map implements Serializable {
     }
 
     /**
+     * This method is to return the current coordinate of the chest
+     * @return it returns the Point corresponding the chest coordinate
+     */
+    public  Point getChestCoordinate() {
+        for (int i = 0; i < this.getScreen().length; i++) {
+            for (int j = 0; j < this.getScreen()[i].length; j++) {
+                if ("c".equalsIgnoreCase(this.getScreen()[i][j])) {
+                    return new Point(i, j);
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
      * A method to generate the map screen
      *
      * @param screen the map screen
