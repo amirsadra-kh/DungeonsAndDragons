@@ -17,6 +17,8 @@ import java.util.Arrays;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static test.Fixtures.createAMapWithNoEmptySpot;
+import static test.Fixtures.createItemWithSeveralBelts;
 
 /**
  * This class covers the unit test for the friendly character
@@ -53,7 +55,7 @@ public class FriendlyNPCTest {
     @Test
     public void moveReturnsNullIfThereIsNoPoint() throws Exception {
         //GIVEN
-        final Map map = createAMapWithNoEmptySpot();
+        final Map map = createAMapWithNoEmptySpot(this.map);
         //WHEN
         final Point p = friendlyNPC.move(fChar, player, null, map);
         //THEN
@@ -86,24 +88,8 @@ public class FriendlyNPCTest {
         final BackPackInventory backPackInventory = new BackPackInventory();
         final BackPackInventory playerBackPackInventory = new BackPackInventory();
         final Item belt = new Item();
-        belt.setItem(ItemEnum.BELT);
-        final ArrayList<Item> itemsForChest = new ArrayList<Item>() {{
-            add(belt);
-            add(belt);
-            add(belt);
-            add(belt);
-            add(belt);
-        }};
-        final ArrayList<Item> itemsForPlayer = new ArrayList<Item>() {{
-            add(belt);
-            add(belt);
-            add(belt);
-            add(belt);
-            add(belt);
-            add(belt);
-            add(belt);
-            add(belt);
-        }};
+        final ArrayList<Item> itemsForChest = createItemWithSeveralBelts(5);
+        final ArrayList<Item> itemsForPlayer = createItemWithSeveralBelts(8);
         backPackInventory.setItems(itemsForChest);
         playerBackPackInventory.setItems(itemsForPlayer);
         fChar.setBackPackInventory(playerBackPackInventory);
@@ -114,17 +100,6 @@ public class FriendlyNPCTest {
         assertEquals(fChar.getBackPackInventory().getItems().size(), 10);
         assertEquals(fChar.getBackPackInventory().getItems().get(0), belt);
         assertEquals(map.getChest().getItems().size(), 3);
-
-    }
-
-    private Map createAMapWithNoEmptySpot() {
-        final Map map = this.map;
-        for (int row = 0; row < map.getScreen().length; row++) {
-            for (int col = 0; col < map.getScreen()[row].length; col++) {
-                map.getScreen()[row][col] = "w";
-            }
-        }
-        return map;
 
     }
 
