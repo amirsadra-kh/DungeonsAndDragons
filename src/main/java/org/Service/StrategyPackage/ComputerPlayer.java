@@ -1,4 +1,4 @@
-package main.java.org.model.StrategyPackage;
+package main.java.org.Service.StrategyPackage;
 
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
@@ -29,7 +29,8 @@ public class ComputerPlayer implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public void move(Character compPlayer, Character player, Point objective, Map map) {
+    public Point move(final Character compPlayer, final Character player, final Point objective, final Map map) {
+        return null;
 
     }
 
@@ -39,7 +40,7 @@ public class ComputerPlayer implements BehaviourStrategy {
      * @param attackedChar
      */
     @Override
-    public void attack(Character compPlayer, Character attackedChar) {
+    public void attack(final Character compPlayer, final Character attackedChar) {
 
     }
 
@@ -49,7 +50,7 @@ public class ComputerPlayer implements BehaviourStrategy {
      * @param chestORbackpack
      */
     @Override
-    public void interact(Character compPlayer, BackPackInventory chestORbackpack) {
+    public void interact(final Character compPlayer, final BackPackInventory chestORbackpack) {
 
     }
 }

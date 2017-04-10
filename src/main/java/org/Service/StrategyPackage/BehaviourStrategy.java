@@ -1,4 +1,4 @@
-package main.java.org.model.StrategyPackage;
+package main.java.org.Service.StrategyPackage;
 
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
@@ -27,7 +27,7 @@ public interface BehaviourStrategy {
      * @param objective the position of the objective of the map - chest or exit
      * @param map the map the character is on
      */
-    void move(Character character, Character player, Point objective, Map map);
+    Point move(Character character, Character player, Point objective, Map map);
 
     /**
      * A method for a character attack after they have moved

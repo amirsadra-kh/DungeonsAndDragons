@@ -1,4 +1,4 @@
-package main.java.org.model.StrategyPackage;
+package main.java.org.Service.StrategyPackage;
 
 import main.java.org.Service.MapDirectionValidator;
 import main.java.org.model.CharacterPackage.BackPackInventory;
@@ -30,7 +30,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param previousStrategy of the target
      * @param attacker the character who made the target frightened
      */
-    public void setUp(int enhancement, BehaviourStrategy previousStrategy, Character attacker) {
+    public void setUp(final int enhancement, final BehaviourStrategy previousStrategy, final Character attacker) {
         this.turns = enhancement;
         this.previousStrategy = previousStrategy;
         this.attacker = attacker;
@@ -50,38 +50,38 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public void move(Character target, Character player, Point objective, Map map) {
+    public Point move(final Character target, final Character player, final Point objective, final Map map) {
         // TODO Runaway implementation here, use this.attacker position and go in the other direction
-        Point attackerPoint = this.attacker.getCurrentPosition();
-        Point targetPoint = target.getCurrentPosition();
+        final Point attackerPoint = this.attacker.getCurrentPosition();
+        final Point targetPoint = target.getCurrentPosition();
 
         // Add all validated points for target to move to a list of points
-        ArrayList<Point> possiblePoints = addValidatedPoints(map, targetPoint);
-
+        final ArrayList<Point> possiblePoints = addValidatedPoints(map, targetPoint);
 
         // Find a point furthest away from attacker
-        Point max = getMaxDistance(possiblePoints, attackerPoint);
+        final Point max = getMaxDistance(possiblePoints, attackerPoint);
 
         // Set the new position
         target.setCurrentPosition(max);
+        return max;
     }
 
     /**
      * A method for checking all the cells in a map and see if the target can move there
      *
-     * @param map the current map being played
+     * @param map         the current map being played
      * @param targetPoint the position of the target
      * @return a list of validated cells for the target ro go to
      */
-    private ArrayList<Point> addValidatedPoints(Map map, Point targetPoint) {
-        ArrayList<Point> possiblePoints = new ArrayList<>();
+    private ArrayList<Point> addValidatedPoints(final Map map, final Point targetPoint) {
+        final ArrayList<Point> possiblePoints = new ArrayList<>();
 
         // Add all valid points for moving to possiblePoints list
-        MapDirectionValidator validate = new MapDirectionValidator();
-        for(int row = 0; row < map.getRows(); row++) {
-            for (int col = 0; col < map.getCols(); col++) {
-                if(validate.coordinateIsValidToMove(row, col, map, targetPoint)) {
-                    Point validPoint = new Point(row, col);
+        final MapDirectionValidator validate = new MapDirectionValidator();
+        for (int row = 0; row < map.getScreen().length; row++) {
+            for (int col = 0; col < map.getScreen()[row].length; col++) {
+                if (validate.coordinateIsValidToMove(row, col, map, targetPoint)) {
+                    final Point validPoint = new Point(row, col);
                     possiblePoints.add(validPoint);
                 }
             }
@@ -92,14 +92,15 @@ public class FrighteningStrategy implements BehaviourStrategy {
 
     /**
      * A method to get the point furthest away from the attacker out of the valid points
+     *
      * @param possiblePoints points the target can move
-     * @param attackerPoint the position of the attacker
+     * @param attackerPoint  the position of the attacker
      * @return a point furthest away from the attacker
      */
-    private Point getMaxDistance(ArrayList<Point> possiblePoints, Point attackerPoint) {
+    private Point getMaxDistance(final ArrayList<Point> possiblePoints, final Point attackerPoint) {
         Point max = possiblePoints.get(0);
-        for(Point p : possiblePoints) {
-            if((Math.abs(p.x - attackerPoint.x)) + Math.abs(p.y - attackerPoint.y) >
+        for (final Point p : possiblePoints) {
+            if ((Math.abs(p.x - attackerPoint.x)) + Math.abs(p.y - attackerPoint.y) >
                     (Math.abs(max.x - attackerPoint.x)) + Math.abs(max.y - attackerPoint.y))
                 max = p;
         }
@@ -112,7 +113,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param attackedChar
      */
     @Override
-    public void attack(Character attackingChar, Character attackedChar) {
+    public void attack(final Character attackingChar, final Character attackedChar) {
 
     }
 
@@ -122,7 +123,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param chestORbackpack
      */
     @Override
-    public void interact(Character character, BackPackInventory chestORbackpack) {
+    public void interact(final Character character, final BackPackInventory chestORbackpack) {
 
     }
 }
