@@ -1,7 +1,7 @@
 package main.java.org.model.DecoratorPackage;
 
 import main.java.org.model.CharacterPackage.Character;
-import main.java.org.model.StrategyPackage.FriendlyNPC;
+import main.java.org.Service.StrategyPackage.FriendlyNPC;
 
 /**
  * A Pacifying Decorator

@@ -2,7 +2,7 @@ package main.java.org.model.CharacterPackage;
 
 import main.java.org.model.Item;
 import main.java.org.model.RollDice;
-import main.java.org.model.StrategyPackage.BehaviourStrategy;
+import main.java.org.Service.StrategyPackage.BehaviourStrategy;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
