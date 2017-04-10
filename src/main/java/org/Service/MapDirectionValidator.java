@@ -2,6 +2,7 @@ package main.java.org.Service;
 
 import main.java.org.model.Campaign;
 import main.java.org.model.Map;
+import org.assertj.core.util.Strings;
 
 import java.awt.*;
 
@@ -97,37 +98,26 @@ public class MapDirectionValidator {
 
     }
 
-//    /**
-//     * This method is to validate if we can go to next level
-//     * @param map the map we are playing
-//     * @param i the i coordinate on map
-//     * @param j the j coordinate on map
-//     * @param campaign the campaign we are playing
-//     * @param str  the target object we are interacting with
-//     * @return true (if there is no more levels left), false : if goes to next level or remains in this level
-//     */
-//    private boolean isAllLevelsCompleted(Map map, final int i, final int j, final Campaign campaign, final String str) {
-//        if (this.map.isCanGoNextLevel()) {
-//
-//            try {
-//                this.map = map = campaign.getNextLevel(map);
-//
-//            } catch (final Exception e) {
-//                System.out.println("You finished all the levels in the Campaign!");
-//                return true;
-//            }
-//            PlayScreen.setPlayerAtEntryPoint(this.map);
-//            System.out.println("Great you moved to next level");
-//            MapScreen.showMap(this.map);
-//            System.out.println(GameConstantsInterface.ENTER_DIRECTION);
-//            SetInteractionStrategy.interact(this.map, str, Map.getPlayerCoordinate(this.map), new Point(i, j), campaign);
-//
-//            return false;
-//        } else {
-//            System.out.println("You have not found a chest in the map yet\n" +
-//                    " Please find the chest in the map and then you can go to next level");
-//            return false;
-//        }
-//    }
+    /**
+     * This method is to return a valid coordinate with the maximum 3 spots
+     *
+     * @param i      i coordinate
+     * @param j      j coordinate
+     * @param map    the target map
+     * @param target the target coordinate
+     * @return
+     */
+    public boolean coordinateIsValidForFriendlyCharacter(final int i, final int j, final Map map, final Point target) {
+        try {
+            final String elementInTheMap = map.getScreen()[i][j];
+            return (Strings.isNullOrEmpty(elementInTheMap)
+                    || elementInTheMap.equalsIgnoreCase("f")
+                    || elementInTheMap.equalsIgnoreCase("c"))
+                    && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;
+        } catch (final IndexOutOfBoundsException e) {
+            System.out.print("the selected coordinate is out of bound");
+            return false;
+        }
 
+    }
 }

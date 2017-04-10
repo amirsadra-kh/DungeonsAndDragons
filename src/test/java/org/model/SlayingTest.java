@@ -3,7 +3,6 @@ package test.java.org.model;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.DecoratorPackage.Slaying;
 import main.java.org.model.DecoratorPackage.Weapon;
-import main.java.org.model.StrategyPackage.BehaviourStrategy;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

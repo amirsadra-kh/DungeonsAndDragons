@@ -5,7 +5,7 @@ import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Item;
 import main.java.org.model.Map;
-import main.java.org.model.StrategyPackage.AggressiveNPC;
+import main.java.org.Service.StrategyPackage.AggressiveNPC;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

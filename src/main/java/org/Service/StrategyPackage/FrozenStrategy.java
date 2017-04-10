@@ -1,4 +1,4 @@
-package main.java.org.model.StrategyPackage;
+package main.java.org.Service.StrategyPackage;
 
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
@@ -24,7 +24,7 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param enhancement
      * @param previousStrategy
      */
-    public void setUp(int enhancement, BehaviourStrategy previousStrategy) {
+    public void setUp(final int enhancement, final BehaviourStrategy previousStrategy) {
         this.turns = enhancement;
         this.previousStrategy = previousStrategy;
     }
@@ -46,6 +46,7 @@ public class FrozenStrategy implements BehaviourStrategy {
             // Set the strategy of the character back to normal because the turns are finished
             target.setBehaviourStrategy(previousStrategy);
         }
+
         return target.getCurrentPosition();
     }
 
@@ -56,7 +57,7 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param attackedChar a possible character to attack
      */
     @Override
-    public void attack(Character target, Character attackedChar) {
+    public void attack(final Character target, final Character attackedChar) {
 
     }
 
@@ -67,7 +68,7 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param chestORbackpack a possible chest or backpack to interact with
      */
     @Override
-    public void interact(Character target, BackPackInventory chestORbackpack) {
+    public void interact(final Character target, final BackPackInventory chestORbackpack) {
 
     }
 }

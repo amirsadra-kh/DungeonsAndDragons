@@ -1,4 +1,4 @@
-package main.java.org.model.StrategyPackage;
+package main.java.org.Service.StrategyPackage;
 
 import main.java.org.Service.MapDirectionValidator;
 import main.java.org.Service.MapScreen;
@@ -66,7 +66,7 @@ public class HumanPlayer implements BehaviourStrategy {
      * @param attackedChar
      */
     @Override
-    public void attack(Character player, Character attackedChar) {
+    public void attack(final Character player, final Character attackedChar) {
 
     }
 
@@ -76,7 +76,7 @@ public class HumanPlayer implements BehaviourStrategy {
      * @param chestORbackpack
      */
     @Override
-    public void interact(Character character, BackPackInventory chestORbackpack) {
+    public void interact(final Character character, final BackPackInventory chestORbackpack) {
 
     }
 }

@@ -1,4 +1,4 @@
-package main.java.org.model.StrategyPackage;
+package main.java.org.Service.StrategyPackage;
 
 import main.java.org.Service.MapDirectionValidator;
 import main.java.org.model.CharacterPackage.BackPackInventory;
@@ -30,7 +30,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param previousStrategy of the target
      * @param attacker the character who made the target frightened
      */
-    public void setUp(int enhancement, BehaviourStrategy previousStrategy, Character attacker) {
+    public void setUp(final int enhancement, final BehaviourStrategy previousStrategy, final Character attacker) {
         this.turns = enhancement;
         this.previousStrategy = previousStrategy;
         this.attacker = attacker;
@@ -71,7 +71,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
     /**
      * A method for checking all the cells in a map and see if the target can move there
      *
-     * @param map the current map being played
+     * @param map         the current map being played
      * @param targetPoint the position of the target
      * @return a list of validated cells for the target ro go to
      */
@@ -94,14 +94,15 @@ public class FrighteningStrategy implements BehaviourStrategy {
 
     /**
      * A method to get the point furthest away from the attacker out of the valid points
+     *
      * @param possiblePoints points the target can move
-     * @param attackerPoint the position of the attacker
+     * @param attackerPoint  the position of the attacker
      * @return a point furthest away from the attacker
      */
-    private Point getMaxDistance(ArrayList<Point> possiblePoints, Point attackerPoint) {
+    private Point getMaxDistance(final ArrayList<Point> possiblePoints, final Point attackerPoint) {
         Point max = possiblePoints.get(0);
-        for(Point p : possiblePoints) {
-            if((Math.abs(p.x - attackerPoint.x)) + Math.abs(p.y - attackerPoint.y) >
+        for (final Point p : possiblePoints) {
+            if ((Math.abs(p.x - attackerPoint.x)) + Math.abs(p.y - attackerPoint.y) >
                     (Math.abs(max.x - attackerPoint.x)) + Math.abs(max.y - attackerPoint.y))
                 max = p;
         }
@@ -114,7 +115,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param attackedChar
      */
     @Override
-    public void attack(Character attackingChar, Character attackedChar) {
+    public void attack(final Character attackingChar, final Character attackedChar) {
 
     }
 
@@ -124,7 +125,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param chestORbackpack
      */
     @Override
-    public void interact(Character character, BackPackInventory chestORbackpack) {
+    public void interact(final Character character, final BackPackInventory chestORbackpack) {
 
     }
 }

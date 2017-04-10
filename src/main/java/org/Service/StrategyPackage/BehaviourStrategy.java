@@ -1,4 +1,4 @@
-package main.java.org.model.StrategyPackage;
+package main.java.org.Service.StrategyPackage;
 
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;

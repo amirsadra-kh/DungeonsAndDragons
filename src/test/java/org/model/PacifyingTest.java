@@ -1,14 +1,10 @@
 package test.java.org.model;
 
-import main.java.org.model.CharacterPackage.Ability;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.DecoratorPackage.Pacifying;
 import main.java.org.model.DecoratorPackage.Weapon;
-import main.java.org.model.DecoratorPackage.WeaponEnhanceDecorator;
-import main.java.org.model.Item;
-import main.java.org.model.ItemEnum;
-import main.java.org.model.StrategyPackage.BehaviourStrategy;
-import main.java.org.model.StrategyPackage.FriendlyNPC;
+import main.java.org.Service.StrategyPackage.BehaviourStrategy;
+import main.java.org.Service.StrategyPackage.FriendlyNPC;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
