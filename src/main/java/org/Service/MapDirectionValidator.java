@@ -2,7 +2,6 @@ package main.java.org.Service;
 
 import main.java.org.model.Campaign;
 import main.java.org.model.Map;
-import org.assertj.core.util.Strings;
 
 import java.awt.*;
 
@@ -110,7 +109,7 @@ public class MapDirectionValidator {
     public boolean coordinateIsValidForFriendlyCharacter(final int i, final int j, final Map map, final Point target) {
         try {
             final String elementInTheMap = map.getScreen()[i][j];
-            return (Strings.isNullOrEmpty(elementInTheMap)
+            return ((elementInTheMap != "")
                     || elementInTheMap.equalsIgnoreCase("f")
                     || elementInTheMap.equalsIgnoreCase("c"))
                     && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;
