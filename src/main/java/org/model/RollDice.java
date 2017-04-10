@@ -1,4 +1,4 @@
-package main.java.org.model.CharacterPackage;
+package main.java.org.model;
 
 import java.util.Random;
 

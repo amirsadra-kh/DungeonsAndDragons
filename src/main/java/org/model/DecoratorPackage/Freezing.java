@@ -1,5 +1,8 @@
 package main.java.org.model.DecoratorPackage;
 
+import main.java.org.Service.StrategyPackage.FrozenStrategy;
+import main.java.org.model.CharacterPackage.Character;
+
 /**
  * Freezing Decorator.
  * Target cannot move for a number of turns equal to the enhancement
@@ -16,7 +19,7 @@ public class Freezing  extends WeaponEnhanceDecorator {
      *
      * @param decoratedWeapon
      */
-    public Freezing(Weapon decoratedWeapon) {
+    public Freezing(final Weapon decoratedWeapon) {
         super(decoratedWeapon);
     }
 
@@ -26,5 +29,15 @@ public class Freezing  extends WeaponEnhanceDecorator {
      */
     public String getSpecialEnhance() {
         return super.getSpecialEnhance() + ", Freezing";
+    }
+
+    /**
+     * A method to set the behaviour strategy of the target to frozen.
+     * @param target
+     */
+    public void freeze(final Character target) {
+        final FrozenStrategy frozen = new FrozenStrategy();
+        frozen.setUp(this.getEnhance(), target.getBehaviourStrategy());
+        target.setBehaviourStrategy(frozen);
     }
 }

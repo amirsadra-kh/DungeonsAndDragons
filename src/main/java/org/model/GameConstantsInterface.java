@@ -14,6 +14,7 @@ public interface GameConstantsInterface {
     String ITEM = "Item";
     String START = "Start";
     String END = "End";
+    String LOAD = "Load";
     String CHOSEN_ITEM_NOT_VALID = "The Chosen Item is not valid, please try again";
     String NOT_A_NUMBER = "The prompted is not a number! ";
     String NOT_A_STRING = "The prompted is not a STRING";
@@ -25,7 +26,9 @@ public interface GameConstantsInterface {
             "3) Create/Modify Campaign:\n" +
             "4) Create/Modify Items:\n" +
             "5) Start the Game:\n" +
-            "6) End the Game:\n";
+            "6) Load the Game:\n" +
+            "7) End the Game:\n";
     String MAP_SOURCE_PATH = "src/main/java/org/resources/characters/";
     String ENTER_DIRECTION = "Enter the direction you wish to move: \n Left:L\n Right:R \n Down:D\n Up:U\n";
+    String WRONG_DIRECTION_MESSDAGE = "You entered a wrong direction\nValid directions are : L, R, U, D, Exit";
 }

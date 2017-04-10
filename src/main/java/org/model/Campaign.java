@@ -28,6 +28,8 @@ public class Campaign implements Serializable {
     private List<Map> maps = new ArrayList<>();
     private String name;
     private int numLevels;
+    private int levelsCompleted;
+
 
     /**
      * A default constructor
@@ -41,7 +43,7 @@ public class Campaign implements Serializable {
      *
      * @param mapNames these are a list of maps which are in the campaign object
      */
-    public Campaign(ArrayList<String> mapNames, String name, int numLevels) {
+    public Campaign(final ArrayList<String> mapNames, final String name, final int numLevels) {
         this.mapNames = mapNames;
         this.name = name;
         this.numLevels = numLevels;
@@ -53,23 +55,19 @@ public class Campaign implements Serializable {
      * @param character
      * @return
      */
-    public List<Map> getMapsFromCampaign(Character character) {
-        List<Map> maps = new ArrayList<>();
+    public List<Map> getMapsFromCampaign(final Character character) {
+        final List<Map> maps = new ArrayList<>();
 
-        for (String mapName : mapNames) {
+        for (final String mapName : mapNames) {
             try {
-                Map map =new ObjectLoader().loadMapFromXML(mapName);
+                final Map map = new ObjectLoader().loadMapFromXML(mapName);
                 map.setPlayer(character);
                 maps.add(map);
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
         }
         return maps;
-    }
-
-    public void setMaps(List<Map> maps) {
-        this.maps = maps;
     }
 
     //The below annotation will exclude the file from saving the maps
@@ -78,13 +76,8 @@ public class Campaign implements Serializable {
         return maps;
     }
 
-    /**
-     * A method to set the name of the campaign object
-     *
-     * @param name the name to be set
-     */
-    public void setName(String name) {
-        this.name = name;
+    public void setMaps(final List<Map> maps) {
+        this.maps = maps;
     }
 
     /**
@@ -97,12 +90,28 @@ public class Campaign implements Serializable {
     }
 
     /**
+     * A method to set the name of the campaign object
+     *
+     * @param name the name to be set
+     */
+    public void setName(final String name) {
+        this.name = name;
+    }
+
+    /**
      * A method to get the number of levels in a campaign
      *
      * @return numLevels the number of levels in the campaign
      */
     public int getNumLevels() {
         return this.numLevels;
+    }
+
+    /**
+     * A method to set the number of levels in a campaign
+     */
+    public void setNumLevels(final int num) {
+        this.numLevels += num;
     }
 
     /**
@@ -116,10 +125,11 @@ public class Campaign implements Serializable {
     }
 
     /**
-     * A method to set the number of levels in a campaign
+     * a method  to set Map Names
+     * @param mapNames
      */
-    public void setNumLevels(int num) {
-        this.numLevels += num;
+    public void setMapNames(final ArrayList<String> mapNames) {
+        this.mapNames = mapNames;
     }
 
     /**
@@ -127,13 +137,13 @@ public class Campaign implements Serializable {
      *
      * @param mapName a name of a map which will be added to the list of levels in the campaign
      */
-    public boolean setMapNames(String mapName) {
-        ObjectLoader ol = new ObjectLoader();
+    public boolean setMapNames(final String mapName) {
+        final ObjectLoader ol = new ObjectLoader();
         boolean mapExist = false;
         try {
-            Map map = ol.loadMapFromXML(mapName);
+            final Map map = ol.loadMapFromXML(mapName);
             mapExist = false;
-        } catch (Exception e) {
+        } catch (final Exception e) {
             System.out.println("Sorry this map does not exist!");
             mapExist = true;
         }
@@ -149,12 +159,12 @@ public class Campaign implements Serializable {
      * @param mapName
      * @return a map object
      */
-    public Map getMap(String mapName) {
+    public Map getMap(final String mapName) {
         // Get Map using Map name
         try {
-            Map map = ObjectLoader.loadMapFromXML(mapName);
+            final Map map = ObjectLoader.loadMapFromXML(mapName);
             return map;
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
             return null;
         }
@@ -166,7 +176,7 @@ public class Campaign implements Serializable {
      * @param campName the name of the campaign.
      * @return an existing campaign object.
      */
-    public Campaign getCampaign(String campName) throws Exception {
+    public Campaign getCampaign(final String campName) throws Exception {
         return loadCampaign(campName);
     }
 
@@ -175,7 +185,7 @@ public class Campaign implements Serializable {
      *
      * @param mapNames the list of mapNames in the campaign
      */
-    public void removeLevel(List<String> mapNames) {
+    public void removeLevel(final List<String> mapNames) {
         if (mapNames.size() != 0)
             mapNames.remove(mapNames.size() - 1);
         this.numLevels -= 1;
@@ -183,17 +193,12 @@ public class Campaign implements Serializable {
 
     /**
      * This method get the map in the current level, sets the level completed flag and returns the next level
-     * @param completedMap the current map which is completed
      * @return the new level
      */
-    public Map getNextLevel(Map completedMap) {
-        maps.stream().
-                filter(map -> map.getName().equals(completedMap.getName())).
-                findFirst().
-                get().setLevelCompleted(true);
-       return maps.stream().
-               filter(map -> !map.isLevelCompleted()).
-               findFirst().get();
+    public Map getNextLevel() {
+        this.maps.get(levelsCompleted).setLevelCompleted(true);
+        levelsCompleted++;
+        return this.maps.get(levelsCompleted);
     }
 
     /**
@@ -216,10 +221,10 @@ public class Campaign implements Serializable {
         JAXBContext context = null;
         try {
             context = JAXBContext.newInstance(Campaign.class);
-            Marshaller m = context.createMarshaller();
+            final Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             m.marshal(this, new FileOutputStream("src/main/java/org/resources/campaigns/" + this.name));
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
     }
@@ -230,17 +235,34 @@ public class Campaign implements Serializable {
      * @param name of the campaign
      * @return an existing campaign object
      */
-    public Campaign loadCampaign(String name) {
+    public Campaign loadCampaign(final String name) {
         try {
-            JAXBContext jc = JAXBContext.newInstance(Campaign.class);
+            final JAXBContext jc = JAXBContext.newInstance(Campaign.class);
             Unmarshaller u = null;
             u = jc.createUnmarshaller();
-            File f = new File("src/main/java/org/resources/campaigns/" + name);
+            final File f = new File("src/main/java/org/resources/campaigns/" + name);
             return (Campaign) u.unmarshal(f);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             //e.printStackTrace();
             return null;
         }
     }
 
+    /**
+     * a method to get levels completed
+     *
+     * @return
+     */
+    public int getLevelsCompleted() {
+        return levelsCompleted;
+    }
+
+    /**
+     * a method to set levels completed
+     *
+     * @param levelsCompleted
+     */
+    public void setLevelsCompleted(final int levelsCompleted) {
+        this.levelsCompleted = levelsCompleted;
+    }
 }

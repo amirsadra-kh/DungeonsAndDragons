@@ -2,7 +2,7 @@
 <java version="1.8.0_74" class="java.beans.XMLDecoder">
  <object class="main.java.org.model.Map">
   <void property="chest">
-   <object class="main.java.org.model.BackPackInventory" id="BackPackInventory0">
+   <object class="main.java.org.model.CharacterPackage.BackPackInventory" id="BackPackInventory0">
     <void property="items">
      <void method="add">
       <string>src/main/java/org/resources/items/belt1</string>

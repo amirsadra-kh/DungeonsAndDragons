@@ -1,5 +1,8 @@
 package main.java.org.model.DecoratorPackage;
 
+import main.java.org.Service.StrategyPackage.FriendlyNPC;
+import main.java.org.model.CharacterPackage.Character;
+
 /**
  * A Pacifying Decorator
  * Target adopts the “Friendly NPC” character strategy.
@@ -15,7 +18,7 @@ public class Pacifying extends WeaponEnhanceDecorator {
      *
      * @param decoratedWeapon
      */
-    public Pacifying(Weapon decoratedWeapon) {
+    public Pacifying(final Weapon decoratedWeapon) {
         super(decoratedWeapon);
     }
 
@@ -25,5 +28,15 @@ public class Pacifying extends WeaponEnhanceDecorator {
      */
     public String getSpecialEnhance() {
         return super.getSpecialEnhance() + ", Pacifying";
+    }
+
+    /**
+     * A method for setting the target's strategy to friendly
+     *
+     * @param target
+     */
+    public void setPacifying(final Character target) {
+        final FriendlyNPC friendly = new FriendlyNPC();
+        target.setBehaviourStrategy(friendly);
     }
 }
