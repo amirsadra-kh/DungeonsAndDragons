@@ -188,27 +188,18 @@ public class MapFrame implements ActionListener {
                         case "Q":
                             ExitPointExist = true;
                             break;
-//                        case "M":
-//                            MonsterExist = true;
-//                            break;
-                        case "C":
-                        case "W":
-                            break;
                         default:
-           //                    System.out.println(i+" "+j+" = "+boardArray[i][j]);
-             //               if (!charactersArrayList.contains(boardArray[i][j]) && boardArray[i][j]!=""){nonCharacterExist=true; nonCharacter = boardArray[i][j]+" ,";System.out.println(boardArray[i][j]); }
                             break;
                     }
                 }
             }
 
 
-            if(EntryPointExist==false || ExitPointExist == false || nonCharacterExist == true ){ //|| MonsterExist == false
+            if(EntryPointExist==false || ExitPointExist == false || nonCharacterExist == true ){
 
                 if (EntryPointExist==false){errorValidMap="Please add entry point by E";}
                 if (ExitPointExist==false){errorValidMap="Please add exit point by Q";}
-   //             if (nonCharacterExist==true){errorValidMap="Please remove "+nonCharacter+". it is not in defined map input";}
-                //  if (MonsterExist==false){errorValidMap="Please add Monsters by M";}
+
 
                 validMap=false;
                 alert("Not Valid "+errorValidMap);
