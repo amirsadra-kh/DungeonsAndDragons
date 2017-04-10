@@ -113,7 +113,8 @@ public class Weapon extends Item {
     }
 
     /**
-     * A method for saving an Item object using JAXB
+     * A method for loading an Item object using JAXB
+     * @param name
      */
     @Override
     public Item loadItem(String name){
@@ -129,7 +130,9 @@ public class Weapon extends Item {
         }
     }
 
-
+    /**
+     * A method for saving an Item object using JAXB
+     */
     @Override
     public void saveItem()  {
         JAXBContext context = null;
