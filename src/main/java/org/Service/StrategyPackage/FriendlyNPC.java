@@ -17,6 +17,7 @@ import java.util.ArrayList;
  *
  * @author Masyam Mokarian
  * @version 1.0
+ * @since 08.04.2017
  */
 public class FriendlyNPC implements BehaviourStrategy {
     /**
@@ -35,7 +36,6 @@ public class FriendlyNPC implements BehaviourStrategy {
         }
         fchar.setCurrentPosition(nextPosition);
         return nextPosition;
-
     }
 
     /**
