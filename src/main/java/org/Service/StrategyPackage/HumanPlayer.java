@@ -39,25 +39,39 @@ public class HumanPlayer implements BehaviourStrategy {
         for(int i = 0; i < 3; i ++) {
             //This prints and ask user to enter the directions
             System.out.println(GameConstantsInterface.ENTER_DIRECTION);
-            if(!checkIfMoveIsValid(map, humanPlayer)) {
+            String direction = readInput.readCoordinate();
+            if(!checkIfMoveIsValid(direction, map, humanPlayer)) {
                 i--;
                 System.out.println("Invalid Move!");
+            } else {
+                humanPlayer.setCurrentPosition(setNewPosition(direction, humanPlayer.getCurrentPosition()));
             }
         }
 
         // TODO return the new coordinate
-        return null;
+        return humanPlayer.getCurrentPosition();
     }
 
     /**
      * A method to check if the move is valid
+     * @param direction
      * @param map
      * @return
      */
-    private boolean checkIfMoveIsValid(Map map, Character humanPlayer) {
-        String direction = readInput.readCoordinate();
+    private boolean checkIfMoveIsValid(String direction, Map map, Character humanPlayer) {
         MapDirectionValidator validate = new MapDirectionValidator();
         return validate.directionIsValidToMove(direction, map, humanPlayer.getCurrentPosition());
+    }
+
+    /**
+     * A method to get the new position after a valid move
+     * @param direction headed direction
+     * @param current position point
+     * @return
+     */
+    private Point setNewPosition(String direction, Point current) {
+        MapDirectionValidator validate = new MapDirectionValidator();
+        return validate.getNextCellToMove(direction, current);
     }
 
     /**

@@ -39,14 +39,16 @@ public class HumanPlayerTest {
         this.player = null;
     }
 
+    /**
+     * Test if the valid cells are taken as valid cells when the human player tries to move on the map
+     * @throws Exception
+     */
     @Test
     public void testMoveHumanPlayerInBounds() throws Exception {
         // GIVEN
         player.setCurrentPosition(new Point(3,0));
-        Point chest = new Point(1,0);
         String direction1 = "U";
         String direction2 = "R";
-        String direction3 = "U";
 
         // WHEN
         MapDirectionValidator validate = new MapDirectionValidator();
@@ -62,10 +64,51 @@ public class HumanPlayerTest {
         Assert.assertTrue(valid);
 
         // WHEN
-        valid = validate.directionIsValidToMove(direction3, this.map, player.getCurrentPosition());
+        valid = validate.directionIsValidToMove(direction1, this.map, player.getCurrentPosition());
 
         // THEN
         Assert.assertTrue(valid);
     }
 
+    /**
+     * Test the new location of the player after moving
+     */
+    @Test
+    public void testGetNewPositionHumanPlayer() {
+        // GIVEN
+        this.player.setCurrentPosition(new Point(3,0));
+        MapDirectionValidator validate = new MapDirectionValidator();
+        String direction1 = "U";
+        String direction2 = "R";
+        String direction3 = "U";
+
+        // WHEN
+        Point newPoint = validate.getNextCellToMove(direction1, player.getCurrentPosition());
+        player.setCurrentPosition(newPoint);
+        newPoint = validate.getNextCellToMove(direction2, player.getCurrentPosition());
+        player.setCurrentPosition(newPoint);
+        newPoint = validate.getNextCellToMove(direction3, player.getCurrentPosition());
+        player.setCurrentPosition(newPoint);
+
+        // THEN
+        Point correctPoint = new Point(1,1);
+        Assert.assertEquals(correctPoint, newPoint);
+    }
+
+    /**
+     * Test if it is an invalid move to move out of the map
+     */
+    @Test
+    public void testMoveHumanPlayerOutOfBounds() {
+        // GIVEN
+        player.setCurrentPosition(new Point(3,0));
+        String direction = "L";
+
+        // WHEN
+        MapDirectionValidator validate = new MapDirectionValidator();
+        boolean valid = validate.directionIsValidToMove(direction, this.map, player.getCurrentPosition());
+
+        // THEN
+        Assert.assertFalse(valid);
+    }
 }
