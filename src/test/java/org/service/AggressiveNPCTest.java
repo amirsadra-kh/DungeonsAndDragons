@@ -14,9 +14,6 @@ import test.Fixtures;
 
 import java.awt.*;
 import java.util.*;
-import java.util.List;
-
-import static org.junit.Assert.*;
 
 /**
  * A class to test the AggressiveNPC strategy
@@ -44,15 +41,6 @@ public class AggressiveNPCTest {
         this.map = null;
         this.monster = null;
         this.player = null;
-    }
-
-    /**
-     * TODO!
-     * @throws Exception
-     */
-    @Test
-    public void execute() throws Exception {
-
     }
 
     /**

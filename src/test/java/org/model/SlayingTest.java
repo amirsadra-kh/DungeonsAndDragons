@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import test.Fixtures;
 
-import static org.junit.Assert.*;
-
 /**
  * A class to test the Slaying decorator
  *

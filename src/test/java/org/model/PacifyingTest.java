@@ -11,10 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 import test.Fixtures;
 
-import java.util.HashSet;
-
-import static org.junit.Assert.*;
-
 /**
  * A class to test the Pacifying decorator
  *
