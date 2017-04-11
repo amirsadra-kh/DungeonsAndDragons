@@ -46,6 +46,7 @@ public class AggressiveNPC implements BehaviourStrategy {
 
         // Find a point furthest away from attacker
         Point min = getMinDistance(possiblePoints, playerPoint);
+        monster.setCurrentPosition(min);
 
         // Check if there is a chest to loot
         AdjacentObjectsFinder finder = new AdjacentObjectsFinder();

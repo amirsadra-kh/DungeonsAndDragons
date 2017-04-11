@@ -1,5 +1,6 @@
 package main.java.org.Service.StrategyPackage;
 
+import main.java.org.Service.AdjacentObjectsFinder;
 import main.java.org.Service.MapDirectionValidator;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
@@ -30,10 +31,17 @@ public class FriendlyNPC implements BehaviourStrategy {
     @Override
     public Point move( Character fchar,  Character player,  Point objective,  Map map) {
         final Point nextPosition = getPossiblePoints(map, fchar.getCurrentPosition());
-        if (nextPosition != null && map.getScreen()[nextPosition.x][nextPosition.y].equalsIgnoreCase("c")) {
-            interactWithChest(map, fchar);
-        }
         fchar.setCurrentPosition(nextPosition);
+
+        // Check if there is a chest to loot
+        AdjacentObjectsFinder finder = new AdjacentObjectsFinder();
+        if(finder.checkForChest(fchar.getCurrentPosition(), map)) {
+            System.out.println("Friendly Character found a chest!!");
+            System.out.println("Backpack inventory before chest: " +fchar.getBackPackInventoryItems().toString());
+            interactWithChest(map, fchar);
+            System.out.println("Backpack inventory after chest: " +fchar.getBackPackInventoryItems().toString());
+        }
+
         return nextPosition;
     }
 

@@ -28,14 +28,26 @@ public class AdjacentObjectsFinder {
     public boolean checkForChest(Point currentPoint, Map map) {
         setAdjacentPoints(currentPoint);
         String[][] currentMap = map.getScreen();
-        if(currentMap[up.x][up.y].equals("c"))
-            return true;
-        else if(currentMap[down.x][down.y].equals("c"))
-            return true;
-        else if(currentMap[left.x][left.y].equals("c"))
-            return true;
-        else if(currentMap[right.x][right.y].equals("c"))
-            return true;
+        // Validate the point is on the map
+        if(up.x > -1 && up.y > -1 && up.x < currentMap[0].length && up.y < currentMap.length)
+            // Check if the point has a chest
+            if(currentMap[up.x][up.y].equals("c"))
+                return true;
+        // Validate the point is on the map
+        else if(down.x > -1 && down.y > -1 && down.x < currentMap[0].length && down.y < currentMap.length)
+            // Check if the point has a chest
+            if(currentMap[down.x][down.y].equals("c"))
+                return true;
+        // Validate the point is on the map
+        else if(left.x > -1 && left.y > -1  && left.x < currentMap[0].length && left.y < currentMap.length)
+            // Check if the point has a chest
+            if(currentMap[left.x][left.y].equals("c"))
+                return true;
+        // Validate the point is on the map
+        else if(right.x > -1 && right.y > -1  && right.x < currentMap[0].length && right.y < currentMap.length)
+            // Check if the point has a chest
+            if(currentMap[right.x][right.y].equals("c"))
+                return true;
 
         return false;
     }

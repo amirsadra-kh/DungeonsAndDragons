@@ -106,8 +106,8 @@ public class PlayScreen {
                 MapScreen.showMap(this.map);
                 i++;
                 System.out.println("Enter \"EXIT\" at any time you like to save and exit the game");
-                String direction = readInput.readCoordinate();
-                if (userWantToSaveTheGameAndExit(direction))
+                String exit = readInput.readLine();
+                if (userWantToSaveTheGameAndExit(exit))
                     return;
             }
         }
