@@ -1,10 +1,13 @@
 package main.java.org.Service.StrategyPackage;
 
+import main.java.org.Service.MapDirectionValidator;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.Item;
 import main.java.org.model.Map;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -38,13 +41,26 @@ public class FriendlyNPC implements BehaviourStrategy {
      * This method is for the friendly character to interact with the chest
      *
      * @param map    the playing map
-     * @param fchar the friendly character
+     * @param player the friendly character
      */
-    public void interactWithChest (Map map, Character fchar) {
-        // Set the new position
-        fchar.setCurrentPosition(new Point(x,y));
-
-        return fchar.getCurrentPosition();
+    public void interactWithChest (Map map, Character player) {
+        final BackPackInventory chest = map.getChest();
+        final ArrayList<Item> loot = new ArrayList<>();
+        if (chest != null) {
+            loot.addAll(chest.getItems());
+        }
+        final java.util.List<Item> playerBackpack = player.getBackPackInventoryItems();
+        if (playerBackpack == null) {
+            player.setBackPackInventory(new BackPackInventory());
+        }
+        while (loot.size() > 0) {
+            if (player.getBackPackInventoryItems().size() < 10) {
+                player.getBackPackInventoryItems().add(loot.remove(loot.size() - 1));
+            } else {
+                break;
+            }
+        }
+        map.getChest().setItems(loot);
     }
 
     /**
@@ -65,6 +81,28 @@ public class FriendlyNPC implements BehaviourStrategy {
      */
     @Override
     public void interact(Character fchar, BackPackInventory chest) {
+
+    }
+
+    /**
+     * This method is to get the possible point for the friendly character
+     *
+     * @param map         the current map
+     * @param targetPoint the target point
+     * @return it returns the first available point
+     */
+    private Point getPossiblePoints(final Map map, final Point targetPoint) {
+
+        final MapDirectionValidator validate = new MapDirectionValidator();
+        for (int row = 0; row < map.getScreen().length; row++) {
+            for (int col = 0; col < map.getScreen()[row].length; col++) {
+                if (validate.coordinateIsValidForFriendlyCharacter(row, col, map, targetPoint)) {
+                    return new Point(row, col);
+                }
+            }
+        }
+        return null;
+
 
     }
 }
