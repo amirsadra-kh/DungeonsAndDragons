@@ -88,7 +88,7 @@ public class AggressiveNPCTest {
         BackPackInventory emptyChest = new BackPackInventory();
 
         // WHEN
-        monster.getBehaviourStrategy().interact(monster, chest);
+        monster.getBehaviourStrategy().interact(monster, chest, map);
 
         // THEN
         // Check if item has been removed from chest

@@ -36,5 +36,5 @@ public interface BehaviourStrategy {
      * @param character
      * @param chestORbackpack
      */
-    void interact(Character character, BackPackInventory chestORbackpack);
+    void interact(Character character, BackPackInventory chestORbackpack, Map map);
 }

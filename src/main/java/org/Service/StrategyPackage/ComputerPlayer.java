@@ -1,10 +1,13 @@
 package main.java.org.Service.StrategyPackage;
 
+import main.java.org.Service.AdjacentObjectsFinder;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.Item;
 import main.java.org.model.Map;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * This strategy is for a player character controlled by the computer. A computer
@@ -28,6 +31,16 @@ public class ComputerPlayer implements BehaviourStrategy {
         if(compPlayer.getBurning()) {
             // TODO decrease monster's hitpoints here based on getBurningDamage in burning decorator
         }
+
+        // Check if there is a chest to loot
+        AdjacentObjectsFinder finder = new AdjacentObjectsFinder();
+        if(finder.checkForChest(compPlayer.getCurrentPosition(), map)) {
+            System.out.println("Computer Player found a chest!!");
+            System.out.println("Backpack inventory before chest: " +compPlayer.getBackPackInventoryItems().toString());
+            interact(compPlayer, map.getChest(), map);
+            System.out.println("Backpack inventory after chest: " +compPlayer.getBackPackInventoryItems().toString());
+        }
+
         return null;
     }
 
@@ -47,7 +60,22 @@ public class ComputerPlayer implements BehaviourStrategy {
      * @param chestORbackpack
      */
     @Override
-    public void interact(final Character compPlayer, final BackPackInventory chestORbackpack) {
-
+    public void interact(final Character compPlayer, final BackPackInventory chestORbackpack, Map map) {
+        ArrayList<Item> loot = new ArrayList<>();
+        if (chestORbackpack != null) {
+            loot.addAll(chestORbackpack.getItems());
+        }
+        java.util.List<Item> playerBackpack = compPlayer.getBackPackInventoryItems();
+        if (playerBackpack == null) {
+            compPlayer.setBackPackInventory(new BackPackInventory());
+        }
+        while (loot.size() > 0) {
+            if(compPlayer.getBackPackInventoryItems().size() < 10) {
+                compPlayer.getBackPackInventoryItems().add(loot.remove(loot.size() - 1));
+            } else {
+                break;
+            }
+        }
+        map.getChest().setItems(loot);
     }
 }

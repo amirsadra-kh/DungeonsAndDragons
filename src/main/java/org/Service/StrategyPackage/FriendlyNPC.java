@@ -1,10 +1,14 @@
 package main.java.org.Service.StrategyPackage;
 
+import main.java.org.Service.AdjacentObjectsFinder;
+import main.java.org.Service.MapDirectionValidator;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.Item;
 import main.java.org.model.Map;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -13,9 +17,9 @@ import java.util.Random;
  * If a character using the friendly strategy is attacked, it will change its
  * strategy and become aggressive.
  *
- * @author
- * @version
- * @since
+ * @author Masyam Mokarian
+ * @version 1.0
+ * @since 08.04.2017
  */
 public class FriendlyNPC implements BehaviourStrategy {
     /**
@@ -25,25 +29,46 @@ public class FriendlyNPC implements BehaviourStrategy {
      * @param objective the position of the objective of the map - chest or exit
      */
     @Override
-    public Point move(Character fchar, Character player, Point objective, Map map) {
-        Random r = new Random();
-        // Get the current position
-        Point current = fchar.getCurrentPosition();
-        // Get a random number to move from 1 to 3 on the x axis
-        int x = r.nextInt(3);
-        // Subtract the movement made on the x axis from 3
-        // This has to be done cause the character is only allowed to move 3 map cells
-        // if x = 2 the user only has one cell left to move and so on.
-        int y = (int) current.getY() + (3 - x);
-        // Add the random movement on x to the current x
-        x += (int) current.getX();
+    public Point move( Character fchar,  Character player,  Point objective,  Map map) {
+        final Point nextPosition = getPossiblePoints(map, fchar.getCurrentPosition());
+        fchar.setCurrentPosition(nextPosition);
 
-        //TODO add out of bounds check
+        // Check if there is a chest to loot
+        AdjacentObjectsFinder finder = new AdjacentObjectsFinder();
+        if(finder.checkForChest(fchar.getCurrentPosition(), map)) {
+            System.out.println("Friendly Character found a chest!!");
+            System.out.println("Backpack inventory before chest: " +fchar.getBackPackInventoryItems().toString());
+            interactWithChest(map, fchar);
+            System.out.println("Backpack inventory after chest: " +fchar.getBackPackInventoryItems().toString());
+        }
 
-        // Set the new position
-        fchar.setCurrentPosition(new Point(x,y));
+        return nextPosition;
+    }
 
-        return fchar.getCurrentPosition();
+    /**
+     * This method is for the friendly character to interact with the chest
+     *
+     * @param map    the playing map
+     * @param player the friendly character
+     */
+    public void interactWithChest (Map map, Character player) {
+        final BackPackInventory chest = map.getChest();
+        final ArrayList<Item> loot = new ArrayList<>();
+        if (chest != null) {
+            loot.addAll(chest.getItems());
+        }
+        final java.util.List<Item> playerBackpack = player.getBackPackInventoryItems();
+        if (playerBackpack == null) {
+            player.setBackPackInventory(new BackPackInventory());
+        }
+        while (loot.size() > 0) {
+            if (player.getBackPackInventoryItems().size() < 10) {
+                player.getBackPackInventoryItems().add(loot.remove(loot.size() - 1));
+            } else {
+                break;
+            }
+        }
+        map.getChest().setItems(loot);
     }
 
     /**
@@ -63,7 +88,29 @@ public class FriendlyNPC implements BehaviourStrategy {
      * @param chest
      */
     @Override
-    public void interact(Character fchar, BackPackInventory chest) {
+    public void interact(Character fchar, BackPackInventory chest, Map map) {
+
+    }
+
+    /**
+     * This method is to get the possible point for the friendly character
+     *
+     * @param map         the current map
+     * @param targetPoint the target point
+     * @return it returns the first available point
+     */
+    private Point getPossiblePoints(final Map map, final Point targetPoint) {
+
+        final MapDirectionValidator validate = new MapDirectionValidator();
+        for (int row = 0; row < map.getScreen().length; row++) {
+            for (int col = 0; col < map.getScreen()[row].length; col++) {
+                if (validate.coordinateIsValidForFriendlyCharacter(row, col, map, targetPoint)) {
+                    return new Point(row, col);
+                }
+            }
+        }
+        return null;
+
 
     }
 }

@@ -68,7 +68,7 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param chestORbackpack a possible chest or backpack to interact with
      */
     @Override
-    public void interact(final Character target, final BackPackInventory chestORbackpack) {
+    public void interact(final Character target, final BackPackInventory chestORbackpack, Map map) {
 
     }
 }
