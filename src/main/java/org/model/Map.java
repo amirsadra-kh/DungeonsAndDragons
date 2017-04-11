@@ -1,6 +1,8 @@
 package main.java.org.model;
 
 import main.java.org.Service.ObjectSaver;
+import main.java.org.Service.StrategyPackage.AggressiveNPC;
+import main.java.org.Service.StrategyPackage.FriendlyNPC;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 
@@ -245,6 +247,7 @@ public class Map implements Serializable {
                         //System.out.println(this.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
                         temp = temp.loadCharacter("fchar" +friendlyNum);
                         temp.setCurrentPosition(new Point(i,j));
+                        temp.setBehaviourStrategy(new FriendlyNPC());
                         characters.add(temp);
                         friendlyNum++;
                     } catch (Exception e) {
@@ -256,6 +259,7 @@ public class Map implements Serializable {
                         //System.out.println(this.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
                         temp = temp.loadCharacter("mon" + monsterNum);
                         temp.setCurrentPosition(new Point(i,j));
+                        temp.setBehaviourStrategy(new AggressiveNPC());
                         characters.add(temp);
 
                         monsterNum++;
