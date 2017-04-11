@@ -1,5 +1,6 @@
 package main.java.org.Service.StrategyPackage;
 
+import main.java.org.Service.AdjacentObjectsFinder;
 import main.java.org.Service.MapDirectionValidator;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
@@ -8,6 +9,7 @@ import main.java.org.model.Map;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Random;
 
 /**
  * This strategy is for friendly NPCs. A friendly NPC will wander around the map
@@ -17,35 +19,39 @@ import java.util.ArrayList;
  *
  * @author Masyam Mokarian
  * @version 1.0
+ * @since 08.04.2017
  */
 public class FriendlyNPC implements BehaviourStrategy {
     /**
      * A method for moving a friendly NPC randomly
-     *
-     * @param fchar     the one who has a turn now
-     * @param player    the player character of the map
+     * @param fchar the one who has a turn now
+     * @param player the player character of the map
      * @param objective the position of the objective of the map - chest or exit
-     * @param map       the map the character is on
      */
     @Override
     public Point move( Character fchar,  Character player,  Point objective,  Map map) {
         final Point nextPosition = getPossiblePoints(map, fchar.getCurrentPosition());
-        if (nextPosition != null && map.getScreen()[nextPosition.x][nextPosition.y].equalsIgnoreCase("c")) {
-            interactWithChest(map, fchar);
-        }
         fchar.setCurrentPosition(nextPosition);
-        return nextPosition;
 
+        // Check if there is a chest to loot
+        AdjacentObjectsFinder finder = new AdjacentObjectsFinder();
+        if(finder.checkForChest(fchar.getCurrentPosition(), map)) {
+            System.out.println("Friendly Character found a chest!!");
+            System.out.println("Backpack inventory before chest: " +fchar.getBackPackInventoryItems().toString());
+            interactWithChest(map, fchar);
+            System.out.println("Backpack inventory after chest: " +fchar.getBackPackInventoryItems().toString());
+        }
+
+        return nextPosition;
     }
 
     /**
      * This method is for the friendly character to interact with the chest
      *
-     * @param map    the paying map
-     * @param player the freidnly character
+     * @param map    the playing map
+     * @param player the friendly character
      */
     public void interactWithChest (Map map, Character player) {
-
         final BackPackInventory chest = map.getChest();
         final ArrayList<Item> loot = new ArrayList<>();
         if (chest != null) {
@@ -63,21 +69,31 @@ public class FriendlyNPC implements BehaviourStrategy {
             }
         }
         map.getChest().setItems(loot);
-
     }
 
+    /**
+     * The friendly character does not attack!
+     * Do nothing in this method
+     * @param fchar
+     * @param attackedChar
+     */
     @Override
-    public void attack(final Character attackingChar, final Character attackedChar) {
-
-    }
-
-    @Override
-    public void interact(final Character character, final BackPackInventory chestORbackpack) {
+    public void attack(Character fchar, Character attackedChar) {
 
     }
 
     /**
-     * Thsi method is to get the possible point for the friendly character
+     * The friendly character can interact with a chest on the map
+     * @param fchar
+     * @param chest
+     */
+    @Override
+    public void interact(Character fchar, BackPackInventory chest, Map map) {
+
+    }
+
+    /**
+     * This method is to get the possible point for the friendly character
      *
      * @param map         the current map
      * @param targetPoint the target point

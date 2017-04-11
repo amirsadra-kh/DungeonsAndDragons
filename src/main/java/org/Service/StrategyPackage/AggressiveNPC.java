@@ -1,5 +1,6 @@
 package main.java.org.Service.StrategyPackage;
 
+import main.java.org.Service.AdjacentObjectsFinder;
 import main.java.org.Service.Calculation;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
@@ -22,14 +23,15 @@ import java.util.List;
  * @since 09.04.2017
  */
 public class AggressiveNPC implements BehaviourStrategy {
-    @Override
+
     /**
      * A method for moving a hostile character - move towards player
-     * @param character the one who has a turn now
+     * @param monster the one who has a turn now
      * @param player the player character of the map
      * @param objective the position of the objective of the map - chest or exit
      * @param map the map the character is on
      */
+    @Override
     public Point move(Character monster, Character player, Point objective, Map map) {
         if(monster.getBurning()) {
             // TODO decrease monster's hitpoints here based on getBurningDamage in burning decorator
@@ -44,6 +46,16 @@ public class AggressiveNPC implements BehaviourStrategy {
 
         // Find a point furthest away from attacker
         Point min = getMinDistance(possiblePoints, playerPoint);
+        monster.setCurrentPosition(min);
+
+        // Check if there is a chest to loot
+        AdjacentObjectsFinder finder = new AdjacentObjectsFinder();
+        if(finder.checkForChest(monster.getCurrentPosition(), map)) {
+            System.out.println("Monster found a chest!!");
+            System.out.println("Backpack inventory before chest: " +monster.getBackPackInventoryItems().toString());
+            interact(monster, map.getChest(), map);
+            System.out.println("Backpack inventory after chest: " +monster.getBackPackInventoryItems().toString());
+        }
 
         // Set the new position
         return min;
@@ -131,12 +143,22 @@ public class AggressiveNPC implements BehaviourStrategy {
      * @param chest
      */
     @Override
-    public void interact(Character mon, BackPackInventory chest) {
-        BackPackInventory monBackpack = mon.getBackPackInventory();
-        // remove items from chest and add to backpack
-        List<Item> changedChestItems = monBackpack.addToBackpack(chest.getItems());
-        chest.setItems(changedChestItems);
-        // set the new backpack inventory
-        mon.setBackPackInventory(monBackpack);
+    public void interact(Character mon, BackPackInventory chest, Map map) {
+        ArrayList<Item> loot = new ArrayList<>();
+        if (chest != null) {
+            loot.addAll(chest.getItems());
+        }
+        java.util.List<Item> playerBackpack = mon.getBackPackInventoryItems();
+        if (playerBackpack == null) {
+            mon.setBackPackInventory(new BackPackInventory());
+        }
+        while (loot.size() > 0) {
+            if(mon.getBackPackInventoryItems().size() < 10) {
+               mon.getBackPackInventoryItems().add(loot.remove(loot.size() - 1));
+            } else {
+                break;
+            }
+        }
+        map.getChest().setItems(loot);
     }
 }

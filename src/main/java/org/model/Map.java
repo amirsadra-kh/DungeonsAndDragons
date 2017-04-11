@@ -1,6 +1,8 @@
 package main.java.org.model;
 
 import main.java.org.Service.ObjectSaver;
+import main.java.org.Service.StrategyPackage.AggressiveNPC;
+import main.java.org.Service.StrategyPackage.FriendlyNPC;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 
@@ -75,6 +77,21 @@ public class Map implements Serializable {
         for (int i = 0; i < map.getScreen().length; i++) {
             for (int j = 0; j < map.getScreen()[i].length; j++) {
                 if ("P".equalsIgnoreCase(map.getScreen()[i][j])) {
+                    return new Point(i, j);
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * This method is to return the current coordinate of the chest
+     * @return it returns the Point corresponding the chest coordinate
+     */
+    public  Point getChestCoordinate() {
+        for (int i = 0; i < this.getScreen().length; i++) {
+            for (int j = 0; j < this.getScreen()[i].length; j++) {
+                if ("c".equalsIgnoreCase(this.getScreen()[i][j])) {
                     return new Point(i, j);
                 }
             }
@@ -228,7 +245,10 @@ public class Map implements Serializable {
                 if ('f' == this.getScreen()[i][j].charAt(0) || 'F' == this.getScreen()[i][j].charAt(0)) {
                     try {
                         //System.out.println(this.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
-                        characters.add(temp.loadCharacter("fchar" +friendlyNum));
+                        temp = temp.loadCharacter("fchar" +friendlyNum);
+                        temp.setCurrentPosition(new Point(i,j));
+                        temp.setBehaviourStrategy(new FriendlyNPC());
+                        characters.add(temp);
                         friendlyNum++;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -237,11 +257,15 @@ public class Map implements Serializable {
                 else if('m' == this.getScreen()[i][j].charAt(0) || 'M' == this.getScreen()[i][j].charAt(0)){
                     try {
                         //System.out.println(this.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
-                        characters.add(temp.loadCharacter("mon" + monsterNum));
+                        temp = temp.loadCharacter("mon" + monsterNum);
+                        temp.setCurrentPosition(new Point(i,j));
+                        temp.setBehaviourStrategy(new AggressiveNPC());
+                        characters.add(temp);
+
                         monsterNum++;
                     } catch (Exception e) {
                         e.printStackTrace();
-                    }
+                       }
                 }
             }
 
