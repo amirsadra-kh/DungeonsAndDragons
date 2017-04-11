@@ -243,7 +243,9 @@ public class Map implements Serializable {
                 if ('f' == this.getScreen()[i][j].charAt(0) || 'F' == this.getScreen()[i][j].charAt(0)) {
                     try {
                         //System.out.println(this.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
-                        characters.add(temp.loadCharacter("fchar" +friendlyNum));
+                        temp = temp.loadCharacter("fchar" +friendlyNum);
+                        temp.setCurrentPosition(new Point(i,j));
+                        characters.add(temp);
                         friendlyNum++;
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -252,7 +254,10 @@ public class Map implements Serializable {
                 else if('m' == this.getScreen()[i][j].charAt(0) || 'M' == this.getScreen()[i][j].charAt(0)){
                     try {
                         //System.out.println(this.getScreen()[i][j].charAt(0)+" at position i="+i+",j="+j );
-                        characters.add(temp.loadCharacter("mon" + monsterNum));
+                        temp = temp.loadCharacter("mon" + monsterNum);
+                        temp.setCurrentPosition(new Point(i,j));
+                        characters.add(temp);
+
                         monsterNum++;
                     } catch (Exception e) {
                         e.printStackTrace();
