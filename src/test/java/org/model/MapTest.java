@@ -54,7 +54,7 @@ public class MapTest {
      * A method to get the rows of the map.
      */
     @Test
-    public void testgetRows() {
+    public void testGetRows() {
         int rows=4;
         this.map.setRows(rows);
         Assert.assertEquals(rows, this.map.getRows());
@@ -64,7 +64,7 @@ public class MapTest {
      * A method to get the Player in the map.
      */
     @Test
-    public void testgetPlayer() {
+    public void testGetPlayer() {
         Character player = new Character();
         this.map.setPlayer(player);
         Assert.assertEquals(player, this.map.getPlayer());
