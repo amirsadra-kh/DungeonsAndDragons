@@ -1,5 +1,6 @@
 package main.java.org.Service.StrategyPackage;
 
+import main.java.org.Service.AdjacentObjectsFinder;
 import main.java.org.Service.Calculation;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
@@ -45,6 +46,15 @@ public class AggressiveNPC implements BehaviourStrategy {
 
         // Find a point furthest away from attacker
         Point min = getMinDistance(possiblePoints, playerPoint);
+
+        // Check if there is a chest to loot
+        AdjacentObjectsFinder finder = new AdjacentObjectsFinder();
+        if(finder.checkForChest(monster.getCurrentPosition(), map)) {
+            System.out.println("Monster found a chest!!");
+            System.out.println("Backpack inventory before chest: " +monster.getBackPackInventoryItems().toString());
+            interact(monster, map.getChest(), map);
+            System.out.println("Backpack inventory after chest: " +monster.getBackPackInventoryItems().toString());
+        }
 
         // Set the new position
         return min;
@@ -133,11 +143,21 @@ public class AggressiveNPC implements BehaviourStrategy {
      */
     @Override
     public void interact(Character mon, BackPackInventory chest, Map map) {
-        BackPackInventory monBackpack = mon.getBackPackInventory();
-        // remove items from chest and add to backpack
-        List<Item> changedChestItems = monBackpack.addToBackpack(chest.getItems());
-        chest.setItems(changedChestItems);
-        // set the new backpack inventory
-        mon.setBackPackInventory(monBackpack);
+        ArrayList<Item> loot = new ArrayList<>();
+        if (chest != null) {
+            loot.addAll(chest.getItems());
+        }
+        java.util.List<Item> playerBackpack = mon.getBackPackInventoryItems();
+        if (playerBackpack == null) {
+            mon.setBackPackInventory(new BackPackInventory());
+        }
+        while (loot.size() > 0) {
+            if(mon.getBackPackInventoryItems().size() < 10) {
+               mon.getBackPackInventoryItems().add(loot.remove(loot.size() - 1));
+            } else {
+                break;
+            }
+        }
+        map.getChest().setItems(loot);
     }
 }
