@@ -81,11 +81,15 @@ public class PlayScreen {
         askUserToChoseHumanOrComputer(readInput);
         setStrategy();
         playGameInTurns(character, map);
-
         // movePlayer();
 
     }
 
+    /**
+     * A method to let each character use their turn
+     * @param player
+     * @param map
+     */
     private void playGameInTurns(Character player, Map map) {
         int i = 0;
         while (true) {
@@ -109,7 +113,10 @@ public class PlayScreen {
         }
     }
 
-
+    /**
+     * A method to interact with the user to ask if the character should be a computer or a human player
+     * @param readInput
+     */
     private static void askUserToChoseHumanOrComputer(ReadInput readInput) {
         System.out.println("Do you want to play or you want the computer to play?\n 1) Computer \n 2) Human");
         int choice = readInput.readIntHandling(0);
@@ -206,7 +213,7 @@ public class PlayScreen {
     }
 
     /**
-     * Thsi method is to check the interaction Object and interact accordingly
+     * This method is to check the interaction Object and interact accordingly
      *
      * @param str The target object
      * @param i   the I coordinate
@@ -640,6 +647,11 @@ public class PlayScreen {
         }
     }
 
+    /**
+     * A method to get the name of the current character and associate it with a letter on the map
+     * @param currentCharacter
+     * @return
+     */
     public String getPlayerName(Character currentCharacter) {
         String str=currentCharacter.getCharName().substring(0,1);
         if ("c".equalsIgnoreCase(str)){
