@@ -65,10 +65,11 @@ public class MapTest {
      */
     @Test
     public void testgetPlayer() {
-        Character player = new Character() ;
+        Character player = new Character();
         this.map.setPlayer(player);
         Assert.assertEquals(player, this.map.getPlayer());
     }
+
 
     /**
      * A method to tear down after the tests.

@@ -128,14 +128,16 @@ public class CharacterTest {
         Assert.assertEquals(size, this.character.getItemsWearing().size());
     }
 
+    /**
+     * A test method to get the ability strength
+     */
     @Test
     public void testItemInfluence() {
         int strength = ability.getStrength();
         System.out.println("Current strength: " +strength);
         HashSet<Item> wearingItems = character.getItemsWearing();
-        Item strengthItem = new Item();
-        strengthItem = strengthItem.loadItem("belt1");
 
+        Item strengthItem = Fixtures.createBelt();
         wearingItems.add(strengthItem);
         strength += strengthItem.getEnhance();
         System.out.println("Current strength: " +ability.getStrength());
@@ -147,6 +149,96 @@ public class CharacterTest {
         Assert.assertEquals(strength, ability.getStrength());
 
     }
+
+    /**
+     * A test method to get the ability dexterity
+     */
+    @Test
+    public void testItemDexterity() {
+        int dexterity = ability.getDexterity();
+        System.out.println("Current dexterity: " +dexterity);
+        HashSet<Item> wearingItems = character.getItemsWearing();
+        Item dexterityItem = Fixtures.createBootsDex();
+
+        wearingItems.add(dexterityItem);
+        dexterity += dexterityItem.getEnhance();
+        System.out.println("Current dexterity: " +ability.getDexterity());
+
+        character.setItemsWearing(wearingItems);
+        ability = character.getAbility();
+        System.out.println("New dexterity: " +ability.getDexterity());
+
+        Assert.assertEquals(dexterity, ability.getDexterity());
+
+    }
+
+
+    /**
+     * A test method to get the ability constitution
+     */
+    @Test
+    public void testItemConstitution() {
+        int constitution = ability.getConstitution();
+        System.out.println("Current constitution: " +constitution);
+        HashSet<Item> wearingItems = character.getItemsWearing();
+        Item constitutionItem = Fixtures.createBeltCon();
+
+        wearingItems.add(constitutionItem);
+        constitution += constitutionItem.getEnhance();
+        System.out.println("Current constitution: " +ability.getConstitution());
+
+        character.setItemsWearing(wearingItems);
+        ability = character.getAbility();
+        System.out.println("New constitution: " +ability.getConstitution());
+
+        Assert.assertEquals(constitution, ability.getConstitution());
+
+    }
+
+    /**
+     * A test method to get the item attack bonus
+     */
+    @Test
+    public void testItemAttackBonus() {
+        int attackBonus = ability.getAttackBonus();
+        System.out.println("Current attack Bonus: " +attackBonus);
+        HashSet<Item> wearingItems = character.getItemsWearing();
+        Item attackBonusItem = Fixtures.createWeaponAtt();
+
+        wearingItems.add(attackBonusItem);
+        attackBonus += attackBonusItem.getEnhance();
+        System.out.println("Current attack Bonus: " +ability.getAttackBonus());
+
+        character.setItemsWearing(wearingItems);
+        ability = character.getAbility();
+        System.out.println("New attack Bonus: " +ability.getAttackBonus());
+
+        Assert.assertEquals(attackBonus, ability.getAttackBonus());
+
+    }
+
+    /**
+     * A test method to get the item Damage Bonus
+     */
+    @Test
+    public void testItemDamageBonus() {
+        int damageBonus = ability.getDamageBonus();
+        System.out.println("Current Damage Bonus: " +damageBonus);
+        HashSet<Item> wearingItems = character.getItemsWearing();
+        Item damageBonusItem = Fixtures.createWeapon();
+
+        wearingItems.add(damageBonusItem);
+        damageBonus += damageBonusItem.getEnhance();
+        System.out.println("Current Damage Bonus: " +ability.getDamageBonus());
+
+        character.setItemsWearing(wearingItems);
+        ability = character.getAbility();
+        System.out.println("New Damage Bonus: " +ability.getDamageBonus());
+
+        Assert.assertEquals(damageBonus, ability.getDamageBonus());
+
+    }
+
 
     /**
      * A test method to test the backpack inventory of a character.
