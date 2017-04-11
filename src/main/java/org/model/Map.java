@@ -265,7 +265,7 @@ public class Map implements Serializable {
                         monsterNum++;
                     } catch (Exception e) {
                         e.printStackTrace();
-                    }
+                       }
                 }
             }
 

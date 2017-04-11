@@ -88,14 +88,27 @@ public class PlayScreen {
 
     private void playGameInTurns(Character player, Map map) {
         int i = 0;
-//        while (i<3) {
+        while (true) {
             if (mapCharacters.size() != 0) {
-                Character currentCharacter = mapCharacters.get(i % (mapCharacters.size()-1));
-                player.setCurrentPosition(currentCharacter.getBehaviourStrategy().move(currentCharacter, player, map.getChestCoordinate(), map));
+                int position =i % (mapCharacters.size()-1);
+                Character currentCharacter = mapCharacters.get(position);
+                Point previousPossition= currentCharacter.getCurrentPosition();
+                currentCharacter.setCurrentPosition(currentCharacter.getBehaviourStrategy().move(currentCharacter, player, this.map.getChestCoordinate(), this.map));
+                String [][]str=map.getScreen();
+                str[currentCharacter.getCurrentPosition().x][currentCharacter.getCurrentPosition().y]=getPlayerName(currentCharacter);
+                str[previousPossition.x][previousPossition.y]="";
+                mapCharacters.set(position,currentCharacter);
+                map.setScreen(str);
+                MapScreen.showMap(this.map);
                 i++;
+                System.out.println("Enter \"EXIT\" at any time you like to save and exit the game");
+                String direction = readInput.readCoordinate();
+                if (userWantToSaveTheGameAndExit(direction))
+                    return;
             }
-      //  }
+        }
     }
+
 
     private static void askUserToChoseHumanOrComputer(ReadInput readInput) {
         System.out.println("Do you want to play or you want the computer to play?\n 1) Computer \n 2) Human");
@@ -185,6 +198,7 @@ public class PlayScreen {
             for (int j = 0; j < map.getScreen()[i].length; j++) {
                 if (map.getScreen()[i][j].equalsIgnoreCase("E")) {
                     map.getScreen()[i][j] = "P";
+                    map.getPlayer().setCurrentPosition(new Point(i,j));
                 }
             }
         }
@@ -623,6 +637,16 @@ public class PlayScreen {
         } catch (final Exception e) {
             //e.printStackTrace();
             return null;
+        }
+    }
+
+    public String getPlayerName(Character currentCharacter) {
+        String str=currentCharacter.getCharName().substring(0,1);
+        if ("c".equalsIgnoreCase(str)){
+            return "p";
+
+        }else {
+            return str;
         }
     }
 }
