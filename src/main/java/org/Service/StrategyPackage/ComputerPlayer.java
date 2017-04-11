@@ -47,7 +47,7 @@ public class ComputerPlayer implements BehaviourStrategy {
      * @param chestORbackpack
      */
     @Override
-    public void interact(final Character compPlayer, final BackPackInventory chestORbackpack) {
+    public void interact(final Character compPlayer, final BackPackInventory chestORbackpack, Map map) {
 
     }
 }

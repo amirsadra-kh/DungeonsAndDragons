@@ -1,13 +1,16 @@
 package main.java.org.Service.StrategyPackage;
 
+import main.java.org.Service.AdjacentObjectsFinder;
 import main.java.org.Service.MapDirectionValidator;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.GameConstantsInterface;
+import main.java.org.model.Item;
 import main.java.org.model.Map;
 import main.java.org.model.ReadInput;
 
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * This strategy is for a player character controlled by the user. It requires user
@@ -46,6 +49,14 @@ public class HumanPlayer implements BehaviourStrategy {
             }
         }
 
+        AdjacentObjectsFinder finder = new AdjacentObjectsFinder();
+        if(finder.checkForChest(humanPlayer.getCurrentPosition(), map)) {
+            System.out.println("Player found a chest!!");
+            System.out.println("Backpack inventory before chest: " +humanPlayer.getBackPackInventoryItems().toString());
+            interact(humanPlayer, map.getChest(), map);
+            System.out.println("Backpack inventory after chest: " +humanPlayer.getBackPackInventoryItems().toString());
+        }
+
         // TODO return the new coordinate
         return humanPlayer.getCurrentPosition();
     }
@@ -78,17 +89,32 @@ public class HumanPlayer implements BehaviourStrategy {
      * @param attackedChar
      */
     @Override
-    public void attack(final Character player, final Character attackedChar) {
+    public void attack(Character player, Character attackedChar) {
 
     }
 
     /**
      * A method for the player to interact with a chest, a friendly characters backpack or a dead monster's backpack
-     * @param character
+     * @param player
      * @param chestORbackpack
      */
     @Override
-    public void interact(final Character character, final BackPackInventory chestORbackpack) {
-
+    public void interact(Character player, BackPackInventory chestORbackpack, Map map) {
+        ArrayList<Item> loot = new ArrayList<>();
+        if (chestORbackpack != null) {
+            loot.addAll(chestORbackpack.getItems());
+        }
+        java.util.List<Item> playerBackpack = player.getBackPackInventoryItems();
+        if (playerBackpack == null) {
+            player.setBackPackInventory(new BackPackInventory());
+        }
+        while (loot.size() > 0) {
+            if (player.getBackPackInventoryItems().size() < 10) {
+                player.getBackPackInventoryItems().add(loot.remove(loot.size() - 1));
+            } else {
+                break;
+            }
+        }
+        map.getChest().setItems(loot);
     }
 }

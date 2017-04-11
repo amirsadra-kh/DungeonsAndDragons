@@ -125,7 +125,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param chestORbackpack
      */
     @Override
-    public void interact(final Character character, final BackPackInventory chestORbackpack) {
+    public void interact(final Character character, final BackPackInventory chestORbackpack, Map map) {
 
     }
 }

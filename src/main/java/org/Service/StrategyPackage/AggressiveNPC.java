@@ -132,7 +132,7 @@ public class AggressiveNPC implements BehaviourStrategy {
      * @param chest
      */
     @Override
-    public void interact(Character mon, BackPackInventory chest) {
+    public void interact(Character mon, BackPackInventory chest, Map map) {
         BackPackInventory monBackpack = mon.getBackPackInventory();
         // remove items from chest and add to backpack
         List<Item> changedChestItems = monBackpack.addToBackpack(chest.getItems());

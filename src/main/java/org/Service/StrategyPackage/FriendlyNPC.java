@@ -80,7 +80,7 @@ public class FriendlyNPC implements BehaviourStrategy {
      * @param chest
      */
     @Override
-    public void interact(Character fchar, BackPackInventory chest) {
+    public void interact(Character fchar, BackPackInventory chest, Map map) {
 
     }
 
