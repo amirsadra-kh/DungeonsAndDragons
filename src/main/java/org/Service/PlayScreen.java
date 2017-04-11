@@ -88,13 +88,13 @@ public class PlayScreen {
 
     private void playGameInTurns(Character player, Map map) {
         int i = 0;
-//        while (i<3) {
+        while (i<3) {
             if (mapCharacters.size() != 0) {
                 Character currentCharacter = mapCharacters.get(i % (mapCharacters.size()-1));
                 player.setCurrentPosition(currentCharacter.getBehaviourStrategy().move(currentCharacter, player, map.getChestCoordinate(), map));
                 i++;
             }
-      //  }
+        }
     }
 
     private static void askUserToChoseHumanOrComputer(ReadInput readInput) {
@@ -185,6 +185,7 @@ public class PlayScreen {
             for (int j = 0; j < map.getScreen()[i].length; j++) {
                 if (map.getScreen()[i][j].equalsIgnoreCase("E")) {
                     map.getScreen()[i][j] = "P";
+                    character.setCurrentPosition(new Point(i,j));
                 }
             }
         }

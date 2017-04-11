@@ -3,6 +3,7 @@ package main.java.org.model.DecoratorPackage;
 import main.java.org.Service.StrategyPackage.FrozenStrategy;
 import main.java.org.model.CharacterPackage.Character;
 
+
 /**
  * Freezing Decorator.
  * Target cannot move for a number of turns equal to the enhancement
