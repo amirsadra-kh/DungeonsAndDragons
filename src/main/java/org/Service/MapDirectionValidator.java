@@ -70,6 +70,8 @@ public class MapDirectionValidator {
     protected boolean coordinateIsValid(final int i, final int j, final Map map) {
         try {
             final String str = map.getScreen()[i][j];
+            if(!str.equals(" ") && !str.equals(""))
+                return false;
             return true;
         } catch (final IndexOutOfBoundsException e) {
             System.out.print("the selected coordinate is out of bound , please try another coordinate");
@@ -119,10 +121,10 @@ public class MapDirectionValidator {
      * @param target the target coordinate
      * @return
      */
-    public boolean coordinateIsValidForFriendlyCharacter(final int i, final int j, final Map map, final Point target) {
+    public boolean coordinateIsValidForFriendlyCharacter(int i, int j, Map map, Point target) {
         try {
-            final String elementInTheMap = map.getScreen()[i][j];
-            return (elementInTheMap != "")
+            String elementInTheMap = map.getScreen()[i][j];
+            return (!elementInTheMap.equals(""))
                     && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;
         } catch (final IndexOutOfBoundsException e) {
             System.out.print("the selected coordinate is out of bound");
