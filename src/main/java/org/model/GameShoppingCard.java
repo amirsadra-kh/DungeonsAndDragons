@@ -1,6 +1,6 @@
 package main.java.org.model;
 
-import java.util.List;
+import main.java.org.model.CharacterPackage.Character;
 
 /**
  * A class to be used to choose objects in play mode

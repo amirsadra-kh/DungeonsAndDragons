@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<character>
+    <dice>0</dice>
+    <ability>
+        <level>1</level>
+        <armorClass>14</armorClass>
+        <attackBonus>0</attackBonus>
+        <constitution>15</constitution>
+        <damageBonus>0</damageBonus>
+        <dexterity>20</dexterity>
+        <strength>10</strength>
+    </ability>
+    <backPackInventory>
+        <items>
+            <enhance>0</enhance>
+            <name>item1</name>
+        </items>
+    </backPackInventory>
+    <charName>char2</charName>
+    <fighterType>nimble</fighterType>
+    <hitPoints>0</hitPoints>
+    <itemsWearing>
+        <enhance>5</enhance>
+        <enhancementType>DEXTERITY</enhancementType>
+        <item>BOOTS</item>
+        <name>boots1</name>
+    </itemsWearing>
+    <level>1</level>
+    <playerCharacter>false</playerCharacter>
+    <state>
+        <level>1</level>
+        <armorClass>14</armorClass>
+        <attackBonus>0</attackBonus>
+        <constitution>15</constitution>
+        <damageBonus>0</damageBonus>
+        <dexterity>20</dexterity>
+        <strength>10</strength>
+    </state>
+</character>

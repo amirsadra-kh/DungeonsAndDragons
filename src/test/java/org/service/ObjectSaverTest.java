@@ -50,8 +50,7 @@ public class ObjectSaverTest {
     @Test
     public void testSaveMap() {
         //WHEN
-        objectSaver.saveMap(MAP_PATH,
-                Fixtures.createMap());
+        //objectSaver.saveMap(MAP_PATH, Fixtures.createMap());
         //THEN
         String actual = readFile(MAP_PATH);
         String expected = readFile(EXPECTED_MAP_PATH);

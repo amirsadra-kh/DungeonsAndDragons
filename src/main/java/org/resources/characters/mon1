@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<character>
+    <dice>2</dice>
+    <ability>
+        <armorClass>10</armorClass>
+        <constitution>14</constitution>
+        <constitutionModifier>2</constitutionModifier>
+        <damageBonus>4</damageBonus>
+        <dexterity>9</dexterity>
+        <dexterityModifier>0</dexterityModifier>
+        <strength>17</strength>
+        <strengthModifier>4</strengthModifier>
+    </ability>
+    <backPackInventory>
+        <items>
+            <enhance>5</enhance>
+            <enhancementType>DEXTERITY</enhancementType>
+            <item>BOOTS</item>
+            <name>boots1</name>
+        </items>
+    </backPackInventory>
+    <charName>mon1</charName>
+    <hitPoints>2</hitPoints>
+    <itemsWearing>
+        <enhance>3</enhance>
+        <enhancementType>ATTACKBONUS</enhancementType>
+        <item>WEAPON</item>
+        <name>weapon1</name>
+    </itemsWearing>
+    <level>1</level>
+    <playerCharacter>false</playerCharacter>
+    <state>
+        <armorClass>10</armorClass>
+        <constitution>14</constitution>
+        <constitutionModifier>2</constitutionModifier>
+        <damageBonus>4</damageBonus>
+        <dexterity>9</dexterity>
+        <dexterityModifier>0</dexterityModifier>
+        <strength>17</strength>
+        <strengthModifier>4</strengthModifier>
+    </state>
+</character>

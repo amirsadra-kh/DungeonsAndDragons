@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_74" class="java.beans.XMLDecoder">
+ <object class="main.java.org.model.Map">
+  <void property="chest">
+   <object class="main.java.org.model.CharacterPackage.BackPackInventory" id="BackPackInventory0">
+    <void property="items">
+     <void method="add">
+      <string>src/main/java/org/resources/items/belt1</string>
+     </void>
+     <void method="add">
+      <string>src/main/java/org/resources/items/belt2</string>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void property="cols">
+   <int>3</int>
+  </void>
+  <void property="name">
+   <string>map4</string>
+  </void>
+  <void property="rows">
+   <int>2</int>
+  </void>
+  <void property="screen">
+   <array class="[Ljava.lang.String;" length="2">
+    <void index="0">
+     <array class="java.lang.String" length="3">
+      <void index="0">
+       <string>C</string>
+      </void>
+      <void index="1">
+       <string></string>
+      </void>
+      <void index="2">
+       <string>Q</string>
+      </void>
+     </array>
+    </void>
+    <void index="1">
+     <array class="java.lang.String" length="3">
+      <void index="0">
+       <string>E</string>
+      </void>
+      <void index="1">
+       <string>W</string>
+      </void>
+      <void index="2">
+       <string></string>
+      </void>
+     </array>
+    </void>
+   </array>
+  </void>
+ </object>
+</java>

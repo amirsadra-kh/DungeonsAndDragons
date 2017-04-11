@@ -1,12 +1,13 @@
 package main.java.org.Service;
 
+import main.java.org.Service.CharacterScreens.CharacterScreen;
 import main.java.org.model.Campaign;
 import main.java.org.model.GameConstantsInterface;
 import main.java.org.model.GameShoppingCard;
 import main.java.org.model.Item;
 import main.java.org.model.Map;
+import main.java.org.model.ReadInput;
 import main.java.org.view.MapFrame;
-import java.util.Scanner;
 
 /**
  * This class is is to Generate/edit game objects .
@@ -18,6 +19,7 @@ import java.util.Scanner;
  */
 
 public class GameGenerator {
+    private final ReadInput readInput = new ReadInput();
     /**
      * A start screen for the game, offers choices for the user
      *
@@ -35,16 +37,6 @@ public class GameGenerator {
     }
 
     /**
-     * A Scanner for reading input from user
-     *
-     * @return a String which has been read from input
-     */
-    String readLine() {
-        Scanner scanner = new Scanner(System.in);
-        return scanner.nextLine();
-    }
-
-    /**
      * A method for getting an input from the user to determine what they would like to do.
      *
      * @return the users option such as create, edit, play or quit
@@ -52,11 +44,11 @@ public class GameGenerator {
      */
     String getUserChosenOption() throws Exception {
         int option = 0;
-        GameShoppingCard gameShoppingCard = new GameShoppingCard();
+        final GameShoppingCard gameShoppingCard = new GameShoppingCard();
 
         try {
-            option = Integer.parseInt(readLine());
-        } catch (NumberFormatException e) {
+            option = Integer.parseInt(readInput.readLine());
+        } catch (final NumberFormatException e) {
             System.out.println(GameConstantsInterface.NOT_A_NUMBER);
             System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
             getUserChosenOption();
@@ -81,6 +73,10 @@ public class GameGenerator {
                 playGame();
                 return GameConstantsInterface.START;
             case 6:
+                System.out.println("Loading a Game");
+                loadAndStartTheGame();
+                return GameConstantsInterface.LOAD;
+            case 7:
                 System.out.println("Ending the Game, Thanks!");
                 return GameConstantsInterface.END;
             default:
@@ -91,11 +87,30 @@ public class GameGenerator {
     }
 
     /**
+     * This method is load the game and start it (read from file)
+     */
+    private void loadAndStartTheGame() {
+        PlayScreen ps = new PlayScreen();
+        System.out.println("Please enter the file name to load the game");
+        while (true) {
+            try {
+                final String gameName = readInput.readLine();
+                ps = ps.loadGame(gameName);
+                break;
+            } catch (final Exception e) {
+                System.out.println("we could not load the game, please try again");
+                System.out.println("Please enter the file name to load the game");
+            }
+        }
+        ps.playGame(true);
+    }
+
+    /**
      * A method that calls the Item screen to interact with a user after the user has chosen to create, edit or
      * choose an item
      */
     public Item createOrEditItems() {
-        ItemScreen itemScreen =new ItemScreen();
+        final ItemScreen itemScreen = new ItemScreen();
         return itemScreen.askUserToCreateOrEditItem();
       }
 
@@ -107,20 +122,20 @@ public class GameGenerator {
      * @throws Exception
      */
     private Campaign createOrChoseCampaign() throws Exception {
-        CampaignScreen cs = new CampaignScreen();
+        final CampaignScreen cs = new CampaignScreen();
         cs.CampaignScreen();
         return cs.getNewCamp();
     }
 
     /**
-     * A method that calls the Character screen to interact with a user after the user has chosen to create or edit
+     * A method that calls the CharacterPackage screen to interact with a user after the user has chosen to create or edit
      * a character
      *
      * @throws Exception
      */
     private void createOrEditCharacter() throws Exception {
-        CharacterScreen cs = new CharacterScreen();
-        cs.CharacterScreen();
+        final CharacterScreen cs = new CharacterScreen();
+        cs.choiceScreen();
     }
 
     /**
@@ -129,7 +144,7 @@ public class GameGenerator {
      */
     private void createOrChoseMaps() {
 
-        Map map = new MapFrame().makeFrame("Map Builder");
+        final Map map = new MapFrame().makeFrame("Map AbilityScoreBuilder");
         //  MapFrame.Main();
     }
 
@@ -137,7 +152,7 @@ public class GameGenerator {
      * A method that calls the play screen to interact with the user to play the game
      */
     private void playGame() throws Exception {
-        PlayScreen ps = new PlayScreen();
+        final PlayScreen ps = new PlayScreen();
         ps.PlayScreen();
     }
 

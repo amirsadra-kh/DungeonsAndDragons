@@ -68,11 +68,6 @@
                 <scope>test</scope>
             </dependency>
             <dependency>
-                <groupId>ch.ledcom.jpreseed</groupId>
-                <artifactId>jpreseed-cli</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-            <dependency>
                 <groupId>Dungeons.Dragons</groupId>
                 <artifactId>DungeonsDragons</artifactId>
                 <version>0.0.1-SNAPSHOT</version>

@@ -1,75 +1,50 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<java version="1.8.0_101" class="java.beans.XMLDecoder">
- <object class="main.java.org.model.Character">
-  <void property="ability">
-   <object class="main.java.org.model.Ability" id="Ability0">
-    <void class="main.java.org.model.Ability" method="getField">
-     <string>level</string>
-     <void method="set">
-      <object idref="Ability0"/>
-      <int>1</int>
-     </void>
-    </void>
-    <void property="constitution">
-     <int>17</int>
-    </void>
-    <void property="dexterity">
-     <int>18</int>
-    </void>
-    <void property="strength">
-     <int>9</int>
-    </void>
-   </object>
-  </void>
-  <void property="backPackInventory">
-   <object class="main.java.org.model.BackPackInventory">
-    <void property="items">
-     <object class="java.util.HashSet">
-      <void method="add">
-       <object class="main.java.org.model.Item">
-        <void property="enhance">
-         <int>1</int>
-        </void>
-        <void property="enhancementType">
-         <object class="java.lang.Enum" method="valueOf">
-          <class>main.java.org.model.EnhancementTypes</class>
-          <string>CONSTITUTION</string>
-         </object>
-        </void>
-        <void property="item">
-         <object class="java.lang.Enum" method="valueOf">
-          <class>main.java.org.model.ItemEnum</class>
-          <string>BELT</string>
-         </object>
-        </void>
-       </object>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
-  <void property="itemsWearing">
-   <object class="java.util.HashSet">
-    <void method="add">
-     <object class="main.java.org.model.Item">
-      <void property="enhance">
-       <int>1</int>
-      </void>
-      <void property="enhancementType">
-       <object class="java.lang.Enum" method="valueOf">
-        <class>main.java.org.model.EnhancementTypes</class>
-        <string>DEXTERITY</string>
-       </object>
-      </void>
-      <void property="item">
-       <object class="java.lang.Enum" method="valueOf">
-        <class>main.java.org.model.ItemEnum</class>
-        <string>BOOTS</string>
-       </object>
-      </void>
-     </object>
-    </void>
-   </object>
-  </void>
- </object>
-</java>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<character>
+    <dice>0</dice>
+    <ability>
+        <armorClass>10</armorClass>
+        <constitution>15</constitution>
+        <constitutionModifier>0</constitutionModifier>
+        <damageBonus>0</damageBonus>
+        <dexterity>13</dexterity>
+        <dexterityModifier>0</dexterityModifier>
+        <strength>12</strength>
+        <strengthModifier>0</strengthModifier>
+    </ability>
+    <backPackInventory>
+        <items>
+            <enhance>5</enhance>
+            <enhancementType>DEXTERITY</enhancementType>
+            <item>BOOTS</item>
+            <name>boots1</name>
+        </items>
+        <items>
+            <enhance>5</enhance>
+            <enhancementType>DEXTERITY</enhancementType>
+            <item>BOOTS</item>
+            <name>boots1</name>
+        </items>
+    </backPackInventory>
+    <burning>false</burning>
+    <charName>char1</charName>
+    <hitPoints>0</hitPoints>
+    <itemsWearing>
+        <enhance>3</enhance>
+        <enhancementType>STRENGTH</enhancementType>
+        <item>BELT</item>
+        <name>belt1</name>
+    </itemsWearing>
+    <level>1</level>
+    <playerCharacter>true</playerCharacter>
+    <state>
+        <armorClass>92</armorClass>
+        <constitution>15</constitution>
+        <constitutionModifier>0</constitutionModifier>
+        <damageBonus>1</damageBonus>
+        <dexterity>13</dexterity>
+        <dexterityModifier>0</dexterityModifier>
+        <strength>12</strength>
+        <strengthModifier>0</strengthModifier>
+    </state>
+    <turn>false</turn>
+</character>

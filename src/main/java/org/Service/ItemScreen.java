@@ -1,9 +1,7 @@
 package main.java.org.Service;
 
-import main.java.org.model.GameConstantsInterface;
-import main.java.org.model.EnhancementTypesEnum;
-import main.java.org.model.Item;
-import main.java.org.model.ItemEnum;
+import main.java.org.model.*;
+import main.java.org.model.DecoratorPackage.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,26 +13,11 @@ import java.util.InputMismatchException;
  * This class is is to Item objects
  *
  * @author Sadra
- * @version 1.0
+ * @version 2.0
  * @since 2017-03-01
  */
 public class ItemScreen {
-
-    /**
-     * A method for reading an integer input from user and handling a wrong input
-     *
-     * @param num an input from the user
-     * @return the integer if it was in fact an integer
-     */
-    private int readInt(int num){
-        try{
-            num = Integer.parseInt(readLine());
-        } catch (NumberFormatException e){
-            System.out.println(GameConstantsInterface.NOT_A_NUMBER);
-            System.out.println(GameConstantsInterface.CHOSEN_ITEM_NOT_VALID);
-        }
-        return num;
-    }
+    private ReadInput readInput = new ReadInput();
 
     /**
      *  A method for interacting with the user to create or edit an item.
@@ -47,12 +30,12 @@ public class ItemScreen {
         System.out.println("Choose one of the following by entering the number associated with the choice:");
         System.out.println("1. Create an Item\n2. Edit an Item\n3. Back to Main Menu");
         while(choice == 0)
-            choice = readInt(choice);
+            choice = readInput.readIntHandling(choice);
 
         // If the user enters an invalid input, they will be asked again
         while (choice < 1 || choice > 3) {
             System.out.println("Your input is invalid, please try again");
-            choice = readInt(choice);
+            choice = readInput.readIntHandling(choice);
         }
 
         switch (choice) {
@@ -127,7 +110,15 @@ public class ItemScreen {
         int enhancementAmount = getEnhancementAmount();
         Item itemToCreate = new Item(itemName, getItemEnumfromString(item), getEnhancementEnumfromString(enhancement), enhancementAmount);
 
-        itemToCreate.saveItem();
+        // If the item is a weapon, allow the user to choose a special enhancement
+        if(item.equals("WEAPON")) {
+            // Do something here for that
+            Weapon weapon = setSpecialEnhanceInteraction(itemToCreate);
+            weapon.saveItem();
+        }
+        else {
+            itemToCreate.saveItem();
+        }
 
         return itemToCreate;
     }
@@ -137,15 +128,17 @@ public class ItemScreen {
      * @return a string with the item type
      */
     public String getItemEnum() {
-        ArrayList<String> itemsArray = new ArrayList<>();
-
         // Get input from user
         System.out.println("Please enter your item Type from the provided list below:");
         for (ItemEnum e : ItemEnum.values()) {
             System.out.println(e.ordinal() + ". " + e.name());
+        }
+
+        ArrayList<String> itemsArray = new ArrayList<>();
+        for (ItemEnum e : ItemEnum.values()) {
             itemsArray.add(e.ordinal(), e.name());
         }
-        String item = readLine();
+        String item = readLine().toUpperCase();
 
         // Check if the input of the enum is valid
         while(!itemsArray.contains(item)) {
@@ -153,14 +146,14 @@ public class ItemScreen {
             for (ItemEnum e : ItemEnum.values()) {
                 System.out.println(e.ordinal() + ". " + e.name());
             }
-            item = readLine();
 
+            item = readLine().toUpperCase();
             for (ItemEnum e : ItemEnum.values()) {
                 itemsArray.add(e.ordinal(), e.name());
             }
 
             // Exist while loop is a correct enum is chosen
-            if(itemsArray.contains(item))
+            if (itemsArray.contains(item))
                 break;
         }
 
@@ -200,14 +193,15 @@ public class ItemScreen {
             EnhancementArray.add("ATTACKBONUS");
             EnhancementArray.add("DAMAGEBONUS");
         }
-        String enhancement = readLine();
+
+        String enhancement = readLine().toUpperCase();
 
         while (!EnhancementArray.contains(enhancement)) {
             System.out.println("The Entered Enhancement is not valid! \nPlease enter your Enhancement from the provided list below:");
             for (int i = 0; i < EnhancementArray.size(); i++) {
                 System.out.println(EnhancementArray.get(i));
             }
-            enhancement = readLine();
+            enhancement = readLine().toUpperCase();
 
             // Exit while loop if the input is correct.
             if(EnhancementArray.contains(enhancement)){
@@ -278,5 +272,44 @@ public class ItemScreen {
         return null;
     }
 
+    /**
+     * A method to interact with the user to set a special enhancement for a weapon
+     * @param item already created
+     * @return weapon based on the item parameter
+     */
+    private Weapon setSpecialEnhanceInteraction(Item item) {
+        String answer = "";
+        boolean yes = true;
+        int choice = 0;
+        // Create the weapon based on the item
+        Weapon weapon = new Weapon();
 
+        // Ask the user if they would like to add a special enhancement.
+        System.out.println("Would you like to add special enhancements to your weapon? Y/N");
+        answer = readInput.readLine().trim().toLowerCase();
+        while (yes) {
+            if (answer.equals("y")) {
+                System.out.println("Which special enhancement would you like to add:");
+                System.out.println("1. Freezing\n2. Burning\n3. Slaying\n4. Frightening\n5. Pacifying");
+                while(choice < 1 || choice > 5)
+                    choice = readInput.readIntHandling(choice);
+                // Set the new enhancement
+                weapon = WeaponFactory.setSpecialEnhancement(weapon, choice);
+                choice = 0;
+            } else if (answer.equals("n")) {
+                yes = false;
+            } else {
+                System.out.println("Sorry, I didn't catch that. Please answer y/n");
+            }
+            // Check if the user wants to add more items.
+            System.out.println("do you  want to add another special enhancement ? Y/N");
+            yes = readInput.askUserIfAgain();
+        }
+        System.out.println("Special Enhancement: " +weapon.getSpecialEnhance());
+        weapon.setName(item.getName());
+        weapon.setEnhance(item.getEnhance());
+        weapon.setItem(item.getItem());
+
+        return weapon;
+    }
 }

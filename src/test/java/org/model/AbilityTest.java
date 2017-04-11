@@ -1,6 +1,6 @@
 package test.java.org.model;
 
-import main.java.org.model.Ability;
+import main.java.org.model.CharacterPackage.Ability;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -28,22 +28,14 @@ public class AbilityTest {
     @Test
     public void ConstitutionTest() {
         int score = ability.getConstitution();
-        System.out.println("Constitution is " + score);
-        System.out.println("Constitution is xxxxx " + ability.getConstitution());
+        System.out.println("constitution is " + score);
+        System.out.println("constitution is xxxxx " + ability.getConstitution());
     }
 
     @Test
     public void DexterityTest() {
         int score = ability.getDexterity();
-        System.out.println("Dexterity is " + score);
-        System.out.println("Dexterity isxxxx " + ability.getDexterity());
+        System.out.println("dexterity is " + score);
+        System.out.println("dexterity isxxxx " + ability.getDexterity());
     }
-
-    @Test
-    public void HitPointTest(){
-        int type = ability.getHitPoints();
-        assert ((1 <= type) && (type <= 22));
-    }
-
-
 }

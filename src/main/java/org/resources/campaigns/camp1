@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <campaign>
+    <mapNames>map2</mapNames>
     <name>camp1</name>
-    <numLevels>2</numLevels>
+    <numLevels>1</numLevels>
 </campaign>

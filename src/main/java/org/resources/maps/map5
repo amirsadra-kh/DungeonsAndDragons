@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="1.8.0_74" class="java.beans.XMLDecoder">
+ <object class="main.java.org.model.Map">
+  <void property="chest">
+   <object class="main.java.org.model.CharacterPackage.BackPackInventory" id="BackPackInventory0">
+    <void property="items">
+     <void method="add">
+      <string>belt1</string>
+     </void>
+     <void method="add">
+      <string>belt2</string>
+     </void>
+     <void method="add">
+      <string>boots1</string>
+     </void>
+    </void>
+   </object>
+  </void>
+  <void property="cols">
+   <int>7</int>
+  </void>
+  <void property="name">
+   <string>map5</string>
+  </void>
+  <void property="rows">
+   <int>5</int>
+  </void>
+  <void property="screen">
+   <array class="[Ljava.lang.String;" length="5">
+    <void index="0">
+     <array class="java.lang.String" length="7">
+      <void index="0">
+       <string></string>
+      </void>
+      <void index="1">
+       <string>char1</string>
+      </void>
+      <void index="2">
+       <string></string>
+      </void>
+      <void index="3">
+       <string>W</string>
+      </void>
+      <void index="4">
+       <string></string>
+      </void>
+      <void index="5">
+       <string></string>
+      </void>
+      <void index="6">
+       <string>Q</string>
+      </void>
+     </array>
+    </void>
+    <void index="1">
+     <array class="java.lang.String" length="7">
+      <void index="0">
+       <string></string>
+      </void>
+      <void index="1">
+       <string></string>
+      </void>
+      <void index="2">
+       <string></string>
+      </void>
+      <void index="3">
+       <string></string>
+      </void>
+      <void index="4">
+       <string></string>
+      </void>
+      <void index="5">
+       <string></string>
+      </void>
+      <void index="6">
+       <string></string>
+      </void>
+     </array>
+    </void>
+    <void index="2">
+     <array class="java.lang.String" length="7">
+      <void index="0">
+       <string>C</string>
+      </void>
+      <void index="1">
+       <string></string>
+      </void>
+      <void index="2">
+       <string>mon1</string>
+      </void>
+      <void index="3">
+       <string></string>
+      </void>
+      <void index="4">
+       <string>W</string>
+      </void>
+      <void index="5">
+       <string></string>
+      </void>
+      <void index="6">
+       <string></string>
+      </void>
+     </array>
+    </void>
+    <void index="3">
+     <array class="java.lang.String" length="7">
+      <void index="0">
+       <string></string>
+      </void>
+      <void index="1">
+       <string></string>
+      </void>
+      <void index="2">
+       <string></string>
+      </void>
+      <void index="3">
+       <string></string>
+      </void>
+      <void index="4">
+       <string></string>
+      </void>
+      <void index="5">
+       <string></string>
+      </void>
+      <void index="6">
+       <string></string>
+      </void>
+     </array>
+    </void>
+    <void index="4">
+     <array class="java.lang.String" length="7">
+      <void index="0">
+       <string>E</string>
+      </void>
+      <void index="1">
+       <string></string>
+      </void>
+      <void index="2">
+       <string>W</string>
+      </void>
+      <void index="3">
+       <string></string>
+      </void>
+      <void index="4">
+       <string></string>
+      </void>
+      <void index="5">
+       <string></string>
+      </void>
+      <void index="6">
+       <string></string>
+      </void>
+     </array>
+    </void>
+   </array>
+  </void>
+ </object>
+</java>

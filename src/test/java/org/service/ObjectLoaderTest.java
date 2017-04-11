@@ -1,7 +1,7 @@
 package test.java.org.service;
 
 import main.java.org.Service.ObjectLoader;
-import main.java.org.model.Character;
+import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Map;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,10 +41,10 @@ public class ObjectLoaderTest {
     public void testLoadMap(){
         //WHEN
         try {
-            Map map = objectLoader.loadMapFromXML("test-Map");
+            final Map map = objectLoader.loadMapFromXML("test-Map");
             //THEN
             assertMapsAreEqual(Fixtures.createMap(), map);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.getMessage();
         }
     }
@@ -58,26 +58,17 @@ public class ObjectLoaderTest {
     public void testLoadCharacter(){
 
     }
-    void assertMapsAreEqual(Map expected, Map actual){
-//        assertCharacterAreTheSame(expected.getCharacter(),actual.getCharacter());
-//        assertEquals(expected.getEnterPoint(),actual.getEnterPoint());
-//        assertEquals(expected.getExitPoint(),actual.getExitPoint());
-//        assertEquals(expected.getItems(),actual.getItems());
-//        assertEquals(expected.getNextLevel(),actual.getNextLevel());
-//        assertCharactersAreTheSame(expected.getNonPlayerCharacters(),actual.getNonPlayerCharacters());
-//        assertEquals(expected.getScreen(),actual.getScreen());
-        //assertEquals(expected.getTurn(),actual.getTurn());
+
+    void assertMapsAreEqual(final Map expected, final Map actual) {
 
     }
 
-    void assertCharacterAreTheSame(Character expectedCharacter, Character actualCharacter){
-        //assertEquals(expectedCharacter.getAbility(),actualCharacter.getAbility());
+    void assertCharacterAreTheSame(final Character expectedCharacter, final Character actualCharacter) {
         assertEquals(expectedCharacter.getCurrentPosition(),actualCharacter.getCurrentPosition());
-        //assertEquals(expectedCharacter.getBackPackInventory(),actualCharacter.getBackPackInventory());
 
     }
 
-    void assertCharactersAreTheSame(List<Character> expectedCharacter, List<Character> actualCharacter){
+    void assertCharactersAreTheSame(final List<Character> expectedCharacter, final List<Character> actualCharacter) {
         assertEquals(expectedCharacter.size(),actualCharacter.size());
         for(int i =0 ;i< expectedCharacter.size();i++){
             assertCharacterAreTheSame(expectedCharacter.get(i),actualCharacter.get(i));
