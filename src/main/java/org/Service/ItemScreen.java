@@ -292,6 +292,7 @@ public class ItemScreen {
             weapon.setType("longsword");
         else
             weapon.setType("longbow");
+        weapon.setNormalRange();
 
         choice = 0;
 

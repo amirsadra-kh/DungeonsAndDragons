@@ -35,6 +35,7 @@ public class Weapon extends Item {
      * TODO get this string to save with the weapon item
      * @return WeaponEnhanceDecorator
      */
+    @XmlElement
     public String getSpecialEnhance() {
         return this.specialEnhancement;
     }
@@ -75,7 +76,7 @@ public class Weapon extends Item {
      * A setter for the type of the weapon; longsword or longbow
      * @param type
      */
-    @XmlElement
+
     public void setType(String type)  {
         this.type = type;
     }
@@ -84,6 +85,7 @@ public class Weapon extends Item {
      * A getter for the type of the weapon
      * @return longsword or longbow
      */
+    @XmlElement
     public String getType() {
         return this.type;
     }
@@ -92,6 +94,7 @@ public class Weapon extends Item {
      * A method to get the damage, AttackBonus or DamageBonus, of the weapon
      * @return
      */
+    @XmlElement
     public int getDamage() {
         return this.damage;
     }
@@ -100,14 +103,26 @@ public class Weapon extends Item {
      * A method to get the normal range of the weapon
      * @return the normal range
      */
+    @XmlElement
     public int getNormalRange() {
         return this.normalRange;
+    }
+
+    /**
+     * A method to set the normal range if the weapon is a ranged weapon
+     */
+    public void setNormalRange() {
+        if(this.type.equalsIgnoreCase("longbow")) {
+            Longbow longbow = new Longbow();
+            this.normalRange = longbow.getNormalRange();
+        }
     }
 
     /**
      * A method to get the maximum range of the weapon
      * @return the maximum range
      */
+    @XmlElement
     public int getMaxRange() {
         return this.maxRange;
     }
