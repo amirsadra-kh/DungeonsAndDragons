@@ -1,7 +1,8 @@
 package main.java.org.view;
 
+import main.java.org.model.GameConstantsInterface;
+import main.java.org.model.Map;
 import main.java.org.Service.ObjectLoader;
-import main.java.org.model.*;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 
 import javax.swing.*;

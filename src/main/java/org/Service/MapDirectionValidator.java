@@ -89,7 +89,7 @@ public class MapDirectionValidator {
     public boolean coordinateIsValidToMove(final int i, final int j, final Map map, final Point target) {
         try {
             final String str = map.getScreen()[i][j];
-            return str.equalsIgnoreCase("") && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;
+            return (str.equalsIgnoreCase("") || str.equalsIgnoreCase(" ")) && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;
         } catch (final IndexOutOfBoundsException e) {
             System.out.print("the selected coordinate is out of bound , please try another coordinate");
             return false;
@@ -122,9 +122,7 @@ public class MapDirectionValidator {
     public boolean coordinateIsValidForFriendlyCharacter(final int i, final int j, final Map map, final Point target) {
         try {
             final String elementInTheMap = map.getScreen()[i][j];
-            return ((elementInTheMap != "")
-                    || elementInTheMap.equalsIgnoreCase("f")
-                    || elementInTheMap.equalsIgnoreCase("c"))
+            return (elementInTheMap != "")
                     && ((Math.abs(target.x - i)) + Math.abs(target.y - j)) <= 3;
         } catch (final IndexOutOfBoundsException e) {
             System.out.print("the selected coordinate is out of bound");
