@@ -67,9 +67,7 @@ public class Weapon extends Item {
     private void log(){
         System.out.println(ColorConstants.ANSI_RED +"Enhancement of the weapon: +" +this.getEnhance()
                 +ColorConstants.ANSI_RESET);
-        System.out.println(ColorConstants.ANSI_RED +"Total AttackBonus or DamageBonus of the weapon: "
-                +damage +ColorConstants.ANSI_RESET);
-        System.out.println("------------------------------------------------------------");
+        System.out.println(ColorConstants.ANSI_GREEN +"Total: " +this.damage +ColorConstants.ANSI_RESET);
     }
 
     /**
