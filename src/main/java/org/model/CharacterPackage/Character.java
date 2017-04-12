@@ -76,6 +76,7 @@ public class Character extends Observable {
      *
      * @return the current position as an x,y point
      */
+    @XmlTransient
     public Point getCurrentPosition() {
         return this.currentPosition;
     }

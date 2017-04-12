@@ -2,6 +2,7 @@ package main.java.org.Service.StrategyPackage;
 
 import main.java.org.Service.AdjacentObjectsFinder;
 import main.java.org.Service.MapDirectionValidator;
+import main.java.org.model.Campaign;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Item;
@@ -29,7 +30,7 @@ public class FriendlyNPC implements BehaviourStrategy {
      * @param objective the position of the objective of the map - chest or exit
      */
     @Override
-    public Point move( Character fchar,  Character player,  Point objective,  Map map) {
+    public Point move( Character fchar,  Character player,  Point objective,  Map map, Campaign campaign) {
         final Point nextPosition = getPossiblePoints(map, fchar.getCurrentPosition());
         fchar.setCurrentPosition(nextPosition);
 
@@ -99,9 +100,8 @@ public class FriendlyNPC implements BehaviourStrategy {
      * @param targetPoint the target point
      * @return it returns the first available point
      */
-    private Point getPossiblePoints(final Map map, final Point targetPoint) {
-
-        final MapDirectionValidator validate = new MapDirectionValidator();
+    private Point getPossiblePoints(Map map, Point targetPoint) {
+        MapDirectionValidator validate = new MapDirectionValidator();
         for (int row = 0; row < map.getScreen().length; row++) {
             for (int col = 0; col < map.getScreen()[row].length; col++) {
                 if (validate.coordinateIsValidForFriendlyCharacter(row, col, map, targetPoint)) {

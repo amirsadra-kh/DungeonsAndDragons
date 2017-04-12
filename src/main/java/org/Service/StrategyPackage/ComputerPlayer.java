@@ -1,6 +1,7 @@
 package main.java.org.Service.StrategyPackage;
 
 import main.java.org.Service.AdjacentObjectsFinder;
+import main.java.org.model.Campaign;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Item;
@@ -27,7 +28,7 @@ public class ComputerPlayer implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public Point move(Character compPlayer, Character player, Point objective, Map map) {
+    public Point move(Character compPlayer, Character player, Point objective, Map map, Campaign campaign) {
         if(compPlayer.getBurning()) {
             // TODO decrease monster's hitpoints here based on getBurningDamage in burning decorator
         }

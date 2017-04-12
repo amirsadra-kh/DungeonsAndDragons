@@ -38,7 +38,7 @@ public class MapDirectionValidatorTest {
     @Test
     public void testValidateDirectionToLeftOutOfBound() throws Exception {
         final boolean result = mapDirectionValidator.isDirectionLeadsToValidCell("l", map);
-        assertTrue(result);
+        assertFalse(result);
     }
 
     @Test
@@ -50,7 +50,7 @@ public class MapDirectionValidatorTest {
     @Test
     public void testValidateDirectionToTopOutOfBound() throws Exception {
         final boolean result = mapDirectionValidator.isDirectionLeadsToValidCell("u", map);
-        assertTrue(result);
+        assertFalse(result);
     }
 
     @Test
