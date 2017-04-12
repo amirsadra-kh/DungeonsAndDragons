@@ -284,6 +284,18 @@ public class ItemScreen {
         // Create the weapon based on the item
         Weapon weapon = new Weapon();
 
+        //Ask the user the type of the weapon
+        System.out.println("Please choose the weapon type: "+'\n');
+        System.out.println("1. Melee\n2. Ranged");
+        choice = readInput.readIntHandling(choice);
+        if (choice == 1)
+            weapon.setType("longsword");
+        else
+            weapon.setType("longbow");
+        weapon.setNormalRange();
+
+        choice = 0;
+
         // Ask the user if they would like to add a special enhancement.
         System.out.println("Would you like to add special enhancements to your weapon? Y/N");
         answer = readInput.readLine().trim().toLowerCase();
@@ -308,6 +320,7 @@ public class ItemScreen {
         System.out.println("Special Enhancement: " +weapon.getSpecialEnhance());
         weapon.setName(item.getName());
         weapon.setEnhance(item.getEnhance());
+        weapon.setEnhancementType(item.getEnhancementType());
         weapon.setItem(item.getItem());
 
         return weapon;
