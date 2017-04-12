@@ -2,12 +2,10 @@ package main.java.org.Service.StrategyPackage;
 
 import main.java.org.Service.AdjacentObjectsFinder;
 import main.java.org.Service.MapDirectionValidator;
+import main.java.org.model.*;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
-import main.java.org.model.GameConstantsInterface;
-import main.java.org.model.Item;
 import main.java.org.model.Map;
-import main.java.org.model.ReadInput;
 
 import java.awt.*;
 import java.awt.List;
@@ -32,7 +30,7 @@ public class HumanPlayer implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public Point move(Character humanPlayer, Character player, Point objective, Map map) {
+    public Point move(Character humanPlayer, Character player, Point objective, Map map, Campaign campaign) {
         if(humanPlayer.getBurning()) {
             // TODO decrease monster's hitpoints here based on getBurningDamage in burning decorator
         }
@@ -42,17 +40,18 @@ public class HumanPlayer implements BehaviourStrategy {
             //This prints and ask user to enter the directions
             System.out.println(GameConstantsInterface.ENTER_DIRECTION);
             String direction = readInput.readCoordinate();
-            if(!checkIfMoveIsValid(direction, map, humanPlayer)) {
+            if(!checkIfMoveIsValid(direction, map, humanPlayer, campaign)) {
                 i--;
                 System.out.println("Invalid Move!");
             } else {
                 humanPlayer.setCurrentPosition(setNewPosition(direction, humanPlayer.getCurrentPosition()));
             }
-            if(i < 2)
-            System.out.println("Do you want to make another move? (Y/N)");
-            boolean answer = readInput.askUserIfAgain();
-            if(!answer)
-                i = 3;
+            if(i < 2) {
+                System.out.println("Do you want to make another move? (Y/N)");
+                boolean answer = readInput.askUserIfAgain();
+                if (!answer)
+                    i = 3;
+            }
         }
 
         AdjacentObjectsFinder finder = new AdjacentObjectsFinder();
@@ -148,8 +147,8 @@ public class HumanPlayer implements BehaviourStrategy {
      * @param map
      * @return
      */
-    private boolean checkIfMoveIsValid(String direction, Map map, Character humanPlayer) {
-        MapDirectionValidator validate = new MapDirectionValidator();
+    private boolean checkIfMoveIsValid(String direction, Map map, Character humanPlayer, Campaign campaign) {
+        MapDirectionValidator validate = new MapDirectionValidator(campaign, map);
         return validate.directionIsValidToMove(direction, map, humanPlayer.getCurrentPosition());
     }
 

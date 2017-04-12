@@ -1,5 +1,6 @@
 package main.java.org.Service.StrategyPackage;
 
+import main.java.org.model.Campaign;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Map;
@@ -38,7 +39,7 @@ public class FrozenStrategy implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public Point move(Character target, Character player, Point objective, Map map) {
+    public Point move(Character target, Character player, Point objective, Map map, Campaign campaign) {
         // decrease turns everytime it is the character's turn
         if(turns > 1) {
             turns--;

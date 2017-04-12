@@ -70,7 +70,7 @@ public class FrozenStrategyTest {
         this.target.setBehaviourStrategy(frozenStrategy);
 
         // WHEN
-        Point newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
+        Point newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map, null);
 
         // THEN
         // acceptable moves
@@ -91,9 +91,12 @@ public class FrozenStrategyTest {
 
         // WHEN
         // Target gets 2 more turns -> enhance = 2
-        Point newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
-        newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
-        newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map);
+        Point newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map, null);
+        target.setCurrentPosition(newPoint);
+        newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map, null);
+        target.setCurrentPosition(newPoint);
+        newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map, null);
+        target.setCurrentPosition(newPoint);
 
         // THEN
         // target is back to being aggressive and will move towards player

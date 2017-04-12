@@ -1,6 +1,7 @@
 package test.java.org.service;
 
 import main.java.org.Service.ObjectLoader;
+import main.java.org.model.Campaign;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Item;
@@ -53,9 +54,10 @@ public class AggressiveNPCTest {
         monster.setCurrentPosition(new Point(2,2));
         player.setCurrentPosition(new Point(3,0));
         Point chest = new Point(1,0);
+        Campaign campaign = new Campaign();
 
         // WHEN
-        Point newPoint = monster.getBehaviourStrategy().move(monster, player, chest, this.map);
+        Point newPoint = monster.getBehaviourStrategy().move(monster, player, chest, this.map, campaign);
         // acceptable moves
         Point idealPoint1 = new Point(2,0);
 

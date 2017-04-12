@@ -72,7 +72,7 @@ public class MapDirectionValidator {
             final String str = map.getScreen()[i][j];
             if(str.equals("Q")) {
                 PlayScreen ps = new PlayScreen();
-                ps.isLevelCompleted(map, i, j, str);
+                ps.isLevelCompleted(map, i, j, str, this.campaign);
             }
             if(!str.equals(" ") && !str.equals(""))
                 return false;

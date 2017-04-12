@@ -2,6 +2,7 @@ package main.java.org.Service.StrategyPackage;
 
 import main.java.org.Service.AdjacentObjectsFinder;
 import main.java.org.Service.Calculation;
+import main.java.org.model.Campaign;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Item;
@@ -32,7 +33,7 @@ public class AggressiveNPC implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public Point move(Character monster, Character player, Point objective, Map map) {
+    public Point move(Character monster, Character player, Point objective, Map map, Campaign campaign) {
         if(monster.getBurning()) {
             // TODO decrease monster's hitpoints here based on getBurningDamage in burning decorator
         }
@@ -50,7 +51,7 @@ public class AggressiveNPC implements BehaviourStrategy {
 
         // Check if there is a chest to loot
         AdjacentObjectsFinder finder = new AdjacentObjectsFinder();
-        if(finder.checkForChest(monster.getCurrentPosition(), map)) {
+        if(finder.checkForChest(monster.getCurrentPosition(), map) && monster.getBackPackInventoryItems() != null) {
             System.out.println("Monster found a chest!!");
             System.out.println("Backpack inventory before chest: " +monster.getBackPackInventoryItems().toString());
             interact(monster, map.getChest(), map);
