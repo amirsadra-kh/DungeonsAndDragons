@@ -71,7 +71,7 @@ public class PlayScreen {
      *
      * @param gameLoaded this parameter is to decide if the player character should be located at the entry point of map
      */
-    protected void playGame(final boolean gameLoaded) {
+    protected void playGame(boolean gameLoaded) {
         if (!gameLoaded) {
             this.mapCharacters = setPlayerAtEntryPoint(map);
         }
@@ -96,11 +96,11 @@ public class PlayScreen {
             if (mapCharacters.size() != 0) {
                 int position =i % (mapCharacters.size()-1);
                 Character currentCharacter = mapCharacters.get(position);
-                Point previousPossition= currentCharacter.getCurrentPosition();
-                currentCharacter.setCurrentPosition(currentCharacter.getBehaviourStrategy().move(currentCharacter, player, this.map.getChestCoordinate(), this.map));
+                Point previousPosition= currentCharacter.getCurrentPosition();
+                currentCharacter.setCurrentPosition(currentCharacter.getBehaviourStrategy().move(currentCharacter, player, this.map.getChestCoordinate(), this.map, this.campaign));
                 String [][]str=map.getScreen();
                 str[currentCharacter.getCurrentPosition().x][currentCharacter.getCurrentPosition().y]=getPlayerName(currentCharacter);
-                str[previousPossition.x][previousPossition.y]="";
+                str[previousPosition.x][previousPosition.y]="";
                 mapCharacters.set(position,currentCharacter);
                 map.setScreen(str);
                 MapScreen.showMap(this.map);
@@ -135,7 +135,6 @@ public class PlayScreen {
      * This method is to set the strategy to non-player character
      */
     private void setStrategy() {
-
         for (Character character : map.getNonPLayerCharacters()) {
             if (character.getCharName() != null &&
                     (character.getCharName().charAt(0) == 'm' || character.getCharName().charAt(0) == 'M')) {
@@ -170,11 +169,11 @@ public class PlayScreen {
      */
     private void movePlayer() {
         String direction = readInput.readCoordinate();
-        final MapDirectionValidator mapValidator = new MapDirectionValidator(this.campaign, this.map);
+        MapDirectionValidator mapValidator = new MapDirectionValidator(this.campaign, this.map);
         while (mapValidator.isDirectionLeadsToValidCell(direction, this.map)) {
-            final Point point = Map.getPlayerCoordinate(this.map);
-            final Point nextCell = mapValidator.getNextCellToMove(direction, point);
-            final String objectInMap = map.getScreen()[nextCell.x][nextCell.y];
+            Point point = Map.getPlayerCoordinate(this.map);
+            Point nextCell = mapValidator.getNextCellToMove(direction, point);
+            String objectInMap = map.getScreen()[nextCell.x][nextCell.y];
             MapScreen.showMap(this.map);
             if (checkInteractionObject(objectInMap, nextCell.x, nextCell.y)) {
                 direction = readInput.readCoordinate();
@@ -220,7 +219,7 @@ public class PlayScreen {
      * @param j   the j coordinate
      * @return returns true if we go next level
      */
-    private boolean checkInteractionObject(final String str, final int i, final int j) {
+    private boolean checkInteractionObject(String str, int i, int j) {
 
         if ("W".equalsIgnoreCase(str)) {
             System.out.println("The target direction will lead to wall, please try another direction");
@@ -228,14 +227,14 @@ public class PlayScreen {
             MapScreen.showMap(this.map);
             return false;
         } else if ("Q".equalsIgnoreCase(str)) {
-            return isLevelCompleted(this.map, i, j, campaign, str);
+            return isLevelCompleted(this.map, i, j, str, this.campaign);
         } else if (!" ".equalsIgnoreCase(str)) {
             SetInteractionStrategy.interact(this.map, str, Map.getPlayerCoordinate(this.map), new Point(i, j), campaign);
             MapScreen.printElementsInTheMap(this.map);
             MapScreen.showMap(this.map);
             return false;
         } else {
-            final Point point = Map.getPlayerCoordinate(this.map);
+            Point point = Map.getPlayerCoordinate(this.map);
             this.map.getScreen()[point.x][point.y] = " ";
             this.map.getScreen()[i][j] = "P";
             MapScreen.printElementsInTheMap(this.map);
@@ -250,21 +249,21 @@ public class PlayScreen {
      * @param map      the map we are playing
      * @param i        the i coordinate on map
      * @param j        the j coordinate on map
-     * @param campaign the campaign we are playing
      * @param str      the target object we are interacting with
      * @return true if we go next level
      */
-    private boolean isLevelCompleted(final Map map, final int i, final int j, final Campaign campaign, final String str) {
+    public boolean isLevelCompleted(Map map, int i, int j, String str, Campaign campaign) {
+        this.map = map;
         if (this.map.isCanGoNextLevel()) {
 
             try {
-                this.map = campaign.getNextLevel();
-            } catch (final Exception e) {
+                this. map = campaign.getNextLevel();
+            } catch (Exception e) {
                 System.out.println("You finished all the levels in the Campaign!");
                 System.exit(0);
                 return true;
             }
-            PlayScreen.setPlayerAtEntryPoint(this.map);
+            PlayScreen.setPlayerAtEntryPoint(map);
             System.out.println("Great you moved to next level");
             MapScreen.showMap(this.map);
             System.out.println(GameConstantsInterface.ENTER_DIRECTION);
@@ -279,12 +278,12 @@ public class PlayScreen {
     }
 
     /**
-     * this methdo checks if user wants to save the game and exit
+     * this method checks if user wants to save the game and exit
      *
      * @param direction
      * @return true if user wants to exit
      */
-    private boolean userWantToSaveTheGameAndExit(final String direction) {
+    private boolean userWantToSaveTheGameAndExit(String direction) {
         if ("Exit".equalsIgnoreCase(direction)) {
             saveGame();
             return true;
@@ -306,15 +305,15 @@ public class PlayScreen {
      */
     private void choseCampaignForPlayingGame() throws Exception {
         // Get the user to choose an existing map from a list to play
-        final ObjectLoader ol = new ObjectLoader();
+        ObjectLoader ol = new ObjectLoader();
         System.out.println("Please enter the name of the campaign you would like to play from the list below: ");
         this.campaign = new Campaign();
         ol.showItemNames("src/main/java/org/resources/campaigns/");
-        this.campaign = campaign.getCampaign(readInput.readLine());
+        this.campaign = this.campaign.getCampaign(readInput.readLine());
         this.campaign.setMaps(this.campaign.getMapsFromCampaign(this.character));
         while (this.campaign == null) {
             System.out.println("This campaign does not exist! Please try again: ");
-            this.campaign = campaign.getCampaign(readInput.readLine());
+            this.campaign = this.campaign.getCampaign(readInput.readLine());
         }
     }
 
@@ -324,7 +323,7 @@ public class PlayScreen {
      * @throws Exception
      */
     private void choseCharacterForPlayingGame() throws Exception {
-        final ObjectLoader ol = new ObjectLoader();
+        ObjectLoader ol = new ObjectLoader();
         // Get the user to choose an existing character from a list to play
         System.out.println("Please enter the name of the character you would like to play from the list below: ");
         character = new Character();
@@ -344,9 +343,9 @@ public class PlayScreen {
      * A method to give the user the choice to observe a character
      * The inventory, Ability or both of that character
      */
-    public void userObserverChoice(final Map currentMap) {
+    public void userObserverChoice(Map currentMap) {
         // Get the character the user wants to observe
-        final Character observeChar = getObserverCharacter(currentMap);
+        Character observeChar = getObserverCharacter(currentMap);
 
         // Ask user if they want to observe the ability of the character
         askUserAbilityObserver(observeChar);
@@ -363,12 +362,12 @@ public class PlayScreen {
      * @param currentMap being played
      * @return observeChar the character the user wants to observe
      */
-    public Character getObserverCharacter(final Map currentMap) {
-        final ObjectLoader ol = new ObjectLoader();
+    public Character getObserverCharacter(Map currentMap) {
+        ObjectLoader ol = new ObjectLoader();
         // Testing the CharacterPackage Observer
         Character observeChar = new Character();
         // Get the characters that are in the map
-        final List<Character> mapCharacters = currentMap.getNonPLayerCharacters();
+        List<Character> mapCharacters = currentMap.getNonPLayerCharacters();
         // Add the player character to the list as well
         mapCharacters.add(character);
         int choice = 0;
@@ -376,7 +375,7 @@ public class PlayScreen {
         System.out.println("Please enter the name of the character you would like to observe from the list below: ");
         // Print the name of each character that is on the map
         int i = 1;
-        for (final Character character : mapCharacters) {
+        for (Character character : mapCharacters) {
             System.out.println(i + ". " + character.getCharName());
             i++;
         }
@@ -395,7 +394,7 @@ public class PlayScreen {
      *
      * @param observeChar the character being observed.
      */
-    public void askUserAbilityObserver(final Character observeChar) {
+    public void askUserAbilityObserver(Character observeChar) {
         String choice = "";
         // This gets the character's abilities - Observer
         System.out.println("Would you like to observe the ability of " + observeChar.getCharName() + "? Y/N");
@@ -426,7 +425,7 @@ public class PlayScreen {
 
         if ("Y".equals(choice) || "y".equals(choice)) {
             // This gets the character's inventory - Observer
-            final Inventory observeInventory = new Inventory();
+            Inventory observeInventory = new Inventory();
             observeInventory.setBackpackItems(observeChar.getBackPackInventoryItems());
             observeInventory.setWearingItems(observeChar.getItemsWearing());
             observeInventory.setState(observeInventory.getItems());
@@ -434,7 +433,7 @@ public class PlayScreen {
             // If the character being observed is the player character, ask user if they want to make changes
             if (this.character.getCharName().equals(observeChar.getCharName())) {
                 // Ask the user if they want to make changes to the player's inventory
-                final InventoryScreen inventoryScreen = new InventoryScreen();
+                InventoryScreen inventoryScreen = new InventoryScreen();
                 inventoryScreen.setObserverChar(observeChar);
                 inventoryScreen.InventoryScreen();
                 observeChar = inventoryScreen.getObserverChar();
@@ -458,7 +457,7 @@ public class PlayScreen {
      *
      * @param character
      */
-    public void setCharacter(final Character character) {
+    public void setCharacter(Character character) {
         this.character = character;
     }
 
@@ -476,7 +475,7 @@ public class PlayScreen {
      *
      * @param campaign
      */
-    public void setCampaign(final Campaign campaign) {
+    public void setCampaign(Campaign campaign) {
         this.campaign = campaign;
     }
 
@@ -487,8 +486,8 @@ public class PlayScreen {
      * @throws Exception
      */
     public List<Map> getMapsInTheCampaign() throws Exception {
-        final List<Map> maps = new ArrayList<>();
-        for (final String mapName : this.campaign.getMapNames()) {
+        List<Map> maps = new ArrayList<>();
+        for (String mapName : this.campaign.getMapNames()) {
             maps.add(new ObjectLoader().loadMapFromXML(mapName));
         }
         return maps;
@@ -509,7 +508,7 @@ public class PlayScreen {
      *
      * @param level
      */
-    public void setLevel(final int level) {
+    public void setLevel(int level) {
         this.level = level;
     }
 
@@ -528,7 +527,7 @@ public class PlayScreen {
      *
      * @param characterObserver
      */
-    public void setCharacterObserver(final CharacterObserver characterObserver) {
+    public void setCharacterObserver(CharacterObserver characterObserver) {
         this.characterObserver = characterObserver;
     }
 
@@ -547,7 +546,7 @@ public class PlayScreen {
      *
      * @param inventoryObserver
      */
-    public void setInventoryObserver(final InventoryObserver inventoryObserver) {
+    public void setInventoryObserver(InventoryObserver inventoryObserver) {
         this.inventoryObserver = inventoryObserver;
     }
 
@@ -566,7 +565,7 @@ public class PlayScreen {
      *
      * @param inventory an Inventory Object
      */
-    public void setInventory(final List<Item> inventory) {
+    public void setInventory(List<Item> inventory) {
         this.inventory = inventory;
     }
 
@@ -585,7 +584,7 @@ public class PlayScreen {
      *
      * @param ability
      */
-    public void setAbility(final Ability ability) {
+    public void setAbility(Ability ability) {
         this.ability = ability;
     }
 
@@ -604,7 +603,7 @@ public class PlayScreen {
      *
      * @param map
      */
-    public void setMap(final Map map) {
+    public void setMap(Map map) {
         this.map = map;
     }
 
@@ -615,12 +614,12 @@ public class PlayScreen {
         JAXBContext context = null;
         try {
             context = JAXBContext.newInstance(PlayScreen.class);
-            final Marshaller m = context.createMarshaller();
+            Marshaller m = context.createMarshaller();
             m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             System.out.println("Please Enter the Game Name to save");
-            final String fileName = readInput.readLine();
+            String fileName = readInput.readLine();
             m.marshal(this, new FileOutputStream("src/main/java/org/resources/games/" + fileName));
-        } catch (final Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
             System.out.print("Could not save the game");
         }
@@ -632,16 +631,16 @@ public class PlayScreen {
      * @param name of the campaign
      * @return an existing campaign object
      */
-    public PlayScreen loadGame(final String name) {
+    public PlayScreen loadGame(String name) {
         try {
-            final JAXBContext jc = JAXBContext.newInstance(PlayScreen.class);
+            JAXBContext jc = JAXBContext.newInstance(PlayScreen.class);
             Unmarshaller u = null;
             u = jc.createUnmarshaller();
-            final File f = new File("src/main/java/org/resources/games/" + name);
-            final PlayScreen playScreen = (PlayScreen) u.unmarshal(f);
+            File f = new File("src/main/java/org/resources/games/" + name);
+            PlayScreen playScreen = (PlayScreen) u.unmarshal(f);
             playScreen.getCampaign().setMaps(playScreen.getCampaign().getMapsFromCampaign(playScreen.getCharacter()));
             return playScreen;
-        } catch (final Exception e) {
+        } catch (Exception e) {
             //e.printStackTrace();
             return null;
         }

@@ -1,6 +1,7 @@
 package main.java.org.Service.StrategyPackage;
 
 import main.java.org.Service.MapDirectionValidator;
+import main.java.org.model.Campaign;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Map;
@@ -46,7 +47,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
      * @param map the map the character is on
      */
     @Override
-    public Point move(Character target, Character player, Point objective, Map map) {
+    public Point move(Character target, Character player, Point objective, Map map, Campaign campaign) {
         if(turns > 0) {
             Point attackerPoint = this.attacker.getCurrentPosition();
             Point targetPoint = target.getCurrentPosition();
@@ -64,7 +65,7 @@ public class FrighteningStrategy implements BehaviourStrategy {
         } else {
             // Set the strategy of the character back to normal because the turns are finished
             target.setBehaviourStrategy(previousStrategy);
-            return target.getBehaviourStrategy().move(target, player, objective, map);
+            return target.getBehaviourStrategy().move(target, player, objective, map, campaign);
         }
     }
 
