@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<weapon>
+    <enhance>3</enhance>
+    <enhancementType>DAMAGEBONUS</enhancementType>
+    <item>WEAPON</item>
+    <name>longbow</name>
+    <damage>0</damage>
+    <maxRange>0</maxRange>
+    <normalRange>2</normalRange>
+    <specialEnhance>Weapon, Slaying</specialEnhance>
+    <type>longbow</type>
+</weapon>

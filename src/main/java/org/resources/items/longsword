@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<weapon>
+    <enhance>5</enhance>
+    <enhancementType>ATTACKBONUS</enhancementType>
+    <item>WEAPON</item>
+    <name>longsword</name>
+    <damage>0</damage>
+    <maxRange>0</maxRange>
+    <normalRange>0</normalRange>
+    <specialEnhance>Weapon, Frightening</specialEnhance>
+    <type>longsword</type>
+</weapon>
