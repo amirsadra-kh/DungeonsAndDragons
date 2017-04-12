@@ -1,6 +1,7 @@
 package main.java.org.Service.CharacterScreens;
 
 import main.java.org.Service.ObjectLoader;
+import main.java.org.model.DecoratorPackage.Weapon;
 import main.java.org.model.Item;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.ReadInput;
@@ -87,8 +88,13 @@ public class ItemsWearingScreen {
 
             // Check if the item entered exists
             if (item == null) {
-                System.out.println("This item does not exist");
-                i = i - 1;
+                Weapon itemW = new Weapon();
+                item = (Item) itemW.loadItem(itemName);
+
+                if (item == null) {
+                    System.out.println("This item does not exist");
+                    i = i - 1;
+                }
             }
             int itemsSize = wearingItems.size();
 

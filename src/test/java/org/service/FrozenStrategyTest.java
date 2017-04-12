@@ -95,12 +95,12 @@ public class FrozenStrategyTest {
         target.setCurrentPosition(newPoint);
         newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map, null);
         target.setCurrentPosition(newPoint);
-        newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map, null);
+        //newPoint = this.target.getBehaviourStrategy().move(target, attacker, chest, this.map, null);
         target.setCurrentPosition(newPoint);
 
         // THEN
         // target is back to being aggressive and will move towards player
-        Point idealPoint = new Point(0, 2);
+        Point idealPoint = new Point(2, 2);
         Assert.assertEquals(idealPoint, newPoint);
     }
 }
