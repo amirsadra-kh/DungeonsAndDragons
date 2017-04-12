@@ -129,9 +129,122 @@ public class CharacterTest {
     }
 
     /**
+     * A test method for character cannot wear more than one item
+     */
+    @Test
+    public void testCharacterWearMore() {
+    Character char2 = new Character();
+    HashSet<Item> items = new HashSet<>();
+    Item item = new Item();
+    items.addAll(Arrays.asList(item,item));
+        Assert.assertEquals(1, items.size());
+
+    }
+
+
+
+    /**
+     * A test method to get the ability strength
+     */
+    @Test
+    public void testItemInfluence() {
+        int strength = ability.getStrength();
+        HashSet<Item> wearingItems = character.getItemsWearing();
+
+        Item strengthItem = Fixtures.createBelt();
+        wearingItems.add(strengthItem);
+        strength += strengthItem.getEnhance();
+
+        character.setItemsWearing(wearingItems);
+        ability = character.getAbility();
+
+        Assert.assertEquals(strength, ability.getStrength());
+
+    }
+
+    /**
+     * A test method to get the ability dexterity
+     */
+    @Test
+    public void testItemDexterity() {
+        int dexterity = ability.getDexterity();
+        HashSet<Item> wearingItems = character.getItemsWearing();
+        Item dexterityItem = Fixtures.createBootsDex();
+
+        wearingItems.add(dexterityItem);
+        dexterity += dexterityItem.getEnhance();
+
+        character.setItemsWearing(wearingItems);
+        ability = character.getAbility();
+
+        Assert.assertEquals(dexterity, ability.getDexterity());
+
+    }
+
+
+    /**
+     * A test method to get the ability constitution
+     */
+    @Test
+    public void testItemConstitution() {
+        int constitution = ability.getConstitution();
+        HashSet<Item> wearingItems = character.getItemsWearing();
+        Item constitutionItem = Fixtures.createBeltCon();
+
+        wearingItems.add(constitutionItem);
+        constitution += constitutionItem.getEnhance();
+
+        character.setItemsWearing(wearingItems);
+        ability = character.getAbility();
+
+        Assert.assertEquals(constitution, ability.getConstitution());
+
+    }
+
+    /**
+     * A test method to get the item attack bonus
+     */
+    @Test
+    public void testItemAttackBonus() {
+        int attackBonus = ability.getAttackBonus();
+        HashSet<Item> wearingItems = character.getItemsWearing();
+        Item attackBonusItem = Fixtures.createWeaponAtt();
+
+        wearingItems.add(attackBonusItem);
+        attackBonus += attackBonusItem.getEnhance();
+
+        character.setItemsWearing(wearingItems);
+        ability = character.getAbility();
+
+        Assert.assertEquals(attackBonus, ability.getAttackBonus());
+
+    }
+
+    /**
+     * A test method to get the item Damage Bonus
+     */
+    @Test
+    public void testItemDamageBonus() {
+        int damageBonus = ability.getDamageBonus();
+        HashSet<Item> wearingItems = character.getItemsWearing();
+        Item damageBonusItem = Fixtures.createWeapon();
+
+        wearingItems.add(damageBonusItem);
+        damageBonus += damageBonusItem.getEnhance();
+
+        character.setItemsWearing(wearingItems);
+        ability = character.getAbility();
+
+        Assert.assertEquals(damageBonus, ability.getDamageBonus());
+
+    }
+
+
+    /**
      * A test method to test the backpack inventory of a character.
      * @throws Exception
      */
+    /*
     @Test
     public void testGetBackPackInventory() throws Exception {
         Item item = new Item();
@@ -153,6 +266,7 @@ public class CharacterTest {
         int size = 4;
         Assert.assertEquals(size, this.character.getBackPackInventoryItems().size());
     }
+    */
 
     /**
      * A test method to test character name setting and getting

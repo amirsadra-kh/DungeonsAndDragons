@@ -9,6 +9,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
@@ -45,12 +46,12 @@ public class MapFrame implements ActionListener {
     static int rows;
     static int cols;
     private boolean validMap;
-    private boolean EntryPointExist= false;
-    private boolean ExitPointExist= false;
+
     private boolean MonsterExist= false;
     private String errorValidMap="";
     private DefaultListModel listModel;
     private BackPackInventory chest=new BackPackInventory();
+    String nonCharacter = null;
     /**
      * A MapFrame object
      */
@@ -61,6 +62,7 @@ public class MapFrame implements ActionListener {
         newCheckBox.addActionListener(this);
         loadObjectsNames();
     }
+
     public static void alert(String message) {
         JOptionPane.showMessageDialog(null, message);
     }
@@ -114,7 +116,7 @@ public class MapFrame implements ActionListener {
     }
 
     /**
-     * A mehtod to make a frame
+     * A method to make a frame
      *
      * @param frameTitle the title of the frame
      * @return a map
@@ -129,6 +131,49 @@ public class MapFrame implements ActionListener {
 
         return map;
     }
+
+
+    public static boolean testMap(String[][] boardArray) {
+        boolean validMap = true;
+        boolean EntryPointExist = false;
+        boolean ExitPointExist = false;
+        String errorValidMap;
+        for (int i = 0; i < boardArray.length; i++) {
+            for (int j = 0; j < boardArray[i].length; j++) {
+                switch (boardArray[i][j]) {
+                    case "E":
+                        EntryPointExist = true;
+                        break;
+                    case "Q":
+                        ExitPointExist = true;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+
+
+        if (EntryPointExist == false || ExitPointExist == false) {
+
+            if (EntryPointExist == false) {
+                errorValidMap = "Please add entry point by E";
+            }
+            if (ExitPointExist == false) {
+                errorValidMap = "Please add exit point by Q";
+            }
+
+//alert(errorValidMap);
+            validMap = false;
+
+
+
+        }
+        return validMap;
+    }
+
+
+
 
     /**
      * A method to handle Actions
@@ -156,11 +201,11 @@ public class MapFrame implements ActionListener {
             this.grid = this.grid.ShowGrid(rows, cols, this.grid, name, newMap);
 
         } else if (actionEvent.getSource() == saveMapButton) {
-            Map map=new Map();
+            Map map = new Map();
             if (!newMap) {
                 map = grid.getExistingMap(name);
-                rows=map.getRows();
-                cols=map.getCols();
+                rows = map.getRows();
+                cols = map.getCols();
             }
 
             List chestList = chestJList.getSelectedValuesList();
@@ -174,49 +219,19 @@ public class MapFrame implements ActionListener {
             map.setRows(rows);
             map.setName(name);
 
-            validMap =false;
-
-
-            for (int i=0;i<boardArray.length;i++) {
-                for (int j = 0; j < boardArray[i].length; j++) {
-                    switch (boardArray[i][j]) {
-                        case "E":
-                            EntryPointExist = true;
-                            break;
-                        case "Q":
-                            ExitPointExist = true;
-                            break;
-                        case "M":
-                            MonsterExist = true;
-                            break;
-                        default:
-                    }
-                }
-            }
-            if(EntryPointExist==false || ExitPointExist == false ){ //|| MonsterExist == false
-
-                if (EntryPointExist==false){errorValidMap="Please add entry point by E";}
-                if (ExitPointExist==false){errorValidMap="Please add exit point by Q";}
-              //  if (MonsterExist==false){errorValidMap="Please add Monsters by M";}
-
-                validMap=false;
-                alert("Not Valid "+errorValidMap);
+            validMap=testMap(boardArray);
+            if (validMap == false) {
+                errorValidMap="Please add entry point by E & exit point by Q";
+                alert("Not Valid " + errorValidMap);
             }else{
                 map.saveObject();
                 grid.dispose();
-                alert("Your map is saved. you may close the map");
+                alert("Your map is saved.");
             }
 
-
+        }
 
 
 
         }
     }
-
-    private void editMap(int rows, int cols, String name) {
-
-    }
-
-
-}

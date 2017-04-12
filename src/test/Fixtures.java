@@ -1,5 +1,6 @@
 package test;
 
+import javafx.stage.Screen;
 import main.java.org.model.CharacterPackage.Ability;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
@@ -82,6 +83,21 @@ public class Fixtures {
     }
 
     /**
+     * A method to create a belt with cons for test units
+     * @return a belt item
+     */
+    public static Item createBeltCon(){
+        final ItemEnum belt = ItemEnum.BELT;
+        final Item item = new Item();
+        item.setName("belt1");
+        item.setEnhancementType(EnhancementTypesEnum.CONSTITUTION);
+        item.setEnhance(2);
+        item.setItem(belt);
+        return item;
+    }
+
+
+    /**
      * A method to create boots for test units
      * @return a boots item
      */
@@ -94,6 +110,21 @@ public class Fixtures {
         item.setItem(boots);
         return item;
     }
+
+    /**
+     * A method to create boots dexterity for test units
+     * @return a boots item
+     */
+    public static Item createBootsDex() {
+        final ItemEnum boots = ItemEnum.BOOTS;
+        final Item item = new Item();
+        item.setName("boots2");
+        item.setEnhancementType(EnhancementTypesEnum.DEXTERITY);
+        item.setEnhance(3);
+        item.setItem(boots);
+        return item;
+    }
+
 
     /**
      * This method creates an Item with several belts
@@ -190,7 +221,25 @@ public class Fixtures {
     }
 
     /**
-     * Thsi method is to create a map with no empty spot (all walls)
+     * A weapon item - longsword for testing frightening
+     * @return
+     */
+    public static Weapon createWeaponAtt() {
+        ItemEnum weapon = ItemEnum.WEAPON;
+        Weapon item = new Weapon();
+        item = WeaponFactory.setSpecialEnhancement(item, 4);
+        item.setName("weapon1");
+        item.setEnhancementType(EnhancementTypesEnum.ATTACKBONUS);
+        item.setEnhance(4);
+        item.setItem(weapon);
+        item.setType("longsword");
+        return item;
+    }
+
+
+
+    /**
+     * This method is to create a map with no empty spot (all walls)
      *
      * @param map a map with no empty spot
      * @return
@@ -203,4 +252,26 @@ public class Fixtures {
         }
         return map;
     }
+
+
+    /**
+     * This method is to create a map to be test
+     *
+     * @param map a map with no empty spot
+     * @return
+     */
+    public static Map createTestMap(final Map map) {
+       String[][] screen = new String[map.getRows()][map.getCols()];;
+        for (int row = 0; row < map.getRows(); row++) {
+            for (int col = 0; col < map.getCols(); col++) {
+                screen[row][col] = "w";
+            }
+        }
+        screen[0][0] = "E";
+        screen[1][1] = "Q";
+        map.setScreen(screen);
+        return map;
+    }
+
+
 }
