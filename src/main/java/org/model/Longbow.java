@@ -43,6 +43,7 @@ public class Longbow extends Weapon {
      */
     private void log(Character character, int d8, int dexterityMod){
         System.out.println("------------------------Log Window-------------------------");
+        System.out.println(ColorConstants.ANSI_RED +"DAMAGE!" +ColorConstants.ANSI_RESET);
         System.out.println(ColorConstants.ANSI_RED +"Damage roll of Longbow (d8): " +d8 +ColorConstants.ANSI_RESET);
         System.out.println(ColorConstants.ANSI_GREEN +character.getCharName() +" dexterity modifier: "
                 +dexterityMod +ColorConstants.ANSI_RESET);

@@ -6,6 +6,7 @@ import main.java.org.Service.MapDirectionValidator;
 import main.java.org.model.*;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
+import main.java.org.model.DecoratorPackage.Weapon;
 import main.java.org.model.Map;
 
 import java.awt.*;
@@ -189,7 +190,8 @@ public class HumanPlayer implements BehaviourStrategy {
         attackLog(d20, attackBonus, attackedChar.getAbility().getArmorClass());
         if(attackRoll > attackedChar.getAbility().getArmorClass()) {
             System.out.println(ColorConstants.ANSI_GREEN +"HIT!!" +ColorConstants.ANSI_RESET);
-            int d8 = roll.getDice8();
+            Weapon weapon = checkForWeapon(player);
+            int d8 = weapon.getDamage();
             int strengthMod = player.getAbility().getStrengthModifier();
             int damageRoll = d8 + strengthMod;
             int monstersHP = attackedChar.getHitPoints();
@@ -250,14 +252,32 @@ public class HumanPlayer implements BehaviourStrategy {
      */
     private void damageLog(int d8, int strengthMod, int monsterHP) {
         int damageRoll = d8 + strengthMod;
-        System.out.println(ColorConstants.ANSI_RED +"DAMAGE!" +ColorConstants.ANSI_RESET);
-        System.out.println(ColorConstants.ANSI_RED +"D8 roll: " +d8 +ColorConstants.ANSI_RESET);
-        System.out.println(ColorConstants.ANSI_RED +"StrengthModifier: " +strengthMod +ColorConstants.ANSI_RESET);
-        System.out.println(ColorConstants.ANSI_GREEN +"Total: " +damageRoll +ColorConstants.ANSI_RESET);
         System.out.println(ColorConstants.ANSI_RED +"Monster's Hit Points Before Attack: " +monsterHP +ColorConstants.ANSI_RESET);
         monsterHP = monsterHP - damageRoll;
         if(monsterHP < 0)
             monsterHP = 0;
         System.out.println(ColorConstants.ANSI_RED +"Monster's Hit Points After Attack: " +monsterHP +ColorConstants.ANSI_RESET);
+    }
+
+    /**
+     * A method to get the weapon the character has
+     * @param player
+     * @return weapon or null if there is no weapon
+     */
+    private Weapon checkForWeapon(Character player) {
+        HashSet<Item> itemsWearing = player.getItemsWearing();
+        Weapon weapon = new Weapon();
+        for(Item i : itemsWearing) {
+            if(i.getItem().equals(ItemEnum.WEAPON)) {
+                weapon.setName(i.getName());
+                weapon.setEnhance(i.getEnhance());
+                weapon.setEnhancementType(i.getEnhancementType());
+                weapon.setItem(i.getItem());
+                weapon.setType("longsword");
+                weapon.setDamage(player);
+                return weapon;
+            }
+        }
+        return null;
     }
 }
