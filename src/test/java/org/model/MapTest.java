@@ -1,5 +1,6 @@
 package test.java.org.model;
 
+import com.sun.javafx.collections.MappingChange;
 import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Map;
 import org.junit.After;
@@ -7,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import main.java.org.view.MapFrame;
+import main.java.org.Service.*;
 import test.Fixtures;
 
 /**
@@ -85,10 +87,22 @@ public class MapTest {
         Assert.assertEquals(validMap, true);
     }
 
-
-
-
-
+    /**
+     * A method to test load map is a map object.
+     */
+    @Test
+    public void testMapLoading() throws Exception {
+        this.map.setRows(3);
+        this.map.setCols(4);
+        this.map.setName("mapTest3");
+        this.map = Fixtures.createTestMap(this.map);
+        this.map.saveObject();
+        Map loadMap = ObjectLoader.loadMapFromXML("mapTest3");
+        Assert.assertEquals(loadMap.getName(), this.map.getName());
+        Assert.assertEquals(loadMap.getCols(), this.map.getCols());
+        Assert.assertEquals(loadMap.getScreen(), this.map.getScreen());
+        Assert.assertEquals(loadMap.getPlayer(), this.map.getPlayer());
+    }
 
     /**
      * A method to tear down after the tests.
