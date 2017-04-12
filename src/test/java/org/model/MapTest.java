@@ -6,6 +6,8 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import main.java.org.view.MapFrame;
+import test.Fixtures;
 
 /**
  * Created by misha on 2017-04-08.
@@ -69,6 +71,23 @@ public class MapTest {
         this.map.setPlayer(player);
         Assert.assertEquals(player, this.map.getPlayer());
     }
+
+    /**
+     * A method to validate map.
+     */
+    @Test
+    public void testMapValidate() {
+        this.map.setRows(4);
+        this.map.setCols(5);
+        Fixtures.createTestMap(this.map);
+        String[][] boardArray=map.getScreen();
+        boolean validMap=MapFrame.testMap(boardArray);
+        Assert.assertEquals(validMap, true);
+    }
+
+
+
+
 
 
     /**

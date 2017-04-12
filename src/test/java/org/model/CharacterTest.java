@@ -129,6 +129,21 @@ public class CharacterTest {
     }
 
     /**
+     * A test method for character cannot wear more than one item
+     */
+    @Test
+    public void testCharacterWearMore() {
+    Character char2 = new Character();
+    HashSet<Item> items = new HashSet<>();
+    Item item = new Item();
+    items.addAll(Arrays.asList(item,item));
+        Assert.assertEquals(1, items.size());
+
+    }
+
+
+
+    /**
      * A test method to get the ability strength
      */
     @Test

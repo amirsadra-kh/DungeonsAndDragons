@@ -1,5 +1,6 @@
 package test;
 
+import javafx.stage.Screen;
 import main.java.org.model.CharacterPackage.Ability;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
@@ -238,7 +239,7 @@ public class Fixtures {
 
 
     /**
-     * Thsi method is to create a map with no empty spot (all walls)
+     * This method is to create a map with no empty spot (all walls)
      *
      * @param map a map with no empty spot
      * @return
@@ -251,4 +252,26 @@ public class Fixtures {
         }
         return map;
     }
+
+
+    /**
+     * This method is to create a map to be test
+     *
+     * @param map a map with no empty spot
+     * @return
+     */
+    public static Map createTestMap(final Map map) {
+       String[][] screen = new String[map.getRows()][map.getCols()];;
+        for (int row = 0; row < map.getRows(); row++) {
+            for (int col = 0; col < map.getCols(); col++) {
+                screen[row][col] = "w";
+            }
+        }
+        screen[0][0] = "E";
+        screen[1][1] = "Q";
+        map.setScreen(screen);
+        return map;
+    }
+
+
 }
