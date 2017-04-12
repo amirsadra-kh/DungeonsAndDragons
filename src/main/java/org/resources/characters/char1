@@ -37,7 +37,7 @@
     <level>1</level>
     <playerCharacter>true</playerCharacter>
     <state>
-        <armorClass>92</armorClass>
+        <armorClass>112</armorClass>
         <constitution>15</constitution>
         <constitutionModifier>0</constitutionModifier>
         <damageBonus>1</damageBonus>
@@ -47,4 +47,5 @@
         <strengthModifier>0</strengthModifier>
     </state>
     <turn>false</turn>
+    <turnRoll>20</turnRoll>
 </character>

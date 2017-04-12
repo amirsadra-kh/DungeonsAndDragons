@@ -27,7 +27,7 @@
     </backPackInventory>
     <burning>false</burning>
     <charName>fchar1</charName>
-    <hitPoints>0</hitPoints>
+    <hitPoints>5</hitPoints>
     <itemsWearing>
         <enhance>5</enhance>
         <enhancementType>DEXTERITY</enhancementType>
@@ -37,7 +37,7 @@
     <level>1</level>
     <playerCharacter>false</playerCharacter>
     <state>
-        <armorClass>80</armorClass>
+        <armorClass>100</armorClass>
         <constitution>13</constitution>
         <constitutionModifier>0</constitutionModifier>
         <damageBonus>4</damageBonus>
@@ -47,4 +47,5 @@
         <strengthModifier>0</strengthModifier>
     </state>
     <turn>false</turn>
+    <turnRoll>0</turnRoll>
 </character>

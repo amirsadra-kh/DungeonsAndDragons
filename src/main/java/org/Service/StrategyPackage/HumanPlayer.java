@@ -1,6 +1,7 @@
 package main.java.org.Service.StrategyPackage;
 
 import main.java.org.Service.AdjacentObjectsFinder;
+import main.java.org.Service.Calculation;
 import main.java.org.Service.MapDirectionValidator;
 import main.java.org.model.*;
 import main.java.org.model.CharacterPackage.BackPackInventory;
@@ -57,7 +58,7 @@ public class HumanPlayer implements BehaviourStrategy {
 
         AdjacentObjectsFinder finder = new AdjacentObjectsFinder();
         if(finder.checkForChest(character.getCurrentPosition(), map)) {
-            System.out.println("Player found a chest!!");
+            System.out.println(ColorConstants.ANSI_CYAN +"Player found a chest!!" +ColorConstants.ANSI_RESET);
             // The objective of the map has been met
             map.setCanGoNextLevel(true);
             System.out.println("Backpack inventory before chest: " +character.getBackPackInventoryItems().toString());
@@ -68,6 +69,12 @@ public class HumanPlayer implements BehaviourStrategy {
         Character friendly = finder.checkForFriendly(character.getCurrentPosition(), map);
         if(friendly != null)
             askUserAttackOrInteract(character, friendly, map);
+
+        Character monster = finder.checkForMonster(character.getCurrentPosition(), map);
+        if(monster != null) {
+            System.out.println(ColorConstants.ANSI_RED +"You just found an aggressive character!" +ColorConstants.ANSI_RESET);
+            attack(character, monster);
+        }
 
         // return the new coordinate
         return character.getCurrentPosition();
@@ -80,8 +87,8 @@ public class HumanPlayer implements BehaviourStrategy {
      * @param map
      */
     private void askUserAttackOrInteract(Character player, Character friendly, Map map) {
-        System.out.println("You just found a friendly character!");
-        System.out.println("Would you like to\n1.Interact\2.Attack");
+        System.out.println(ColorConstants.ANSI_CYAN +"You just found a friendly character!" +ColorConstants.ANSI_RESET);
+        System.out.println("Would you like to\n1.Interact\n2.Attack");
         int choice = readInput.readIntHandling(0);
         while (choice < 1 || choice > 2) {
             System.out.println("Your input is invalid, please try again");
@@ -137,6 +144,10 @@ public class HumanPlayer implements BehaviourStrategy {
         player.setBackPackInventory(playerBackPack);
         friendly.setBackPackInventory(friendlyCharacterBackpack);
 
+        // Log for user
+        System.out.println("Friendly character's backpack after interaction: " +friendly.getBackPackInventoryItems());
+        System.out.println("Human player's backpack after interaction: " +player.getBackPackInventoryItems());
+
         // Save the characters with their new inventory
         player.saveCharacter();
         friendly.saveCharacter();
@@ -171,7 +182,23 @@ public class HumanPlayer implements BehaviourStrategy {
      */
     @Override
     public void attack(Character player, Character attackedChar) {
-
+        Calculation roll = new Calculation();
+        int d20 = roll.getDice20();
+        int attackBonus = player.getAbility().getAttackBonus();
+        int attackRoll = d20 + attackBonus;
+        attackLog(d20, attackBonus, attackedChar.getAbility().getArmorClass());
+        if(attackRoll > attackedChar.getAbility().getArmorClass()) {
+            System.out.println(ColorConstants.ANSI_GREEN +"HIT!!" +ColorConstants.ANSI_RESET);
+            int d8 = roll.getDice8();
+            int strengthMod = player.getAbility().getStrengthModifier();
+            int damageRoll = d8 + strengthMod;
+            int monstersHP = attackedChar.getHitPoints();
+            damageLog(d8, strengthMod, monstersHP);
+            attackedChar.decreaseHitPoint(damageRoll);
+        } else {
+            System.out.println(ColorConstants.ANSI_RED +"MISS!!" +ColorConstants.ANSI_RESET);
+        }
+        System.out.println("------------------------------------------------------------");
     }
 
     /**
@@ -197,5 +224,40 @@ public class HumanPlayer implements BehaviourStrategy {
             }
         }
         map.getChest().setItems(loot);
+    }
+
+    /**
+     * A method for showing the attempt for an attack log
+     * @param d20 the d20 roll
+     * @param attackBonus the character's attack bonus
+     * @param monsterAC the monster's armor class
+     */
+    private void attackLog(int d20, int attackBonus, int monsterAC) {
+        int attackRoll = d20 + attackBonus;
+        System.out.println("------------------------Log Window-------------------------");
+        System.out.println(ColorConstants.ANSI_RED +"ATTACK!" +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_RED +"D20 roll: " +d20 +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_RED +"AttackBonus: " +attackBonus +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_GREEN +"Total: " +attackRoll +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_RED +"Monster's ArmorClass: " +monsterAC +ColorConstants.ANSI_RESET);
+    }
+
+    /**
+     * A method for showing the attack log after it has been attempted successfully
+     * @param d8 the dice for longsword and longbow
+     * @param strengthMod the strength modifier of the character
+     * @param monsterHP the hit points of the monster
+     */
+    private void damageLog(int d8, int strengthMod, int monsterHP) {
+        int damageRoll = d8 + strengthMod;
+        System.out.println(ColorConstants.ANSI_RED +"DAMAGE!" +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_RED +"D8 roll: " +d8 +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_RED +"StrengthModifier: " +strengthMod +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_GREEN +"Total: " +damageRoll +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_RED +"Monster's Hit Points Before Attack: " +monsterHP +ColorConstants.ANSI_RESET);
+        monsterHP = monsterHP - damageRoll;
+        if(monsterHP < 0)
+            monsterHP = 0;
+        System.out.println(ColorConstants.ANSI_RED +"Monster's Hit Points After Attack: " +monsterHP +ColorConstants.ANSI_RESET);
     }
 }
