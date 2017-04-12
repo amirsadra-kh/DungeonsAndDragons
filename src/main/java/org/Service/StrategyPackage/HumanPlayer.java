@@ -48,11 +48,18 @@ public class HumanPlayer implements BehaviourStrategy {
             } else {
                 humanPlayer.setCurrentPosition(setNewPosition(direction, humanPlayer.getCurrentPosition()));
             }
+            if(i < 2)
+            System.out.println("Do you want to make another move? (Y/N)");
+            boolean answer = readInput.askUserIfAgain();
+            if(!answer)
+                i = 3;
         }
 
         AdjacentObjectsFinder finder = new AdjacentObjectsFinder();
         if(finder.checkForChest(humanPlayer.getCurrentPosition(), map)) {
             System.out.println("Player found a chest!!");
+            // The objective of the map has been met
+            map.setCanGoNextLevel(true);
             System.out.println("Backpack inventory before chest: " +humanPlayer.getBackPackInventoryItems().toString());
             interact(humanPlayer, map.getChest(), map);
             System.out.println("Backpack inventory after chest: " +humanPlayer.getBackPackInventoryItems().toString());

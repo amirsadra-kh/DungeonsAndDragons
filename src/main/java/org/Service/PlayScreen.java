@@ -228,7 +228,7 @@ public class PlayScreen {
             MapScreen.showMap(this.map);
             return false;
         } else if ("Q".equalsIgnoreCase(str)) {
-            return isLevelCompleted(this.map, i, j, campaign, str);
+            return isLevelCompleted(this.map, i, j, str);
         } else if (!" ".equalsIgnoreCase(str)) {
             SetInteractionStrategy.interact(this.map, str, Map.getPlayerCoordinate(this.map), new Point(i, j), campaign);
             MapScreen.printElementsInTheMap(this.map);
@@ -250,21 +250,21 @@ public class PlayScreen {
      * @param map      the map we are playing
      * @param i        the i coordinate on map
      * @param j        the j coordinate on map
-     * @param campaign the campaign we are playing
      * @param str      the target object we are interacting with
      * @return true if we go next level
      */
-    private boolean isLevelCompleted(final Map map, final int i, final int j, final Campaign campaign, final String str) {
+    public boolean isLevelCompleted(Map map, int i, int j, String str) {
+        this.map = map;
         if (this.map.isCanGoNextLevel()) {
 
             try {
-                this.map = campaign.getNextLevel();
+                this. map = campaign.getNextLevel();
             } catch (final Exception e) {
                 System.out.println("You finished all the levels in the Campaign!");
                 System.exit(0);
                 return true;
             }
-            PlayScreen.setPlayerAtEntryPoint(this.map);
+            PlayScreen.setPlayerAtEntryPoint(map);
             System.out.println("Great you moved to next level");
             MapScreen.showMap(this.map);
             System.out.println(GameConstantsInterface.ENTER_DIRECTION);
@@ -279,7 +279,7 @@ public class PlayScreen {
     }
 
     /**
-     * this methdo checks if user wants to save the game and exit
+     * this method checks if user wants to save the game and exit
      *
      * @param direction
      * @return true if user wants to exit

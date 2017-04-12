@@ -67,9 +67,13 @@ public class MapDirectionValidator {
      * @param j          new J Coordinate
      * @return the return condition is true only when player goes to next level
      */
-    protected boolean coordinateIsValid(final int i, final int j, final Map map) {
+    protected boolean coordinateIsValid(int i, int j, Map map) {
         try {
             final String str = map.getScreen()[i][j];
+            if(str.equals("Q")) {
+                PlayScreen ps = new PlayScreen();
+                ps.isLevelCompleted(map, i, j, str);
+            }
             if(!str.equals(" ") && !str.equals(""))
                 return false;
             return true;
