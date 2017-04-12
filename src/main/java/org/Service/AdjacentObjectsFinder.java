@@ -138,6 +138,46 @@ public class AdjacentObjectsFinder {
     }
 
     /**
+     * A method to check if there is a player in the adjacent cells
+     * @param currentPoint of the monster
+     * @param map being played
+     * @return player character
+     */
+    public Character checkForPlayer(Point currentPoint, Map map) {
+        setAdjacentPoints(currentPoint);
+        String[][] currentMap = map.getScreen();
+        // Validate the point is on the map
+        if(up.x > -1 && up.y > -1 && up.x < currentMap[0].length && up.y < currentMap.length) {
+            // Check if the point has a chest
+            if (currentMap[up.x][up.y].substring(0,1).equals("P")) {
+                return loadCharacterByPoint(up, map);
+            }
+        }
+        // Validate the point is on the map
+        else if(down.x > -1 && down.y > -1 && down.x < currentMap[0].length && down.y < currentMap.length) {
+            // Check if the point has a chest
+            if (currentMap[down.x][down.y].substring(0,1).equals("P")) {
+                return loadCharacterByPoint(down, map);
+            }
+        }
+        // Validate the point is on the map
+        else if(left.x > -1 && left.y > -1  && left.x < currentMap[0].length && left.y < currentMap.length) {
+            // Check if the point has a chest
+            if (currentMap[left.x][left.y].substring(0,1).equals("P")) {
+                return loadCharacterByPoint(left, map);
+            }
+        }
+        // Validate the point is on the map
+        else if(right.x > -1 && right.y > -1  && right.x < currentMap[0].length && right.y < currentMap.length) {
+            // Check if the point has a chest
+            if (currentMap[right.x][right.y].substring(0,1).equals("P")) {
+                return loadCharacterByPoint(right, map);
+            }
+        }
+        return null;
+    }
+
+    /**
      * A method to set the adjacent points of the character for checking them
      * @param currentPoint the current point of the character
      */

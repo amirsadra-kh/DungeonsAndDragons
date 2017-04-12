@@ -2,12 +2,9 @@ package main.java.org.Service.StrategyPackage;
 
 import main.java.org.Service.AdjacentObjectsFinder;
 import main.java.org.Service.Calculation;
-import main.java.org.model.Campaign;
+import main.java.org.model.*;
 import main.java.org.model.CharacterPackage.BackPackInventory;
 import main.java.org.model.CharacterPackage.Character;
-import main.java.org.model.Item;
-import main.java.org.model.ItemEnum;
-import main.java.org.model.Map;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -58,6 +55,14 @@ public class AggressiveNPC implements BehaviourStrategy {
             System.out.println("Backpack inventory after chest: " +monster.getBackPackInventoryItems().toString());
         }
 
+        Character friendly = finder.checkForFriendly(monster.getCurrentPosition(), map);
+        if(friendly != null)
+            attack(monster, friendly);
+
+        Character playerChar = finder.checkForPlayer(monster.getCurrentPosition(), map);
+        if(playerChar != null)
+            attack(monster, playerChar);
+
         // Set the new position
         return min;
     }
@@ -85,57 +90,58 @@ public class AggressiveNPC implements BehaviourStrategy {
      */
     @Override
     public void attack(Character mon, Character attackedChar) {
-        // check if attack is valid
-        int armorClass = attackedChar.getAbility().getArmorClass();
-        // if attack is valid, get and apply damage
-        if(checkAttack(armorClass, mon)) {
-            int total = getDamage(mon, attackedChar);
-            attackedChar.decreaseHitPoint(total);
-        }
-    }
-
-    /**
-     * A method to check if an attack is successful
-     * @param armorClass of the target
-     * @param mon the monster character
-     * @return true if attack is successful, else false
-     */
-    private boolean checkAttack(int armorClass, Character mon) {
         Calculation roll = new Calculation();
         int d20 = roll.getDice20();
-
         int attackBonus = mon.getAbility().getAttackBonus();
-        int strengthMod = mon.getAbility().getStrengthModifier();
-        int level = mon.getLevel();
-
-        int total = d20 + attackBonus + strengthMod + level;
-
-        if(total > armorClass)
-            return true;
-        else
-            return false;
+        int attackRoll = d20 + attackBonus;
+        attackLog(d20, attackBonus, attackedChar.getAbility().getArmorClass());
+        if(attackRoll > attackedChar.getAbility().getArmorClass()) {
+            System.out.println(ColorConstants.ANSI_GREEN +"HIT!!" +ColorConstants.ANSI_RESET);
+            int d8 = roll.getDice8();
+            int strengthMod = mon.getAbility().getStrengthModifier();
+            int damageRoll = d8 + strengthMod;
+            int attackedCharHP = attackedChar.getHitPoints();
+            damageLog(d8, strengthMod, attackedCharHP);
+            attackedChar.decreaseHitPoint(damageRoll);
+        } else {
+            System.out.println(ColorConstants.ANSI_RED +"MISS!!" +ColorConstants.ANSI_RESET);
+        }
+        System.out.println("------------------------------------------------------------");
     }
 
     /**
-     * A method to get the damageBonus + d8 roll of a weapon and add it to the strength modifier.
-     * Also get the special enhancement of the weapon and apply it to the target.
-     * @param mon
-     * @param target
-     * @return total damage to be dealt
+     * A method for showing the attempt for an attack log
+     * @param d20 the d20 roll
+     * @param attackBonus the monster's attack bonus
+     * @param characterAC the attacked character's armor class
      */
-    private int getDamage(Character mon, Character target) {
-        int damageBonus = 0;
-        HashSet<Item> wearingItems = mon.getItemsWearing();
-        for(Item i : wearingItems) {
-            if(i.getItem().equals(ItemEnum.WEAPON)) {
-                // TODO get the damageBonus of the item here
-                // TODO get the special enhancement here
-                // TODO Apply special enhancement, if any, to character here
-            }
-        }
-        int strengthMod = mon.getAbility().getStrengthModifier();
+    private void attackLog(int d20, int attackBonus, int characterAC) {
+        int attackRoll = d20 + attackBonus;
+        System.out.println("------------------------Log Window-------------------------");
+        System.out.println(ColorConstants.ANSI_RED +"ATTACK!" +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_RED +"D20 roll: " +d20 +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_RED +"AttackBonus: " +attackBonus +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_GREEN +"Total: " +attackRoll +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_RED +"Character's ArmorClass: " +characterAC +ColorConstants.ANSI_RESET);
+    }
 
-        return (damageBonus + strengthMod);
+    /**
+     * A method for showing the attack log after it has been attempted successfully
+     * @param d8 the dice for longsword and longbow
+     * @param strengthMod the strength modifier of the monster
+     * @param characterHP the hit points of the attacked character
+     */
+    private void damageLog(int d8, int strengthMod, int characterHP) {
+        int damageRoll = d8 + strengthMod;
+        System.out.println(ColorConstants.ANSI_RED +"DAMAGE!" +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_RED +"D8 roll: " +d8 +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_RED +"StrengthModifier: " +strengthMod +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_GREEN +"Total: " +damageRoll +ColorConstants.ANSI_RESET);
+        System.out.println(ColorConstants.ANSI_RED +"Character's Hit Points Before Attack: " +characterHP +ColorConstants.ANSI_RESET);
+        characterHP = characterHP - damageRoll;
+        if(characterHP < 0)
+            characterHP = 0;
+        System.out.println(ColorConstants.ANSI_RED +"Character's Hit Points After Attack: " +characterHP +ColorConstants.ANSI_RESET);
     }
 
     /**
