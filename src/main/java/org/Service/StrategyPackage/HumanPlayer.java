@@ -10,6 +10,7 @@ import main.java.org.model.Map;
 import java.awt.*;
 import java.awt.List;
 import java.util.*;
+import java.util.ArrayList;
 
 /**
  * This strategy is for a player character controlled by the user. It requires user
@@ -24,14 +25,14 @@ public class HumanPlayer implements BehaviourStrategy {
     ReadInput readInput = new ReadInput();
     /**
      * A method for moving a player character - by choice
-     * @param humanPlayer the one who has a turn now - the player character
+     * @param character the one who has a turn now - the player character
      * @param player the player character of the map
      * @param objective the position of the objective of the map - chest or exit
      * @param map the map the character is on
      */
     @Override
-    public Point move(Character humanPlayer, Character player, Point objective, Map map, Campaign campaign) {
-        if(humanPlayer.getBurning()) {
+    public Point move(Character character, Character player, Point objective, Map map, Campaign campaign) {
+        if(character.getBurning()) {
             // TODO decrease monster's hitpoints here based on getBurningDamage in burning decorator
         }
 
@@ -40,11 +41,11 @@ public class HumanPlayer implements BehaviourStrategy {
             //This prints and ask user to enter the directions
             System.out.println(GameConstantsInterface.ENTER_DIRECTION);
             String direction = readInput.readCoordinate();
-            if(!checkIfMoveIsValid(direction, map, humanPlayer, campaign)) {
+            if(!checkIfMoveIsValid(direction, map, character, campaign)) {
                 i--;
                 System.out.println("Invalid Move!");
             } else {
-                humanPlayer.setCurrentPosition(setNewPosition(direction, humanPlayer.getCurrentPosition()));
+                character.setCurrentPosition(setNewPosition(direction, character.getCurrentPosition()));
             }
             if(i < 2) {
                 System.out.println("Do you want to make another move? (Y/N)");
@@ -55,21 +56,21 @@ public class HumanPlayer implements BehaviourStrategy {
         }
 
         AdjacentObjectsFinder finder = new AdjacentObjectsFinder();
-        if(finder.checkForChest(humanPlayer.getCurrentPosition(), map)) {
+        if(finder.checkForChest(character.getCurrentPosition(), map)) {
             System.out.println("Player found a chest!!");
             // The objective of the map has been met
             map.setCanGoNextLevel(true);
-            System.out.println("Backpack inventory before chest: " +humanPlayer.getBackPackInventoryItems().toString());
-            interact(humanPlayer, map.getChest(), map);
-            System.out.println("Backpack inventory after chest: " +humanPlayer.getBackPackInventoryItems().toString());
+            System.out.println("Backpack inventory before chest: " +character.getBackPackInventoryItems().toString());
+            interact(character, map.getChest(), map);
+            System.out.println("Backpack inventory after chest: " +character.getBackPackInventoryItems().toString());
         }
 
-        Character friendly = finder.checkForFriendly(humanPlayer.getCurrentPosition(), map);
+        Character friendly = finder.checkForFriendly(character.getCurrentPosition(), map);
         if(friendly != null)
-            askUserAttackOrInteract(humanPlayer, friendly, map);
+            askUserAttackOrInteract(character, friendly, map);
 
-        // TODO return the new coordinate
-        return humanPlayer.getCurrentPosition();
+        // return the new coordinate
+        return character.getCurrentPosition();
     }
 
     /**

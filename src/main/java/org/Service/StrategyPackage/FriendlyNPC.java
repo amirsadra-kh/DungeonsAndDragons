@@ -101,8 +101,7 @@ public class FriendlyNPC implements BehaviourStrategy {
      * @return it returns the first available point
      */
     private Point getPossiblePoints(Map map, Point targetPoint) {
-
-        final MapDirectionValidator validate = new MapDirectionValidator();
+        MapDirectionValidator validate = new MapDirectionValidator();
         for (int row = 0; row < map.getScreen().length; row++) {
             for (int col = 0; col < map.getScreen()[row].length; col++) {
                 if (validate.coordinateIsValidForFriendlyCharacter(row, col, map, targetPoint)) {

@@ -4,7 +4,6 @@ import main.java.org.model.CharacterPackage.Character;
 import main.java.org.model.Map;
 
 import java.awt.*;
-import java.util.ArrayList;
 
 /**
  * A class for the Character strategies to use to see if there  is anything in the cells next to them for interaction
@@ -95,7 +94,6 @@ public class AdjacentObjectsFinder {
                 return loadCharacterByPoint(right, map);
             }
         }
-
         return null;
     }
 

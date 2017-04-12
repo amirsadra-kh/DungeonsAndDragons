@@ -135,7 +135,6 @@ public class PlayScreen {
      * This method is to set the strategy to non-player character
      */
     private void setStrategy() {
-
         for (Character character : map.getNonPLayerCharacters()) {
             if (character.getCharName() != null &&
                     (character.getCharName().charAt(0) == 'm' || character.getCharName().charAt(0) == 'M')) {
