@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<character>
+    <dice>10</dice>
+    <ability>
+        <armorClass>10</armorClass>
+        <constitution>9</constitution>
+        <constitutionModifier>0</constitutionModifier>
+        <damageBonus>4</damageBonus>
+        <dexterity>14</dexterity>
+        <dexterityModifier>0</dexterityModifier>
+        <strength>17</strength>
+        <strengthModifier>4</strengthModifier>
+    </ability>
+    <backPackInventory>
+        <items>
+            <enhance>3</enhance>
+            <enhancementType>STRENGTH</enhancementType>
+            <item>BELT</item>
+            <name>belt1</name>
+        </items>
+        <items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:nil="true"/>
+    </backPackInventory>
+    <burning>false</burning>
+    <charName>char4</charName>
+    <hitPoints>10</hitPoints>
+    <itemsWearing>
+        <enhance>5</enhance>
+        <enhancementType>DEXTERITY</enhancementType>
+        <item>BOOTS</item>
+        <name>boots1</name>
+    </itemsWearing>
+    <itemsWearing>
+        <enhance>5</enhance>
+        <enhancementType>ATTACKBONUS</enhancementType>
+        <item>WEAPON</item>
+        <name>longsword</name>
+    </itemsWearing>
+    <level>1</level>
+    <playerCharacter>false</playerCharacter>
+    <state>
+        <armorClass>10</armorClass>
+        <constitution>9</constitution>
+        <constitutionModifier>0</constitutionModifier>
+        <damageBonus>4</damageBonus>
+        <dexterity>14</dexterity>
+        <dexterityModifier>0</dexterityModifier>
+        <strength>17</strength>
+        <strengthModifier>4</strengthModifier>
+    </state>
+    <turn>false</turn>
+    <turnRoll>0</turnRoll>
+</character>

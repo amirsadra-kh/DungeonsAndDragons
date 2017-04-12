@@ -110,7 +110,14 @@ public class FriendlyNPC implements BehaviourStrategy {
             }
         }
         return null;
+    }
 
-
+    /**
+     * A method to override the toString of a FriendlyNPC
+     * @return string indicated it is a friendly character
+     */
+    @Override
+    public String toString() {
+        return "FriendlyNPC";
     }
 }
