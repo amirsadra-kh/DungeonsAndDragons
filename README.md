@@ -5,43 +5,41 @@ Dungeons Dragons Game for SOEN 6441
 Installations (Only first Time)
 ----------------------------
 
-git clone https://[YOUR-EMAIL]@bitbucket.org/dungeonsanddragons/dungeons_dragons.git
+git clone https://github.com/amirsadra-kh/DungeonsAndDragons
 
 
-Process
+About
 ----------------------------
 
-1) Pull the latest version from master:
+This project is a contributional team work of the following:
 
-    git pull origin master
+- Amir Sadra Khorramizadeh
 
-2) Create a meaningful name branch
+- Freyja Jokulsdottir
 
-    git checkout -b "createGameCampaign"
+- Meysam Mokarian
 
-3) do your development
+- Mehran Ishanian
 
-4) Make sure you have unit test
+- Parisa Nikzad
 
-5) add the changes to your branch
+All rights are reserved for the above individuals.
 
-    git add .
+What is the project?
+----------------------------
 
-6) commit your changes to the local branch
+This is Dungeons and Dragons game with D20 rules. You can do the followings:
 
-    git commit -m "added the files for game campaign + adding Unit tests "
+1) Create/Modify CharacterPackage
+2) Create/Modify Map
+3) Create/Modify Campaign
+4) Create/Modify Items
+5) Start the Game
+6) Load the Game
+7) End the Game
 
-7) Push your changes in a pull request 
+What technologies are used?
+----------------------------
 
-    git push --set-upstream createGameCampaign
-
-8) Open bitBucket and create a PR (pull request)
-
-9) ask the team to review your changes and merge it with branch
-
-
-
-Rules
------------------
-- Please make sure to have enough unit tests before push
-- Never push your changes to the master branch yourself (lets have at least 1 review TBD)
+This project is written in Java and it adopts several design patterns including Observer, Decorator and Builder.
+Main functions are tested with JUnit. The project has been built by Maven structure.
